@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:oklch(96.5% 0.003 270);font-family:'Inter',system-ui,sans-serif;color:oklch(22% 0.01 270);-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+input::placeholder{color:oklch(66% 0.008 270)}
+a{color:oklch(54% 0.19 258);text-decoration:none}
+a:hover{color:oklch(46% 0.19 258)}
+</style>
+</helmet>
+
+<div style="min-height:100vh;background:oklch(94.6% 0.004 270);display:flex;flex-direction:column">
+
+<header style="height:52px;flex-shrink:0;background:oklch(94.6% 0.004 270);border-bottom:1px solid oklch(90.5% 0.006 270);display:flex;align-items:center;gap:16px;padding:0 16px;position:sticky;top:0;z-index:20">
+<div style="display:flex;align-items:center;gap:9px;width:198px;flex-shrink:0">
+<div style="width:22px;height:22px;border-radius:7px;background:oklch(54% 0.19 258);flex-shrink:0"></div>
+<span style="font-size:13.5px;font-weight:700;letter-spacing:-.01em;color:oklch(28% 0.012 270)">Operations Platform</span>
+<span style="margin-left:auto;font-size:11px;color:oklch(48% 0.012 270);background:#fff;border:1px solid oklch(91% 0.006 270);border-radius:6px;padding:2px 6px">Pro</span>
+</div>
+<label style="flex:1;min-width:0;max-width:420px;display:flex;align-items:center;gap:8px;background:#fff;border:1px solid oklch(91% 0.006 270);border-radius:9px;padding:6px 11px">
+<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(47% 0.013 270)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="7" cy="7" r="4.6"></circle><line x1="10.4" y1="10.4" x2="14" y2="14"></line></svg>
+<input type="text" placeholder="Search locations, products, employees" style="border:none;outline:none;background:transparent;font-family:inherit;font-size:12.5px;color:oklch(22% 0.012 270);width:100%">
+<span style="font-size:10.5px;background:oklch(96.5% 0.004 270);border-radius:5px;padding:1px 5px;flex-shrink:0;color:oklch(52% 0.012 270)">&#8984;K</span>
+</label>
+<div style="margin-left:auto;display:flex;align-items:center;gap:8px;flex-shrink:0">
+<span style="width:32px;height:32px;border-radius:9px;background:#fff;border:1px solid oklch(91% 0.006 270);display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:oklch(50% 0.01 270);cursor:pointer">?</span>
+<span style="position:relative;width:32px;height:32px;border-radius:9px;background:#fff;border:1px solid oklch(91% 0.006 270);display:inline-flex;align-items:center;justify-content:center;cursor:pointer"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(48% 0.012 270)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M4 6.6a4 4 0 0 1 8 0c0 2.4.5 3.6 1.2 4.4H2.8C3.5 10.2 4 9 4 6.6Z"></path><path d="M6.6 13.2a1.6 1.6 0 0 0 2.8 0"></path></svg><span style="position:absolute;top:5px;right:6px;width:6px;height:6px;border-radius:50%;background:oklch(54% 0.19 258);border:1.5px solid #fff"></span></span>
+<div style="width:1px;height:20px;background:oklch(90.5% 0.006 270);margin:0 2px"></div>
+<span title="Anna Weber" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer"><span style="width:28px;height:28px;flex-shrink:0;border-radius:50%;background:oklch(86% 0.014 265);box-shadow:inset 0 0 0 1px oklch(80% 0.014 265);display:inline-flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:600;letter-spacing:.01em;color:oklch(32% 0.02 265)">AW</span><span style="font-size:11px;color:oklch(45% 0.012 270)">&#9662;</span></span>
+</div>
+</header>
+
+<div style="flex:1;display:flex;min-height:0">
+
+<aside ref="{{ asideRef }}" style="width:{{ asideW }};transition:width .18s ease;overflow:hidden;flex-shrink:0;background:oklch(94.6% 0.004 270);border-right:1px solid oklch(90.5% 0.006 270);padding:10px 8px 14px;display:flex;flex-direction:column;position:sticky;top:52px;height:calc(100vh - 52px)">
+<nav ref="{{ navRef }}" style="display:flex;flex-direction:column;gap:1px;overflow-y:auto;min-height:0">
+<div style="display:{{ navTxt }};font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:oklch(47% 0.013 270);padding:4px 10px 6px">Workspace</div>
+<a href="Overview.dc.html" style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><rect x="2" y="2" width="5" height="5" rx="1"></rect><rect x="9" y="2" width="5" height="5" rx="1"></rect><rect x="2" y="9" width="5" height="5" rx="1"></rect><rect x="9" y="9" width="5" height="5" rx="1"></rect></svg><span style="display:{{ navTxt }};white-space:nowrap">Overview</span></a>
+<span style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><polyline points="1.5,10 5,10 6.8,5.5 9.2,12 11,8 14.5,8"></polyline></svg><span style="display:{{ navTxt }};white-space:nowrap">Operations</span></span>
+<div style="display:{{ navTxt }};font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:oklch(47% 0.013 270);padding:{{ navLabelPad }}">Analysis</div>
+<a href="Location Analytics.dc.html" style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><line x1="3" y1="13" x2="3" y2="8.5"></line><line x1="8" y1="13" x2="8" y2="4"></line><line x1="13" y1="13" x2="13" y2="6.5"></line></svg><span style="display:{{ navTxt }};white-space:nowrap">Location analytics</span></a>
+<span style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M4 2.2h5.2L12 5v8.8H4z"></path><line x1="6" y1="8" x2="10" y2="8"></line><line x1="6" y1="10.6" x2="9" y2="10.6"></line></svg><span style="display:{{ navTxt }};white-space:nowrap">Reports</span></span>
+<div style="display:{{ navTxt }};font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:oklch(47% 0.013 270);padding:{{ navLabelPad }}">Manage</div>
+<span style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M2.5 5.5 8 2.8l5.5 2.7v5L8 13.2 2.5 10.5z"></path><line x1="2.5" y1="5.5" x2="8" y2="8.2"></line><line x1="13.5" y1="5.5" x2="8" y2="8.2"></line></svg><span style="display:{{ navTxt }};white-space:nowrap">Inventory</span><span style="display:{{ navTxt }};margin-left:auto;font-size:10.5px;font-weight:600;color:oklch(42% 0.012 270);background:oklch(91.5% 0.006 270);border-radius:5px;padding:1px 5px">5</span></span>
+<span style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="6.3" cy="6" r="2.4"></circle><path d="M2 13c.6-2.2 2.3-3.3 4.3-3.3S10 10.8 10.6 13"></path><path d="M11 5.2a2.2 2.2 0 0 1 0 4"></path></svg><span style="display:{{ navTxt }};white-space:nowrap">Team</span></span>
+<span style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:600;color:oklch(20% 0.012 270);background:#fff;border:1px solid oklch(91.5% 0.006 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(54% 0.19 258)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M8 14c2.6-3.2 4-5.4 4-7.2A4 4 0 0 0 4 6.8C4 8.6 5.4 10.8 8 14Z"></path><circle cx="8" cy="6.6" r="1.5"></circle></svg><span style="display:{{ navTxt }};white-space:nowrap">Locations</span><span style="display:{{ navTxt }};margin-left:auto;font-size:10.5px;font-weight:600;color:oklch(42% 0.012 270);background:oklch(91.5% 0.006 270);border-radius:5px;padding:1px 5px">12</span></span>
+<span style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="5.4" cy="5.6" r="2.3"></circle><circle cx="10.8" cy="7.4" r="1.9"></circle><path d="M1.8 13c.5-2 2-3 3.6-3s3.1 1 3.6 3"></path></svg><span style="display:{{ navTxt }};white-space:nowrap">Customers</span></span>
+</nav>
+<div ref="{{ bottomRef }}" style="margin-top:auto;display:flex;flex-direction:column;gap:1px">
+<sc-if value="{{ showGettingStartedC }}" hint-placeholder-val="{{ true }}"><div ref="{{ gsRef }}" style="display:flex;flex-direction:column;margin:0 2px 10px;padding:5px 5px 7px;background:#fff;border:1px solid oklch(91.5% 0.006 270);border-radius:14px;box-shadow:0 1px 2px oklch(25% 0.02 265 / 0.04)">
+<div style="position:relative;height:58px;border-radius:10px;background:oklch(95.6% 0.004 270);overflow:hidden">
+<button type="button" aria-label="Dismiss getting started" title="Dismiss" onClick="{{ dismissGs }}" style="position:absolute;z-index:1;top:4px;right:4px;width:20px;height:20px;padding:0;border:0;border-radius:6px;background:transparent;display:flex;align-items:center;justify-content:center;font-size:14px;line-height:1;color:oklch(52% 0.012 270);cursor:pointer" style-hover="background:oklch(91% 0.005 270);color:oklch(28% 0.012 270)">&#215;</button>
+<div style="position:absolute;left:16px;right:16px;top:12px;bottom:-8px;display:grid;grid-template-columns:18px minmax(0,1fr);gap:5px;padding:6px;background:#fff;border-radius:7px;box-shadow:0 0 0 1px oklch(92% 0.005 270),0 2px 6px oklch(25% 0.02 265 / 0.06)">
+<div style="display:flex;flex-direction:column;gap:3px"><span style="height:4px;border-radius:2px;background:oklch(54% 0.19 258 / 0.55)"></span><span style="height:4px;border-radius:2px;background:oklch(91% 0.005 270)"></span><span style="height:4px;border-radius:2px;background:oklch(91% 0.005 270)"></span></div>
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:12px 1fr;gap:3px"><span style="border-radius:3px;background:oklch(96.2% 0.004 270)"></span><span style="border-radius:3px;background:oklch(96.2% 0.004 270)"></span><span style="border-radius:3px;background:oklch(96.2% 0.004 270)"></span><span style="grid-column:1 / span 3;border-radius:3px;background:oklch(96.2% 0.004 270)"></span></div>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:3px;padding:11px 8px 10px;text-align:center">
+<span style="font-size:12.5px;font-weight:600;letter-spacing:-.008em;color:oklch(20% 0.012 270)">Getting started</span>
+<span style="font-size:11px;line-height:1.4;color:oklch(46% 0.013 270);text-wrap:pretty">Take a quick tour of the platform.</span>
+</div>
+<a href="#" style="display:flex;align-items:center;justify-content:center;gap:6px;height:32px;border-radius:9px;background:linear-gradient(oklch(31% 0.012 270),oklch(21% 0.012 270));box-shadow:inset 0 1px 0 oklch(100% 0 0 / 0.12),0 1px 2px oklch(20% 0.02 270 / 0.2);color:#fff;font-size:12px;font-weight:600;letter-spacing:-.004em;text-decoration:none" style-hover="background:linear-gradient(oklch(36% 0.012 270),oklch(25% 0.012 270))">Start onboarding &#8594;</a>
+</div></sc-if>
+<span style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:7px 9px;cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><line x1="2.5" y1="5" x2="13.5" y2="5"></line><line x1="2.5" y1="11" x2="13.5" y2="11"></line><circle cx="6" cy="5" r="1.7"></circle><circle cx="10.4" cy="11" r="1.7"></circle></svg><span style="display:{{ navTxt }};white-space:nowrap">Settings</span></span>
+<div style="display:flex;flex-direction:{{ profileDir }};align-items:center;gap:9px;padding:10px {{ profilePadX }} 0;margin-top:8px;border-top:1px solid oklch(90.5% 0.006 270)">
+<div title="North &amp; Oak" style="width:26px;height:26px;border-radius:7px;background:oklch(30% 0.012 270);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:700;letter-spacing:.02em;color:#fff">N&amp;O</div>
+<div style="display:{{ navTxt }};min-width:0">
+<div style="font-size:11.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:oklch(30% 0.012 270)">North &amp; Oak</div>
+<div style="font-size:10.5px;color:oklch(46% 0.013 270)">Owner</div>
+</div>
+<span title="{{ collapseTitle }}" onClick="{{ toggleSidebar }}" style="margin-left:{{ collapseML }};font-size:11px;color:oklch(45% 0.012 270);border:1px solid oklch(90% 0.006 270);border-radius:6px;padding:2px 6px;background:#fff;cursor:pointer" style-hover="color:oklch(24% 0.012 270);border-color:oklch(84% 0.008 270)">{{ collapseGlyph }}</span>
+</div>
+</div>
+</aside>
+
+<main style="flex:1;min-width:0;display:flex;flex-direction:column;background:oklch(96.4% 0.004 265);border-top-left-radius:16px;border-left:1px solid oklch(92% 0.005 270);border-top:1px solid oklch(92% 0.005 270);margin-top:-1px;padding:0 0 44px">
+
+<div style="padding:18px 26px 16px;border-bottom:1px solid oklch(92% 0.005 265);display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+<div style="display:flex;flex-direction:column;gap:6px;min-width:0;flex:1 0 auto">
+<h1 style="margin:0;font-size:21px;font-weight:600;letter-spacing:-.024em;line-height:1.15;color:oklch(18% 0.012 270)">Locations</h1>
+<span style="font-size:12px;color:oklch(47% 0.013 270);white-space:nowrap">{{ subline }}</span>
+</div>
+<div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap;justify-content:flex-end">
+<div style="position:relative">
+<span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:oklch(28% 0.012 270);background:#fff;border:1px solid oklch(88% 0.008 270);border-radius:8px;padding:5px 9px;cursor:pointer;white-space:nowrap" onClick="{{ toggleScopePicker }}"><span style="width:6px;height:6px;border-radius:50%;background:oklch(54% 0.19 258)"></span>{{ scopeName }} <span style="color:oklch(47% 0.013 270);font-weight:500">&#9662;</span></span>
+<sc-if value="{{ scopeOpen }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;top:calc(100% + 6px);right:0;width:240px;background:#fff;border:1px solid oklch(90% 0.006 270);border-radius:14px;box-shadow:0 12px 32px oklch(20% 0.02 270 / 0.12);padding:8px;z-index:30">
+<div style="font-size:10px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:oklch(50% 0.013 270);padding:4px 9px 5px">Whole business</div>
+<sc-for list="{{ scopeAll }}" as="o" hint-placeholder-count="1">
+<div style="{{ o.style }}" onClick="{{ o.select }}"><span>{{ o.name }}</span><span style="margin-left:auto;font-size:11px;color:oklch(52% 0.013 270)">{{ o.meta }}</span></div>
+</sc-for>
+<div style="font-size:10px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:oklch(50% 0.013 270);padding:10px 9px 5px;border-top:1px solid oklch(96% 0.004 270);margin-top:5px">Regions</div>
+<sc-for list="{{ scopeRegions }}" as="o" hint-placeholder-count="3">
+<div style="{{ o.style }}" onClick="{{ o.select }}"><span>{{ o.name }}</span><span style="margin-left:auto;font-size:11px;color:oklch(52% 0.013 270)">{{ o.meta }}</span></div>
+</sc-for>
+</div>
+</sc-if>
+</div>
+<div style="position:relative">
+<span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:oklch(34% 0.012 270);background:#fff;border:1px solid oklch(92% 0.005 270);border-radius:8px;padding:5px 9px;cursor:pointer;white-space:nowrap" onClick="{{ togglePeriodPicker }}">{{ periodLabel }} <span style="color:oklch(47% 0.013 270)">&#9662;</span></span>
+<sc-if value="{{ periodOpen }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;top:calc(100% + 6px);right:0;width:168px;background:#fff;border:1px solid oklch(90% 0.006 270);border-radius:14px;box-shadow:0 12px 32px oklch(20% 0.02 270 / 0.12);padding:8px;z-index:30;display:flex;flex-direction:column;gap:1px">
+<sc-for list="{{ periodOptions }}" as="o" hint-placeholder-count="4">
+<div style="{{ o.style }}" onClick="{{ o.select }}"><span>{{ o.name }}</span></div>
+</sc-for>
+</div>
+</sc-if>
+</div>
+</div>
+</div>
+
+<div style="padding:22px 26px 0;display:flex;flex-direction:column;gap:14px;min-width:0">
+
+<div role="group" aria-label="Filter by state" style="display:flex;align-items:center;gap:2px;flex-wrap:wrap;align-self:flex-start;max-width:100%;background:#fff;border:1px solid oklch(92.6% 0.004 265);border-radius:12px;padding:4px 12px 4px 4px;box-shadow:0 1px 2px oklch(25% 0.02 265 / 0.05)">
+<sc-for list="{{ stateSegs }}" as="sg" hint-placeholder-count="3">
+<button type="button" onClick="{{ sg.toggle }}" aria-pressed="{{ sg.pressed }}" style="{{ sg.style }}" style-hover="background:oklch(97.2% 0.004 270)"><span style="{{ sg.sw }}"></span><span style="font-weight:650;font-variant-numeric:tabular-nums;color:{{ sg.numColor }}">{{ sg.n }}</span><span>{{ sg.label }}</span></button>
+</sc-for>
+<span style="font-size:12.5px;color:oklch(47% 0.013 270);padding-left:4px;white-space:nowrap">expected pace</span>
+<sc-if value="{{ stateActive }}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{ clearState }}" style="margin-left:8px;padding:0;border:0;background:none;font:inherit;font-size:12px;font-weight:600;color:oklch(44% 0.012 270);cursor:pointer" style-hover="color:oklch(24% 0.012 270)">Show all</button></sc-if>
+</div>
+
+<div style="background:#fff;border:1px solid oklch(92.6% 0.004 265);border-radius:18px;box-shadow:0 1px 2px oklch(25% 0.02 265 / 0.05)">
+<div style="box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;padding:12px 22px;min-height:58px;background:oklch(97.8% 0.003 270);border-bottom:1px solid oklch(93.5% 0.005 270);border-radius:18px 18px 0 0;flex-wrap:wrap;gap:12px">
+<span style="display:inline-flex;align-items:baseline;gap:10px;flex-wrap:wrap"><span style="font-size:15.5px;font-weight:600;letter-spacing:-.012em;color:oklch(18% 0.012 270)">{{ scopeName }}</span><span style="font-size:11.5px;color:oklch(50% 0.013 270)">{{ countLabel }}</span></span>
+<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+<label style="display:flex;align-items:center;gap:7px;width:220px;max-width:100%;background:#fff;border:1px solid oklch(91% 0.006 270);border-radius:8px;padding:5px 9px">
+<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.013 270)" stroke-width="1.5" stroke-linecap="round" style="flex-shrink:0"><circle cx="7" cy="7" r="4.6"></circle><line x1="10.4" y1="10.4" x2="14" y2="14"></line></svg>
+<input type="text" value="{{ q }}" onChange="{{ onQ }}" placeholder="Find a location" style="border:none;outline:none;background:transparent;font-family:inherit;font-size:12px;width:100%;min-width:0;color:oklch(24% 0.01 270)">
+<sc-if value="{{ hasQ }}" hint-placeholder-val="{{ false }}"><span onClick="{{ clearQ }}" title="Clear search" style="font-size:13px;line-height:1;color:oklch(52% 0.012 270);cursor:pointer" style-hover="color:oklch(24% 0.012 270)">&#215;</span></sc-if>
+</label>
+<div style="position:relative">
+<span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:oklch(34% 0.012 270);background:#fff;border:1px solid oklch(92% 0.005 270);border-radius:8px;padding:5px 9px;cursor:pointer;white-space:nowrap" onClick="{{ toggleSort }}"><span style="color:oklch(50% 0.013 270)">Sort:</span> {{ sortLabel }} <span style="color:oklch(47% 0.013 270)">&#9662;</span></span>
+<sc-if value="{{ sortOpen }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;top:calc(100% + 6px);right:0;width:256px;background:#fff;border:1px solid oklch(90% 0.006 270);border-radius:14px;box-shadow:0 12px 32px oklch(20% 0.02 270 / 0.12);padding:8px;z-index:30;display:flex;flex-direction:column;gap:1px">
+<sc-for list="{{ sortOptions }}" as="o" hint-placeholder-count="4">
+<div style="{{ o.style }}" onClick="{{ o.select }}"><span style="white-space:nowrap">{{ o.name }}</span><span style="margin-left:auto;padding-left:12px;font-size:11px;white-space:nowrap;text-align:right;color:oklch(52% 0.013 270)">{{ o.meta }}</span></div>
+</sc-for>
+</div>
+</sc-if>
+</div>
+<button type="button" role="switch" aria-checked="{{ grouped }}" onClick="{{ toggleGroup }}" style="display:inline-flex;align-items:center;gap:8px;padding:0;border:0;background:none;font:inherit;font-size:12px;color:oklch(34% 0.012 270);cursor:pointer;white-space:nowrap"><span style="{{ swTrack }}"><span style="{{ swKnob }}"></span></span>Group by region</button>
+</div>
+</div>
+
+<div onScroll="{{ onTableScroll }}" style="overflow-x:auto">
+<div style="min-width:1018px">
+<div style="display:grid;grid-template-columns:minmax(170px,1.4fr) 150px 112px 90px 116px 116px 120px 16px;column-gap:12px;align-items:center;padding:0 22px;height:36px;font-size:10.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:oklch(50% 0.013 270);background:#fff">
+<span style="position:sticky;left:0;background:#fff;align-self:stretch;display:flex;align-items:center;box-shadow:{{ pinShadow }}">Location</span><span>State</span><span>Pace</span><span style="text-align:right">Revenue</span><span>Change</span><span>Duration</span><span>Share of gap</span><span></span>
+</div>
+<sc-for list="{{ groups }}" as="g" hint-placeholder-count="1">
+<sc-if value="{{ g.showHead }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;padding:0 22px;height:34px;align-items:center;background:oklch(98% 0.002 270);border-top:1px solid oklch(93.5% 0.005 270)"><span style="position:sticky;left:22px;display:inline-flex;align-items:baseline;gap:8px"><span style="font-size:12px;font-weight:600;color:oklch(26% 0.012 270)">{{ g.name }}</span><span style="font-size:11.5px;color:oklch(50% 0.013 270)">{{ g.meta }}</span></span></div>
+</sc-if>
+<sc-for list="{{ g.rows }}" as="r" hint-placeholder-count="12">
+<a href="{{ r.href }}" title="{{ r.title }}" style="display:grid;grid-template-columns:minmax(170px,1.4fr) 150px 112px 90px 116px 116px 120px 16px;column-gap:12px;align-items:center;padding:0 22px;min-height:58px;border-top:1px solid oklch(94.5% 0.004 270);background:#fff;color:oklch(22% 0.01 270);text-decoration:none;cursor:pointer" style-hover="background:oklch(97.6% 0.004 270);color:oklch(22% 0.01 270)">
+<span style="position:sticky;left:0;z-index:1;background:inherit;align-self:stretch;display:flex;flex-direction:column;justify-content:center;gap:2px;min-width:0;padding:9px 0;box-shadow:{{ pinShadow }}"><span style="font-size:13px;font-weight:600;letter-spacing:-.006em;color:oklch(18% 0.012 270);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ r.name }}</span><span style="font-size:11.5px;color:oklch(50% 0.013 270);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ r.meta }}</span></span>
+<span style="display:flex;flex-direction:column;gap:2px;min-width:0"><span style="font-size:12.5px;font-weight:{{ r.stateWeight }};color:{{ r.stateColor }};white-space:nowrap">{{ r.stateLabel }}</span><span style="font-size:11.5px;color:oklch(50% 0.013 270);font-variant-numeric:tabular-nums">{{ r.ptsText }}</span></span>
+<span style="{{ r.pace }}"></span>
+<span style="text-align:right;font-size:13px;font-weight:500;color:oklch(22% 0.012 270);font-variant-numeric:tabular-nums">{{ r.revText }}</span>
+<span style="font-size:12px;color:oklch(47% 0.013 270);font-variant-numeric:tabular-nums;white-space:nowrap">{{ r.deltaText }}</span>
+<span style="font-size:12px;color:oklch(40% 0.012 270);white-space:nowrap">{{ r.since }}</span>
+<span style="font-size:12px;color:oklch(47% 0.013 270);white-space:nowrap"><sc-if value="{{ r.hasShare }}" hint-placeholder-val="{{ false }}"><span style="font-weight:600;color:oklch(24% 0.012 270);font-variant-numeric:tabular-nums">{{ r.shareN }}</span> of portfolio gap</sc-if></span>
+<span style="justify-self:end;font-size:16px;line-height:1;color:oklch(64% 0.01 270)">&#8250;</span>
+</a>
+</sc-for>
+</sc-for>
+<sc-if value="{{ isEmpty }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;align-items:center;gap:12px;padding:28px 22px;border-top:1px solid oklch(94.5% 0.004 270);font-size:12.5px;color:oklch(45% 0.012 270)"><span>{{ emptyText }}</span><button type="button" onClick="{{ clearAll }}" style="padding:0;border:0;background:none;font:inherit;font-size:12.5px;font-weight:600;color:oklch(44% 0.012 270);cursor:pointer" style-hover="color:oklch(24% 0.012 270)">Clear filters</button></div>
+</sc-if>
+</div>
+</div>
+
+<div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap;padding:14px 22px;border-top:1px solid oklch(91.5% 0.006 270);background:oklch(97.4% 0.003 270);border-radius:0 0 18px 18px;font-size:12px;color:oklch(47% 0.013 270)">
+<span style="display:inline-flex;align-items:center;gap:8px"><span style="display:block;width:34px;height:12px;border-radius:3px;background:linear-gradient(oklch(70% 0.01 265),oklch(70% 0.01 265)) 16.5px center / 1px 8px no-repeat,linear-gradient(oklch(95% 0.004 265),oklch(95% 0.004 265)) 11px center / 12px 100% no-repeat,oklch(98.2% 0.002 270);box-shadow:inset 0 0 0 1px oklch(90% 0.005 270)"></span>Pace: midline = expected pace, band = &#177;10 pts tolerance</span>
+<span style="margin-left:auto">Select a location to open Location analytics</span>
+</div>
+</div>
+
+</div>
+
+</main>
+</div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1000},&quot;stressTest&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Testing&quot;}}">
+
+const TOL = 10, DEV_SCALE = 30;
+const NEG = 'oklch(55% 0.18 22)', POS = 'oklch(63% 0.03 175)', POS_TXT = 'oklch(45% 0.05 175)', MUTED = 'oklch(44% 0.012 270)';
+const REGIONS = ['north', 'south', 'central'];
+const REGION_NAME = { north: 'North region', south: 'South region', central: 'Central region' };
+const REGION_SHORT = { north: 'North', south: 'South', central: 'Central' };
+const LOCS = [
+  { id: 'berlin', name: 'Berlin', region: 'north', site: 'Mitte flagship' },
+  { id: 'amsterdam', name: 'Amsterdam', region: 'north', site: 'Single site' },
+  { id: 'hamburg', name: 'Hamburg', region: 'north', site: 'Single site' },
+  { id: 'copenhagen', name: 'Copenhagen', region: 'north', site: 'Single site' },
+  { id: 'stockholm', name: 'Stockholm', region: 'north', site: 'Single site' },
+  { id: 'madrid', name: 'Madrid', region: 'south', site: 'Single site' },
+  { id: 'paris', name: 'Paris', region: 'south', site: 'Single site' },
+  { id: 'barcelona', name: 'Barcelona', region: 'south', site: 'Single site' },
+  { id: 'rome', name: 'Rome', region: 'south', site: 'Single site' },
+  { id: 'munich', name: 'Munich', region: 'central', site: 'Single site' },
+  { id: 'zurich', name: 'Zurich', region: 'central', site: 'Single site' },
+  { id: 'lisbon', name: 'Lisbon', region: 'central', site: 'Single site' },
+];
+const P = {
+  Today: { label: 'Today', cmp: 'vs yesterday', mult: 0.021 },
+  Week:  { label: 'This week', cmp: 'vs last week', mult: 0.232 },
+  Month: { label: 'This month', cmp: 'vs last month', mult: 1 },
+  Year:  { label: 'This year', cmp: 'vs last year', mult: 10.4 },
+};
+// Month revenue per location (Overview v38 LM); other periods scale by P.mult as Overview does.
+// Munich uses Location Analytics v8 as source of truth; REV_P carries its LA v8 Today/Week figures.
+const REV = { berlin: 18300, amsterdam: 28800, hamburg: 16370, copenhagen: 16990, stockholm: 18540, madrid: 24610, paris: 21030, barcelona: 22540, rome: 19860, munich: 20150, zurich: 26160, lisbon: 15770 };
+const REV_P = { munich: { Today: 402, Week: 4710 } };
+// Revenue change vs previous period, % (Overview v38 ENT / DELTA).
+const DELTA = {
+  Today: { berlin: 1, munich: 2, paris: 2, madrid: 6, amsterdam: 7, hamburg: 2, copenhagen: 1, stockholm: 4, barcelona: 6, rome: 3, zurich: 5, lisbon: 2 },
+  Week:  { berlin: -18, munich: 4, paris: 2, madrid: 5, amsterdam: 8, hamburg: -11, copenhagen: -7, stockholm: 4, barcelona: 7, rome: -6, zurich: 7, lisbon: 2 },
+  Month: { berlin: -15, munich: 5, paris: -1, madrid: 4, amsterdam: 9, hamburg: -9, copenhagen: 2, stockholm: 6, barcelona: 7, rome: -2, zurich: 8, lisbon: 1 },
+  Year:  { berlin: -12, munich: 6, paris: 1, madrid: 5, amsterdam: 11, hamburg: 3, copenhagen: 4, stockholm: 7, barcelona: 9, rome: 2, zurich: 10, lisbon: 3 },
+};
+// Deviation from expected pace, pts. Outside-tolerance values are Overview v38 DEV/AHEAD;
+// Berlin, Munich, Barcelona match Location Analytics v8. Within-tolerance values are
+// added for this page so every row can be placed and sorted.
+const PTS = {
+  Today: { berlin: -4, amsterdam: 6, hamburg: -3, copenhagen: -1, stockholm: 2, madrid: 4, paris: 1, barcelona: 5, rome: -2, munich: -2, zurich: 3, lisbon: 0 },
+  Week:  { berlin: -20, amsterdam: 7, hamburg: -16, copenhagen: -12, stockholm: 2, madrid: 3, paris: -1, barcelona: 5, rome: -11, munich: -1, zurich: 6, lisbon: -2 },
+  Month: { berlin: -20, amsterdam: 12, hamburg: -7, copenhagen: -4, stockholm: 1, madrid: 3, paris: -3, barcelona: 14, rome: -5, munich: -2, zurich: 6, lisbon: -1 },
+  Year:  { berlin: -18, amsterdam: 8, hamburg: -2, copenhagen: 1, stockholm: 3, madrid: 2, paris: -1, barcelona: 6, rome: -3, munich: 2, zurich: 7, lisbon: 0 },
+};
+const SINCE = {
+  Today: {},
+  Week:  { berlin: '3rd week below', hamburg: '2nd week below', copenhagen: 'Below since Aug 12', rome: 'Below since Aug 14' },
+  Month: { berlin: '3rd week below', amsterdam: '2nd month above', barcelona: 'Above since Nov 10' },
+  Year:  { berlin: 'Below since week 31' },
+};
+const SHARE = { Today: {}, Week: { berlin: 34, hamburg: 26, copenhagen: 21, rome: 19 }, Month: { berlin: 71 }, Year: { berlin: 64 } };
+// STRESS TEST (temporary) — same fictional roster as Overview v38's stressTest.
+const LOCS_TEST = [
+  { id: 'berlin', name: 'Berlin', region: 'north' },
+  { id: 'amsterdam', name: 'Amsterdam', region: 'north' },
+  { id: 'hamburg', name: 'Hamburg', region: 'north' },
+  { id: 'copenhagen', name: 'Copenhagen', region: 'north' },
+  { id: 'stockholm', name: 'Stockholm', region: 'north' },
+  { id: 'oslo', name: 'Oslo', region: 'north' },
+  { id: 'helsinki', name: 'Helsinki', region: 'north' },
+  { id: 'rotterdam', name: 'Rotterdam', region: 'north' },
+  { id: 'utrecht', name: 'Utrecht', region: 'north' },
+  { id: 'bremen', name: 'Bremen', region: 'north' },
+  { id: 'hanover', name: 'Hanover', region: 'north' },
+  { id: 'gothenburg', name: 'Gothenburg', region: 'north' },
+  { id: 'malmo', name: 'Malmö', region: 'north' },
+  { id: 'aarhus', name: 'Aarhus', region: 'north' },
+  { id: 'antwerp', name: 'Antwerp', region: 'north' },
+  { id: 'ghent', name: 'Ghent', region: 'north' },
+  { id: 'leipzig', name: 'Leipzig', region: 'north' },
+  { id: 'dresden', name: 'Dresden', region: 'north' },
+  { id: 'dortmund', name: 'Dortmund', region: 'north' },
+  { id: 'essen', name: 'Essen', region: 'north' },
+  { id: 'dusseldorf', name: 'Düsseldorf', region: 'north' },
+  { id: 'kiel', name: 'Kiel', region: 'north' },
+  { id: 'lubeck', name: 'Lübeck', region: 'north' },
+  { id: 'rostock', name: 'Rostock', region: 'north' },
+  { id: 'odense', name: 'Odense', region: 'north' },
+  { id: 'uppsala', name: 'Uppsala', region: 'north' },
+  { id: 'bergen', name: 'Bergen', region: 'north' },
+  { id: 'tampere', name: 'Tampere', region: 'north' },
+  { id: 'turku', name: 'Turku', region: 'north' },
+  { id: 'groningen', name: 'Groningen', region: 'north' },
+  { id: 'eindhoven', name: 'Eindhoven', region: 'north' },
+  { id: 'leiden', name: 'Leiden', region: 'north' },
+  { id: 'haarlem', name: 'Haarlem', region: 'north' },
+  { id: 'bruges', name: 'Bruges', region: 'north' },
+  { id: 'munster', name: 'Münster', region: 'north' },
+  { id: 'aalborg', name: 'Aalborg', region: 'north' },
+  { id: 'madrid', name: 'Madrid', region: 'south' },
+  { id: 'paris', name: 'Paris', region: 'south' },
+  { id: 'barcelona', name: 'Barcelona', region: 'south' },
+  { id: 'rome', name: 'Rome', region: 'south' },
+  { id: 'lyon', name: 'Lyon', region: 'south' },
+  { id: 'marseille', name: 'Marseille', region: 'south' },
+  { id: 'milan', name: 'Milan', region: 'south' },
+  { id: 'naples', name: 'Naples', region: 'south' },
+  { id: 'valencia', name: 'Valencia', region: 'south' },
+  { id: 'seville', name: 'Seville', region: 'south' },
+  { id: 'porto', name: 'Porto', region: 'south' },
+  { id: 'nice', name: 'Nice', region: 'south' },
+  { id: 'turin', name: 'Turin', region: 'south' },
+  { id: 'florence', name: 'Florence', region: 'south' },
+  { id: 'bilbao', name: 'Bilbao', region: 'south' },
+  { id: 'bologna', name: 'Bologna', region: 'south' },
+  { id: 'toulouse', name: 'Toulouse', region: 'south' },
+  { id: 'bordeaux', name: 'Bordeaux', region: 'south' },
+  { id: 'montpellier', name: 'Montpellier', region: 'south' },
+  { id: 'genoa', name: 'Genoa', region: 'south' },
+  { id: 'verona', name: 'Verona', region: 'south' },
+  { id: 'venice', name: 'Venice', region: 'south' },
+  { id: 'palermo', name: 'Palermo', region: 'south' },
+  { id: 'malaga', name: 'Málaga', region: 'south' },
+  { id: 'zaragoza', name: 'Zaragoza', region: 'south' },
+  { id: 'granada', name: 'Granada', region: 'south' },
+  { id: 'alicante', name: 'Alicante', region: 'south' },
+  { id: 'palma', name: 'Palma', region: 'south' },
+  { id: 'cannes', name: 'Cannes', region: 'south' },
+  { id: 'nantes', name: 'Nantes', region: 'south' },
+  { id: 'faro', name: 'Faro', region: 'south' },
+  { id: 'pisa', name: 'Pisa', region: 'south' },
+  { id: 'bari', name: 'Bari', region: 'south' },
+  { id: 'murcia', name: 'Murcia', region: 'south' },
+  { id: 'munich', name: 'Munich', region: 'central' },
+  { id: 'zurich', name: 'Zurich', region: 'central' },
+  { id: 'lisbon', name: 'Lisbon', region: 'central' },
+  { id: 'vienna', name: 'Vienna', region: 'central' },
+  { id: 'prague', name: 'Prague', region: 'central' },
+  { id: 'frankfurt', name: 'Frankfurt', region: 'central' },
+  { id: 'stuttgart', name: 'Stuttgart', region: 'central' },
+  { id: 'cologne', name: 'Cologne', region: 'central' },
+  { id: 'geneva', name: 'Geneva', region: 'central' },
+  { id: 'basel', name: 'Basel', region: 'central' },
+  { id: 'salzburg', name: 'Salzburg', region: 'central' },
+  { id: 'brno', name: 'Brno', region: 'central' },
+  { id: 'bratislava', name: 'Bratislava', region: 'central' },
+  { id: 'nuremberg', name: 'Nuremberg', region: 'central' },
+  { id: 'graz', name: 'Graz', region: 'central' },
+  { id: 'linz', name: 'Linz', region: 'central' },
+  { id: 'innsbruck', name: 'Innsbruck', region: 'central' },
+  { id: 'bern', name: 'Bern', region: 'central' },
+  { id: 'lausanne', name: 'Lausanne', region: 'central' },
+  { id: 'lucerne', name: 'Lucerne', region: 'central' },
+  { id: 'augsburg', name: 'Augsburg', region: 'central' },
+  { id: 'mannheim', name: 'Mannheim', region: 'central' },
+  { id: 'heidelberg', name: 'Heidelberg', region: 'central' },
+  { id: 'freiburg', name: 'Freiburg', region: 'central' },
+  { id: 'karlsruhe', name: 'Karlsruhe', region: 'central' },
+  { id: 'ljubljana', name: 'Ljubljana', region: 'central' },
+  { id: 'budapest', name: 'Budapest', region: 'central' },
+  { id: 'krakow', name: 'Kraków', region: 'central' },
+  { id: 'wrocaw', name: 'Wrocław', region: 'central' },
+  { id: 'strasbourg', name: 'Strasbourg', region: 'central' },
+];
+const DEV_TEST = {
+  Today: { naples: { pts: 12 } },
+  Week: { berlin: { pts: 20 }, hamburg: { pts: 16 }, copenhagen: { pts: 12 }, bremen: { pts: 11 }, kiel: { pts: 13 },
+    rome: { pts: 11 }, naples: { pts: 14 }, marseille: { pts: 12 }, palermo: { pts: 15 }, bari: { pts: 11 },
+    prague: { pts: 13 }, linz: { pts: 11 } },
+  Month: { berlin: { pts: 20 }, hamburg: { pts: 14 }, leipzig: { pts: 11 }, rostock: { pts: 13 },
+    lyon: { pts: 12 }, naples: { pts: 16 }, palermo: { pts: 11 }, brno: { pts: 12 } },
+  Year: { berlin: { pts: 18 }, naples: { pts: 12 }, rostock: { pts: 11 } },
+};
+const AHEAD_TEST = {
+  Today: {}, Week: { amsterdam: { pts: 11 }, vienna: { pts: 12 }, faro: { pts: 13 } },
+  Month: { amsterdam: { pts: 12 }, utrecht: { pts: 11 }, uppsala: { pts: 13 }, barcelona: { pts: 14 }, valencia: { pts: 13 },
+    malaga: { pts: 12 }, vienna: { pts: 15 }, basel: { pts: 11 }, ljubljana: { pts: 12 } },
+  Year: { barcelona: { pts: 12 }, vienna: { pts: 11 } },
+};
+const STATE = {
+  below:  { label: 'Below expected pace',  short: 'below',  color: NEG,     num: NEG,
+    sw: 'width:12px;height:12px;border-radius:3px;flex-shrink:0;background:linear-gradient(oklch(55% 0.18 22 / 0.5),oklch(55% 0.18 22 / 0.5)) center 5.5px / 10px 1px no-repeat,linear-gradient(oklch(55% 0.18 22),oklch(55% 0.18 22)) center 6px / 6px 5px no-repeat,oklch(96.6% 0.022 22);box-shadow:inset 0 0 0 1px oklch(55% 0.18 22 / 0.32)' },
+  within: { label: 'Within expected pace', short: 'within', color: MUTED,   num: 'oklch(26% 0.012 270)',
+    sw: 'width:12px;height:12px;border-radius:3px;flex-shrink:0;background:linear-gradient(oklch(66% 0.012 265),oklch(66% 0.012 265)) center 5.5px / 10px 1px no-repeat,linear-gradient(oklch(95.4% 0.004 265),oklch(95.4% 0.004 265)) center 3px / 100% 6px no-repeat,oklch(98.2% 0.002 270);box-shadow:inset 0 0 0 1px oklch(90% 0.005 270)' },
+  above:  { label: 'Above expected pace',  short: 'above',  color: POS_TXT, num: POS_TXT,
+    sw: 'width:12px;height:12px;border-radius:3px;flex-shrink:0;background:linear-gradient(oklch(76% 0.01 265),oklch(76% 0.01 265)) center 6.5px / 10px 1px no-repeat,linear-gradient(oklch(63% 0.03 175),oklch(63% 0.03 175)) center 1.5px / 6px 5px no-repeat,oklch(98.2% 0.002 270);box-shadow:inset 0 0 0 1px oklch(90% 0.005 270)' },
+};
+const SORTS = {
+  deviation: { name: 'Deviation from pace', meta: 'Below first', fn: (a, b) => a.pts - b.pts || a.name.localeCompare(b.name) },
+  revenue:   { name: 'Revenue', meta: 'Highest first', fn: (a, b) => b.rev - a.rev },
+  change:    { name: 'Change', meta: 'Largest drop first', fn: (a, b) => a.d - b.d || a.pts - b.pts },
+  name:      { name: 'Name', meta: 'A–Z', fn: (a, b) => a.name.localeCompare(b.name) },
+};
+const stateOf = pts => pts < -TOL ? 'below' : pts > TOL ? 'above' : 'within';
+const fold = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+const signed = (v, unit) => (v > 0 ? '+' : v < 0 ? '\u2212' : '') + Math.abs(v) + unit;
+// Horizontal pace marker: Overview's Locations cell turned on its side.
+// Midline = expected pace, band = ±TOL, bar = deviation on the shared DEV_SCALE.
+function paceStyle(pts, st) {
+  const W = 112, mid = 56, k = 50 / DEV_SCALE, band = Math.round(TOL * k);
+  const v = Math.max(-33, Math.min(33, pts)), w = Math.max(2, Math.round(Math.abs(v) * k));
+  const left = v < 0 ? mid - w : mid, bad = st === 'below';
+  const g = c => 'linear-gradient(' + c + ',' + c + ')';
+  const barC = bad ? NEG : st === 'above' ? POS : 'oklch(74% 0.012 265)';
+  const lineC = bad ? 'oklch(55% 0.18 22 / 0.5)' : 'oklch(70% 0.01 265)';
+  const bandC = bad ? 'oklch(55% 0.18 22 / 0.07)' : 'oklch(95% 0.004 265)';
+  return 'display:block;width:' + W + 'px;height:18px;border-radius:5px;background:'
+    + g(lineC) + ' ' + (mid - 0.5) + 'px center / 1px 12px no-repeat,'
+    + (pts ? g(barC) + ' ' + left + 'px center / ' + w + 'px 6px no-repeat,' : '')
+    + g(bandC) + ' ' + (mid - band) + 'px center / ' + (band * 2) + 'px 100% no-repeat,'
+    + (bad ? 'oklch(96.6% 0.022 22)' : 'oklch(98.2% 0.002 270)')
+    + ';box-shadow:inset 0 0 0 1px ' + (bad ? 'oklch(55% 0.18 22 / 0.32)' : 'oklch(92.5% 0.004 270)');
+}
+function baseRow(l, p) {
+  const pts = PTS[p][l.id], st = stateOf(pts);
+  return { id: l.id, name: l.name, region: l.region, site: l.site, pts, st, rev: (REV_P[l.id] && REV_P[l.id][p]) || REV[l.id] * P[p].mult, d: DELTA[p][l.id],
+    since: st === 'within' ? '' : (SINCE[p][l.id] || ''), share: st === 'below' ? (SHARE[p][l.id] || null) : null };
+}
+function stressRow(l, p) {
+  let sd = 0; for (const ch of l.id) sd = (sd * 31 + ch.charCodeAt(0)) % 997;
+  const pi = ['Today', 'Week', 'Month', 'Year'].indexOf(p) + 1;
+  const dv = (DEV_TEST[p] || {})[l.id], av = (AHEAD_TEST[p] || {})[l.id];
+  const pts = dv ? -dv.pts : av ? av.pts : ((sd * 7 + pi * 131) % 19) - 9;
+  const st = stateOf(pts);
+  const rev = (REV[l.id] || 12000 + (sd * 53) % 18000) * P[p].mult;
+  return { id: l.id, name: l.name, region: l.region, site: 'Single site', pts, st, rev,
+    d: DELTA[p][l.id] != null ? DELTA[p][l.id] : ((sd * 13 + pi * 29) % 17) - 7,
+    since: st === 'below' ? ['2nd week below', '3rd week below', 'Below since Aug 12'][sd % 3] : st === 'above' ? ['2nd week above', 'Above since Nov 10'][sd % 2] : '',
+    share: null };
+}
+
+class Component extends DCLogic {
+  state = { period: 'Month', scope: 'all', stateF: null, q: '', sort: 'deviation', grouped: false, scopeOpen: false, periodOpen: false, sortOpen: false };
+  asideRef = React.createRef(); navRef = React.createRef(); bottomRef = React.createRef(); gsRef = React.createRef();
+  fitSidebar() {
+    const aside = this.asideRef.current, nav = this.navRef.current, bottom = this.bottomRef.current;
+    if (!aside || !nav || !bottom) return;
+    const gs = this.gsRef.current;
+    if (gs) this._gsH = gs.offsetHeight + 10;
+    const wH = this._gsH || 200, SAVE = 42;
+    const avail = aside.clientHeight - 24;
+    const base = bottom.offsetHeight - (gs ? gs.offsetHeight + 10 : 0);
+    const navN = nav.scrollHeight + (this.state.navCompact ? SAVE : 0);
+    let next;
+    if (navN + base + wH <= avail) next = { gsFit: true, navCompact: false };
+    else if (navN - SAVE + base + wH <= avail) next = { gsFit: true, navCompact: true };
+    else next = { gsFit: false, navCompact: false };
+    if (next.gsFit !== this.state.gsFit || next.navCompact !== this.state.navCompact) this.setState(next);
+  }
+  componentDidMount() {
+    try { if (localStorage.getItem('gsDismissed') === '1') this.setState({ gsDismissed: true }); } catch (e) {}
+    this._onResize = () => this.fitSidebar();
+    requestAnimationFrame(this._onResize);
+    if (document.fonts) document.fonts.ready.then(this._onResize);
+    window.addEventListener('resize', this._onResize);
+  }
+  componentDidUpdate() { this.fitSidebar(); }
+  componentWillUnmount() { window.removeEventListener('resize', this._onResize); }
+
+  optStyle(active) {
+    return 'display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:' + (active ? 600 : 500) + ';color:' + (active ? 'oklch(20% 0.01 270)' : 'oklch(32% 0.01 270)') + ';background:' + (active ? 'oklch(96.5% 0.004 270)' : 'transparent') + ';border-radius:9px;padding:7px 9px;cursor:pointer';
+  }
+  closeMenus() { return { scopeOpen: false, periodOpen: false, sortOpen: false }; }
+
+  renderVals() {
+    const s = this.state, p = s.period, stress = !!this.props.stressTest;
+    const roster = stress ? LOCS_TEST : LOCS;
+    const all = roster.map(l => stress ? stressRow(l, p) : baseRow(l, p));
+    if (stress) {
+      const below = all.filter(r => r.st === 'below');
+      const tot = below.reduce((a, r) => a + r.rev * -r.pts, 0);
+      below.forEach(r => { r.share = Math.round(r.rev * -r.pts / tot * 100); });
+    }
+    const inRegion = id => s.scope === 'all' || id === s.scope;
+    const scoped = all.filter(r => inRegion(r.region));
+    const counts = { below: 0, within: 0, above: 0 };
+    scoped.forEach(r => { counts[r.st]++; });
+    const stF = s.stateF && counts[s.stateF] ? s.stateF : null;
+    const q = fold(s.q.trim());
+    const rows = scoped.filter(r => (!stF || r.st === stF) && (!q || fold(r.name).includes(q))).sort(SORTS[s.sort].fn);
+    const regionsWithCount = id => all.filter(r => id === 'all' || r.region === id).length;
+
+    const view = r => {
+      const S = STATE[r.st];
+      return {
+        name: r.name, meta: REGION_SHORT[r.region] + ' \u00B7 ' + r.site,
+        stateLabel: S.label, stateColor: S.color, stateWeight: r.st === 'within' ? 500 : 600,
+        ptsText: signed(r.pts, ' pts'), pace: paceStyle(r.pts, r.st),
+        revText: '$' + Math.round(r.rev).toLocaleString('en-US'),
+        deltaText: signed(r.d, '%') + ' ' + P[p].cmp,
+        since: r.since, hasShare: r.share != null, shareN: r.share + '%',
+        href: 'Location Analytics.dc.html?location=' + r.id + '&period=' + p,
+        title: 'Open ' + r.name + ' in Location analytics',
+      };
+    };
+    const groups = s.grouped
+      ? REGIONS.filter(inRegion).map(g => {
+          const gr = rows.filter(r => r.region === g), tot = scoped.filter(r => r.region === g).length;
+          return { showHead: true, name: REGION_NAME[g], meta: (gr.length === tot ? tot : gr.length + ' of ' + tot) + ' location' + (tot === 1 ? '' : 's'), rows: gr.map(view) };
+        }).filter(g => g.rows.length)
+      : [{ showHead: false, rows: rows.map(view) }];
+
+    const nRegions = s.scope === 'all' ? 3 : 1;
+    const total = scoped.length;
+    const filtered = !!(stF || q);
+
+    return {
+      subline: s.scope === 'all' ? all.length + ' locations \u00B7 ' + nRegions + ' regions' : total + ' locations \u00B7 ' + REGION_NAME[s.scope],
+      scopeName: s.scope === 'all' ? 'All locations' : REGION_NAME[s.scope],
+      scopeOpen: s.scopeOpen, periodOpen: s.periodOpen, sortOpen: s.sortOpen,
+      toggleScopePicker: () => this.setState(st => ({ ...this.closeMenus(), scopeOpen: !st.scopeOpen })),
+      togglePeriodPicker: () => this.setState(st => ({ ...this.closeMenus(), periodOpen: !st.periodOpen })),
+      toggleSort: () => this.setState(st => ({ ...this.closeMenus(), sortOpen: !st.sortOpen })),
+      scopeAll: [{ name: 'All locations', meta: regionsWithCount('all') + ' locations', style: this.optStyle(s.scope === 'all'), select: () => this.setState({ scope: 'all', scopeOpen: false }) }],
+      scopeRegions: REGIONS.map(id => ({ name: REGION_NAME[id], meta: regionsWithCount(id) + ' locations', style: this.optStyle(s.scope === id), select: () => this.setState({ scope: id, scopeOpen: false }) })),
+      periodLabel: P[p].label,
+      periodOptions: ['Today', 'Week', 'Month', 'Year'].map(id => ({ name: P[id].label, style: this.optStyle(p === id), select: () => this.setState({ period: id, periodOpen: false }) })),
+      sortLabel: SORTS[s.sort].name,
+      sortOptions: Object.keys(SORTS).map(id => ({ name: SORTS[id].name, meta: SORTS[id].meta, style: this.optStyle(s.sort === id), select: () => this.setState({ sort: id, sortOpen: false }) })),
+
+      stateSegs: ['below', 'within', 'above'].map(k => {
+        const n = counts[k], on = stF === k, S = STATE[k];
+        return {
+          n, label: S.short, sw: S.sw, numColor: n ? S.num : 'oklch(60% 0.01 270)', pressed: on ? 'true' : 'false',
+          toggle: () => { if (n) this.setState({ stateF: on ? null : k }); },
+          style: 'display:inline-flex;align-items:center;gap:7px;height:30px;padding:0 11px;border-radius:8px;font:inherit;font-size:12.5px;white-space:nowrap;color:' + (n ? 'oklch(34% 0.012 270)' : 'oklch(60% 0.01 270)') + ';border:1px solid ' + (on ? 'oklch(84% 0.008 270)' : 'transparent') + ';background:' + (on ? 'oklch(96.2% 0.004 270)' : 'transparent') + ';box-shadow:' + (on ? 'inset 0 1px 0 #fff' : 'none') + ';cursor:' + (n ? 'pointer' : 'default'),
+        };
+      }),
+      stateActive: !!stF,
+      clearState: () => this.setState({ stateF: null }),
+
+      q: s.q, hasQ: !!s.q,
+      onQ: e => this.setState({ q: e.target.value }),
+      clearQ: () => this.setState({ q: '' }),
+      grouped: s.grouped ? 'true' : 'false',
+      toggleGroup: () => this.setState(st => ({ grouped: !st.grouped })),
+      swTrack: 'position:relative;display:inline-block;width:26px;height:16px;border-radius:8px;flex-shrink:0;transition:background .15s;background:' + (s.grouped ? 'oklch(30% 0.012 270)' : 'oklch(88% 0.006 270)'),
+      swKnob: 'position:absolute;top:2px;left:' + (s.grouped ? '12px' : '2px') + ';width:12px;height:12px;border-radius:50%;background:#fff;box-shadow:0 1px 2px oklch(20% 0.02 270 / 0.25);transition:left .15s',
+
+      countLabel: filtered ? rows.length + ' of ' + total + ' locations' : total + ' locations',
+      groups, isEmpty: rows.length === 0,
+      pinShadow: s.pinned ? '1px 0 0 oklch(91% 0.006 270)' : 'none',
+      onTableScroll: e => { const on = e.currentTarget.scrollLeft > 0; if (on !== !!this.state.pinned) this.setState({ pinned: on }); },
+      emptyText: q ? 'No locations match \u201C' + s.q.trim() + '\u201D.' : 'No locations in this state.',
+      clearAll: () => this.setState({ q: '', stateF: null }),
+
+      showGettingStartedC: !this.state.gsDismissed && this.state.gsFit !== false && !this.state.sideCollapsed,
+      dismissGs: () => { try { localStorage.setItem('gsDismissed', '1'); } catch (e) {} this.setState({ gsDismissed: true }); },
+      asideW: this.state.sideCollapsed ? '52px' : '198px',
+      navTxt: this.state.sideCollapsed ? 'none' : 'inline',
+      profileDir: this.state.sideCollapsed ? 'column' : 'row',
+      profilePadX: this.state.sideCollapsed ? '0' : '9px',
+      collapseML: this.state.sideCollapsed ? '0' : 'auto',
+      collapseGlyph: this.state.sideCollapsed ? '\u203A\u203A' : '\u2039\u2039',
+      collapseTitle: this.state.sideCollapsed ? 'Expand sidebar' : 'Collapse sidebar',
+      toggleSidebar: () => this.setState(st => ({ sideCollapsed: !st.sideCollapsed }), () => requestAnimationFrame(() => this.fitSidebar())),
+      navItemPad: this.state.navCompact ? '5px 9px' : '7px 9px',
+      navLabelPad: this.state.navCompact ? '9px 10px 5px' : '14px 10px 6px',
+      asideRef: this.asideRef, navRef: this.navRef, bottomRef: this.bottomRef, gsRef: this.gsRef,
+    };
+  }
+}
+
+</script>
+</body>
+</html>

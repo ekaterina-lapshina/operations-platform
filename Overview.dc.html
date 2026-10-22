@@ -1,0 +1,1287 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:oklch(96.5% 0.003 270);font-family:'Inter',system-ui,sans-serif;color:oklch(22% 0.01 270);-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+input::placeholder{color:oklch(66% 0.008 270)}
+a{color:oklch(54% 0.19 258);text-decoration:none}
+a:hover{color:oklch(46% 0.19 258)}
+</style>
+</helmet>
+
+<div style="min-height:100vh;background:oklch(94.6% 0.004 270);display:flex;flex-direction:column">
+
+<header style="height:52px;flex-shrink:0;background:oklch(94.6% 0.004 270);border-bottom:1px solid oklch(90.5% 0.006 270);display:flex;align-items:center;gap:16px;padding:0 16px;position:sticky;top:0;z-index:20">
+<div style="display:flex;align-items:center;gap:9px;width:198px;flex-shrink:0">
+<div style="width:22px;height:22px;border-radius:7px;background:oklch(54% 0.19 258);flex-shrink:0"></div>
+<span style="font-size:13.5px;font-weight:700;letter-spacing:-.01em;color:oklch(28% 0.012 270)">Operations Platform</span>
+<span style="margin-left:auto;font-size:11px;color:oklch(48% 0.012 270);background:#fff;border:1px solid oklch(91% 0.006 270);border-radius:6px;padding:2px 6px">Pro</span>
+</div>
+<label style="flex:1;min-width:0;max-width:420px;display:flex;align-items:center;gap:8px;background:#fff;border:1px solid oklch(91% 0.006 270);border-radius:9px;padding:6px 11px">
+<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(47% 0.013 270)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="7" cy="7" r="4.6"></circle><line x1="10.4" y1="10.4" x2="14" y2="14"></line></svg>
+<input type="text" placeholder="Search locations, products, employees" style="border:none;outline:none;background:transparent;font-family:inherit;font-size:12.5px;color:oklch(22% 0.012 270);width:100%">
+<span style="font-size:10.5px;background:oklch(96.5% 0.004 270);border-radius:5px;padding:1px 5px;flex-shrink:0;color:oklch(52% 0.012 270)">&#8984;K</span>
+</label>
+<div style="margin-left:auto;display:flex;align-items:center;gap:8px;flex-shrink:0">
+<span style="width:32px;height:32px;border-radius:9px;background:#fff;border:1px solid oklch(91% 0.006 270);display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:oklch(50% 0.01 270);cursor:pointer">?</span>
+<span style="position:relative;width:32px;height:32px;border-radius:9px;background:#fff;border:1px solid oklch(91% 0.006 270);display:inline-flex;align-items:center;justify-content:center;cursor:pointer"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(48% 0.012 270)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M4 6.6a4 4 0 0 1 8 0c0 2.4.5 3.6 1.2 4.4H2.8C3.5 10.2 4 9 4 6.6Z"></path><path d="M6.6 13.2a1.6 1.6 0 0 0 2.8 0"></path></svg><span style="position:absolute;top:5px;right:6px;width:6px;height:6px;border-radius:50%;background:oklch(54% 0.19 258);border:1.5px solid #fff"></span></span>
+<div style="width:1px;height:20px;background:oklch(90.5% 0.006 270);margin:0 2px"></div>
+<span title="Anna Weber" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer"><span style="width:28px;height:28px;flex-shrink:0;border-radius:50%;background:oklch(86% 0.014 265);box-shadow:inset 0 0 0 1px oklch(80% 0.014 265);display:inline-flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:600;letter-spacing:.01em;color:oklch(32% 0.02 265)">AW</span><span style="font-size:11px;color:oklch(45% 0.012 270)">&#9662;</span></span>
+</div>
+</header>
+
+<div style="flex:1;display:flex;min-height:0">
+
+<aside ref="{{ asideRef }}" style="width:{{ asideW }};transition:width .18s ease;overflow:hidden;flex-shrink:0;background:oklch(94.6% 0.004 270);border-right:1px solid oklch(90.5% 0.006 270);padding:10px 8px 14px;display:flex;flex-direction:column;position:sticky;top:52px;height:calc(100vh - 52px)">
+<nav ref="{{ navRef }}" style="display:flex;flex-direction:column;gap:1px;overflow-y:auto;min-height:0">
+<div style="display:{{ navTxt }};font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:oklch(47% 0.013 270);padding:4px 10px 6px">Workspace</div>
+<span style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:600;color:oklch(20% 0.012 270);background:#fff;border:1px solid oklch(91.5% 0.006 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(54% 0.19 258)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><rect x="2" y="2" width="5" height="5" rx="1"></rect><rect x="9" y="2" width="5" height="5" rx="1"></rect><rect x="2" y="9" width="5" height="5" rx="1"></rect><rect x="9" y="9" width="5" height="5" rx="1"></rect></svg><span style="display:{{ navTxt }};white-space:nowrap">Overview</span></span>
+<span style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><polyline points="1.5,10 5,10 6.8,5.5 9.2,12 11,8 14.5,8"></polyline></svg><span style="display:{{ navTxt }};white-space:nowrap">Operations</span></span>
+<div style="display:{{ navTxt }};font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:oklch(47% 0.013 270);padding:{{ navLabelPad }}">Analysis</div>
+<span style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><line x1="3" y1="13" x2="3" y2="8.5"></line><line x1="8" y1="13" x2="8" y2="4"></line><line x1="13" y1="13" x2="13" y2="6.5"></line></svg><span style="display:{{ navTxt }};white-space:nowrap">Location analytics</span></span>
+<span style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M4 2.2h5.2L12 5v8.8H4z"></path><line x1="6" y1="8" x2="10" y2="8"></line><line x1="6" y1="10.6" x2="9" y2="10.6"></line></svg><span style="display:{{ navTxt }};white-space:nowrap">Reports</span></span>
+<div style="display:{{ navTxt }};font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:oklch(47% 0.013 270);padding:{{ navLabelPad }}">Manage</div>
+<span style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M2.5 5.5 8 2.8l5.5 2.7v5L8 13.2 2.5 10.5z"></path><line x1="2.5" y1="5.5" x2="8" y2="8.2"></line><line x1="13.5" y1="5.5" x2="8" y2="8.2"></line></svg><span style="display:{{ navTxt }};white-space:nowrap">Inventory</span><span style="display:{{ navTxt }};margin-left:auto;font-size:10.5px;font-weight:600;color:oklch(42% 0.012 270);background:oklch(91.5% 0.006 270);border-radius:5px;padding:1px 5px">5</span></span>
+<span style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="6.3" cy="6" r="2.4"></circle><path d="M2 13c.6-2.2 2.3-3.3 4.3-3.3S10 10.8 10.6 13"></path><path d="M11 5.2a2.2 2.2 0 0 1 0 4"></path></svg><span style="display:{{ navTxt }};white-space:nowrap">Team</span></span>
+<span style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M8 14c2.6-3.2 4-5.4 4-7.2A4 4 0 0 0 4 6.8C4 8.6 5.4 10.8 8 14Z"></path><circle cx="8" cy="6.6" r="1.5"></circle></svg><span style="display:{{ navTxt }};white-space:nowrap">Locations</span><span style="display:{{ navTxt }};margin-left:auto;font-size:10.5px;font-weight:600;color:oklch(42% 0.012 270);background:oklch(91.5% 0.006 270);border-radius:5px;padding:1px 5px">12</span></span>
+<span style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="5.4" cy="5.6" r="2.3"></circle><circle cx="10.8" cy="7.4" r="1.9"></circle><path d="M1.8 13c.5-2 2-3 3.6-3s3.1 1 3.6 3"></path></svg><span style="display:{{ navTxt }};white-space:nowrap">Customers</span></span>
+</nav>
+<div ref="{{ bottomRef }}" style="margin-top:auto;display:flex;flex-direction:column;gap:1px">
+<sc-if value="{{ showGettingStartedC }}" hint-placeholder-val="{{ true }}"><div ref="{{ gsRef }}" style="display:flex;flex-direction:column;margin:0 2px 10px;padding:5px 5px 7px;background:#fff;border:1px solid oklch(91.5% 0.006 270);border-radius:14px;box-shadow:0 1px 2px oklch(25% 0.02 265 / 0.04)">
+<div style="position:relative;height:58px;border-radius:10px;background:oklch(95.6% 0.004 270);overflow:hidden">
+<button type="button" aria-label="Dismiss getting started" title="Dismiss" onClick="{{ dismissGs }}" style="position:absolute;z-index:1;top:4px;right:4px;width:20px;height:20px;padding:0;border:0;border-radius:6px;background:transparent;display:flex;align-items:center;justify-content:center;font-size:14px;line-height:1;color:oklch(52% 0.012 270);cursor:pointer" style-hover="background:oklch(91% 0.005 270);color:oklch(28% 0.012 270)">&#215;</button>
+<div style="position:absolute;left:16px;right:16px;top:12px;bottom:-8px;display:grid;grid-template-columns:18px minmax(0,1fr);gap:5px;padding:6px;background:#fff;border-radius:7px;box-shadow:0 0 0 1px oklch(92% 0.005 270),0 2px 6px oklch(25% 0.02 265 / 0.06)">
+<div style="display:flex;flex-direction:column;gap:3px"><span style="height:4px;border-radius:2px;background:oklch(54% 0.19 258 / 0.55)"></span><span style="height:4px;border-radius:2px;background:oklch(91% 0.005 270)"></span><span style="height:4px;border-radius:2px;background:oklch(91% 0.005 270)"></span></div>
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:12px 1fr;gap:3px"><span style="border-radius:3px;background:oklch(96.2% 0.004 270)"></span><span style="border-radius:3px;background:oklch(96.2% 0.004 270)"></span><span style="border-radius:3px;background:oklch(96.2% 0.004 270)"></span><span style="grid-column:1 / span 3;border-radius:3px;background:oklch(96.2% 0.004 270)"></span></div>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:3px;padding:11px 8px 10px;text-align:center">
+<span style="font-size:12.5px;font-weight:600;letter-spacing:-.008em;color:oklch(20% 0.012 270)">Getting started</span>
+<span style="font-size:11px;line-height:1.4;color:oklch(46% 0.013 270);text-wrap:pretty">Take a quick tour of the platform.</span>
+</div>
+<a href="#" style="display:flex;align-items:center;justify-content:center;gap:6px;height:32px;border-radius:9px;background:linear-gradient(oklch(31% 0.012 270),oklch(21% 0.012 270));box-shadow:inset 0 1px 0 oklch(100% 0 0 / 0.12),0 1px 2px oklch(20% 0.02 270 / 0.2);color:#fff;font-size:12px;font-weight:600;letter-spacing:-.004em;text-decoration:none" style-hover="background:linear-gradient(oklch(36% 0.012 270),oklch(25% 0.012 270))">Start onboarding &#8594;</a>
+</div></sc-if>
+<span style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:7px 9px;cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><line x1="2.5" y1="5" x2="13.5" y2="5"></line><line x1="2.5" y1="11" x2="13.5" y2="11"></line><circle cx="6" cy="5" r="1.7"></circle><circle cx="10.4" cy="11" r="1.7"></circle></svg><span style="display:{{ navTxt }};white-space:nowrap">Settings</span></span>
+<div style="display:flex;flex-direction:{{ profileDir }};align-items:center;gap:9px;padding:10px {{ profilePadX }} 0;margin-top:8px;border-top:1px solid oklch(90.5% 0.006 270)">
+<div title="North &amp; Oak" style="width:26px;height:26px;border-radius:7px;background:oklch(30% 0.012 270);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:700;letter-spacing:.02em;color:#fff">N&amp;O</div>
+<div style="display:{{ navTxt }};min-width:0">
+<div style="font-size:11.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:oklch(30% 0.012 270)">North &amp; Oak</div>
+<div style="font-size:10.5px;color:oklch(46% 0.013 270)">Owner</div>
+</div>
+<span title="{{ collapseTitle }}" onClick="{{ toggleSidebar }}" style="margin-left:{{ collapseML }};font-size:11px;color:oklch(45% 0.012 270);border:1px solid oklch(90% 0.006 270);border-radius:6px;padding:2px 6px;background:#fff;cursor:pointer" style-hover="color:oklch(24% 0.012 270);border-color:oklch(84% 0.008 270)">{{ collapseGlyph }}</span>
+</div>
+</div>
+</aside>
+
+<main style="flex:1;min-width:0;display:flex;flex-direction:column;background:oklch(96.4% 0.004 265);border-top-left-radius:16px;border-left:1px solid oklch(92% 0.005 270);border-top:1px solid oklch(92% 0.005 270);margin-top:-1px;padding:0 0 44px">
+
+<div style="padding:18px 26px 16px;border-bottom:1px solid oklch(92% 0.005 265);display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+<div style="display:flex;flex-direction:column;gap:6px;min-width:0;flex:1 0 auto">
+<div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;min-width:0">
+<h1 style="margin:0;font-size:21px;font-weight:600;letter-spacing:-.024em;line-height:1.15;color:oklch(18% 0.012 270)">Overview</h1>
+</div>
+<span style="display:inline-flex;align-items:center;gap:8px;font-size:12px;color:oklch(47% 0.013 270);min-width:0"><span style="width:6px;height:6px;border-radius:50%;background:oklch(54% 0.19 258);box-shadow:0 0 0 3px oklch(54% 0.19 258 / 0.16);flex-shrink:0"></span><span style="white-space:nowrap">12 locations &middot; updated 4 min ago</span></span>
+</div>
+<div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap;justify-content:flex-end">
+<div style="position:relative">
+<span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:oklch(28% 0.012 270);background:#fff;border:1px solid oklch(88% 0.008 270);border-radius:8px;padding:5px 9px;cursor:pointer;white-space:nowrap" onClick="{{ toggleScopePicker }}"><span style="width:6px;height:6px;border-radius:50%;background:oklch(54% 0.19 258)"></span>{{ scopeName }} <span style="color:oklch(47% 0.013 270);font-weight:500">&#9662;</span></span>
+<sc-if value="{{ scopeOpen }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;top:calc(100% + 6px);right:0;width:268px;background:#fff;border:1px solid oklch(90% 0.006 270);border-radius:14px;box-shadow:0 12px 32px oklch(20% 0.02 270 / 0.12);padding:8px;z-index:30;max-height:380px;overflow-y:auto">
+<div style="display:flex;align-items:center;gap:7px;background:oklch(97.5% 0.003 270);border-radius:9px;padding:6px 9px;margin-bottom:6px">
+<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.013 270)" stroke-width="1.5" stroke-linecap="round"><circle cx="7" cy="7" r="4.6"></circle><line x1="10.4" y1="10.4" x2="14" y2="14"></line></svg>
+<input type="text" placeholder="Find a location or region" style="border:none;outline:none;background:transparent;font-family:inherit;font-size:12px;width:100%;color:oklch(24% 0.01 270)">
+</div>
+<div style="font-size:10px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:oklch(50% 0.013 270);padding:8px 9px 5px">Whole business</div>
+<sc-for list="{{ scopeAll }}" as="o" hint-placeholder-count="1">
+<div style="{{ o.style }}" onClick="{{ o.select }}"><span>{{ o.name }}</span><span style="margin-left:auto;font-size:11px;color:oklch(52% 0.013 270)">{{ o.meta }}</span></div>
+</sc-for>
+<div style="font-size:10px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:oklch(50% 0.013 270);padding:10px 9px 5px;border-top:1px solid oklch(96% 0.004 270);margin-top:5px">Regions</div>
+<sc-for list="{{ scopeRegions }}" as="o" hint-placeholder-count="3">
+<div style="{{ o.style }}" onClick="{{ o.select }}"><span>{{ o.name }}</span><span style="margin-left:auto;font-size:11px;color:oklch(52% 0.013 270)">{{ o.meta }}</span></div>
+</sc-for>
+<div style="font-size:10px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:oklch(50% 0.013 270);padding:10px 9px 5px;border-top:1px solid oklch(96% 0.004 270);margin-top:5px">Locations</div>
+<sc-for list="{{ scopeLocations }}" as="o" hint-placeholder-count="5">
+<div style="{{ o.style }}" onClick="{{ o.select }}"><span>{{ o.name }}</span><span style="margin-left:auto;font-size:11px;color:oklch(52% 0.013 270)">{{ o.meta }}</span></div>
+</sc-for>
+</div>
+</sc-if>
+</div>
+<div style="position:relative">
+<span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:oklch(34% 0.012 270);background:#fff;border:1px solid oklch(92% 0.005 270);border-radius:8px;padding:5px 9px;cursor:pointer;white-space:nowrap" onClick="{{ togglePeriodPicker }}">{{ periodLabel }} <span style="color:oklch(47% 0.013 270)">&#9662;</span></span>
+<sc-if value="{{ periodOpen }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;top:calc(100% + 6px);right:0;width:168px;background:#fff;border:1px solid oklch(90% 0.006 270);border-radius:14px;box-shadow:0 12px 32px oklch(20% 0.02 270 / 0.12);padding:8px;z-index:30;display:flex;flex-direction:column;gap:1px">
+<sc-for list="{{ periodOptions }}" as="o" hint-placeholder-count="4">
+<div style="{{ o.style }}" onClick="{{ o.select }}"><span>{{ o.name }}</span></div>
+</sc-for>
+</div>
+</sc-if>
+</div>
+<span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:oklch(34% 0.012 270);background:#fff;border:1px solid oklch(92% 0.005 270);border-radius:8px;padding:5px 9px;cursor:pointer;white-space:nowrap">Business Owner <span style="color:oklch(47% 0.013 270)">&#9662;</span></span>
+<span style="font-size:12px;font-weight:600;color:#fff;background:oklch(54% 0.19 258);border:1px solid oklch(54% 0.19 258);border-radius:8px;padding:5px 12px;cursor:pointer;white-space:nowrap">Export</span>
+</div>
+</div>
+
+<div style="padding:20px 26px 0;display:flex;flex-direction:column;gap:20px">
+<div style="display:flex;flex-wrap:wrap;align-items:flex-end;gap:28px;padding:6px 0 22px;border-bottom:1px solid oklch(93% 0.005 270)">
+<div style="flex:1 1 380px;min-width:0">
+<div style="display:flex;align-items:baseline;flex-wrap:wrap;column-gap:8px;row-gap:2px;margin-bottom:12px">
+<span style="font-size:13px;font-weight:600;letter-spacing:-.005em;color:oklch(26% 0.012 270)">Revenue</span>
+<span style="font-size:12.5px;color:oklch(49% 0.012 270)">&middot;</span>
+<span style="font-size:12.5px;color:oklch(49% 0.012 270);white-space:nowrap">{{ periodLabel }} &middot; {{ scopeName }}</span>
+</div>
+<div style="display:flex;align-items:flex-end;gap:14px;flex-wrap:wrap;margin-bottom:10px">
+<span style="display:inline-flex;align-items:flex-start;font-size:56px;font-weight:700;letter-spacing:-.042em;font-variant-numeric:tabular-nums;font-feature-settings:'tnum','ss01';line-height:.95;color:oklch(17% 0.012 270)"><span style="font-size:30px;font-weight:500;letter-spacing:0;color:oklch(55% 0.01 270);margin:4px 3px 0 0">$</span>{{ heroNum }}</span>
+<span style="display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:oklch(22% 0.012 270);margin-bottom:8px"><span style="display:inline-flex;align-items:center;gap:4px"><span style="font-size:10px;color:{{ heroDeltaColor }}">{{ heroArrow }}</span>{{ heroDeltaVal }}</span><span style="font-weight:500;color:oklch(47% 0.013 270)">{{ heroCompare }}</span></span>
+</div>
+</div>
+<div style="flex:1 1 460px;min-width:0;display:flex;flex-wrap:wrap;gap:20px 0;padding-bottom:4px">
+<div style="flex:1 1 130px;min-width:0;padding:0 0 0 20px;border-left:1px solid oklch(91% 0.006 270)">
+<div style="font-size:12.5px;font-weight:400;color:oklch(49% 0.012 270);margin-bottom:6px">Transactions</div>
+<div style="font-size:30px;font-weight:600;font-variant-numeric:tabular-nums;font-feature-settings:'tnum','ss01';letter-spacing:-.034em;line-height:1.05;color:oklch(17% 0.012 270);margin-bottom:7px">{{ kpiTx }}</div>
+<div style="display:flex;align-items:center;gap:4px;font-size:12.5px;font-weight:500;color:oklch(30% 0.012 270)"><span style="font-size:10px;color:{{ kpiTxDeltaColor }}">{{ kpiTxArrow }}</span>{{ kpiTxVal }}</div></div>
+<div style="flex:1 1 130px;min-width:0;padding:0 0 0 20px;border-left:1px solid oklch(91% 0.006 270)">
+<div style="font-size:12.5px;font-weight:400;color:oklch(49% 0.012 270);margin-bottom:6px">Avg. Order Value</div>
+<div style="font-size:30px;font-weight:600;font-variant-numeric:tabular-nums;font-feature-settings:'tnum','ss01';letter-spacing:-.034em;line-height:1.05;color:oklch(17% 0.012 270);margin-bottom:7px"><span style="font-size:.6em;font-weight:500;letter-spacing:0;color:oklch(55% 0.01 270);margin-right:1px;vertical-align:.5em">$</span>{{ kpiAovNum }}</div>
+<div style="display:flex;align-items:center;gap:4px;font-size:12.5px;font-weight:500;color:oklch(30% 0.012 270)"><span style="font-size:10px;color:{{ kpiAovDeltaColor }}">{{ kpiAovArrow }}</span>{{ kpiAovVal }}</div></div>
+<div style="flex:1 1 130px;min-width:0;padding:0 0 0 20px;border-left:1px solid oklch(91% 0.006 270)">
+<div style="font-size:12.5px;font-weight:400;color:oklch(49% 0.012 270);margin-bottom:6px">Profit Margin</div>
+<div style="font-size:30px;font-weight:600;font-variant-numeric:tabular-nums;font-feature-settings:'tnum','ss01';letter-spacing:-.034em;line-height:1.05;color:oklch(17% 0.012 270);margin-bottom:7px">{{ kpiMarginNum }}<span style="font-size:.6em;font-weight:500;letter-spacing:0;color:oklch(55% 0.01 270);margin-left:1px">%</span></div>
+<div style="display:flex;align-items:center;gap:4px;font-size:12.5px;font-weight:500;color:oklch(30% 0.012 270)"><span style="font-size:10px;color:{{ kpiMarginDeltaColor }}">{{ kpiMarginArrow }}</span>{{ kpiMarginVal }}</div></div>
+<div style="flex:1 1 130px;min-width:0;padding:0 0 0 20px;border-left:1px solid oklch(91% 0.006 270)">
+<div style="font-size:12.5px;font-weight:400;color:oklch(49% 0.012 270);margin-bottom:6px">Target Progress</div>
+<div style="font-size:30px;font-weight:600;font-variant-numeric:tabular-nums;font-feature-settings:'tnum','ss01';letter-spacing:-.034em;line-height:1.05;color:oklch(17% 0.012 270);margin-bottom:7px">{{ kpiTargetNum }}<span style="font-size:.6em;font-weight:500;letter-spacing:0;color:oklch(55% 0.01 270);margin-left:1px">%</span></div>
+<div style="font-size:12.5px;font-weight:500;color:oklch(49% 0.012 270)">{{ kpiGoalLabel }}</div><div style="height:4px;border-radius:2px;background:oklch(93% 0.005 270);overflow:hidden;margin-top:8px;max-width:96px"><div style="height:100%;width:{{ kpiTarget }};background:oklch(54% 0.19 258)"></div></div></div>
+</div>
+</div>
+
+<div style="background:#fff;border:1px solid oklch(92.6% 0.004 265);border-radius:18px;box-shadow:0 1px 2px oklch(25% 0.02 265 / 0.05);overflow:hidden;display:grid;grid-template-columns:minmax(0,1.72fr) minmax(292px,1fr)">
+<div style="min-width:0;display:flex;flex-direction:column">
+<div style="box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;padding:12px 22px;min-height:58px;border-bottom:1px solid oklch(95% 0.004 270);flex-wrap:wrap;gap:12px">
+<span style="display:inline-flex;align-items:baseline;gap:10px;flex-wrap:wrap"><span style="font-size:15.5px;font-weight:600;letter-spacing:-.012em;color:oklch(18% 0.012 270)">Revenue trend</span><span style="font-size:12px;color:oklch(47% 0.013 270)">{{ chartScopeLine }}</span></span>
+<div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:flex-end;min-width:0">
+<div style="{{ prevToggleStyle }}" onClick="{{ togglePrev }}" title="{{ prevToggleHint }}">
+<div style="width:15px;height:15px;border-radius:5px;border:1px solid oklch(82% 0.008 270);background:{{ prevBoxBg }};display:flex;align-items:center;justify-content:center;font-size:9px;color:#fff;flex-shrink:0">{{ prevCheck }}</div>
+<span style="font-size:12px;white-space:nowrap">Previous period</span>
+</div>
+</div>
+</div>
+
+<div style="padding:22px 22px 16px">
+<div style="position:relative;height:288px;padding-left:50px">
+<span style="position:absolute;left:0;top:4%;transform:translateY(-50%);font-size:10.5px;color:oklch(47% 0.013 270);font-variant-numeric:tabular-nums">{{ axis0 }}</span>
+<span style="position:absolute;left:0;top:35%;transform:translateY(-50%);font-size:10.5px;color:oklch(47% 0.013 270);font-variant-numeric:tabular-nums">{{ axis1 }}</span>
+<span style="position:absolute;left:0;top:64%;transform:translateY(-50%);font-size:10.5px;color:oklch(47% 0.013 270);font-variant-numeric:tabular-nums">{{ axis2 }}</span>
+<span style="position:absolute;left:0;top:90%;transform:translateY(-50%);font-size:10.5px;color:oklch(47% 0.013 270);font-variant-numeric:tabular-nums">$0</span>
+<div style="position:absolute;top:0;right:0;bottom:0;left:50px;overflow:hidden">
+<sc-for list="{{ gridX }}" as="gx" hint-placeholder-count="6">
+<div style="{{ gx }}"></div>
+</sc-for>
+<svg viewBox="0 0 1000 236" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;display:block">
+<line x1="0" y1="212" x2="1000" y2="212" stroke="oklch(92% 0.005 270)" vector-effect="non-scaling-stroke"></line>
+<line x1="0" y1="150" x2="1000" y2="150" stroke="oklch(91.8% 0.005 270)" vector-effect="non-scaling-stroke"></line>
+<line x1="0" y1="82" x2="1000" y2="82" stroke="oklch(91.8% 0.005 270)" vector-effect="non-scaling-stroke"></line>
+<line x1="0" y1="10" x2="1000" y2="10" stroke="oklch(91.8% 0.005 270)" vector-effect="non-scaling-stroke"></line>
+<sc-if value="{{ showArea }}" hint-placeholder-val="{{ true }}">
+<path d="{{ areaPath }}" fill="oklch(58% 0.17 258 / 0.10)"></path>
+</sc-if>
+<sc-if value="{{ showPrev }}" hint-placeholder-val="{{ true }}">
+<path d="{{ prevPath }}" fill="none" stroke="oklch(85% 0.008 270)" stroke-width="1.5" stroke-dasharray="5 4" vector-effect="non-scaling-stroke"></path>
+</sc-if>
+<path d="{{ seriesPath }}" fill="none" stroke="oklch(54% 0.19 258)" stroke-width="2.5" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path>
+</svg>
+<sc-if value="{{ hasAnnotation }}" hint-placeholder-val="{{ true }}">
+<div style="{{ annMarkerStyle }}"></div>
+<div style="{{ annRowStyle }}">
+<div style="{{ annCalloutStyle }}">{{ annText }}</div>
+<div style="{{ annLeaderStyle }}"></div>
+</div>
+</sc-if>
+<sc-if value="{{ showEndDot }}" hint-placeholder-val="{{ true }}">
+<div style="position:absolute;left:{{ endDotLeft }};top:{{ endDotTop }};width:11px;height:11px;border-radius:50%;background:oklch(54% 0.19 258);box-shadow:0 0 0 3px #fff;transform:translate(-50%,-50%)"></div>
+</sc-if>
+<div style="position:absolute;inset:0;z-index:4;cursor:crosshair" onMouseMove="{{ chartHoverMove }}" onMouseLeave="{{ chartHoverLeave }}"></div>
+<sc-if value="{{ hovOn }}" hint-placeholder-val="{{ false }}">
+<div style="{{ hovLineStyle }}"></div>
+<sc-if value="{{ hovShowPrev }}" hint-placeholder-val="{{ false }}"><div style="{{ hovPrevDotStyle }}"></div></sc-if>
+<div style="{{ hovDotStyle }}"></div>
+<div style="{{ hovTipStyle }}">
+<span style="font-size:10.5px;font-weight:600;letter-spacing:.02em;color:oklch(47% 0.013 270)">{{ hovLabel }}</span>
+<span style="display:flex;align-items:center;gap:7px;font-size:11.5px;color:oklch(40% 0.012 270)"><span style="width:10px;height:2.5px;border-radius:1px;background:oklch(54% 0.19 258);flex-shrink:0"></span>Revenue<span style="margin-left:auto;padding-left:14px;font-weight:650;color:oklch(18% 0.012 270);font-variant-numeric:tabular-nums">{{ hovRev }}</span></span>
+<sc-if value="{{ hovShowPrev }}" hint-placeholder-val="{{ false }}"><span style="display:flex;align-items:center;gap:7px;font-size:11.5px;color:oklch(47% 0.013 270)"><span style="width:10px;height:0;border-top:2px dashed oklch(78% 0.008 270);flex-shrink:0"></span>Previous period<span style="margin-left:auto;padding-left:14px;font-weight:500;color:oklch(40% 0.012 270);font-variant-numeric:tabular-nums">{{ hovPrev }}</span></span></sc-if>
+</div>
+</sc-if>
+</div>
+</div>
+<div style="position:relative;height:14px;margin:10px 0 16px 50px">
+<sc-for list="{{ xLabels }}" as="xl" hint-placeholder-count="6">
+<span style="{{ xl.style }}">{{ xl.t }}</span>
+</sc-for>
+</div>
+<div style="display:flex;gap:18px;flex-wrap:wrap;align-items:center;border-top:1px solid oklch(96% 0.004 270);padding-top:12px;margin-top:auto">
+<span style="display:inline-flex;align-items:center;gap:7px;font-size:11.5px;color:oklch(46% 0.01 270)"><span style="width:14px;height:2.5px;background:oklch(54% 0.19 258)"></span>{{ scopeName }}</span>
+<sc-if value="{{ showPrev }}" hint-placeholder-val="{{ true }}">
+<span style="display:inline-flex;align-items:center;gap:7px;font-size:11.5px;color:oklch(46% 0.01 270)"><span style="width:14px;height:0;border-top:2px dashed oklch(85% 0.008 270)"></span>Previous period</span>
+</sc-if>
+</div>
+</div>
+</div>
+
+<div style="min-width:0;border-left:1px solid oklch(94% 0.004 270);background:oklch(99.2% 0.002 270);display:flex;flex-direction:column">
+<div style="box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;min-height:58px;border-bottom:1px solid oklch(94% 0.004 270)">
+<span style="display:inline-flex;align-items:baseline;gap:10px;flex-wrap:wrap"><span style="font-size:15.5px;font-weight:600;letter-spacing:-.012em;color:oklch(18% 0.012 270)">{{ panelTitle }}</span><sc-if value="{{ panelScoped }}" hint-placeholder-val="{{ false }}"><span style="font-size:12px;color:oklch(47% 0.013 270)">{{ scopeName }}</span></sc-if></span>
+</div>
+<sc-if value="{{ i1 }}" hint-placeholder-val="{{ true }}">
+<div style="{{ insight1Style }}" onClick="{{ toggleInsight1 }}">
+<span style="display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;letter-spacing:-.003em;color:oklch(55% 0.18 22);white-space:nowrap"><span style="width:7px;height:7px;border-radius:2px;background:oklch(55% 0.18 22)"></span>{{ i1Badge }}</span>
+<div>
+<div style="font-size:21px;font-weight:650;line-height:1.26;margin-bottom:9px;letter-spacing:-.024em;color:oklch(15% 0.012 270);text-wrap:pretty">{{ i1Title }}</div>
+<div style="font-size:13.5px;line-height:1.5;color:oklch(42% 0.012 270);text-wrap:pretty">{{ i1Sub }}</div>
+<sc-if value="{{ exp1 }}" hint-placeholder-val="{{ false }}">
+<div style="font-size:12.5px;color:oklch(45% 0.01 270);background:oklch(97.5% 0.003 270);border-radius:12px;padding:11px 13px;margin-top:10px">{{ i1Detail }}</div>
+</sc-if>
+</div>
+<a href="#" style="display:inline-block;font-size:13px;font-weight:600;white-space:nowrap">Investigate {{ i1Loc }} &#8599;</a>
+</div>
+</sc-if>
+<sc-if value="{{ hasOthers }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;align-items:center;justify-content:space-between;padding:11px 20px 9px;margin-top:18px;background:oklch(97.2% 0.003 270);border-top:1px solid oklch(92% 0.005 270);border-bottom:1px solid oklch(95% 0.004 270)">
+<span style="font-size:12px;font-weight:600;letter-spacing:-.003em;color:oklch(44% 0.012 270)">Other signals</span>
+<span style="font-size:11px;color:oklch(52% 0.013 270)">{{ otherCount }}</span>
+</div>
+</sc-if>
+<sc-if value="{{ i2 }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;align-items:flex-start;gap:10px;padding:13px 20px;border-bottom:1px solid oklch(96.5% 0.004 270);cursor:pointer" style-hover="background:oklch(98.4% 0.002 270)" onClick="{{ toggleInsight2 }}">
+<span style="width:6px;height:6px;border-radius:50%;background:oklch(72% 0.01 270);flex-shrink:0;margin-top:6px"></span>
+<div style="min-width:0;flex:1">
+<div style="font-size:13px;font-weight:600;letter-spacing:-.003em;margin-bottom:2px">5 products are running low</div>
+<div style="font-size:12px;color:oklch(48% 0.013 270)">{{ i2Meta }}</div>
+<sc-if value="{{ exp2 }}" hint-placeholder-val="{{ false }}">
+<div style="font-size:12px;line-height:1.5;color:oklch(45% 0.01 270);background:oklch(97.5% 0.003 270);border-radius:11px;padding:10px 12px;margin-top:9px">Espresso beans (3 locations), ceramic mugs (Berlin, Paris), oat milk (Amsterdam). At current run-rate, beans stock out in 4 days.</div>
+</sc-if>
+</div>
+<a href="#" style="font-size:11.5px;font-weight:600;white-space:nowrap;margin-top:1px">Inventory &#8599;</a>
+</div>
+</sc-if>
+<sc-if value="{{ i3 }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;align-items:flex-start;gap:10px;padding:13px 20px;cursor:pointer;flex:1" style-hover="background:oklch(98.4% 0.002 270)" onClick="{{ toggleInsight3 }}">
+<span style="width:6px;height:6px;border-radius:50%;background:oklch(72% 0.01 270);flex-shrink:0;margin-top:6px"></span>
+<div style="min-width:0;flex:1">
+<div style="font-size:13px;font-weight:600;letter-spacing:-.003em;margin-bottom:2px">Employee conversion down 4pt</div>
+<div style="font-size:12px;color:oklch(48% 0.013 270)">Team &middot; group-wide, last two weeks</div>
+<sc-if value="{{ exp3 }}" hint-placeholder-val="{{ false }}">
+<div style="font-size:12px;line-height:1.5;color:oklch(45% 0.01 270);background:oklch(97.5% 0.003 270);border-radius:11px;padding:10px 12px;margin-top:9px">Conversion fell from 24.8% to 20.6% across new hires onboarded in the last 30 days; tenured staff hold at 25.1%.</div>
+</sc-if>
+</div>
+<a href="#" style="font-size:11.5px;font-weight:600;white-space:nowrap;margin-top:1px">Team &#8599;</a>
+</div>
+</sc-if>
+
+</div>
+
+</div>
+
+<div style="background:#fff;border:1px solid oklch(92.6% 0.004 265);border-radius:18px;box-shadow:0 1px 2px oklch(25% 0.02 265 / 0.05);overflow:hidden">
+<div style="box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;padding:12px 22px;min-height:58px;background:oklch(97.8% 0.003 270);border-bottom:1px solid oklch(93.5% 0.005 270);flex-wrap:wrap;gap:12px">
+<span style="display:inline-flex;align-items:baseline;gap:10px;flex-wrap:wrap"><span style="font-size:15.5px;font-weight:600;letter-spacing:-.012em;color:oklch(18% 0.012 270)">Locations</span><span style="font-size:11.5px;color:oklch(50% 0.013 270)">{{ locWindow }}</span></span>
+</div>
+<div style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:18px 22px 16px">
+<span style="display:flex;align-items:baseline;gap:8px;flex-wrap:wrap"><span style="white-space:nowrap;font-size:26px;font-weight:650;letter-spacing:-.034em;line-height:1;color:oklch(17% 0.012 270);font-variant-numeric:tabular-nums;font-feature-settings:'tnum','ss01'">{{ locLeadA }}<span style="font-weight:500;color:oklch(58% 0.01 270)"> {{ locLeadB }}</span></span><span style="font-size:12.5px;color:oklch(45% 0.012 270)">{{ locCountLabel }}</span></span>
+<span style="{{ locShapeStyle }}">{{ locShape }}</span>
+</div>
+<div ref="{{ locGridRef }}" style="{{ locGridStyle }}">
+<sc-for list="{{ locItems }}" as="it" hint-placeholder-count="12">
+<div style="{{ it.style }}"><span style="{{ it.aStyle }}">{{ it.a }}</span><span style="{{ it.bStyle }}">{{ it.b }}</span></div>
+</sc-for>
+</div>
+<div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:16px 22px;border-top:1px solid oklch(91.5% 0.006 270);background:oklch(97.4% 0.003 270)">
+<span style="display:flex;align-items:center;gap:18px;flex-wrap:wrap;font-size:12px;color:oklch(44% 0.012 270)">
+<span style="display:inline-flex;align-items:center;gap:7px"><span style="width:12px;height:12px;border-radius:3px;background:linear-gradient(oklch(55% 0.18 22 / 0.5),oklch(55% 0.18 22 / 0.5)) center 5.5px / 10px 1px no-repeat,linear-gradient(oklch(55% 0.18 22),oklch(55% 0.18 22)) center 6px / 6px 5px no-repeat,oklch(96.6% 0.022 22);box-shadow:inset 0 0 0 1px oklch(55% 0.18 22 / 0.32)"></span>Below expected pace</span>
+<span style="display:inline-flex;align-items:center;gap:7px"><span style="width:12px;height:12px;border-radius:3px;background:linear-gradient(oklch(66% 0.012 265),oklch(66% 0.012 265)) center 5.5px / 10px 1px no-repeat,linear-gradient(oklch(95.4% 0.004 265),oklch(95.4% 0.004 265)) center 3px / 100% 6px no-repeat,oklch(98.2% 0.002 270);box-shadow:inset 0 0 0 1px oklch(90% 0.005 270)"></span>Within expected pace</span>
+<sc-if value="{{ locHasAhead }}" hint-placeholder-val="{{ false }}"><span style="display:inline-flex;align-items:center;gap:7px"><span style="width:12px;height:12px;border-radius:3px;background:linear-gradient(oklch(76% 0.01 265),oklch(76% 0.01 265)) center 6.5px / 10px 1px no-repeat,linear-gradient(oklch(63% 0.03 175),oklch(63% 0.03 175)) center 1.5px / 6px 5px no-repeat,oklch(98.2% 0.002 270);box-shadow:inset 0 0 0 1px oklch(90% 0.005 270)"></span>Above expected pace</span></sc-if>
+</span>
+<a href="#" style="font-size:12.5px;font-weight:600;white-space:nowrap;margin-left:auto;color:oklch(44% 0.012 270);text-decoration:none" style-hover="color:oklch(24% 0.012 270)">Location analytics &#8599;</a>
+</div>
+</div>
+<sc-if value="{{ showStateReference }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:18px;margin-top:56px;padding-top:28px;border-top:2px dashed oklch(86% 0.008 270)">
+<div style="display:flex;flex-direction:column;gap:4px"><span style="font-size:10.5px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:oklch(47% 0.013 270)">Locations · state reference</span><span style="font-size:12.5px;color:oklch(44% 0.012 270)">Fixed fixtures of the module above. The live module follows the period and scope controls.</span></div>
+<sc-for list="{{ locStates }}" as="st" hint-placeholder-count="4">
+<div style="display:flex;flex-direction:column;gap:10px">
+<span style="display:flex;align-items:center;gap:10px"><span style="font-size:11px;font-weight:700;color:#fff;background:oklch(30% 0.012 270);border-radius:6px;padding:2px 7px;font-variant-numeric:tabular-nums">{{ st.n }}</span><span style="font-size:12.5px;font-weight:600;color:oklch(30% 0.012 270)">{{ st.title }}</span></span>
+<div style="background:#fff;border:1px solid oklch(92.6% 0.004 265);border-radius:18px;box-shadow:0 1px 2px oklch(25% 0.02 265 / 0.05);overflow:hidden">
+<div style="box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;padding:12px 22px;min-height:58px;background:oklch(97.8% 0.003 270);border-bottom:1px solid oklch(93.5% 0.005 270);flex-wrap:wrap;gap:12px">
+<span style="display:inline-flex;align-items:baseline;gap:10px;flex-wrap:wrap"><span style="font-size:15.5px;font-weight:600;letter-spacing:-.012em;color:oklch(18% 0.012 270)">Locations</span><span style="font-size:11.5px;color:oklch(50% 0.013 270)">{{ st.locWindow }}</span></span>
+</div>
+<div style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:18px 22px 16px">
+<span style="display:flex;align-items:baseline;gap:8px;flex-wrap:wrap"><span style="white-space:nowrap;font-size:26px;font-weight:650;letter-spacing:-.034em;line-height:1;color:oklch(17% 0.012 270);font-variant-numeric:tabular-nums;font-feature-settings:'tnum','ss01'">{{ st.locLeadA }}<span style="font-weight:500;color:oklch(58% 0.01 270)"> {{ st.locLeadB }}</span></span><span style="font-size:12.5px;color:oklch(45% 0.012 270)">{{ st.locCountLabel }}</span></span>
+<span style="{{ st.locShapeStyle }}">{{ st.locShape }}</span>
+</div>
+<div style="{{ st.locGridStyle }}">
+<sc-for list="{{ st.locItems }}" as="it" hint-placeholder-count="12">
+<div style="{{ it.style }}"><span style="{{ it.aStyle }}">{{ it.a }}</span><span style="{{ it.bStyle }}">{{ it.b }}</span></div>
+</sc-for>
+</div>
+<div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:16px 22px;border-top:1px solid oklch(91.5% 0.006 270);background:oklch(97.4% 0.003 270)">
+<span style="display:flex;align-items:center;gap:18px;flex-wrap:wrap;font-size:12px;color:oklch(44% 0.012 270)">
+<span style="display:inline-flex;align-items:center;gap:7px"><span style="width:12px;height:12px;border-radius:3px;background:linear-gradient(oklch(55% 0.18 22 / 0.5),oklch(55% 0.18 22 / 0.5)) center 5.5px / 10px 1px no-repeat,linear-gradient(oklch(55% 0.18 22),oklch(55% 0.18 22)) center 6px / 6px 5px no-repeat,oklch(96.6% 0.022 22);box-shadow:inset 0 0 0 1px oklch(55% 0.18 22 / 0.32)"></span>Below expected pace</span>
+<span style="display:inline-flex;align-items:center;gap:7px"><span style="width:12px;height:12px;border-radius:3px;background:linear-gradient(oklch(66% 0.012 265),oklch(66% 0.012 265)) center 5.5px / 10px 1px no-repeat,linear-gradient(oklch(95.4% 0.004 265),oklch(95.4% 0.004 265)) center 3px / 100% 6px no-repeat,oklch(98.2% 0.002 270);box-shadow:inset 0 0 0 1px oklch(90% 0.005 270)"></span>Within expected pace</span>
+<span style="display:inline-flex;align-items:center;gap:7px;color:oklch(52% 0.011 270)">Midline = expected pace</span>
+</span>
+<a href="#" style="font-size:12.5px;font-weight:600;white-space:nowrap;margin-left:auto;color:oklch(44% 0.012 270);text-decoration:none" style-hover="color:oklch(24% 0.012 270)">Location analytics &#8599;</a>
+</div>
+</div>
+</div>
+</sc-for>
+</div>
+</sc-if>
+
+</div>
+</div>
+</main>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1180},&quot;showStateReference&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Testing&quot;},&quot;stressTest&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Testing&quot;}}">
+const D = {
+  all:       'M8,160 L110,138 L212,124 L314,96 L420,76 L508,124 L572,142 L668,84 L778,64 L882,44 L992,28',
+  north:     'M8,120 L110,114 L212,108 L314,100 L420,94 L508,110 L572,120 L668,112 L778,106 L882,102 L992,98',
+  south:     'M8,140 L110,134 L212,128 L314,120 L420,112 L508,114 L572,108 L668,100 L778,92 L882,84 L992,76',
+  central:   'M8,150 L110,146 L212,142 L314,138 L420,134 L508,138 L572,136 L668,132 L778,130 L882,126 L992,122',
+  berlin:    'M8,150 L110,145 L212,141 L314,136 L420,132 L508,146 L572,158 L668,166 L778,172 L882,174 L992,181',
+  munich:    'M8,158 L110,152 L212,148 L314,142 L420,136 L508,138 L572,132 L668,126 L778,120 L882,114 L992,108',
+  paris:     'M8,164 L110,160 L212,156 L314,152 L420,148 L508,152 L572,150 L668,148 L778,146 L882,144 L992,142',
+  madrid:    'M8,146 L110,142 L212,138 L314,132 L420,128 L508,130 L572,126 L668,122 L778,118 L882,114 L992,110',
+  amsterdam: 'M8,138 L110,132 L212,126 L314,118 L420,112 L508,116 L572,110 L668,104 L778,96 L882,88 L992,80',
+  hamburg:   'M8,156 L110,152 L212,149 L314,145 L420,141 L508,152 L572,160 L668,164 L778,168 L882,170 L992,174',
+  copenhagen:'M8,152 L110,148 L212,145 L314,141 L420,137 L508,144 L572,150 L668,152 L778,154 L882,154 L992,156',
+  stockholm: 'M8,150 L110,146 L212,142 L314,137 L420,133 L508,136 L572,132 L668,128 L778,124 L882,120 L992,116',
+  barcelona: 'M8,148 L110,144 L212,140 L314,135 L420,130 L508,132 L572,128 L668,124 L778,119 L882,114 L992,110',
+  rome:      'M8,154 L110,150 L212,147 L314,143 L420,139 L508,148 L572,154 L668,157 L778,159 L882,160 L992,162',
+  zurich:    'M8,146 L110,141 L212,137 L314,132 L420,127 L508,129 L572,124 L668,119 L778,114 L882,109 L992,104',
+  lisbon:    'M8,158 L110,154 L212,151 L314,147 L420,143 L508,145 L572,142 L668,139 L778,136 L882,133 L992,130',
+};
+
+const ENT = {
+  all:       { kind: 'all',      name: 'All locations',  sub: '12 locations',   total: '$248,540', short: '$248.5k', delta: '▲ 12%', tx: '9,412', target: '76%' },
+  north:     { kind: 'region',   name: 'North region',   sub: '5 locations',    total: '$96,400',  short: '$96.4k',  delta: '▲ 3%',  tx: '3,780', target: '68%' },
+  south:     { kind: 'region',   name: 'South region',   sub: '4 locations',    total: '$88,100',  short: '$88.1k',  delta: '▲ 9%',  tx: '3,240', target: '84%' },
+  central:   { kind: 'region',   name: 'Central region', sub: '3 locations',    total: '$64,040',  short: '$64.0k',  delta: '▲ 5%',  tx: '2,392', target: '72%' },
+  berlin:    { kind: 'location', name: 'Berlin',         sub: 'Mitte flagship', total: '$38,900',  short: '$38.9k',  delta: '▼ 15%', tx: '1,510', target: '58%' },
+  munich:    { kind: 'location', name: 'Munich',         sub: 'Single site',    total: '$41,600',  short: '$41.6k',  delta: '▲ 5%',  tx: '1,580', target: '74%' },
+  paris:     { kind: 'location', name: 'Paris',          sub: 'Single site',    total: '$44,700',  short: '$44.7k',  delta: '▼ 1%',  tx: '1,690', target: '70%' },
+  madrid:    { kind: 'location', name: 'Madrid',         sub: 'Single site',    total: '$52,300',  short: '$52.3k',  delta: '▲ 4%',  tx: '1,880', target: '81%' },
+  amsterdam: { kind: 'location', name: 'Amsterdam',      sub: 'Single site',    total: '$61,200',  short: '$61.2k',  delta: '▲ 9%',  tx: '2,140', target: '94%' },
+  hamburg:   { kind: 'location', name: 'Hamburg',        sub: 'Single site',    total: '$34,800',  short: '$34.8k',  delta: '▼ 9%',  tx: '1,320', target: '76%' },
+  copenhagen:{ kind: 'location', name: 'Copenhagen',     sub: 'Single site',    total: '$36,100',  short: '$36.1k',  delta: '▲ 2%',  tx: '1,290', target: '79%' },
+  stockholm: { kind: 'location', name: 'Stockholm',      sub: 'Single site',    total: '$39,400',  short: '$39.4k',  delta: '▲ 6%',  tx: '1,410', target: '82%' },
+  barcelona: { kind: 'location', name: 'Barcelona',      sub: 'Single site',    total: '$47,900',  short: '$47.9k',  delta: '▲ 7%',  tx: '1,720', target: '85%' },
+  rome:      { kind: 'location', name: 'Rome',           sub: 'Single site',    total: '$42,200',  short: '$42.2k',  delta: '▼ 2%',  tx: '1,560', target: '80%' },
+  zurich:    { kind: 'location', name: 'Zurich',         sub: 'Single site',    total: '$55,600',  short: '$55.6k',  delta: '▲ 8%',  tx: '1,840', target: '88%' },
+  lisbon:    { kind: 'location', name: 'Lisbon',         sub: 'Single site',    total: '$33,500',  short: '$33.5k',  delta: '▲ 1%',  tx: '1,240', target: '77%' },
+};
+
+// The previous-period overlay is derived from the scope's own series and its
+// year-on-year delta, so it can never contradict the headline figure.
+function prevOf(id) {
+  const raw = ENT[id].delta;
+  const d = (raw.indexOf('▼') === 0 ? -1 : 1) * parseFloat(raw.replace(/[^0-9.]/g, '')) / 100;
+  return D[id].split(' ').map(seg => {
+    const [x, y] = seg.slice(1).split(',');
+    return `${seg[0]}${x},${(212 - (212 - parseFloat(y)) / (1 + d)).toFixed(1)}`;
+  }).join(' ');
+}
+
+const AXIS = {
+  all:      ['$300k', '$200k', '$100k'],
+  region:   ['$150k', '$100k', '$50k'],
+  location: ['$60k', '$40k', '$20k'],
+};
+
+// One event per scope, chosen by magnitude. There is no linking token: the
+// insight beside the chart is the only explanation on the page, and an event
+// that no insight explains must be complete in its own sentence.
+const EVENTS = {
+  all:       { x: '57.2%', y: '52.5%', text: 'August dip — group revenue fell 6% below trend' },
+  north:     { x: '57.2%', y: '46.6%', text: 'August dip — North region fell 4% below trend' },
+  berlin:    { x: '57.2%', y: '61.9%', text: 'Evening trade drops — dinner sales down 22% from week 31' },
+  amsterdam: { x: '25.0%', y: '53.4%', text: 'Terrace opens — weekend covers up 18% from week 21' },
+};
+
+const REGION_MEMBERS = {
+  north:   ['berlin', 'amsterdam', 'hamburg', 'copenhagen', 'stockholm'],
+  south:   ['madrid', 'paris', 'barcelona', 'rome'],
+  central: ['munich', 'zurich', 'lisbon'],
+};
+const NEG = 'oklch(55% 0.18 22)';
+const RED = NEG;
+const BLUE = 'oklch(54% 0.19 258)';
+
+// The Locations module owns one question: is the problem isolated or
+// distributed? It therefore carries the full portfolio roster, not just the
+// locations that have curated chart fixtures.
+const LOCS = [
+  { id: 'berlin',     name: 'Berlin',     region: 'north' },
+  { id: 'amsterdam',  name: 'Amsterdam',  region: 'north' },
+  { id: 'hamburg',    name: 'Hamburg',    region: 'north' },
+  { id: 'copenhagen', name: 'Copenhagen', region: 'north' },
+  { id: 'stockholm',  name: 'Stockholm',  region: 'north' },
+  { id: 'madrid',     name: 'Madrid',     region: 'south' },
+  { id: 'paris',      name: 'Paris',      region: 'south' },
+  { id: 'barcelona',  name: 'Barcelona',  region: 'south' },
+  { id: 'rome',       name: 'Rome',       region: 'south' },
+  { id: 'munich',     name: 'Munich',     region: 'central' },
+  { id: 'zurich',     name: 'Zurich',     region: 'central' },
+  { id: 'lisbon',     name: 'Lisbon',     region: 'central' },
+];
+// STRESS TEST (temporary) — 100 fictional locations, used only by the
+// Locations module while the stressTest prop is on. Production LOCS/DEV/AHEAD untouched.
+const LOCS_TEST = [
+  { id: 'berlin', name: 'Berlin', region: 'north' },
+  { id: 'amsterdam', name: 'Amsterdam', region: 'north' },
+  { id: 'hamburg', name: 'Hamburg', region: 'north' },
+  { id: 'copenhagen', name: 'Copenhagen', region: 'north' },
+  { id: 'stockholm', name: 'Stockholm', region: 'north' },
+  { id: 'oslo', name: 'Oslo', region: 'north' },
+  { id: 'helsinki', name: 'Helsinki', region: 'north' },
+  { id: 'rotterdam', name: 'Rotterdam', region: 'north' },
+  { id: 'utrecht', name: 'Utrecht', region: 'north' },
+  { id: 'bremen', name: 'Bremen', region: 'north' },
+  { id: 'hanover', name: 'Hanover', region: 'north' },
+  { id: 'gothenburg', name: 'Gothenburg', region: 'north' },
+  { id: 'malmo', name: 'Malmö', region: 'north' },
+  { id: 'aarhus', name: 'Aarhus', region: 'north' },
+  { id: 'antwerp', name: 'Antwerp', region: 'north' },
+  { id: 'ghent', name: 'Ghent', region: 'north' },
+  { id: 'leipzig', name: 'Leipzig', region: 'north' },
+  { id: 'dresden', name: 'Dresden', region: 'north' },
+  { id: 'dortmund', name: 'Dortmund', region: 'north' },
+  { id: 'essen', name: 'Essen', region: 'north' },
+  { id: 'dusseldorf', name: 'Düsseldorf', region: 'north' },
+  { id: 'kiel', name: 'Kiel', region: 'north' },
+  { id: 'lubeck', name: 'Lübeck', region: 'north' },
+  { id: 'rostock', name: 'Rostock', region: 'north' },
+  { id: 'odense', name: 'Odense', region: 'north' },
+  { id: 'uppsala', name: 'Uppsala', region: 'north' },
+  { id: 'bergen', name: 'Bergen', region: 'north' },
+  { id: 'tampere', name: 'Tampere', region: 'north' },
+  { id: 'turku', name: 'Turku', region: 'north' },
+  { id: 'groningen', name: 'Groningen', region: 'north' },
+  { id: 'eindhoven', name: 'Eindhoven', region: 'north' },
+  { id: 'leiden', name: 'Leiden', region: 'north' },
+  { id: 'haarlem', name: 'Haarlem', region: 'north' },
+  { id: 'bruges', name: 'Bruges', region: 'north' },
+  { id: 'munster', name: 'Münster', region: 'north' },
+  { id: 'aalborg', name: 'Aalborg', region: 'north' },
+  { id: 'madrid', name: 'Madrid', region: 'south' },
+  { id: 'paris', name: 'Paris', region: 'south' },
+  { id: 'barcelona', name: 'Barcelona', region: 'south' },
+  { id: 'rome', name: 'Rome', region: 'south' },
+  { id: 'lyon', name: 'Lyon', region: 'south' },
+  { id: 'marseille', name: 'Marseille', region: 'south' },
+  { id: 'milan', name: 'Milan', region: 'south' },
+  { id: 'naples', name: 'Naples', region: 'south' },
+  { id: 'valencia', name: 'Valencia', region: 'south' },
+  { id: 'seville', name: 'Seville', region: 'south' },
+  { id: 'porto', name: 'Porto', region: 'south' },
+  { id: 'nice', name: 'Nice', region: 'south' },
+  { id: 'turin', name: 'Turin', region: 'south' },
+  { id: 'florence', name: 'Florence', region: 'south' },
+  { id: 'bilbao', name: 'Bilbao', region: 'south' },
+  { id: 'bologna', name: 'Bologna', region: 'south' },
+  { id: 'toulouse', name: 'Toulouse', region: 'south' },
+  { id: 'bordeaux', name: 'Bordeaux', region: 'south' },
+  { id: 'montpellier', name: 'Montpellier', region: 'south' },
+  { id: 'genoa', name: 'Genoa', region: 'south' },
+  { id: 'verona', name: 'Verona', region: 'south' },
+  { id: 'venice', name: 'Venice', region: 'south' },
+  { id: 'palermo', name: 'Palermo', region: 'south' },
+  { id: 'malaga', name: 'Málaga', region: 'south' },
+  { id: 'zaragoza', name: 'Zaragoza', region: 'south' },
+  { id: 'granada', name: 'Granada', region: 'south' },
+  { id: 'alicante', name: 'Alicante', region: 'south' },
+  { id: 'palma', name: 'Palma', region: 'south' },
+  { id: 'cannes', name: 'Cannes', region: 'south' },
+  { id: 'nantes', name: 'Nantes', region: 'south' },
+  { id: 'faro', name: 'Faro', region: 'south' },
+  { id: 'pisa', name: 'Pisa', region: 'south' },
+  { id: 'bari', name: 'Bari', region: 'south' },
+  { id: 'murcia', name: 'Murcia', region: 'south' },
+  { id: 'munich', name: 'Munich', region: 'central' },
+  { id: 'zurich', name: 'Zurich', region: 'central' },
+  { id: 'lisbon', name: 'Lisbon', region: 'central' },
+  { id: 'vienna', name: 'Vienna', region: 'central' },
+  { id: 'prague', name: 'Prague', region: 'central' },
+  { id: 'frankfurt', name: 'Frankfurt', region: 'central' },
+  { id: 'stuttgart', name: 'Stuttgart', region: 'central' },
+  { id: 'cologne', name: 'Cologne', region: 'central' },
+  { id: 'geneva', name: 'Geneva', region: 'central' },
+  { id: 'basel', name: 'Basel', region: 'central' },
+  { id: 'salzburg', name: 'Salzburg', region: 'central' },
+  { id: 'brno', name: 'Brno', region: 'central' },
+  { id: 'bratislava', name: 'Bratislava', region: 'central' },
+  { id: 'nuremberg', name: 'Nuremberg', region: 'central' },
+  { id: 'graz', name: 'Graz', region: 'central' },
+  { id: 'linz', name: 'Linz', region: 'central' },
+  { id: 'innsbruck', name: 'Innsbruck', region: 'central' },
+  { id: 'bern', name: 'Bern', region: 'central' },
+  { id: 'lausanne', name: 'Lausanne', region: 'central' },
+  { id: 'lucerne', name: 'Lucerne', region: 'central' },
+  { id: 'augsburg', name: 'Augsburg', region: 'central' },
+  { id: 'mannheim', name: 'Mannheim', region: 'central' },
+  { id: 'heidelberg', name: 'Heidelberg', region: 'central' },
+  { id: 'freiburg', name: 'Freiburg', region: 'central' },
+  { id: 'karlsruhe', name: 'Karlsruhe', region: 'central' },
+  { id: 'ljubljana', name: 'Ljubljana', region: 'central' },
+  { id: 'budapest', name: 'Budapest', region: 'central' },
+  { id: 'krakow', name: 'Kraków', region: 'central' },
+  { id: 'wrocaw', name: 'Wrocław', region: 'central' },
+  { id: 'strasbourg', name: 'Strasbourg', region: 'central' },
+];
+const DEV_TEST = {
+  Today: { naples: { pts: 12 } },
+  Week: { berlin: { pts: 20 }, hamburg: { pts: 16 }, copenhagen: { pts: 12 }, bremen: { pts: 11 }, kiel: { pts: 13 },
+    rome: { pts: 11 }, naples: { pts: 14 }, marseille: { pts: 12 }, palermo: { pts: 15 }, bari: { pts: 11 },
+    prague: { pts: 13 }, linz: { pts: 11 } },
+  Month: { berlin: { pts: 20 }, hamburg: { pts: 14 }, leipzig: { pts: 11 }, rostock: { pts: 13 },
+    lyon: { pts: 12 }, naples: { pts: 16 }, palermo: { pts: 11 }, brno: { pts: 12 } },
+  Year: { berlin: { pts: 18 }, naples: { pts: 12 }, rostock: { pts: 11 } },
+};
+const AHEAD_TEST = {
+  Today: {}, Week: { amsterdam: { pts: 11 }, vienna: { pts: 12 }, faro: { pts: 13 } },
+  Month: { amsterdam: { pts: 12 }, utrecht: { pts: 11 }, uppsala: { pts: 13 }, barcelona: { pts: 14 }, valencia: { pts: 13 },
+    malaga: { pts: 12 }, vienna: { pts: 15 }, basel: { pts: 11 }, ljubljana: { pts: 12 } },
+  Year: { barcelona: { pts: 12 }, vienna: { pts: 11 } },
+};
+const REGION_NAME = { north: 'North region', south: 'South region', central: 'Central region' };
+const PERIOD_WORD = { Today: 'today', Week: 'this week', Month: 'this month', Year: 'this year' };
+
+// Deviation from expected pace, in points, listed only for locations outside
+// tolerance. Absence from this table is what 'within expectation' means.
+const TOL = 10;
+const DEV_SCALE = 30;
+const DEV = {
+  Today: {},
+  Week: {
+    berlin:     { pts: 20, since: '3rd week below', share: 34 },
+    hamburg:    { pts: 16, since: '2nd week below', share: 26 },
+    copenhagen: { pts: 12, since: 'below since Aug 12', share: 21 },
+    rome:       { pts: 11, since: 'below since Aug 14', share: 19 },
+  },
+  Month: { berlin: { pts: 20, since: '3rd week below', share: 71 } },
+  Year:  { berlin: { pts: 18, since: 'below since week 31', share: 64 } },
+};
+
+// Positive deviation from expected pace, in points, for locations ahead of
+// tolerance. Synthetic portfolio-prototype values, set directly as expected-pace
+// deviations (not derived from revenue change).
+const AHEAD = { Today: {}, Week: {}, Month: { amsterdam: { pts: 12 }, barcelona: { pts: 14 } }, Year: {} };
+
+// The top period dropdown is the single period for the whole Overview.
+// Month figures are the ENT fixtures; other periods scale them and carry
+// their own change vs the prior period, so every surface reads one period.
+const P = {
+  Today: { label: 'Today',      word: 'today',      cmp: 'vs yesterday',  goal: 'daily',   mult: 0.021 },
+  Week:  { label: 'This week',  word: 'this week',  cmp: 'vs last week',  goal: 'weekly',  mult: 0.232 },
+  Month: { label: 'This month', word: 'this month', cmp: 'vs last month', goal: 'monthly', mult: 1 },
+  Year:  { label: 'This year',  word: 'this year',  cmp: 'vs last year',  goal: 'yearly',  mult: 10.4 },
+};
+const DELTA = {
+  Today: { all: 4, north: 3, south: 5, central: 4, berlin: 1, munich: 5, paris: 2, madrid: 6, amsterdam: 7, hamburg: 2, copenhagen: 1, stockholm: 4, barcelona: 6, rome: 3, zurich: 5, lisbon: 2 },
+  Week:  { all: 2, north: -6, south: 3, central: 5, berlin: -18, munich: 6, paris: 2, madrid: 5, amsterdam: 8, hamburg: -11, copenhagen: -7, stockholm: 4, barcelona: 7, rome: -6, zurich: 7, lisbon: 2 },
+  Year:  { all: 9, north: 2, south: 8, central: 6, berlin: -12, munich: 6, paris: 1, madrid: 5, amsterdam: 11, hamburg: 3, copenhagen: 4, stockholm: 7, barcelona: 9, rome: 2, zurich: 10, lisbon: 3 },
+};
+const KPI_P = {
+  Today: { txD: 3,  aov: '$24.10', aovD: 1.2,  margin: '19.4%', marginD: 0.3 },
+  Week:  { txD: 1,  aov: '$26.10', aovD: 0.2,  margin: '17.8%', marginD: -1.4 },
+  Month: { txD: 6,  aov: '$26.40', aovD: 0.4,  margin: '18.2%', marginD: -2.1 },
+  Year:  { txD: 8,  aov: '$26.90', aovD: 1.6,  margin: '18.9%', marginD: -0.6 },
+};
+const TPL = {
+  Today: [0.45, 0.8, 0.95, 1.05, 1.5, 1.45, 1.0, 0.85, 0.9],
+  Week:  [0.85, 0.88, 0.92, 0.98, 1.12, 1.2, 1.05],
+  Month: [].concat(...Array(4).fill([0.88, 0.9, 0.94, 1.0, 1.12, 1.2, 0.96])),
+};
+const XL = {
+  Today: ['7am', '9am', '11am', '1pm', '3pm'],
+  Week:  ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+  Month: ['Nov 1', 'Nov 8', 'Nov 15', 'Nov 22', 'Nov 28'],
+  Year:  ['Jan', 'Mar', 'May', 'Jul', 'Sep', 'Nov'],
+};
+// Events are per period; i is the index of the data point they sit on.
+const EVENTS_P = {
+  Today: {},
+  Week: {},
+  Month: { berlin: { i: 7, text: 'Revenue fell from Nov 8' } },
+  Year: {
+    all:       { i: 6, text: 'August dip — group revenue fell 6% below trend' },
+    north:     { i: 6, text: 'August dip — North region fell 4% below trend' },
+    berlin:    { i: 6, text: 'Revenue fell from week 31' },
+    amsterdam: { i: 4, text: 'Terrace opens — weekend covers up 18% from week 21' },
+  },
+};
+const num = v => parseFloat(String(v).replace(/[^0-9.]/g, ''));
+const dOf = (id, p) => p === 'Month' ? (ENT[id].delta.indexOf('▼') === 0 ? -1 : 1) * num(ENT[id].delta) : DELTA[p][id];
+const arrow = d => (d < 0 ? '▼ ' : '▲ ') + Math.abs(d) + '%';
+const clampPct = v => Math.max(30, Math.min(99, v));
+const fmtK = v => v >= 1000 ? '$' + (+(v / 1000).toFixed(1)) + 'k' : '$' + Math.round(v);
+function niceStep(x) {
+  const k = Math.pow(10, Math.floor(Math.log10(x)));
+  for (const m of [1, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10]) if (m * k >= x) return m * k;
+  return 10 * k;
+}
+// Piecewise through the chart's existing gridlines (y 212 / 150 / 82 / 10).
+function yOf(v, max) {
+  const r = v / max;
+  return r <= 1 / 3 ? 212 - r * 3 * 62 : r <= 2 / 3 ? 150 - (r - 1 / 3) * 3 * 68 : 82 - (r - 2 / 3) * 3 * 72;
+}
+// Inverse of yOf, as a share of the axis maximum.
+function yInv(y) {
+  return y >= 150 ? (212 - y) / 186 : y >= 82 ? 1 / 3 + (150 - y) / 204 : 2 / 3 + (82 - y) / 216;
+}
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const WEEKDAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+function pointLabel(p, i) {
+  if (p === 'Today') { const h = 7 + i; return 'Today, ' + (h % 12 || 12) + (h < 12 ? ' am' : ' pm'); }
+  if (p === 'Week') return WEEKDAYS[i];
+  if (p === 'Month') return 'Nov ' + (i + 1);
+  return MONTHS[i];
+}
+// Presentation offset: previous-period line drawn slightly lower so it separates from the current line.
+const PREV_DROP = 0.9;
+function chartFor(id, p) {
+  const d = dOf(id, p) / 100;
+  if (p === 'Year') {
+    const pts = D[id].split(' ').map(seg => seg.slice(1).split(',').map(Number));
+    return {
+      pts, path: D[id], axis: AXIS[ENT[id].kind], xl: XL.Year,
+      prev: pts.map((q, i) => (i ? 'L' : 'M') + q[0] + ',' + (212 - (212 - q[1]) * PREV_DROP / (1 + d)).toFixed(1)).join(' '),
+      prevPts: pts.map(q => [q[0], +(212 - (212 - q[1]) * PREV_DROP / (1 + d)).toFixed(1)]),
+      vals: pts.map(q => yInv(q[1]) * num(AXIS[ENT[id].kind][0]) * 1000),
+      prevVals: pts.map(q => yInv(212 - (212 - q[1]) * PREV_DROP / (1 + d)) * num(AXIS[ENT[id].kind][0]) * 1000),
+      round: 100,
+    };
+  }
+  const t = TPL[p], n = t.length, sum = t.reduce((a, b) => a + b, 0);
+  let sd = 0; for (const ch of id) sd = (sd * 31 + ch.charCodeAt(0)) % 997;
+  const total = num(ENT[id].total) * P[p].mult;
+  let vals = t.map((v, i) => total * v / sum * (1 + d * 1.1 * (i / (n - 1) - 0.5)) * (1 + 0.03 * Math.sin(sd + i * 1.7)));
+  let prevV = vals.map(v => v * PREV_DROP / (1 + d));
+  // Berlin · Month: the decline starts at the Nov 8 event, so the series steps
+  // down there instead of sloping evenly. Period total is preserved.
+  const evM = id === 'berlin' && p === 'Month' ? EVENTS_P.Month.berlin : null;
+  if (evM) {
+    // Flat daily base (weekly swing removed) so the step reads clearly.
+    const base = t.map((v, i) => total / n * (1 + 0.025 * Math.sin(sd + i * 1.7)));
+    const stepped = base.map((v, i) => v * (i < evM.i ? 1 : 0.64));
+    const k = total / stepped.reduce((a, b) => a + b, 0);
+    vals = stepped.map(v => v * k);
+    prevV = base.map(v => v * PREV_DROP / (1 + d));
+  }
+  const step = niceStep(Math.max(...vals, ...prevV) * 1.08 / 3);
+  const X = i => Math.round(8 + 984 * i / (n - 1));
+  const pts = vals.map((v, i) => [X(i), +yOf(v, 3 * step).toFixed(1)]);
+  return {
+    pts, xl: XL[p],
+    path: pts.map((q, i) => (i ? 'L' : 'M') + q[0] + ',' + q[1]).join(' '),
+    prev: prevV.map((v, i) => (i ? 'L' : 'M') + X(i) + ',' + yOf(v, 3 * step).toFixed(1)).join(' '),
+    prevPts: prevV.map((v, i) => [X(i), +yOf(v, 3 * step).toFixed(1)]),
+    vals, prevVals: prevV, round: 1,
+    axis: [fmtK(3 * step), fmtK(2 * step), fmtK(step)],
+  };
+}
+// Position of an axis date along the plotted series (x 8→992 of 1000).
+const xFrac = (p, t, i, n) => p === 'Month' ? (parseInt(t.replace(/\D/g, ''), 10) - 1) / 27 : i / (n - 1);
+// Pace inside a Locations cell. Expected pace is the midline; the bar is the
+// deviation from it (up = ahead, down = behind), on the shared DEV_SCALE.
+// Within-tolerance locations carry no measured deviation, so they show only the
+// expected-pace midline and tolerance band (pts === null), never an estimated bar.
+function paceCell(pts, bad) {
+  const mid = 28, k = 24 / DEV_SCALE;
+  const has = pts !== null;
+  const bar = has ? Math.max(2, Math.round(Math.min(Math.abs(pts), DEV_SCALE + 3) * k)) : 0;
+  const top = pts < 0 ? mid : mid - bar;
+  const band = Math.round(TOL * k);
+  const g = c => 'linear-gradient(' + c + ',' + c + ')';
+  const barC = bad ? NEG : pts > 0 ? 'oklch(63% 0.03 175)' : 'oklch(64% 0.014 265)';
+  const lineC = bad ? 'oklch(55% 0.18 22 / 0.5)' : 'oklch(76% 0.01 265)';
+  const bandC = bad ? 'oklch(55% 0.18 22 / 0.06)' : 'oklch(95.4% 0.004 265)';
+  return 'background:'
+    + g(lineC) + ' center ' + (mid - 0.5) + 'px / calc(100% - 8px) 1px no-repeat,'
+    + (has ? g(barC) + ' center ' + top + 'px / max(8px,36%) ' + bar + 'px no-repeat,' : '')
+    + g(bandC) + ' center ' + (mid - band) + 'px / 100% ' + (band * 2) + 'px no-repeat,'
+    + (bad ? 'oklch(96.6% 0.022 22)' : 'oklch(98.2% 0.002 270)')
+    + ';box-shadow:inset 0 0 0 1px ' + (bad ? 'oklch(55% 0.18 22 / 0.32)' : 'oklch(92.5% 0.004 270)');
+}
+// Month source data per location: revenue, transactions, margin (%), margin change
+// (pt), AOV change (%) and monthly goal. Regions and the portfolio are always the
+// sum of their locations, so every KPI in every scope is derived, never stored.
+const LM = {
+  berlin:     { rev: 18300, tx: 741,  m: 14.8, dm: -4.4, aovD: -2.6, goal: 25100 },
+  amsterdam:  { rev: 28800, tx: 1050, m: 19.6, dm: -1.6, aovD: 0.9,  goal: 28800 },
+  hamburg:    { rev: 16370, tx: 648,  m: 16.9, dm: -2.4, aovD: -0.4, goal: 18800 },
+  copenhagen: { rev: 16990, tx: 633,  m: 18.1, dm: -1.8, aovD: 0.3,  goal: 18900 },
+  stockholm:  { rev: 18540, tx: 692,  m: 18.7, dm: -1.7, aovD: 0.6,  goal: 19300 },
+  madrid:     { rev: 24610, tx: 923,  m: 18.8, dm: -1.7, aovD: 0.5,  goal: 26200 },
+  paris:      { rev: 21030, tx: 829,  m: 17.9, dm: -2.0, aovD: 0.1,  goal: 23600 },
+  barcelona:  { rev: 22540, tx: 844,  m: 19.0, dm: -1.6, aovD: 0.8,  goal: 23200 },
+  rome:       { rev: 19860, tx: 766,  m: 17.6, dm: -2.1, aovD: 0.0,  goal: 22600 },
+  munich:     { rev: 19570, tx: 775,  m: 18.6, dm: -1.8, aovD: 0.5,  goal: 20600 },
+  zurich:     { rev: 26160, tx: 903,  m: 19.8, dm: -1.5, aovD: 0.9,  goal: 26400 },
+  lisbon:     { rev: 15770, tx: 608,  m: 17.8, dm: -1.9, aovD: 0.3,  goal: 17100 },
+};
+// Goal for each period as a share of the monthly goal.
+const GOAL_MULT = { Today: 1 / 30, Week: 7 / 30, Month: 1, Year: 11 };
+const LOC_MONTH_D = {};
+LOCS.forEach(l => { LOC_MONTH_D[l.id] = dOf(l.id, 'Month'); });
+function locMetrics(id, p) {
+  const L = LM[id], K = KPI_P[p], B = KPI_P.Month;
+  const rev = L.rev * P[p].mult;
+  const aov = L.rev / L.tx * num(K.aov) / num(B.aov);
+  const revD = (p === 'Month' ? LOC_MONTH_D[id] : DELTA[p][id]) / 100;
+  const aovD = (K.aovD + L.aovD - B.aovD) / 100;
+  const prevRev = rev / (1 + revD);
+  const m = L.m + num(K.margin) - num(B.margin), dm = K.marginD + L.dm - B.marginD;
+  return { rev, tx: rev / aov, prevRev, prevTx: prevRev / (aov / (1 + aovD)), mRev: rev * m, pmRev: prevRev * (m - dm), goal: L.goal * GOAL_MULT[p] };
+}
+function metricsOf(id, p) {
+  const kind = ENT[id].kind;
+  const ids = kind === 'all' ? LOCS.map(l => l.id) : kind === 'region' ? REGION_MEMBERS[id] : [id];
+  const t = { rev: 0, tx: 0, prevRev: 0, prevTx: 0, mRev: 0, pmRev: 0, goal: 0 };
+  ids.forEach(i => { const x = locMetrics(i, p); for (const f in t) t[f] += x[f]; });
+  const rev = Math.round(t.rev), tx = Math.round(t.tx);
+  const aov = t.rev / t.tx, prevAov = t.prevRev / t.prevTx;
+  const margin = t.mRev / t.rev, prevMargin = t.pmRev / t.prevRev;
+  const r1 = v => Math.round(v * 10) / 10;
+  return {
+    rev, tx, txDrop: Math.round(t.prevTx - t.tx),
+    revD: Math.round((t.rev / t.prevRev - 1) * 100),
+    txD: Math.round((t.tx / t.prevTx - 1) * 100),
+    aov: '$' + aov.toFixed(2), aovD: r1((aov / prevAov - 1) * 100),
+    margin: margin.toFixed(1) + '%', marginD: r1(margin - prevMargin),
+    progress: Math.round(t.rev / t.goal * 100),
+  };
+}
+// Fixture fields for regions and the portfolio are rewritten from their locations.
+Object.keys(ENT).forEach(id => {
+  const m = metricsOf(id, 'Month');
+  ENT[id].total = '$' + m.rev.toLocaleString('en-US');
+  ENT[id].tx = m.tx.toLocaleString('en-US');
+  ENT[id].delta = (m.revD < 0 ? '▼ ' : '▲ ') + Math.abs(m.revD) + '%';
+  ENT[id].target = m.progress + '%';
+  ['Today', 'Week', 'Year'].forEach(p => { DELTA[p][id] = metricsOf(id, p).revD; });
+});
+const GREEN = 'oklch(44% 0.13 152)', NEUTRAL = 'oklch(58% 0.01 270)', DOWN = NEG;
+
+class Component extends DCLogic {
+  state = { period: 'Month', prev: true, scope: 'all', scopeOpen: false, periodOpen: false, exp1: false, exp2: false, exp3: false, locExp: false };
+
+  // Getting started only uses spare sidebar space. Fit is measured, not
+  // breakpointed: full spacing if everything fits, tighter nav spacing if that
+  // makes it fit, and the widget hides only when even the compact nav can't fit.
+  locGridRef = React.createRef();
+  asideRef = React.createRef(); navRef = React.createRef(); bottomRef = React.createRef(); gsRef = React.createRef();
+  fitSidebar() {
+    const aside = this.asideRef.current, nav = this.navRef.current, bottom = this.bottomRef.current;
+    if (!aside || !nav || !bottom) return;
+    const gs = this.gsRef.current;
+    if (gs) this._gsH = gs.offsetHeight + 10;
+    const wH = this._gsH || 200, SAVE = 42;
+    const avail = aside.clientHeight - 24;
+    const base = bottom.offsetHeight - (gs ? gs.offsetHeight + 10 : 0);
+    const navN = nav.scrollHeight + (this.state.navCompact ? SAVE : 0);
+    let next;
+    if (navN + base + wH <= avail) next = { gsFit: true, navCompact: false };
+    else if (navN - SAVE + base + wH <= avail) next = { gsFit: true, navCompact: true };
+    else next = { gsFit: false, navCompact: false };
+    if (next.gsFit !== this.state.gsFit || next.navCompact !== this.state.navCompact) this.setState(next);
+  }
+  componentDidMount() {
+    try { if (localStorage.getItem('gsDismissed') === '1') this.setState({ gsDismissed: true }); } catch (e) {}
+    this._locRO = new ResizeObserver(es => { const w = Math.round(es[0].contentRect.width + 44); if (w !== this.state.locW) this.setState({ locW: w }); });
+    if (this.locGridRef.current) this._locRO.observe(this.locGridRef.current);
+    requestAnimationFrame(() => { const g = this.locGridRef.current; if (g) { const w = Math.round(g.clientWidth); if (w && w !== this.state.locW) this.setState({ locW: w }); } });
+    this._onResize = () => this.fitSidebar();
+    requestAnimationFrame(this._onResize);
+    if (document.fonts) document.fonts.ready.then(this._onResize);
+    window.addEventListener('resize', this._onResize);
+  }
+  componentWillUnmount() { if (this._locRO) this._locRO.disconnect(); window.removeEventListener('resize', this._onResize); }
+
+  // Revenue Trend hover: nearest data point to the cursor, exact values only.
+  chartHover(ch, p, prevOn) {
+    const n = ch.pts.length, i = this.state.hov;
+    const move = e => {
+      const rc = e.currentTarget.getBoundingClientRect();
+      const x = (e.clientX - rc.left) / rc.width * 1000;
+      let best = 0;
+      ch.pts.forEach((q, k) => { if (Math.abs(q[0] - x) < Math.abs(ch.pts[best][0] - x)) best = k; });
+      const yTop = Math.min(ch.pts[best][1], prevOn ? ch.prevPts[best][1] : 999) / 236 * rc.height;
+      if (best !== this.state.hov || (yTop < 88) !== this.state.hovBelow) this.setState({ hov: best, hovBelow: yTop < 88 });
+    };
+    const base = { chartHoverMove: move, chartHoverLeave: () => this.setState({ hov: null }) };
+    if (i == null || i >= n) return Object.assign(base, { hovOn: false });
+    const q = ch.pts[i], pq = ch.prevPts[i];
+    const xp = q[0] / 10, yp = q[1] / 2.36, pyp = pq[1] / 2.36;
+    const fmt = v => '$' + (Math.round(v / ch.round) * ch.round).toLocaleString('en-US');
+    const below = !!this.state.hovBelow;
+    const anchorY = below ? Math.max(yp, prevOn ? pyp : 0) : Math.min(yp, prevOn ? pyp : 999);
+    const tx = xp < 14 ? '-14px' : xp > 86 ? 'calc(-100% + 14px)' : '-50%';
+    const dot = (y, c, s) => 'position:absolute;left:' + xp + '%;top:' + y + '%;width:' + s + 'px;height:' + s + 'px;border-radius:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:5;' + c;
+    return Object.assign(base, {
+      hovOn: true,
+      hovLabel: pointLabel(p, i),
+      hovRev: fmt(ch.vals[i]),
+      hovPrev: fmt(ch.prevVals[i]),
+      hovShowPrev: prevOn,
+      hovLineStyle: 'position:absolute;top:0;bottom:10.2%;left:' + xp + '%;width:0;border-left:1px solid oklch(80% 0.008 270);pointer-events:none;z-index:5',
+      hovDotStyle: dot(yp, 'background:oklch(54% 0.19 258);box-shadow:0 0 0 2.5px #fff', 9),
+      hovPrevDotStyle: dot(pyp, 'background:#fff;border:1.5px solid oklch(72% 0.01 270)', 8),
+      hovTipStyle: 'position:absolute;left:' + xp + '%;top:' + anchorY + '%;transform:translate(' + tx + ',' + (below ? '14px' : 'calc(-100% - 14px)') + ');'
+        + 'min-width:150px;display:flex;flex-direction:column;gap:6px;padding:9px 11px;background:#fff;border:1px solid oklch(91.5% 0.006 270);border-radius:10px;'
+        + 'box-shadow:0 4px 14px oklch(25% 0.02 265 / 0.08),0 1px 2px oklch(25% 0.02 265 / 0.05);pointer-events:none;z-index:6;white-space:nowrap',
+    });
+  }
+
+  pillStyle(active) {
+    return `padding:6px 14px;border-radius:9px;font-size:12px;cursor:pointer;font-weight:${active ? 600 : 500};background:${active ? '#ffffff' : 'transparent'};color:${active ? 'oklch(22% 0.01 270)' : 'oklch(47% 0.013 270)'};`;
+  }
+
+  scopeOption(id) {
+    const e = ENT[id];
+    const active = this.state.scope === id;
+    return {
+      name: e.name, meta: e.sub,
+      style: `display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:${active ? 600 : 500};color:${active ? 'oklch(20% 0.01 270)' : 'oklch(32% 0.01 270)'};background:${active ? 'oklch(96.5% 0.004 270)' : 'transparent'};border-radius:9px;padding:7px 9px;cursor:pointer`,
+      select: () => this.setState({ scope: id, scopeOpen: false }),
+    };
+  }
+
+  // Locations owns one question: is the problem isolated to a site, confined to
+  // a region, or spread across regions? Grouping is therefore permanent and
+  // every group states its denominator, so the shape is read before the words.
+  // Attribution (share of decline), severity ranking and duration deliberately
+  // live in Priority Insight and Analytics, not here.
+  locationsModule(o) {
+    const s = Object.assign({}, this.state, o || {});
+    const st = !!(this.props.stressTest ?? true);
+    const L = st ? LOCS_TEST : LOCS, DV = st ? DEV_TEST : DEV, AH = st ? AHEAD_TEST : AHEAD;
+    // Locations is portfolio-level only; its state is driven by data alone.
+    s.scope = 'all';
+    const scope = ENT[s.scope];
+    const kind = scope.kind;
+    const word = PERIOD_WORD[s.period];
+    const dev = (o && o.dev) || DV[s.period] || {};
+    const ahead = (o && o.ahead) || AH[s.period] || {};
+    const aheadCount = L.filter(l => ahead[l.id] && !dev[l.id]).length;
+
+    const me = kind === 'location' ? L.filter(l => l.id === s.scope)[0] : null;
+    const homeRegion = me ? me.region : kind === 'region' ? s.scope : null;
+    const regions = homeRegion ? [homeRegion] : ['north', 'south', 'central'];
+    const pool = homeRegion ? L.filter(l => l.region === homeRegion) : L;
+    const total = pool.length;
+    const n = pool.filter(l => dev[l.id]).length;
+
+    const hit = regions.filter(r => L.some(l => l.region === r && dev[l.id]));
+
+    let shape, tone;
+    if (n === 0)      { shape = 'All clear';                        tone = 152; }
+    else if (n === 1) { shape = 'Isolated';                         tone = 40;  }
+    else if (hit.length > 1) { shape = 'Across ' + hit.length + ' regions'; tone = 15; }
+    else              { shape = 'Regional';                         tone = 15;  }
+
+    const build = r => {
+      const locs = L.filter(l => l.region === r);
+      const off = locs.filter(l => dev[l.id]);
+      const on = off.length > 0;
+      return {
+        name: REGION_NAME[r],
+        ratio: off.length + ' of ' + locs.length,
+        ratioLabel: on ? 'below expected pace' : 'clear',
+        headStyle: 'display:flex;align-items:center;justify-content:space-between;gap:12px;padding:'
+          + (on ? '13px' : '11px') + ' 22px;cursor:pointer;border-top:1px solid oklch(93.5% 0.005 270)'
+          + (on ? '' : ';background:oklch(98.7% 0.002 270)'),
+        markerStyle: 'width:7px;height:7px;border-radius:2px;flex-shrink:0;'
+          + (on ? 'background:oklch(34% 0.014 270)' : 'border:1.5px solid oklch(80% 0.008 270)'),
+        nameStyle: 'font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:'
+          + (on ? 'oklch(32% 0.014 270)' : 'oklch(51% 0.011 270)'),
+        ratioStyle: 'font-variant-numeric:tabular-nums;letter-spacing:-.02em;text-align:right;'
+          + (on ? 'font-size:15.5px;font-weight:650;color:oklch(22% 0.012 270)'
+                : 'font-size:12.5px;font-weight:500;color:oklch(50% 0.011 270)'),
+        ratioLabelStyle: 'font-size:11px;color:oklch(' + (on ? '50% 0.012 270' : '53% 0.01 270') + ')',
+        showHead: regions.length > 1,
+        on,
+        aRowStyle: 'display:grid;grid-template-columns:minmax(140px,190px) 132px minmax(0,1fr);column-gap:18px;align-items:center;padding:'
+          + (on ? '13px' : '11px') + ' 22px;cursor:pointer;border-top:1px solid oklch(93.5% 0.005 270)'
+          + (on ? '' : ';background:oklch(98.7% 0.002 270)'),
+        runRule: on ? 'oklch(93% 0.005 270)' : 'transparent',
+        open: () => this.setState({ scope: r }),
+        sites: off.map(l => {
+          const sel = me && me.id === l.id;
+          return {
+            name: l.name,
+            dev: '\u2212' + dev[l.id].pts + ' pts',
+            rowStyle: 'display:flex;align-items:center;justify-content:space-between;gap:14px;'
+              + 'padding:0 22px 0 ' + (regions.length > 1 ? 52 : 22) + 'px;height:44px;'
+              + 'border-top:1px solid oklch(96.5% 0.004 270);cursor:pointer'
+              + (sel ? ';background:oklch(98.2% 0.003 270)' : ''),
+            nameStyle: 'font-size:13px;font-weight:' + (sel ? 650 : 500) + ';letter-spacing:-.004em;color:oklch(28% 0.01 270);'
+              + 'overflow:hidden;text-overflow:ellipsis;white-space:nowrap',
+            open: ev => { if (ev) ev.stopPropagation(); this.setState({ scope: l.id }); },
+            sel,
+          };
+        }),
+      };
+    };
+    // Affected regions first, canonical order within each partition: grouping by
+    // state, never ranking by magnitude.
+    const groups = regions.filter(r => L.some(l => l.region === r && dev[l.id])).map(build)
+      .concat(regions.filter(r => !L.some(l => l.region === r && dev[l.id])).map(build));
+
+    const heads = regions.length > 1;
+    const grid = 'display:grid;grid-template-columns:minmax(150px,210px) minmax(0,1fr) auto;column-gap:24px;align-items:baseline;border-top:1px solid oklch(93.5% 0.005 270);';
+    const hitG = groups.filter(g => g.on);
+    const clean = groups.filter(g => !g.on);
+    const locBands = hitG.map(g => ({
+      style: grid + 'padding:17px 22px',
+      markerStyle: g.markerStyle + ';align-self:center',
+      label: g.name, labelStyle: g.nameStyle,
+      items: g.sites.map(site => ({ name: site.name,
+        style: 'font-size:14px;letter-spacing:-.006em;color:oklch(24% 0.012 270);font-weight:' + (site.sel ? 650 : 520) })),
+      showRatio: heads,
+      ratio: g.ratio, ratioLabel: 'below expected pace',
+      ratioStyle: g.ratioStyle, ratioLabelStyle: g.ratioLabelStyle,
+    }));
+    if (heads && clean.length) {
+      const cl = clean.reduce((a, g) => a + L.filter(l => REGION_NAME[l.region] === g.name).length, 0);
+      locBands.push({
+        style: grid + 'padding:12px 22px;background:oklch(98.7% 0.002 270)',
+        markerStyle: 'width:7px;height:7px;border-radius:2px;flex-shrink:0;align-self:center;border:1.5px solid oklch(80% 0.008 270)',
+        label: hitG.length ? 'Other regions' : 'All regions',
+        labelStyle: clean[0].nameStyle,
+        items: clean.map(g => ({ name: g.name, style: 'font-size:12.5px;color:oklch(48% 0.011 270)' })),
+        showRatio: true,
+        ratio: '0 of ' + cl, ratioLabel: 'clear',
+        ratioStyle: clean[0].ratioStyle, ratioLabelStyle: clean[0].ratioLabelStyle,
+      });
+    }
+
+    // One location = one equal grid column; one region = its run of columns.
+    // All regions share a single grid so every cell is exactly the same width.
+    // State is appearance only. Names sit in a row beneath, each spanning from
+    // its cell to the next named cell, so they take only the room that exists.
+    const order = regions.filter(r => L.some(l => l.region === r && dev[l.id]))
+      .concat(regions.filter(r => !L.some(l => l.region === r && dev[l.id])));
+    const cols = [];
+    const locItems = [];
+    const empty = { b: '', bStyle: 'display:none' };
+    const labels = [];
+    const regionHead = (r, off, n, col, row) => ({
+      style: (row ? 'grid-row:' + row + ';' : '') + 'grid-column:' + col + ';display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:2px 10px;min-width:0;padding-bottom:10px',
+      a: REGION_NAME[r].replace(/\s+region$/i, ''),
+      aStyle: 'font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;color:' + (off ? 'oklch(28% 0.014 270)' : 'oklch(52% 0.011 270)'),
+      b: off + ' of ' + n,
+      bStyle: (order.length < 2 || hit.length < 2 ? 'display:none;' : '') + 'font-variant-numeric:tabular-nums;white-space:nowrap;letter-spacing:-.01em;'
+        + (off ? 'font-size:14px;font-weight:650;color:oklch(22% 0.012 270)' : 'font-size:12.5px;font-weight:500;color:oklch(52% 0.011 270)'),
+    });
+    const cellStyle = (l, row, col) => {
+      const bad = !!dev[l.id];
+      const sel = !!(me && me.id === l.id);
+      return Object.assign({
+        style: (row ? 'grid-row:' + row + ';grid-column:' + col + ';' : '') + 'height:56px;border-radius:6px;'
+          + paceCell(bad ? -dev[l.id].pts : ahead[l.id] ? ahead[l.id].pts : null, bad)
+          + (sel ? ';outline:2px solid ' + NEG + ';outline-offset:3px' : ''),
+        a: '', aStyle: 'display:none',
+      }, empty);
+    };
+    // Scaling rule: one row while every cell keeps MIN_CELL width. Past that,
+    // each region gets its own full-width band and its cells wrap, up to
+    // MAX_ROWS rows per region; beyond that a representative subset shows
+    // (every off-pace location kept) and a Show all affordance appears.
+    const MIN_CELL = 18, STACK_CELL = 40, GAP = 4, REG_GAP = 14, MAX_ROWS = 2;
+    const inner = Math.max(200, (this.state.locW || 900) - 44);
+    const oneRowCell = (inner - REG_GAP * (order.length - 1) - GAP * (pool.length - 1)) / pool.length;
+    const stacked = oneRowCell < MIN_CELL;
+    let locGridStyle, shown = 0;
+    if (!stacked) {
+      let c = 1;
+      order.forEach((r, ri) => {
+        if (ri) { cols.push(REG_GAP + 'px'); c++; }
+        const locs = L.filter(l => l.region === r);
+        const off = locs.filter(l => dev[l.id]).length;
+        const c0 = c;
+        locs.forEach(() => cols.push('minmax(0,1fr)'));
+        locItems.push(regionHead(r, off, locs.length, c0 + ' / span ' + locs.length, 1));
+        locs.forEach((l, i) => locItems.push(cellStyle(l, 2, c0 + i)));
+        if (off) labels.push({ row: 3, col: c0 + ' / span ' + locs.length, names: locs.filter(l => dev[l.id]).map(l => l.name).join(' \u00b7 ') });
+        c += locs.length;
+        shown += locs.length;
+      });
+      locGridStyle = 'display:grid;grid-template-columns:' + cols.join(' ') + ';grid-template-rows:27px 56px 28.125px;column-gap:4px;align-items:start;padding:6px 22px 24px';
+    } else {
+      const nCols = Math.max(8, Math.floor((inner + GAP) / (STACK_CELL + GAP)));
+      // Balanced column count: as many as fit at STACK_CELL min, then evened out
+      // so the largest region's rows are full and 1fr cells span the card width.
+      const largest = Math.max(...order.map(r => L.filter(l => l.region === r).length));
+      const gridCols = Math.ceil(largest / Math.ceil(largest / Math.min(nCols, largest)));
+      const cap = gridCols * MAX_ROWS;
+      order.forEach(r => {
+        const locs = L.filter(l => l.region === r);
+        const off = locs.filter(l => dev[l.id]).length;
+        let vis = locs;
+        if (locs.length > cap) {
+          const keep = new Set(locs.filter(l => dev[l.id] || ahead[l.id]).map(l => l.id));
+          for (const l of locs) { if (keep.size >= cap) break; keep.add(l.id); }
+          vis = locs.filter(l => keep.has(l.id));
+        }
+        locItems.push(regionHead(r, off, locs.length, '1 / -1', 0));
+        vis.forEach(l => locItems.push(cellStyle(l, 0, 0)));
+        if (off) labels.push({ row: 0, at: locItems.length, col: '1 / -1', names: locs.filter(l => dev[l.id]).map(l => l.name).join(' \u00b7 ') });
+        locItems.push(Object.assign({ style: 'grid-column:1 / -1;height:14px', a: '', aStyle: 'display:none' }, empty));
+        shown += vis.length;
+      });
+      locGridStyle = 'display:grid;grid-template-columns:repeat(' + gridCols + ',minmax(' + STACK_CELL + 'px,1fr));gap:4px;align-items:start;padding:6px 22px 6px';
+    }
+    labels.slice().reverse().forEach(lb => {
+      const item = (Object.assign({
+        style: (lb.row ? 'grid-row:' + lb.row + ';' : '') + 'grid-column:' + lb.col + ';min-width:0;margin-top:' + (stacked ? 6 : 10) + 'px',
+        a: lb.names,
+        aStyle: 'display:block;font-size:12.5px;font-weight:600;line-height:1.45;letter-spacing:-.004em;color:oklch(26% 0.012 270);text-wrap:pretty',
+      }, empty));
+      if (stacked) locItems.splice(lb.at, 0, item); else locItems.push(item);
+    });
+    if (!labels.length && !stacked) locItems.push(Object.assign({ style: 'grid-row:3;grid-column:1;margin-top:10px;height:18px', a: '', aStyle: 'display:none' }, empty));
+    if (shown < pool.length) locItems.push({
+      style: 'grid-column:1 / -1;display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:2px 0 18px',
+      a: 'Showing ' + shown + ' of ' + pool.length + ' \u00b7 all off-pace locations included',
+      aStyle: 'font-size:11.5px;color:oklch(50% 0.011 270)',
+      b: 'Show all locations \u2192',
+      bStyle: 'font-size:12.5px;font-weight:600;color:oklch(44% 0.012 270);cursor:pointer;white-space:nowrap',
+    });
+    else if (stacked) locItems.push(Object.assign({ style: 'grid-column:1 / -1;height:12px', a: '', aStyle: 'display:none' }, empty));
+
+    return {
+      locItems,
+      locGridStyle,
+      locGridRef: this.locGridRef,
+      locHasAhead: aheadCount > 0,
+      locBands,
+      locShowBands: heads || n > 0,
+      locWindow: (this.state.scope !== 'all' && !o ? 'All locations \u00b7 ' : '') + 'vs expected pace \u00b7 ' + word,
+      locLeadA: n === 0 ? 'All ' + total : String(n), locLeadB: n === 0 ? '' : 'of ' + total,
+      locCountLabel: (n === 0 ? 'locations within expected pace' : 'locations below expected pace')
+        + (homeRegion ? ' in ' + REGION_NAME[homeRegion] : ''),
+      locShape: shape,
+      locShapeStyle: 'font-size:13px;font-weight:600;letter-spacing:-.003em;color:oklch('
+        + (tone === 152 ? '46% 0.1 152' : '30% 0.012 270') + ')',
+      locGroups: groups,
+      locShowHealthy: n > 0 && total - n > 0,
+      locHealthyLabel: (total - n) + (total - n === 1 ? ' location' : ' locations') + ' within expected pace',
+    };
+  }
+
+  renderVals() {
+    const s = this.state;
+    const p = s.period;
+    const P0 = P[p];
+    const scope = ENT[s.scope];
+    const kind = scope.kind;
+    const dScope = dOf(s.scope, p);
+    const dMonth = dOf(s.scope, 'Month');
+    const mt = num(scope.target);
+    // Every KPI is derived from the same scope's locations (see metricsOf).
+    const k = metricsOf(s.scope, p);
+    const target = k.progress;
+    const ch = chartFor(s.scope, p);
+
+    const ev = EVENTS_P[p][s.scope] || null;
+    const evPt = ev ? ch.pts[ev.i] : null;
+    const evX = evPt ? evPt[0] / 10 : 0;
+    const evY = evPt ? evPt[1] / 236 * 100 : 0;
+
+    const members = kind === 'region' ? REGION_MEMBERS[s.scope] : null;
+    const inScope = id => kind === 'all' ? true : kind === 'location' ? s.scope === id : members.includes(id);
+
+    // Priority insight leads with the in-scope location furthest below expected
+    // pace, and says so when it is not the only one.
+    const devP = DEV[p] || {};
+    const affAll = LOCS.filter(l => devP[l.id]);
+    const affIn = affAll.filter(l => inScope(l.id)).sort((a, b) => devP[b.id].pts - devP[a.id].pts);
+    const lead = affIn[0] || null;
+    const i1 = !!lead;
+    const i2 = kind === 'all' || ['berlin', 'paris', 'amsterdam'].some(inScope);
+    const i3 = true;
+    const INS = {
+      Week:  { dinner: 24, locSub: 'Evening sales have fallen three weeks running',
+               detail: 'Evening shifts (6–10pm) show 90 fewer transactions this week. Weekday dinner trade is down 24%; weekends are flat.' },
+      Month: { dinner: 22, locSub: 'Evening sales have fallen three weeks running',
+               detail: 'Evening shifts (6–10pm) show 340 fewer transactions this month. Weekday dinner trade is down 22%; weekends are flat.' },
+      Year:  { dinner: 22, locSub: 'Evening sales below expected pace since week 31',
+               detail: 'Evening shifts (6–10pm) show 3,100 fewer transactions since week 31. Weekday dinner trade is down 22%; weekends are flat.' },
+    }[p] || {};
+    // Two measures, never merged: deviation vs expected pace (pts) and revenue
+    // change vs the previous period (%).
+    const leadName = lead ? ENT[lead.id].name : '';
+    const pts = lead ? devP[lead.id].pts : 0;
+    const isB = !!lead && lead.id === 'berlin';
+    const revLine = id => { const d = dOf(id, p); return 'Revenue ' + (d < 0 ? 'down ' : 'up ') + Math.abs(d) + '% ' + P0.cmp; };
+    const dinner = 'The decline is concentrated in weekday dinner trade, down ' + INS.dinner + '%.';
+    const notAlone = affAll.length > 1 ? ' One of ' + affAll.length + ' locations below expected pace ' + P0.word + '.' : '';
+    let i1Title = '', i1SubText = '';
+    if (lead && kind === 'location') {
+      i1Title = isB ? 'The decline is concentrated in weekday dinner trade, down ' + INS.dinner + '%' : leadName + ' is ' + pts + ' pts below expected pace';
+      i1SubText = isB ? pts + ' pts below expected pace. ' + INS.locSub + '.' + notAlone : revLine(lead.id) + '.' + notAlone;
+    } else if (affIn.length === 1) {
+      i1Title = leadName + ' is ' + pts + ' pts below expected pace';
+      i1SubText = revLine(lead.id) + '.' + (isB ? ' ' + dinner : '');
+    } else if (affIn.length > 1) {
+      i1Title = 'Revenue is below expected pace across ' + affIn.length + ' locations' + (kind === 'region' ? ' in ' + scope.name : '');
+      i1SubText = leadName + ' is furthest below, ' + pts + ' pts under expected pace.' + (isB ? ' Its decline is concentrated in weekday dinner trade, down ' + INS.dinner + '%.' : '');
+    }
+    const i1Badge = 'Below expected pace · ' + (kind !== 'location' && affIn.length > 1 ? affIn.length + ' locations' : leadName);
+    // Evening share of Berlin's own transaction decline, so the detail can never
+    // exceed the KPI it explains.
+    const bM = metricsOf('berlin', p);
+    const eve = Math.max(0, Math.round(bM.txDrop * 0.8));
+    const i1DetailText = !isB || !INS.detail ? '' : INS.detail.replace(/show [\d,]+ fewer transactions/, 'show ' + eve.toLocaleString('en-US') + ' fewer transactions');
+    const invIn = ['berlin', 'paris', 'amsterdam'].filter(inScope).map(id => ENT[id].name);
+
+    const optStyle = active => `display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:${active ? 600 : 500};color:${active ? 'oklch(20% 0.01 270)' : 'oklch(32% 0.01 270)'};background:${active ? 'oklch(96.5% 0.004 270)' : 'transparent'};border-radius:9px;padding:7px 9px;cursor:pointer`;
+
+    return {
+      scopeName: scope.name,
+      scopeSub: scope.sub,
+      periodWord: P0.word,
+      periodLabel: P0.label,
+      periodOpen: s.periodOpen,
+      togglePeriodPicker: () => this.setState(st => ({ periodOpen: !st.periodOpen, scopeOpen: false })),
+      periodOptions: ['Today', 'Week', 'Month', 'Year'].map(id => ({
+        name: P[id].label, style: optStyle(p === id),
+        select: () => this.setState({ period: id, periodOpen: false }),
+      })),
+
+      heroTotal: '$' + k.rev.toLocaleString('en-US'),
+      heroDelta: arrow(dScope),
+      heroCompare: P0.cmp,
+      heroDeltaColor: dScope < 0 ? NEG : dScope === 0 ? NEUTRAL : GREEN,
+      heroNum: k.rev.toLocaleString('en-US'),
+      kpiAovNum: k.aov.replace('$', ''), kpiMarginNum: k.margin.replace('%', ''), kpiTargetNum: String(target),
+      periodContext: P0.label,
+      kpiTx: k.tx.toLocaleString('en-US'),
+      kpiTxDelta: arrow(k.txD), kpiTxDeltaColor: k.txD < 0 ? DOWN : k.txD === 0 ? NEUTRAL : GREEN,
+      kpiAov: k.aov,
+      kpiAovDelta: (k.aovD < 0 ? '−' : '+') + Math.abs(k.aovD) + '%',
+      kpiAovDeltaColor: k.aovD < 0 ? DOWN : k.aovD === 0 ? NEUTRAL : GREEN,
+      kpiMargin: k.margin,
+      kpiMarginDelta: (k.marginD < 0 ? '▼ ' : '▲ ') + Math.abs(k.marginD) + 'pt',
+      kpiMarginDeltaColor: k.marginD < 0 ? DOWN : k.marginD === 0 ? NEUTRAL : GREEN,
+      kpiTarget: target + '%',
+      heroArrow: dScope < 0 ? '▼' : dScope === 0 ? '–' : '▲', heroDeltaVal: Math.abs(dScope) + '%',
+      kpiTxArrow: k.txD < 0 ? '▼' : k.txD === 0 ? '–' : '▲', kpiTxVal: Math.abs(k.txD) + '%',
+      kpiAovArrow: k.aovD < 0 ? '−' : k.aovD === 0 ? '–' : '+', kpiAovVal: Math.abs(k.aovD) + '%',
+      kpiMarginArrow: k.marginD < 0 ? '▼' : k.marginD === 0 ? '–' : '▲', kpiMarginVal: Math.abs(k.marginD) + 'pt',
+      kpiGoalLabel: 'of ' + P0.goal + ' goal',
+
+      scopeOpen: s.scopeOpen,
+      toggleScopePicker: () => this.setState(st => ({ scopeOpen: !st.scopeOpen, periodOpen: false })),
+      scopeAll: [this.scopeOption('all')],
+      scopeRegions: ['north', 'south', 'central'].map(id => this.scopeOption(id)),
+      scopeLocations: LOCS.map(l => this.scopeOption(l.id)),
+
+      chartScopeLine: scope.name,
+      // Date labels and vertical gridlines share one position per date.
+      xLabels: ch.xl.map((t, i) => {
+        const f = xFrac(p, t, i, ch.xl.length);
+        return { t, style: 'position:absolute;top:0;white-space:nowrap;font-size:10.5px;color:oklch(47% 0.013 270);left:' + (0.8 + f * 98.4).toFixed(3) + '%;transform:translateX(' + (f === 0 ? '0' : f === 1 ? '-100%' : '-50%') + ')' };
+      }),
+      gridX: ch.xl.map((t, i) => 'position:absolute;top:0;bottom:10.2%;width:0;border-left:1px solid oklch(93% 0.005 270);left:' + (0.8 + xFrac(p, t, i, ch.xl.length) * 98.4).toFixed(3) + '%'),
+
+      prevToggleStyle: 'display:flex;align-items:center;gap:7px;cursor:pointer;min-width:0;flex-shrink:0;color:oklch(44% 0.01 270)',
+      prevToggleHint: 'Overlay the previous period',
+      prevBoxBg: s.prev ? BLUE : '#fff',
+      prevCheck: s.prev ? '✓' : '',
+      togglePrev: () => this.setState(st => ({ prev: !st.prev })),
+      ...this.chartHover(ch, p, s.prev),
+      showPrev: s.prev,
+      prevPath: ch.prev,
+
+      axis0: ch.axis[0], axis1: ch.axis[1], axis2: ch.axis[2],
+      seriesPath: ch.path,
+      showArea: true,
+      areaPath: `${ch.path} L992,212 L8,212 Z`,
+      showEndDot: true,
+      // Same viewBox (1000×236, preserveAspectRatio none) as the line, so % maps 1:1 at any size.
+      endDotLeft: `${(ch.pts[ch.pts.length - 1][0] / 1000) * 100}%`,
+      endDotTop: `${(ch.pts[ch.pts.length - 1][1] / 236) * 100}%`,
+
+      hasAnnotation: !!ev,
+      noEvents: !ev,
+      annText: ev ? ev.text : (kind === 'all' ? 'No portfolio-wide event ' : kind === 'region' ? 'No region-wide event ' : 'No single change point ') + P0.word,
+      annMarkerStyle: `position:absolute;left:${evX.toFixed(1)}%;top:${evY.toFixed(1)}%;transform:translate(-50%,-50%);width:13px;height:13px;border-radius:50%;background:#fff;border:3px solid ${NEG};box-shadow:0 0 0 3px #fff;z-index:2`,
+      annRowStyle: ev
+        ? `position:absolute;left:0;right:0;top:0;height:calc(${evY.toFixed(1)}% - 2px);display:flex;flex-direction:column;align-items:flex-start;pointer-events:none;z-index:3`
+        : 'display:none',
+      annCalloutStyle: 'display:inline-flex;align-items:center;gap:8px;min-width:min(196px,100%);max-width:min(252px,100%);background:#fff;border:1px solid oklch(92.5% 0.006 270);box-shadow:0 3px 12px oklch(20% 0.02 270 / 0.07);border-radius:10px;padding:6px 11px;font-size:11.5px;line-height:1.4;color:oklch(32% 0.012 270)',
+      annLeaderStyle: `flex:1;width:0;margin-left:calc(${evX.toFixed(1)}% - 1px);border-left:1px dashed oklch(74% 0.1 22)`,
+
+      i1, i2, i3,
+      panelTitle: i1 ? 'Priority insight' : 'Signals',
+      panelScoped: kind !== 'all',
+      i1Loc: leadName,
+      i2Meta: 'Inventory · 3 of 12 locations' + (kind === 'all' ? '' : ', including ' + invIn.join(' and ')),
+      panelDotStyle: 'display:none',
+      hasOthers: i1 && (i2 || i3),
+      otherCount: `${[i2, i3].filter(Boolean).length}`,
+      insight1Style: `display:flex;flex-direction:column;align-items:flex-start;gap:12px;padding:20px 22px 22px;cursor:pointer`,
+      i1Title,
+      i1Sub: i1SubText,
+      i1Badge,
+      i1Detail: i1DetailText,
+      exp1: s.exp1 && !!i1DetailText, exp2: s.exp2, exp3: s.exp3,
+      toggleInsight1: () => this.setState(st => ({ exp1: !st.exp1 })),
+      toggleInsight2: () => this.setState(st => ({ exp2: !st.exp2 })),
+      toggleInsight3: () => this.setState(st => ({ exp3: !st.exp3 })),
+
+      ...this.locationsModule(),
+      showGettingStarted: !this.state.gsDismissed && this.state.gsFit !== false,
+      dismissGs: () => { try { localStorage.setItem('gsDismissed', '1'); } catch (e) {} this.setState({ gsDismissed: true }); },
+      showGettingStartedC: !(this.state.gsDismissed) && this.state.gsFit !== false && !this.state.sideCollapsed,
+      asideW: this.state.sideCollapsed ? '52px' : '198px',
+      navTxt: this.state.sideCollapsed ? 'none' : 'inline',
+      profileDir: this.state.sideCollapsed ? 'column' : 'row',
+      profilePadX: this.state.sideCollapsed ? '0' : '9px',
+      collapseML: this.state.sideCollapsed ? '0' : 'auto',
+      collapseGlyph: this.state.sideCollapsed ? '\u203A\u203A' : '\u2039\u2039',
+      collapseTitle: this.state.sideCollapsed ? 'Expand sidebar' : 'Collapse sidebar',
+      toggleSidebar: () => this.setState(s => ({ sideCollapsed: !s.sideCollapsed }), () => requestAnimationFrame(() => this.fitSidebar())),
+      navItemPad: this.state.navCompact ? '5px 9px' : '7px 9px',
+      navLabelPad: this.state.navCompact ? '9px 10px 5px' : '14px 10px 6px',
+      asideRef: this.asideRef, navRef: this.navRef, bottomRef: this.bottomRef, gsRef: this.gsRef,
+      showStateReference: !!this.props.showStateReference,
+      locStates: !this.props.showStateReference ? [] : (() => {
+        const north = LOCS.filter(l => l.region === 'north').map(l => l.id);
+        const wk = DEV.Week;
+        const regional = {};
+        Object.keys(wk).filter(k => north.indexOf(k) >= 0).forEach(k => { regional[k] = wk[k]; });
+        return [
+          ['1', 'Isolated', { period: 'Month', scope: 'all' }],
+          ['2', 'Regional', { period: 'Week', scope: 'all', dev: regional }],
+          ['3', 'Distributed', { period: 'Week', scope: 'all' }],
+          ['4', 'All clear', { period: 'Today', scope: 'all', dev: {} }],
+        ].map(([n, title, o]) => Object.assign({ n, title }, this.locationsModule(o)));
+      })(),
+    };
+  }
+}
+</script>
+</body>
+</html>
