@@ -450,7 +450,6 @@ class Component extends DCLogic {
     if (next.gsFit !== this.state.gsFit || next.navCompact !== this.state.navCompact) this.setState(next);
   }
   componentDidMount() {
-    try { if (localStorage.getItem('gsDismissed') === '1') this.setState({ gsDismissed: true }); } catch (e) {}
     this._onResize = () => this.fitSidebar();
     requestAnimationFrame(this._onResize);
     if (document.fonts) document.fonts.ready.then(this._onResize);
@@ -660,7 +659,7 @@ class Component extends DCLogic {
       submitComposer: () => { if (!canSubmit || !selI) return; const v = s.draft.trim(); comp === 'resolve' ? this.doResolve(selI.id, v) : this.doUpdate(selI.id, v); },
 
       showGettingStartedC: !s.gsDismissed && s.gsFit !== false && !s.sideCollapsed,
-      dismissGs: () => { try { localStorage.setItem('gsDismissed', '1'); } catch (e) {} this.setState({ gsDismissed: true }); },
+      dismissGs: () => { this.setState({ gsDismissed: true }); },
       asideW: s.sideCollapsed ? '52px' : '198px',
       navTxt: s.sideCollapsed ? 'none' : 'inline',
       profileDir: s.sideCollapsed ? 'column' : 'row',

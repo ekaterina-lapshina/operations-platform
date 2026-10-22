@@ -416,7 +416,6 @@ class Component extends DCLogic {
     if (next.gsFit !== this.state.gsFit || next.navCompact !== this.state.navCompact) this.setState(next);
   }
   componentDidMount() {
-    try { if (localStorage.getItem('gsDismissed') === '1') this.setState({ gsDismissed: true }); } catch (e) {}
     this._onResize = () => this.fitSidebar();
     requestAnimationFrame(this._onResize);
     if (document.fonts) document.fonts.ready.then(this._onResize);
@@ -511,7 +510,7 @@ class Component extends DCLogic {
     this.breakdownVals(d, dev, dir, col, slices, gapWord),
     {
       asideRef: this.asideRef, navRef: this.navRef, bottomRef: this.bottomRef, gsRef: this.gsRef,
-      dismissGs: () => { try { localStorage.setItem('gsDismissed', '1'); } catch (e) {} this.setState({ gsDismissed: true }); },
+      dismissGs: () => { this.setState({ gsDismissed: true }); },
       showGettingStartedC: !(this.state.gsDismissed) && s.gsFit !== false && !s.sideCollapsed,
       asideW: s.sideCollapsed ? '52px' : '198px',
       navTxt: s.sideCollapsed ? 'none' : 'inline',
