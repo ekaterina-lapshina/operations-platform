@@ -2,6 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
+<title>Operations</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
 </head>
@@ -16,45 +17,38 @@ body{margin:0;background:oklch(96.5% 0.003 270);font-family:'Inter',system-ui,sa
 input::placeholder{color:oklch(66% 0.008 270)}
 a{color:oklch(54% 0.19 258);text-decoration:none}
 a:hover{color:oklch(46% 0.19 258)}
+[data-issue-row]:focus-visible,[data-assign-opt]:focus-visible,[data-focus-ring]:focus-visible{outline:2px solid oklch(54% 0.19 258);outline-offset:-2px}
+a:focus-visible,button:focus-visible{outline:2px solid oklch(54% 0.19 258);outline-offset:2px}
+nav a:focus-visible,[data-opt]:focus-visible,[data-issue-row]:focus-visible,[data-assign-opt]:focus-visible,[data-focus-ring]:focus-visible{outline-offset:-2px}
 </style>
+<script src="./app-shell.js"></script>
 </helmet>
 
 <div style="min-height:100vh;background:oklch(94.6% 0.004 270);display:flex;flex-direction:column">
 
-<header style="height:52px;flex-shrink:0;background:oklch(94.6% 0.004 270);border-bottom:1px solid oklch(90.5% 0.006 270);display:flex;align-items:center;gap:16px;padding:0 16px;position:sticky;top:0;z-index:20">
-<div style="display:flex;align-items:center;gap:9px;width:198px;flex-shrink:0">
+<header style="height:52px;flex-shrink:0;background:oklch(94.6% 0.004 270);border-bottom:1px solid oklch(90.5% 0.006 270);display:flex;align-items:center;gap:16px;padding:0 16px;position:sticky;top:0;z-index:20;min-width:0">
+<div style="display:flex;align-items:center;gap:9px;flex:0 1 198px;min-width:0">
 <div style="width:22px;height:22px;border-radius:7px;background:oklch(54% 0.19 258);flex-shrink:0"></div>
-<span style="font-size:13.5px;font-weight:700;letter-spacing:-.01em;color:oklch(28% 0.012 270)">Operations Platform</span>
-<span style="margin-left:auto;font-size:11px;color:oklch(48% 0.012 270);background:#fff;border:1px solid oklch(91% 0.006 270);border-radius:6px;padding:2px 6px">Pro</span>
+<span style="min-width:0;font-size:13.5px;font-weight:700;letter-spacing:-.01em;line-height:1.2;color:oklch(28% 0.012 270);overflow-wrap:anywhere">Operations Platform</span>
 </div>
-<label style="flex:1;min-width:0;max-width:420px;display:flex;align-items:center;gap:8px;background:#fff;border:1px solid oklch(91% 0.006 270);border-radius:9px;padding:6px 11px">
-<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(47% 0.013 270)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="7" cy="7" r="4.6"></circle><line x1="10.4" y1="10.4" x2="14" y2="14"></line></svg>
-<input type="text" placeholder="Search locations, products, employees" style="border:none;outline:none;background:transparent;font-family:inherit;font-size:12.5px;color:oklch(22% 0.012 270);width:100%">
-<span style="font-size:10.5px;background:oklch(96.5% 0.004 270);border-radius:5px;padding:1px 5px;flex-shrink:0;color:oklch(52% 0.012 270)">&#8984;K</span>
-</label>
-<div style="margin-left:auto;display:flex;align-items:center;gap:8px;flex-shrink:0">
-<span style="width:32px;height:32px;border-radius:9px;background:#fff;border:1px solid oklch(91% 0.006 270);display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:oklch(50% 0.01 270);cursor:pointer">?</span>
-<span style="position:relative;width:32px;height:32px;border-radius:9px;background:#fff;border:1px solid oklch(91% 0.006 270);display:inline-flex;align-items:center;justify-content:center;cursor:pointer"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(48% 0.012 270)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M4 6.6a4 4 0 0 1 8 0c0 2.4.5 3.6 1.2 4.4H2.8C3.5 10.2 4 9 4 6.6Z"></path><path d="M6.6 13.2a1.6 1.6 0 0 0 2.8 0"></path></svg><span style="position:absolute;top:5px;right:6px;width:6px;height:6px;border-radius:50%;background:oklch(54% 0.19 258);border:1.5px solid #fff"></span></span>
-<div style="width:1px;height:20px;background:oklch(90.5% 0.006 270);margin:0 2px"></div>
-<span title="Anna Weber" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer"><span style="width:28px;height:28px;flex-shrink:0;border-radius:50%;background:oklch(86% 0.014 265);box-shadow:inset 0 0 0 1px oklch(80% 0.014 265);display:inline-flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:600;letter-spacing:.01em;color:oklch(32% 0.02 265)">AW</span><span style="font-size:11px;color:oklch(45% 0.012 270)">&#9662;</span></span>
-</div>
+<x-import component-from-global-scope="op-header-tools" hint-size="100%,52px" style="flex:1 0 auto;min-width:0;display:flex;align-items:center;height:52px"></x-import>
 </header>
 
 <div style="flex:1;display:flex;min-height:0">
 
 <aside ref="{{ asideRef }}" style="width:{{ asideW }};transition:width .18s ease;overflow:hidden;flex-shrink:0;background:oklch(94.6% 0.004 270);border-right:1px solid oklch(90.5% 0.006 270);padding:10px 8px 14px;display:flex;flex-direction:column;position:sticky;top:52px;height:calc(100vh - 52px)">
-<nav ref="{{ navRef }}" style="display:flex;flex-direction:column;gap:1px;overflow-y:auto;min-height:0">
+<nav ref="{{ navRef }}" aria-label="Main" style="display:flex;flex-direction:column;gap:1px;overflow-y:auto;min-height:0">
 <div style="display:{{ navTxt }};font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:oklch(47% 0.013 270);padding:4px 10px 6px">Workspace</div>
 <a href="Overview.dc.html" style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><rect x="2" y="2" width="5" height="5" rx="1"></rect><rect x="9" y="2" width="5" height="5" rx="1"></rect><rect x="2" y="9" width="5" height="5" rx="1"></rect><rect x="9" y="9" width="5" height="5" rx="1"></rect></svg><span style="display:{{ navTxt }};white-space:nowrap">Overview</span></a>
-<span style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:600;color:oklch(20% 0.012 270);background:#fff;border:1px solid oklch(91.5% 0.006 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(54% 0.19 258)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><polyline points="1.5,10 5,10 6.8,5.5 9.2,12 11,8 14.5,8"></polyline></svg><span style="display:{{ navTxt }};white-space:nowrap">Operations</span></span>
+<a href="Operations.dc.html" aria-current="page" style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:600;color:oklch(20% 0.012 270);background:#fff;border:1px solid oklch(91.5% 0.006 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(54% 0.19 258)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><polyline points="1.5,10 5,10 6.8,5.5 9.2,12 11,8 14.5,8"></polyline></svg><span style="display:{{ navTxt }};white-space:nowrap">Operations</span></a>
 <div style="display:{{ navTxt }};font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:oklch(47% 0.013 270);padding:{{ navLabelPad }}">Analysis</div>
 <a href="Location Analytics.dc.html" style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><line x1="3" y1="13" x2="3" y2="8.5"></line><line x1="8" y1="13" x2="8" y2="4"></line><line x1="13" y1="13" x2="13" y2="6.5"></line></svg><span style="display:{{ navTxt }};white-space:nowrap">Location analytics</span></a>
-<span style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M4 2.2h5.2L12 5v8.8H4z"></path><line x1="6" y1="8" x2="10" y2="8"></line><line x1="6" y1="10.6" x2="9" y2="10.6"></line></svg><span style="display:{{ navTxt }};white-space:nowrap">Reports</span></span>
+<a href="Reports.dc.html" style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M4 2.2h5.2L12 5v8.8H4z"></path><line x1="6" y1="8" x2="10" y2="8"></line><line x1="6" y1="10.6" x2="9" y2="10.6"></line></svg><span style="display:{{ navTxt }};white-space:nowrap">Reports</span></a>
 <div style="display:{{ navTxt }};font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:oklch(47% 0.013 270);padding:{{ navLabelPad }}">Manage</div>
-<span style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M2.5 5.5 8 2.8l5.5 2.7v5L8 13.2 2.5 10.5z"></path><line x1="2.5" y1="5.5" x2="8" y2="8.2"></line><line x1="13.5" y1="5.5" x2="8" y2="8.2"></line></svg><span style="display:{{ navTxt }};white-space:nowrap">Inventory</span><span style="display:{{ navTxt }};margin-left:auto;font-size:10.5px;font-weight:600;color:oklch(42% 0.012 270);background:oklch(91.5% 0.006 270);border-radius:5px;padding:1px 5px">5</span></span>
-<span style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="6.3" cy="6" r="2.4"></circle><path d="M2 13c.6-2.2 2.3-3.3 4.3-3.3S10 10.8 10.6 13"></path><path d="M11 5.2a2.2 2.2 0 0 1 0 4"></path></svg><span style="display:{{ navTxt }};white-space:nowrap">Team</span></span>
+<a href="Inventory.dc.html" style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M2.5 5.5 8 2.8l5.5 2.7v5L8 13.2 2.5 10.5z"></path><line x1="2.5" y1="5.5" x2="8" y2="8.2"></line><line x1="13.5" y1="5.5" x2="8" y2="8.2"></line></svg><span style="display:{{ navTxt }};white-space:nowrap">Inventory</span><span style="display:{{ navTxt }};margin-left:auto;font-size:10.5px;font-weight:600;color:oklch(42% 0.012 270);background:oklch(91.5% 0.006 270);border-radius:5px;padding:1px 5px">5</span></a>
+<a href="Employees.dc.html" style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="6.3" cy="6" r="2.4"></circle><path d="M2 13c.6-2.2 2.3-3.3 4.3-3.3S10 10.8 10.6 13"></path><path d="M11 5.2a2.2 2.2 0 0 1 0 4"></path></svg><span style="display:{{ navTxt }};white-space:nowrap">Employees</span></a>
 <a href="Locations.dc.html" style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M8 14c2.6-3.2 4-5.4 4-7.2A4 4 0 0 0 4 6.8C4 8.6 5.4 10.8 8 14Z"></path><circle cx="8" cy="6.6" r="1.5"></circle></svg><span style="display:{{ navTxt }};white-space:nowrap">Locations</span><span style="display:{{ navTxt }};margin-left:auto;font-size:10.5px;font-weight:600;color:oklch(42% 0.012 270);background:oklch(91.5% 0.006 270);border-radius:5px;padding:1px 5px">12</span></a>
-<span style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="5.4" cy="5.6" r="2.3"></circle><circle cx="10.8" cy="7.4" r="1.9"></circle><path d="M1.8 13c.5-2 2-3 3.6-3s3.1 1 3.6 3"></path></svg><span style="display:{{ navTxt }};white-space:nowrap">Customers</span></span>
+<a href="Customers.dc.html" style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="5.4" cy="5.6" r="2.3"></circle><circle cx="10.8" cy="7.4" r="1.9"></circle><path d="M1.8 13c.5-2 2-3 3.6-3s3.1 1 3.6 3"></path></svg><span style="display:{{ navTxt }};white-space:nowrap">Customers</span></a>
 </nav>
 <div ref="{{ bottomRef }}" style="margin-top:auto;display:flex;flex-direction:column;gap:1px">
 <sc-if value="{{ showGettingStartedC }}" hint-placeholder-val="{{ true }}"><div ref="{{ gsRef }}" style="display:flex;flex-direction:column;margin:0 2px 10px;padding:5px 5px 7px;background:#fff;border:1px solid oklch(91.5% 0.006 270);border-radius:14px;box-shadow:0 1px 2px oklch(25% 0.02 265 / 0.04)">
@@ -69,16 +63,16 @@ a:hover{color:oklch(46% 0.19 258)}
 <span style="font-size:12.5px;font-weight:600;letter-spacing:-.008em;color:oklch(20% 0.012 270)">Getting started</span>
 <span style="font-size:11px;line-height:1.4;color:oklch(46% 0.013 270);text-wrap:pretty">Take a quick tour of the platform.</span>
 </div>
-<a href="#" style="display:flex;align-items:center;justify-content:center;gap:6px;height:32px;border-radius:9px;background:linear-gradient(oklch(31% 0.012 270),oklch(21% 0.012 270));box-shadow:inset 0 1px 0 oklch(100% 0 0 / 0.12),0 1px 2px oklch(20% 0.02 270 / 0.2);color:#fff;font-size:12px;font-weight:600;letter-spacing:-.004em;text-decoration:none" style-hover="background:linear-gradient(oklch(36% 0.012 270),oklch(25% 0.012 270))">Start onboarding &#8594;</a>
+<a href="#" data-op-tour="" role="button" style="display:flex;align-items:center;justify-content:center;gap:6px;height:32px;border-radius:9px;background:linear-gradient(oklch(31% 0.012 270),oklch(21% 0.012 270));box-shadow:inset 0 1px 0 oklch(100% 0 0 / 0.12),0 1px 2px oklch(20% 0.02 270 / 0.2);color:#fff;font-size:12px;font-weight:600;letter-spacing:-.004em;text-decoration:none" style-hover="background:linear-gradient(oklch(36% 0.012 270),oklch(25% 0.012 270))">Start onboarding &#8594;</a>
 </div></sc-if>
-<span style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:7px 9px;cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><line x1="2.5" y1="5" x2="13.5" y2="5"></line><line x1="2.5" y1="11" x2="13.5" y2="11"></line><circle cx="6" cy="5" r="1.7"></circle><circle cx="10.4" cy="11" r="1.7"></circle></svg><span style="display:{{ navTxt }};white-space:nowrap">Settings</span></span>
+<a href="Settings.dc.html" style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:7px 9px;cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><line x1="2.5" y1="5" x2="13.5" y2="5"></line><line x1="2.5" y1="11" x2="13.5" y2="11"></line><circle cx="6" cy="5" r="1.7"></circle><circle cx="10.4" cy="11" r="1.7"></circle></svg><span style="display:{{ navTxt }};white-space:nowrap">Settings</span></a>
 <div style="display:flex;flex-direction:{{ profileDir }};align-items:center;gap:9px;padding:10px {{ profilePadX }} 0;margin-top:8px;border-top:1px solid oklch(90.5% 0.006 270)">
 <div title="North &amp; Oak" style="width:26px;height:26px;border-radius:7px;background:oklch(30% 0.012 270);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:700;letter-spacing:.02em;color:#fff">N&amp;O</div>
 <div style="display:{{ navTxt }};min-width:0">
 <div style="font-size:11.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:oklch(30% 0.012 270)">North &amp; Oak</div>
 <div style="font-size:10.5px;color:oklch(46% 0.013 270)">Owner</div>
 </div>
-<span title="{{ collapseTitle }}" onClick="{{ toggleSidebar }}" style="margin-left:{{ collapseML }};font-size:11px;color:oklch(45% 0.012 270);border:1px solid oklch(90% 0.006 270);border-radius:6px;padding:2px 6px;background:#fff;cursor:pointer" style-hover="color:oklch(24% 0.012 270);border-color:oklch(84% 0.008 270)">{{ collapseGlyph }}</span>
+<button type="button" title="{{ collapseTitle }}" aria-label="{{ collapseTitle }}" onClick="{{ toggleSidebar }}" style="margin-left:{{ collapseML }};font-size:11px;color:oklch(45% 0.012 270);border:1px solid oklch(90% 0.006 270);border-radius:6px;padding:2px 6px;background:#fff;cursor:pointer;font-family:inherit;line-height:inherit" style-hover="color:oklch(24% 0.012 270);border-color:oklch(84% 0.008 270)">{{ collapseGlyph }}</button>
 </div>
 </div>
 </aside>
@@ -91,16 +85,16 @@ a:hover{color:oklch(46% 0.19 258)}
 <span style="display:inline-flex;align-items:center;gap:8px;font-size:12px;color:oklch(47% 0.013 270);min-width:0"><span style="width:6px;height:6px;border-radius:50%;background:oklch(54% 0.19 258);box-shadow:0 0 0 3px oklch(54% 0.19 258 / 0.16);flex-shrink:0"></span><span style="white-space:nowrap">Thursday 27 Nov &middot; live &middot; updated 1 min ago</span></span>
 </div>
 <div style="position:relative">
-<span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:oklch(28% 0.012 270);background:#fff;border:1px solid oklch(88% 0.008 270);border-radius:8px;padding:5px 9px;cursor:pointer;white-space:nowrap" onClick="{{ toggleScopePicker }}"><span style="width:6px;height:6px;border-radius:50%;background:oklch(54% 0.19 258)"></span>{{ scopeName }} <span style="color:oklch(47% 0.013 270);font-weight:500">&#9662;</span></span>
+<button type="button" ref="{{ scopeBtnRef }}" aria-haspopup="menu" aria-expanded="{{ scopeExpanded }}" onKeyDown="{{ scopeBtnKey }}" onClick="{{ toggleScopePicker }}" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:oklch(28% 0.012 270);background:#fff;border:1px solid oklch(88% 0.008 270);border-radius:8px;padding:5px 9px;cursor:pointer;white-space:nowrap;font-family:inherit;line-height:inherit"><span style="width:6px;height:6px;border-radius:50%;background:oklch(54% 0.19 258)"></span>{{ scopeName }} <span style="color:oklch(47% 0.013 270);font-weight:500">&#9662;</span></button>
 <sc-if value="{{ scopeOpen }}" hint-placeholder-val="{{ false }}">
-<div style="position:absolute;top:calc(100% + 6px);right:0;width:240px;background:#fff;border:1px solid oklch(90% 0.006 270);border-radius:14px;box-shadow:0 12px 32px oklch(20% 0.02 270 / 0.12);padding:8px;z-index:30">
+<div ref="{{ scopeMenuRef }}" role="menu" aria-label="Scope" onKeyDown="{{ scopeMenuKey }}" style="position:absolute;top:calc(100% + 6px);right:0;width:240px;background:#fff;border:1px solid oklch(90% 0.006 270);border-radius:14px;box-shadow:0 12px 32px oklch(20% 0.02 270 / 0.12);padding:8px;z-index:30">
 <div style="font-size:10px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:oklch(50% 0.013 270);padding:4px 9px 5px">Whole business</div>
 <sc-for list="{{ scopeAll }}" as="o" hint-placeholder-count="1">
-<div style="{{ o.style }}" onClick="{{ o.select }}"><span>{{ o.name }}</span><span style="margin-left:auto;font-size:11px;color:oklch(52% 0.013 270)">{{ o.meta }}</span></div>
+<button type="button" data-opt="" role="menuitemradio" aria-checked="{{ o.checked }}" tabindex="-1" onClick="{{ o.select }}" style="{{ o.style }}"><span>{{ o.name }}</span><span style="margin-left:auto;font-size:11px;color:oklch(52% 0.013 270)">{{ o.meta }}</span></button>
 </sc-for>
 <div style="font-size:10px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:oklch(50% 0.013 270);padding:10px 9px 5px;border-top:1px solid oklch(96% 0.004 270);margin-top:5px">Regions</div>
 <sc-for list="{{ scopeRegions }}" as="o" hint-placeholder-count="3">
-<div style="{{ o.style }}" onClick="{{ o.select }}"><span>{{ o.name }}</span><span style="margin-left:auto;font-size:11px;color:oklch(52% 0.013 270)">{{ o.meta }}</span></div>
+<button type="button" data-opt="" role="menuitemradio" aria-checked="{{ o.checked }}" tabindex="-1" onClick="{{ o.select }}" style="{{ o.style }}"><span>{{ o.name }}</span><span style="margin-left:auto;font-size:11px;color:oklch(52% 0.013 270)">{{ o.meta }}</span></button>
 </sc-for>
 </div>
 </sc-if>
@@ -122,17 +116,17 @@ a:hover{color:oklch(46% 0.19 258)}
 </div>
 </nav>
 
-<div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:16px">
+<div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:20px">
 
-<section data-screen-label="Issue queue" style="flex:57 1 0;min-width:min(500px,100%);background:#fff;border:1px solid oklch(92.6% 0.004 265);border-radius:14px;box-shadow:0 1px 2px oklch(25% 0.02 265 / 0.04);overflow:hidden;padding-bottom:4px">
-<div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:18px 20px 4px">
+<section ref="{{ queueRef }}" data-screen-label="Issue queue" style="flex:57 1 0;min-width:min(500px,100%);background:transparent;padding-bottom:4px">
+<div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:18px 0 4px">
 <span style="display:flex;align-items:baseline;gap:7px;flex-wrap:wrap;min-width:0"><span style="font-size:14px;font-weight:500;letter-spacing:-.008em;color:oklch(26% 0.012 270)">Issues today</span><sc-if value="{{ hasQueueScope }}" hint-placeholder-val="{{ false }}"><span style="font-size:12px;color:oklch(82% 0.005 270)">&middot;</span><span style="font-size:12.5px;font-weight:400;color:oklch(55% 0.012 270)">{{ queueScope }}</span></sc-if></span>
 <span style="font-size:12px;color:oklch(50% 0.013 270);font-variant-numeric:tabular-nums">As of {{ nowText }}</span>
 </div>
 <sc-for list="{{ groups }}" as="g" hint-placeholder-count="2">
 <div style="display:flex;align-items:center;gap:8px;padding:20px 20px 6px"><span style="{{ g.dot }}"></span><span style="font-size:10.5px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:oklch(50% 0.013 270)">{{ g.name }}</span><span style="font-size:11px;font-weight:600;font-variant-numeric:tabular-nums;color:oklch(52% 0.013 270)">{{ g.count }}</span></div>
 <sc-for list="{{ g.rows }}" as="r" hint-placeholder-count="3">
-<div role="button" tabindex="0" onClick="{{ r.select }}" style="{{ r.style }}" style-hover="background:oklch(97.6% 0.004 270)">
+<div role="button" tabindex="0" data-issue-row="" aria-current="{{ r.current }}" onClick="{{ r.select }}" onKeyDown="{{ r.onKey }}" style="{{ r.style }}" style-hover="background:oklch(94.6% 0.004 270)">
 <div style="display:flex;flex-direction:column;gap:4px;min-width:0;padding-top:1px"><span style="font-size:18px;font-weight:600;letter-spacing:-.022em;line-height:1.1;font-variant-numeric:tabular-nums;white-space:nowrap;color:{{ r.timeColor }}">{{ r.time }}</span><span style="font-size:11px;line-height:1.3;color:oklch(52% 0.012 270)">{{ r.timeCap }}</span></div>
 <div style="min-width:0;display:flex;flex-direction:column;gap:4px">
 <span style="font-size:14px;font-weight:500;letter-spacing:-.006em;line-height:1.35;color:{{ r.titleColor }};text-wrap:pretty">{{ r.title }}</span>
@@ -143,11 +137,11 @@ a:hover{color:oklch(46% 0.19 258)}
 </sc-for>
 <sc-if value="{{ g.isEmpty }}" hint-placeholder-val="{{ false }}"><div style="padding:4px 20px 8px;font-size:12.5px;color:oklch(52% 0.013 270)">{{ g.emptyText }}</div></sc-if>
 </sc-for>
-<button type="button" onClick="{{ toggleResolved }}" style="width:100%;display:flex;align-items:center;gap:8px;padding:16px 20px 14px;margin-top:12px;border:0;border-top:1px solid oklch(94.5% 0.004 270);background:transparent;font:inherit;cursor:pointer;text-align:left" style-hover="background:oklch(98.4% 0.002 270)"><span style="font-size:10.5px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:oklch(50% 0.013 270)">Resolved today</span><span style="font-size:11px;font-weight:600;font-variant-numeric:tabular-nums;color:oklch(52% 0.013 270)">{{ resolvedCount }}</span><span style="margin-left:auto;font-size:11.5px;font-weight:500;color:oklch(46% 0.013 270)">{{ resolvedGlyph }}</span></button>
+<button type="button" onClick="{{ toggleResolved }}" style="width:100%;display:flex;align-items:center;gap:8px;padding:16px 20px 14px;margin-top:12px;border:0;border-top:1px solid oklch(91% 0.005 270);background:transparent;font:inherit;cursor:pointer;text-align:left" style-hover="background:oklch(94.6% 0.004 270)"><span style="font-size:10.5px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:oklch(50% 0.013 270)">Resolved today</span><span style="font-size:11px;font-weight:600;font-variant-numeric:tabular-nums;color:oklch(52% 0.013 270)">{{ resolvedCount }}</span><span style="margin-left:auto;font-size:11.5px;font-weight:500;color:oklch(46% 0.013 270)">{{ resolvedGlyph }}</span></button>
 <sc-if value="{{ showResolved }}" hint-placeholder-val="{{ false }}">
 <div style="padding-bottom:6px">
 <sc-for list="{{ resolvedRows }}" as="r" hint-placeholder-count="3">
-<div role="button" tabindex="0" onClick="{{ r.select }}" style="{{ r.style }}" style-hover="background:oklch(97.6% 0.004 270)">
+<div role="button" tabindex="0" data-issue-row="" aria-current="{{ r.current }}" onClick="{{ r.select }}" onKeyDown="{{ r.onKey }}" style="{{ r.style }}" style-hover="background:oklch(94.6% 0.004 270)">
 <div style="display:flex;flex-direction:column;gap:4px;min-width:0;padding-top:1px"><span style="font-size:18px;font-weight:600;letter-spacing:-.022em;line-height:1.1;font-variant-numeric:tabular-nums;white-space:nowrap;color:{{ r.timeColor }}">{{ r.time }}</span><span style="font-size:11px;line-height:1.3;color:oklch(52% 0.012 270)">{{ r.timeCap }}</span></div>
 <div style="min-width:0;display:flex;flex-direction:column;gap:4px">
 <span style="font-size:14px;font-weight:500;letter-spacing:-.006em;line-height:1.35;color:{{ r.titleColor }};text-wrap:pretty">{{ r.title }}</span>
@@ -161,7 +155,7 @@ a:hover{color:oklch(46% 0.19 258)}
 </sc-if>
 </section>
 
-<section data-screen-label="Issue detail" style="flex:43 1 0;min-width:min(400px,100%);position:sticky;top:68px;max-height:calc(100vh - 88px);overflow-y:auto;background:#fff;border:1px solid oklch(92.6% 0.004 265);border-radius:14px;box-shadow:0 1px 2px oklch(25% 0.02 265 / 0.04)">
+<section ref="{{ paneRef }}" data-screen-label="Issue detail" style="flex:43 1 0;min-width:min(400px,100%);position:sticky;top:68px;background:#fff;border:1px solid oklch(90.5% 0.006 270);border-radius:14px;box-shadow:0 1px 2px oklch(25% 0.02 265 / 0.05),0 10px 28px -12px oklch(25% 0.02 265 / 0.14)">
 <sc-if value="{{ hasSel }}" hint-placeholder-val="{{ true }}">
 <div style="padding:22px 22px 8px;display:flex;flex-direction:column;gap:22px">
 
@@ -171,9 +165,11 @@ a:hover{color:oklch(46% 0.19 258)}
 <h2 style="margin:4px 0 10px;font-size:22px;font-weight:600;letter-spacing:-.024em;line-height:1.25;color:oklch(14% 0.012 270);text-wrap:pretty">{{ d.title }}</h2>
 <div style="display:flex;align-items:center;justify-content:space-between;gap:8px 16px;flex-wrap:wrap">
 <span style="display:flex;align-items:center;gap:7px;flex-wrap:wrap;font-size:13px"><span style="{{ d.urgMark }}"></span><span style="font-weight:600;color:{{ d.urgColor }}">{{ d.urgLabel }}</span><sc-if value="{{ d.hasUrgRest }}" hint-placeholder-val="{{ false }}"><span style="color:oklch(76% 0.006 270)">&middot;</span><span style="color:oklch(40% 0.012 270);font-variant-numeric:tabular-nums">{{ d.urgRest }}</span></sc-if></span>
-<sc-if value="{{ d.isActive }}" hint-placeholder-val="{{ true }}"><button type="button" onClick="{{ openResolve }}" style="display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 11px;border:1px solid oklch(89% 0.006 270);border-radius:7px;background:#fff;font:inherit;font-size:12px;font-weight:500;color:oklch(32% 0.012 270);cursor:pointer;white-space:nowrap" style-hover="border-color:oklch(78% 0.008 270);color:oklch(16% 0.012 270);background:oklch(98.5% 0.002 270)">&#10003; Resolve issue</button></sc-if>
+<sc-if value="{{ d.isResolved }}" hint-placeholder-val="{{ false }}"><button type="button" ref="{{ reopenBtnRef }}" data-focus-ring="" onClick="{{ reopen }}" style="display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 11px;border:1px solid oklch(89% 0.006 270);border-radius:7px;background:#fff;font:inherit;font-size:12px;font-weight:500;color:oklch(32% 0.012 270);cursor:pointer;white-space:nowrap" style-hover="border-color:oklch(78% 0.008 270);color:oklch(16% 0.012 270);background:oklch(98.5% 0.002 270)">&#8634; Reopen issue</button></sc-if>
+<sc-if value="{{ d.isActive }}" hint-placeholder-val="{{ true }}"><button type="button" ref="{{ resolveBtnRef }}" data-focus-ring="" onClick="{{ openResolve }}" style="display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 11px;border:1px solid oklch(89% 0.006 270);border-radius:7px;background:#fff;font:inherit;font-size:12px;font-weight:500;color:oklch(32% 0.012 270);cursor:pointer;white-space:nowrap" style-hover="border-color:oklch(78% 0.008 270);color:oklch(16% 0.012 270);background:oklch(98.5% 0.002 270)">&#10003; Resolve issue</button></sc-if>
 </div>
 </div>
+<div role="status" aria-live="polite"><sc-if value="{{ hasNotice }}" hint-placeholder-val="{{ false }}"><div style="margin-top:14px;padding:9px 12px;border-radius:9px;background:oklch(96.5% 0.012 258);font-size:12.5px;font-weight:500;line-height:1.4;color:oklch(38% 0.15 258)">{{ noticeText }}</div></sc-if></div>
 <div style="display:flex;flex-wrap:wrap;gap:10px 32px;margin-top:14px;font-size:12px">
 <div style="display:flex;flex-direction:column;gap:3px;min-width:0">
 <span style="font-size:11px;color:oklch(54% 0.012 270)">Status</span>
@@ -181,22 +177,23 @@ a:hover{color:oklch(46% 0.19 258)}
 </div>
 <div style="display:flex;flex-direction:column;gap:3px;min-width:0">
 <span style="font-size:11px;color:oklch(54% 0.012 270)">Assigned to</span>
-<span style="display:flex;align-items:center;gap:7px;min-width:0;min-height:26px"><sc-if value="{{ d.hasOwner }}" hint-placeholder-val="{{ false }}"><span style="{{ d.avatar }}">{{ d.initials }}</span></sc-if><span style="font-weight:500;color:{{ d.ownerColor }}">{{ d.ownerText }}</span><sc-if value="{{ d.isActive }}" hint-placeholder-val="{{ true }}"><span style="color:oklch(76% 0.006 270)">&middot;</span><button type="button" onClick="{{ toggleAssign }}" style="padding:0;border:0;background:none;font:inherit;font-size:12px;font-weight:500;color:oklch(46% 0.15 258);cursor:pointer;white-space:nowrap" style-hover="color:oklch(36% 0.15 258);text-decoration:underline">{{ d.assignLabel }}</button></sc-if></span>
+<span style="display:flex;align-items:center;gap:7px;min-width:0;min-height:26px"><sc-if value="{{ d.hasOwner }}" hint-placeholder-val="{{ false }}"><span style="{{ d.avatar }}">{{ d.initials }}</span></sc-if><span style="font-weight:500;color:{{ d.ownerColor }}">{{ d.ownerText }}</span><sc-if value="{{ d.isActive }}" hint-placeholder-val="{{ true }}"><span style="color:oklch(76% 0.006 270)">&middot;</span><button type="button" ref="{{ assignBtnRef }}" aria-haspopup="menu" aria-expanded="{{ assignExpanded }}" onClick="{{ toggleAssign }}" style="padding:0;border:0;background:none;font:inherit;font-size:12px;font-weight:500;color:oklch(46% 0.15 258);cursor:pointer;white-space:nowrap" style-hover="color:oklch(36% 0.15 258);text-decoration:underline">{{ d.assignLabel }}</button></sc-if></span>
 </div>
 </div>
 <div style="display:flex;flex-direction:column;gap:10px;margin-top:12px">
 <sc-if value="{{ assignOpen }}" hint-placeholder-val="{{ false }}">
-<div style="display:flex;flex-direction:column;gap:1px;padding:6px;border:1px solid oklch(91% 0.006 270);border-radius:10px;background:#fff;max-width:320px">
-<sc-for list="{{ d.people }}" as="pp" hint-placeholder-count="2"><div onClick="{{ pp.go }}" style="{{ pp.style }}"><span style="{{ pp.avatar }}">{{ pp.initials }}</span><span>{{ pp.name }}</span><span style="margin-left:auto;font-size:11px;color:oklch(52% 0.013 270)">{{ pp.meta }}</span></div></sc-for>
+<div ref="{{ menuRef }}" role="menu" aria-label="Assign to" onKeyDown="{{ onMenuKey }}" style="display:flex;flex-direction:column;gap:1px;padding:6px;border:1px solid oklch(91% 0.006 270);border-radius:10px;background:#fff;max-width:320px">
+<sc-for list="{{ d.people }}" as="pp" hint-placeholder-count="2"><button type="button" role="menuitemradio" data-assign-opt="" aria-checked="{{ pp.checked }}" tabindex="{{ pp.tab }}" onClick="{{ pp.go }}" style="{{ pp.style }}"><span style="{{ pp.avatar }}">{{ pp.initials }}</span><span>{{ pp.name }}</span><span style="margin-left:auto;font-size:11px;color:oklch(52% 0.013 270)">{{ pp.meta }}</span></button></sc-for>
 </div>
 </sc-if>
 <sc-if value="{{ composerResolve }}" hint-placeholder-val="{{ false }}">
 <div style="display:flex;flex-direction:column;gap:8px;padding:12px;border-radius:10px;background:oklch(97.8% 0.003 270)">
 <span style="font-size:12px;font-weight:600;color:oklch(30% 0.012 270)">{{ composerTitle }}</span>
-<input type="text" value="{{ draft }}" onChange="{{ onDraft }}" placeholder="{{ composerHint }}" style="height:32px;padding:0 10px;border:1px solid oklch(88% 0.008 270);border-radius:8px;background:#fff;font-family:inherit;font-size:12.5px;color:oklch(22% 0.012 270);outline:none;min-width:0">
+<sc-if value="{{ resolveAutoAssign }}" hint-placeholder-val="{{ false }}"><span style="font-size:12.5px;line-height:1.45;color:oklch(34% 0.012 270)">This issue is unassigned. Resolving it will assign it to Anna Weber.</span></sc-if>
+<input type="text" ref="{{ resolveInputRef }}" aria-label="Resolution outcome" value="{{ draft }}" onChange="{{ onDraft }}" placeholder="{{ composerHint }}" style="height:32px;padding:0 10px;border:1px solid oklch(88% 0.008 270);border-radius:8px;background:#fff;font-family:inherit;font-size:12.5px;color:oklch(22% 0.012 270);outline:none;min-width:0" style-focus="border-color:oklch(54% 0.19 258);box-shadow:0 0 0 2px oklch(54% 0.19 258 / 0.25)">
 <sc-if value="{{ hasSuggest }}" hint-placeholder-val="{{ false }}"><div style="display:flex;gap:6px;flex-wrap:wrap"><sc-for list="{{ suggest }}" as="sg" hint-placeholder-count="2"><button type="button" onClick="{{ sg.go }}" style="height:26px;padding:0 9px;border:1px solid oklch(90% 0.006 270);border-radius:7px;background:#fff;font:inherit;font-size:12px;color:oklch(34% 0.012 270);cursor:pointer" style-hover="border-color:oklch(80% 0.008 270)">{{ sg.label }}</button></sc-for></div></sc-if>
 <div style="display:flex;align-items:center;gap:12px">
-<button type="button" onClick="{{ submitComposer }}" style="{{ submitStyle }}">{{ submitLabel }}</button>
+<button type="button" aria-disabled="{{ submitAriaDisabled }}" onClick="{{ submitComposer }}" style="{{ submitStyle }}">{{ submitLabel }}</button>
 <button type="button" onClick="{{ closeComposer }}" style="padding:0;border:0;background:none;font:inherit;font-size:12.5px;font-weight:500;color:oklch(46% 0.013 270);cursor:pointer" style-hover="color:oklch(22% 0.012 270)">Cancel</button>
 </div>
 </div>
@@ -234,7 +231,7 @@ a:hover{color:oklch(46% 0.19 258)}
 </sc-if>
 
 <div style="display:flex;flex-direction:column;gap:12px;padding-top:20px;border-top:1px solid oklch(95% 0.004 270)">
-<span style="display:flex;align-items:baseline;justify-content:space-between;gap:12px"><span style="display:flex;align-items:baseline;gap:7px"><span style="font-size:10.5px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:oklch(50% 0.013 270)">Activity</span><span style="font-size:11px;color:oklch(54% 0.012 270)">&middot; {{ d.evCount }}</span></span><sc-if value="{{ d.isActive }}" hint-placeholder-val="{{ true }}"><button type="button" onClick="{{ openUpdate }}" style="padding:0;border:0;background:none;font:inherit;font-size:12px;font-weight:500;color:oklch(46% 0.15 258);cursor:pointer;white-space:nowrap" style-hover="color:oklch(36% 0.15 258);text-decoration:underline">+ Add update</button></sc-if></span>
+<span style="display:flex;align-items:baseline;justify-content:space-between;gap:12px"><span style="display:flex;align-items:baseline;gap:7px"><span style="font-size:10.5px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:oklch(50% 0.013 270)">Activity</span><span style="font-size:11px;color:oklch(54% 0.012 270)">&middot; {{ d.evCount }}</span></span><sc-if value="{{ d.isActive }}" hint-placeholder-val="{{ true }}"><button type="button" ref="{{ updateBtnRef }}" onClick="{{ openUpdate }}" style="padding:0;border:0;background:none;font:inherit;font-size:12px;font-weight:500;color:oklch(46% 0.15 258);cursor:pointer;white-space:nowrap" style-hover="color:oklch(36% 0.15 258);text-decoration:underline">+ Add update</button></sc-if></span>
 <div style="display:flex;flex-direction:column">
 <sc-for list="{{ d.events }}" as="e" hint-placeholder-count="3">
 <div style="display:grid;grid-template-columns:40px 14px minmax(0,1fr);column-gap:10px;padding-bottom:14px">
@@ -249,11 +246,12 @@ a:hover{color:oklch(46% 0.19 258)}
 <span style="display:flex;justify-content:center;padding-top:15px"><span style="width:7px;height:7px;border-radius:50%;box-sizing:border-box;border:1.5px solid oklch(54% 0.19 258);background:#fff"></span></span>
 <div style="min-width:0"><div style="display:flex;flex-direction:column;gap:8px;padding:12px;border-radius:10px;background:oklch(97.8% 0.003 270)">
 <span style="font-size:12px;font-weight:600;color:oklch(30% 0.012 270)">{{ composerTitle }}</span>
-<input type="text" value="{{ draft }}" onChange="{{ onDraft }}" placeholder="{{ composerHint }}" style="height:32px;padding:0 10px;border:1px solid oklch(88% 0.008 270);border-radius:8px;background:#fff;font-family:inherit;font-size:12.5px;color:oklch(22% 0.012 270);outline:none;min-width:0">
+<input type="text" ref="{{ updateInputRef }}" aria-label="Update text" aria-describedby="update-hint" value="{{ draft }}" onChange="{{ onDraft }}" onKeyDown="{{ onUpdateKey }}" placeholder="{{ composerHint }}" style-focus="border-color:oklch(54% 0.19 258);box-shadow:0 0 0 2px oklch(54% 0.19 258 / 0.25)" style="height:32px;padding:0 10px;border:1px solid oklch(88% 0.008 270);border-radius:8px;background:#fff;font-family:inherit;font-size:12.5px;color:oklch(22% 0.012 270);outline:none;min-width:0">
 <sc-if value="{{ hasSuggest }}" hint-placeholder-val="{{ false }}"><div style="display:flex;gap:6px;flex-wrap:wrap"><sc-for list="{{ suggest }}" as="sg" hint-placeholder-count="2"><button type="button" onClick="{{ sg.go }}" style="height:26px;padding:0 9px;border:1px solid oklch(90% 0.006 270);border-radius:7px;background:#fff;font:inherit;font-size:12px;color:oklch(34% 0.012 270);cursor:pointer" style-hover="border-color:oklch(80% 0.008 270)">{{ sg.label }}</button></sc-for></div></sc-if>
-<div style="display:flex;align-items:center;gap:12px">
-<button type="button" onClick="{{ submitComposer }}" style="{{ submitStyle }}">{{ submitLabel }}</button>
+<div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+<button type="button" data-focus-ring="" aria-disabled="{{ submitAriaDisabled }}" aria-describedby="update-hint" onClick="{{ submitComposer }}" style="{{ submitStyle }}">{{ submitLabel }}</button>
 <button type="button" onClick="{{ closeComposer }}" style="padding:0;border:0;background:none;font:inherit;font-size:12.5px;font-weight:500;color:oklch(46% 0.013 270);cursor:pointer" style-hover="color:oklch(22% 0.012 270)">Cancel</button>
+<span id="update-hint" aria-live="polite" style="margin-left:auto;font-size:11.5px;color:oklch(48% 0.013 270)">{{ updateHint }}</span>
 </div>
 </div></div>
 </div>
@@ -313,10 +311,10 @@ const LOCS = [
 const LOC = Object.fromEntries(LOCS.map(l => [l.id, l]));
 const ME = 'Anna Weber';
 const LINKS = {
-  Staffing: [{ label: 'Team', meta: 'Schedules & availability', href: '#' }],
-  Stock: [{ label: 'Inventory', meta: 'Stock levels & orders', href: '#' }],
+  Staffing: [{ label: 'Employees', meta: 'Schedules & availability', href: 'Employees.dc.html' }],
+  Stock: [{ label: 'Inventory', meta: 'Stock levels & orders', href: 'Inventory.dc.html' }],
   Equipment: [{ label: 'Locations', meta: 'Location roster', href: 'Locations.dc.html' }],
-  Delivery: [{ label: 'Inventory', meta: 'Deliveries & suppliers', href: '#' }],
+  Delivery: [{ label: 'Inventory', meta: 'Deliveries & suppliers', href: 'Inventory.dc.html' }],
   Connection: [{ label: 'Locations', meta: 'Location roster', href: 'Locations.dc.html' }],
 };
 const OUTCOMES = {
@@ -423,16 +421,40 @@ const NODE = {
   assigned: 'position:relative;z-index:1;width:9px;height:9px;box-sizing:border-box;border-radius:50%;border:1.5px solid ' + BLUE + ';background:#fff',
   update: 'position:relative;z-index:1;width:9px;height:9px;border-radius:50%;background:oklch(68% 0.01 270)',
   resolved: 'position:relative;z-index:1;width:11px;height:11px;border-radius:50%;background:oklch(30% 0.012 270);box-shadow:0 0 0 2px #fff',
+  reopened: 'position:relative;z-index:1;width:11px;height:11px;box-sizing:border-box;border-radius:50%;border:2px solid oklch(30% 0.012 270);background:#fff;box-shadow:0 0 0 2px #fff',
 };
 const TEXT = {
   base: 'font-size:12.5px;line-height:1.45;color:oklch(32% 0.012 270);text-wrap:pretty',
   update: 'font-size:12.5px;line-height:1.45;color:oklch(26% 0.012 270);background:oklch(97.6% 0.003 270);border-radius:7px;padding:5px 9px;text-wrap:pretty',
   resolved: 'font-size:12.5px;line-height:1.45;font-weight:600;color:oklch(22% 0.012 270)',
 };
+// ?issue=<id> preselects that issue; missing/unknown ids fall back to the first open issue.
+const initialSel = () => { let id = null; try { id = new URLSearchParams(location.search).get('issue'); } catch (e) {} return ISSUES.some(i => i.id === id) ? id : null; };
 const clone = () => ISSUES.map(i => Object.assign({}, i, { events: i.events.slice() }));
 
 class Component extends DCLogic {
-  state = { issues: clone(), sel: 'berlin-staff', locF: null, scope: 'all', scopeOpen: false, resolvedOpen: false, assignOpen: false, composer: null, draft: '', tick: 0 };
+  state = { issues: clone(), sel: initialSel(), locF: null, scope: 'all', scopeOpen: false, resolvedOpen: false, assignOpen: false, composer: null, draft: '', tick: 0 };
+  assignBtnRef = React.createRef(); menuRef = React.createRef();
+  resolveBtnRef = React.createRef(); reopenBtnRef = React.createRef(); resolveInputRef = React.createRef(); updateBtnRef = React.createRef(); updateInputRef = React.createRef();
+  applyFocus() { const r = this._wantFocus && this[this._wantFocus]; if (r && r.current) { r.current.focus(); this._wantFocus = null; } }
+  // Focus moves are applied in componentDidUpdate, once the menu has actually mounted/unmounted.
+  focusAssignBtn() { this._wantBtnFocus = true; }
+  closeAssign(returnFocus) { if (returnFocus) this._wantBtnFocus = true; this.setState({ assignOpen: false }); }
+  focusMenuItem() { this._wantMenuFocus = true; }
+  applyAssignFocus() {
+    if (this._wantMenuFocus) { const m = this.menuRef.current; if (m) { this._wantMenuFocus = false; const it = m.querySelector('[aria-checked="true"]') || m.querySelector('[role=menuitemradio]'); if (it) it.focus(); } }
+    if (this._wantBtnFocus && !this.menuRef.current) { const b = this.assignBtnRef.current; if (b) { this._wantBtnFocus = false; b.focus(); } }
+  }
+  onMenuKey = e => {
+    const m = this.menuRef.current; if (!m) return;
+    const items = [...m.querySelectorAll('[role=menuitemradio]')], k = items.indexOf(document.activeElement), n = items.length;
+    const go = j => { e.preventDefault(); if (n) items[(j + n) % n].focus(); };
+    if (e.key === 'Escape' || e.key === 'Tab') { e.preventDefault(); e.stopPropagation(); this.closeAssign(true); }
+    else if (e.key === 'ArrowDown') go(k + 1);
+    else if (e.key === 'ArrowUp') go(k < 0 ? n - 1 : k - 1);
+    else if (e.key === 'Home') go(0);
+    else if (e.key === 'End') go(n - 1);
+  };
   asideRef = React.createRef(); navRef = React.createRef(); bottomRef = React.createRef(); gsRef = React.createRef();
   fitSidebar() {
     const aside = this.asideRef.current, nav = this.navRef.current, bottom = this.bottomRef.current;
@@ -449,17 +471,72 @@ class Component extends DCLogic {
     else next = { gsFit: false, navCompact: false };
     if (next.gsFit !== this.state.gsFit || next.navCompact !== this.state.navCompact) this.setState(next);
   }
+  // Detail pane (same approach as Inventory v2): beside the list it scrolls on its own, sized so its bottom edge stays inside the viewport,
+  // with overscroll contained so it never hands scroll to the page. Stacked under the list: no inner scroll.
+  paneRef = React.createRef(); queueRef = React.createRef();
+  fitPane() {
+    const p = this.paneRef.current, t = this.queueRef.current; if (!p || !t) return;
+    if (p.getBoundingClientRect().left < t.getBoundingClientRect().right) { p.style.maxHeight = ''; p.style.overflowY = ''; p.style.overscrollBehaviorY = ''; return; }
+    const top = Math.max(68, p.getBoundingClientRect().top);
+    p.style.maxHeight = Math.max(240, window.innerHeight - top - 20) + 'px'; p.style.overflowY = 'auto'; p.style.overscrollBehaviorY = 'contain';
+  }
   componentDidMount() {
+    try { this._opMq = window.matchMedia('(max-width: 719px)'); this._opMqFn = () => this.setState({ sideCollapsed: this._opMq.matches }); this._opMq.addEventListener('change', this._opMqFn); if (this._opMq.matches) this.setState({ sideCollapsed: true }); } catch (e) {}
+    this._onPane = () => { if (this._paneRaf) return; this._paneRaf = requestAnimationFrame(() => { this._paneRaf = null; this.fitPane(); }); };
+    window.addEventListener('scroll', this._onPane, { passive: true }); window.addEventListener('resize', this._onPane);
+    requestAnimationFrame(this._onPane);
+    
     this._onResize = () => this.fitSidebar();
     requestAnimationFrame(this._onResize);
     if (document.fonts) document.fonts.ready.then(this._onResize);
     window.addEventListener('resize', this._onResize);
+    if (!this.state.sel && this._selId) this.setState({ sel: this._selId });
+    this._onDocDown = e => {
+      if (!this.state.assignOpen) return;
+      const m = this.menuRef.current, b = this.assignBtnRef.current;
+      if ((m && m.contains(e.target)) || (b && b.contains(e.target))) return;
+      this.setState({ assignOpen: false });
+    };
+    document.addEventListener('mousedown', this._onDocDown);
   }
-  componentDidUpdate() { this.fitSidebar(); }
-  componentWillUnmount() { window.removeEventListener('resize', this._onResize); clearTimeout(this._follow); }
+  // Header pickers: trigger buttons open a menu; arrows/Home/End move between options; Escape or Tab close it; focus returns to the trigger.
+  kbRefs = {};
+  kbRef(k) { return this.kbRefs[k] || (this.kbRefs[k] = React.createRef()); }
+  kbApplyFocus() {
+    const prev = this._kbPrev; this._kbPrev = {}; ["scope"].forEach(k => { this._kbPrev[k + 'Open'] = this.state[k + 'Open']; });
+    if (this._kbIn) { const m = this.kbRef(this._kbIn + 'Menu').current; if (m) { this._kbIn = null; const it = m.querySelector('[data-opt][aria-checked="true"]') || m.querySelector('[data-opt]'); if (it) it.focus(); } }
+    ["scope"].forEach(k => {
+      if (!prev || !prev[k + 'Open'] || this.state[k + 'Open']) return;
+      const b = this.kbRef(k + 'Btn').current, a = document.activeElement;
+      if (b && (this._kbOut === k || !a || a === document.body)) b.focus();
+      if (this._kbOut === k) this._kbOut = null;
+    });
+  }
+  kbMenuKey(k) {
+    return e => {
+      const m = this.kbRef(k + 'Menu').current; if (!m) return;
+      const items = [...m.querySelectorAll('[data-opt]')], n = items.length, i = items.indexOf(document.activeElement);
+      const go = j => { e.preventDefault(); if (n) items[(j + n) % n].focus(); };
+      if (e.key === 'Escape' || e.key === 'Tab') { e.preventDefault(); e.stopPropagation(); this._kbOut = k; this.setState({ [k + 'Open']: false }); }
+      else if (e.key === 'ArrowDown') go(i < 0 ? 0 : i + 1);
+      else if (e.key === 'ArrowUp') go(i < 0 ? n - 1 : i - 1);
+      else if (e.key === 'Home') go(0);
+      else if (e.key === 'End') go(n - 1);
+    };
+  }
+  kbBtnKey(k) { return e => { if ((e.key === 'ArrowDown' || e.key === 'ArrowUp') && !this.state[k + 'Open']) { e.preventDefault(); e.currentTarget.click(); } }; }
+  kbVals(keys) {
+    const v = {};
+    keys.forEach(k => { v[k + 'BtnRef'] = this.kbRef(k + 'Btn'); v[k + 'MenuRef'] = this.kbRef(k + 'Menu'); v[k + 'BtnKey'] = this.kbBtnKey(k); v[k + 'MenuKey'] = this.kbMenuKey(k); v[k + 'Expanded'] = this.state[k + 'Open'] ? 'true' : 'false'; });
+    return v;
+  }
+  componentDidUpdate() { this.fitPane(); this.kbApplyFocus(); this._submitting = false; this.fitSidebar(); this.applyAssignFocus(); this.applyFocus(); }
+  componentWillUnmount() {
+    if (this._opMq) this._opMq.removeEventListener('change', this._opMqFn);
+    window.removeEventListener('scroll', this._onPane); window.removeEventListener('resize', this._onPane); window.removeEventListener('resize', this._onResize); document.removeEventListener('mousedown', this._onDocDown); clearTimeout(this._follow); }
 
   optStyle(active) {
-    return 'display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:' + (active ? 600 : 500) + ';color:' + (active ? 'oklch(20% 0.01 270)' : 'oklch(32% 0.01 270)') + ';background:' + (active ? 'oklch(96.5% 0.004 270)' : 'transparent') + ';border-radius:9px;padding:7px 9px;cursor:pointer';
+    return 'display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:' + (active ? 600 : 500) + ';color:' + (active ? 'oklch(20% 0.01 270)' : 'oklch(32% 0.01 270)') + ';background:' + (active ? 'oklch(96.5% 0.004 270)' : 'transparent') + ';border-radius:9px;padding:7px 9px;cursor:pointer;width:100%;border:0;font-family:inherit;text-align:left';
   }
   base() { return NOW0 + (Number(this.props.simOffset) || 0); }
   // Every user action advances the simulated clock by one minute and is stamped with it.
@@ -483,22 +560,42 @@ class Component extends DCLogic {
     }
   }
   doSecondary(id, b) {
-    if (b.resolve) return this.doResolve(id, b.resolve);
+    // Resolving secondaries go through the same review step as "Resolve issue", prefilled with their outcome.
+    if (b.resolve) { this._wantFocus = 'resolveInputRef'; return this.setState({ composer: 'resolve', draft: b.resolve, assignOpen: false, notice: null }); }
     this.mutate(id, (i, now) => { i.secDone = Object.assign({}, i.secDone, { [b.id]: true }); i.events.push({ t: now, actor: ME, kind: 'action', text: b.event }); this.engage(i); return i; });
   }
   doAssign(id, person) {
+    const cur = this.state.issues.find(x => x.id === id);
+    if (cur && cur.owner === person) return this.setState({ assignOpen: false });
     this.mutate(id, (i, now) => { i.owner = person; if (i.life === 'open') i.life = 'progress'; i.events.push({ t: now, actor: ME, kind: 'assigned', text: person === ME ? 'Took ownership' : 'Assigned to ' + person }); return i; });
   }
-  doUpdate(id, text) { this.mutate(id, (i, now) => { i.events.push({ t: now, actor: ME, kind: 'update', text }); return i; }); }
+  // Reads live state and guards re-entry so Enter followed by a click can't post twice.
+  submitComposer(selI) {
+    const s = this.state, v = (s.draft || '').trim();
+    if (this._submitting || !s.composer || !v || !selI) return;
+    this._submitting = true;
+    s.composer === 'resolve' ? this.doResolve(selI.id, v) : this.doUpdate(selI.id, v);
+  }
+  doUpdate(id, text) { this._wantFocus = 'updateBtnRef'; this.mutate(id, (i, now) => { i.events.push({ t: now, actor: ME, kind: 'update', text }); return i; }); }
+  // Rule: an unassigned issue is assigned to the current user (Anna Weber) on resolution; the composer says so beforehand and the feed records it.
   doResolve(id, outcome) {
-    this.mutate(id, (i, now) => { i.life = 'resolved'; i.resolvedAt = now; i.outcome = outcome; if (!i.owner) i.owner = ME; i.events.push({ t: now, actor: ME, kind: 'resolved', text: 'Resolved · ' + outcome }); return i; }, { resolvedOpen: true });
+    this._wantFocus = 'reopenBtnRef';
+    this.mutate(id, (i, now) => { i.life = 'resolved'; i.resolvedAt = now; i.outcome = outcome; if (!i.owner) { i.owner = ME; i.events.push({ t: now, actor: 'System', kind: 'assigned', text: 'Assigned to ' + ME + ' on resolution (issue was unassigned)' }); } i.events.push({ t: now, actor: ME, kind: 'resolved', text: 'Resolved · ' + outcome }); return i; }, { resolvedOpen: true, notice: { id, text: 'Issue resolved \u00B7 moved to Resolved today' } });
+  }
+  // Reopen returns to In progress (owner is always set after resolution); history and owner are kept.
+  doReopen(id) {
+    this._wantFocus = 'resolveBtnRef';
+    const cur = this.state.issues.find(x => x.id === id), to = cur && cur.owner ? 'In progress' : 'Needs action';
+    this.mutate(id, (i, now) => { i.life = i.owner ? 'progress' : 'open'; i.events.push({ t: now, actor: ME, kind: 'reopened', text: 'Reopened \u00B7 previous outcome: ' + i.outcome }); return i; }, { notice: { id, text: 'Issue reopened \u00B7 status is now ' + to } });
   }
 
   rowVals(i, now, sel) {
     const L = LOC[i.loc], u = urgencyOf(i, now), tm = timeOf(i, now), res = i.life === 'resolved';
+    const select = () => this.setState({ sel: i.id, assignOpen: false, composer: null, draft: '', notice: null });
     return {
-      select: () => this.setState({ sel: i.id, assignOpen: false, composer: null, draft: '' }),
-      style: 'display:grid;grid-template-columns:84px minmax(0,1fr);column-gap:16px;align-items:start;padding:13px 20px;cursor:pointer;outline:none;background:' + (sel ? 'oklch(97% 0.004 270)' : 'transparent') + ';box-shadow:' + (sel ? 'inset 3px 0 0 oklch(30% 0.012 270)' : 'none'),
+      select, current: sel ? 'true' : 'false',
+      onKey: e => { if (e.target !== e.currentTarget) return; if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') { e.preventDefault(); select(); } },
+      style: 'display:grid;grid-template-columns:84px minmax(0,1fr);column-gap:16px;align-items:start;padding:13px 20px;border-radius:0 8px 8px 0;cursor:pointer;background:' + (sel ? 'oklch(92.6% 0.005 270)' : 'transparent') + ';box-shadow:' + (sel ? 'inset 3px 0 0 oklch(30% 0.012 270)' : 'none'),
       time: tm.v, timeCap: tm.cap,
       timeColor: res ? 'oklch(56% 0.01 270)' : u === 'watch' ? 'oklch(42% 0.012 270)' : 'oklch(20% 0.012 270)',
       title: i.title, titleColor: res ? 'oklch(40% 0.012 270)' : 'oklch(18% 0.012 270)',
@@ -535,9 +632,12 @@ class Component extends DCLogic {
     });
     const evs = i.events.slice().sort((a, b) => a.t - b.t);
     const P = i.primary || {};
-    const people = [ME].concat(L.lead !== ME ? [L.lead] : []).map(p => ({
+    const plist = [ME].concat(L.lead !== ME ? [L.lead] : []), hasOwnerOpt = plist.includes(i.owner);
+    const people = plist.map((p, k) => ({
       name: p, meta: p === ME ? 'You' : 'Store lead', initials: initials(p), avatar: avatarStyle(i.owner === p ? 'blue' : 'grey'),
-      style: this.optStyle(i.owner === p), go: () => this.doAssign(i.id, p),
+      checked: i.owner === p ? 'true' : 'false', tab: (hasOwnerOpt ? i.owner === p : k === 0) ? 0 : -1,
+      style: this.optStyle(i.owner === p) + ';width:100%;border:0;font-family:inherit;text-align:left',
+      go: () => { this.doAssign(i.id, p); this.focusAssignBtn(); },
     }));
     let urgRest = '';
     if (res) urgRest = hm(i.resolvedAt);
@@ -554,7 +654,7 @@ class Component extends DCLogic {
       urgMark: URG_MARK[res ? 'resolved' : u],
       hasOwner: !!i.owner, initials: i.owner ? initials(i.owner) : '', avatar: avatarStyle(res ? 'grey' : 'blue', 20),
       ownerText: i.owner || 'Unassigned', ownerColor: i.owner ? 'oklch(24% 0.012 270)' : 'oklch(52% 0.01 270)',
-      facts, isActive: !res,
+      facts, isActive: !res, isResolved: res,
       primaryAvail: !res && !!P.label && !i.primaryDone, primaryLabel: P.label || '', primary: () => this.doPrimary(i.id),
       primaryDone: !res && !!i.primaryDone, primaryDoneLabel: P.done || '',
       hasSecondary: sec.length > 0, showRec: !res && !!P.label && !i.primaryDone && sec.length > 0,
@@ -614,6 +714,7 @@ class Component extends DCLogic {
 
     const order = openL.concat(progL, resL);
     let selI = order.find(i => i.id === s.sel) || openL[0] || progL[0] || resL[0] || null;
+    this._selId = selI ? selI.id : null;
     const showResolved = s.resolvedOpen || !!(selI && selI.life === 'resolved');
     const where = locF ? LOC[locF].name : s.scope === 'all' ? 'all locations' : REGION_NAME[s.scope];
     const rows = l => l.map(i => this.rowVals(i, now, selI && selI.id === i.id));
@@ -627,9 +728,10 @@ class Component extends DCLogic {
 
     return Object.assign({
       scopeName: s.scope === 'all' ? 'All locations' : REGION_NAME[s.scope], scopeOpen: s.scopeOpen,
-      toggleScopePicker: () => this.setState(x => ({ scopeOpen: !x.scopeOpen })),
-      scopeAll: [{ name: 'All locations', meta: LOCS.length + ' locations', style: this.optStyle(s.scope === 'all'), select: () => this.setState({ scope: 'all', scopeOpen: false }) }],
-      scopeRegions: REGIONS.map(id => ({ name: REGION_NAME[id], meta: LOCS.filter(l => l.region === id).length + ' locations', style: this.optStyle(s.scope === id), select: () => this.setState({ scope: id, scopeOpen: false, locF: null }) })),
+      toggleScopePicker: () => { if (!this.state.scopeOpen) this._kbIn = 'scope'; this.setState(x => ({ scopeOpen: !x.scopeOpen })); },
+      ...this.kbVals(['scope']),
+      scopeAll: [{ name: 'All locations', meta: LOCS.length + ' locations', style: this.optStyle(s.scope === 'all'), checked: (s.scope === 'all') ? 'true' : 'false', select: () => this.setState({ scope: 'all', scopeOpen: false }) }],
+      scopeRegions: REGIONS.map(id => ({ name: REGION_NAME[id], meta: LOCS.filter(l => l.region === id).length + ' locations', style: this.optStyle(s.scope === id), checked: (s.scope === id) ? 'true' : 'false', select: () => this.setState({ scope: id, scopeOpen: false, locF: null }) })),
 
       summaryText: scopedLocs.length + ' locations \u00B7 ' + [['disrupted', 'disrupted'], ['attention', 'attention'], ['nosignal', 'no signal'], ['normal', 'normal']].filter(([k]) => counts[k] || k === 'normal').map(([k, label]) => counts[k] + ' ' + label).join(' \u00B7 '),
       tiles, allCount: scoped.filter(active).length, allStyle: tileBase(!locF, 'all'), selectAll: () => this.setState({ locF: null }),
@@ -645,18 +747,28 @@ class Component extends DCLogic {
       emptyHead: locF ? LOC[locF].name + ' is operating normally' : 'No issues today',
       emptyBody: locF ? 'No issues have been raised here today.' : 'Nothing has been raised for ' + where + ' today.',
 
-      assignOpen: s.assignOpen && !!selI, toggleAssign: () => this.setState(x => ({ assignOpen: !x.assignOpen, composer: null })),
+      assignOpen: s.assignOpen && !!selI, assignExpanded: s.assignOpen && !!selI ? 'true' : 'false',
+      assignBtnRef: this.assignBtnRef, menuRef: this.menuRef, onMenuKey: this.onMenuKey,
+      toggleAssign: () => { const open = !s.assignOpen; this.setState({ assignOpen: open, composer: null }); if (open) this.focusMenuItem(); },
       composerOn: !!comp && !!selI, composerResolve: comp === 'resolve' && !!selI, composerUpdate: comp === 'update' && !!selI,
       composerTitle: comp === 'resolve' ? 'Resolve with a short outcome' : 'Add an update',
       composerHint: comp === 'resolve' ? 'e.g. Cover found' : 'What changed?',
-      openUpdate: () => this.setState({ composer: 'update', draft: '', assignOpen: false }),
-      openResolve: () => this.setState({ composer: 'resolve', draft: '', assignOpen: false }),
-      closeComposer: () => this.setState({ composer: null, draft: '' }),
+      openUpdate: () => { this._wantFocus = 'updateInputRef'; this.setState({ composer: 'update', draft: '', assignOpen: false }); },
+      updateBtnRef: this.updateBtnRef, updateInputRef: this.updateInputRef,
+      openResolve: () => { this._wantFocus = 'resolveInputRef'; this.setState({ composer: 'resolve', draft: '', assignOpen: false, notice: null }); },
+      resolveAutoAssign: comp === 'resolve' && !!selI && !selI.owner,
+      reopen: () => { if (selI) this.doReopen(selI.id); },
+      resolveBtnRef: this.resolveBtnRef, reopenBtnRef: this.reopenBtnRef, resolveInputRef: this.resolveInputRef,
+      hasNotice: !!(s.notice && selI && s.notice.id === selI.id), noticeText: s.notice ? s.notice.text : '',
+      closeComposer: () => { this._wantFocus = comp === 'resolve' ? 'resolveBtnRef' : 'updateBtnRef'; this.setState({ composer: null, draft: '' }); },
       draft: s.draft, onDraft: e => this.setState({ draft: e.target.value }),
       hasSuggest: suggest.length > 0, suggest,
       submitLabel: comp === 'resolve' ? 'Resolve issue' : 'Post update',
-      submitStyle: 'height:30px;padding:0 12px;border-radius:8px;border:1px solid ' + (canSubmit ? 'oklch(30% 0.012 270)' : 'oklch(88% 0.006 270)') + ';background:' + (canSubmit ? 'oklch(30% 0.012 270)' : 'oklch(95% 0.004 270)') + ';color:' + (canSubmit ? '#fff' : 'oklch(60% 0.008 270)') + ';font:inherit;font-size:12.5px;font-weight:600;cursor:' + (canSubmit ? 'pointer' : 'default'),
-      submitComposer: () => { if (!canSubmit || !selI) return; const v = s.draft.trim(); comp === 'resolve' ? this.doResolve(selI.id, v) : this.doUpdate(selI.id, v); },
+      submitStyle: 'height:30px;padding:0 12px;border-radius:8px;border:1px ' + (canSubmit ? 'solid oklch(30% 0.012 270)' : 'dashed oklch(78% 0.008 270)') + ';background:' + (canSubmit ? 'oklch(30% 0.012 270)' : 'oklch(95% 0.004 270)') + ';color:' + (canSubmit ? '#fff' : 'oklch(50% 0.01 270)') + ';font:inherit;font-size:12.5px;font-weight:600;cursor:' + (canSubmit ? 'pointer' : 'not-allowed'),
+      submitComposer: () => this.submitComposer(selI),
+      onUpdateKey: e => { if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); this.submitComposer(selI); } },
+      submitAriaDisabled: canSubmit ? 'false' : 'true',
+      updateHint: canSubmit ? 'Press Enter to post' : 'Write an update to post it',
 
       showGettingStartedC: !s.gsDismissed && s.gsFit !== false && !s.sideCollapsed,
       dismissGs: () => { this.setState({ gsDismissed: true }); },
@@ -670,7 +782,7 @@ class Component extends DCLogic {
       toggleSidebar: () => this.setState(x => ({ sideCollapsed: !x.sideCollapsed }), () => requestAnimationFrame(() => this.fitSidebar())),
       navItemPad: s.navCompact ? '5px 9px' : '7px 9px',
       navLabelPad: s.navCompact ? '9px 10px 5px' : '14px 10px 6px',
-      asideRef: this.asideRef, navRef: this.navRef, bottomRef: this.bottomRef, gsRef: this.gsRef,
+      asideRef: this.asideRef, navRef: this.navRef, bottomRef: this.bottomRef, gsRef: this.gsRef, paneRef: this.paneRef, queueRef: this.queueRef,
     });
   }
 }

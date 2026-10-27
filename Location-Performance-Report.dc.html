@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<title>Location Performance Report</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:oklch(96.5% 0.003 270);font-family:'Inter',system-ui,sans-serif;color:oklch(22% 0.01 270);-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+input::placeholder{color:oklch(66% 0.008 270)}
+a{color:oklch(54% 0.19 258);text-decoration:none}
+a:hover{color:oklch(46% 0.19 258)}
+:focus-visible{outline:2px solid oklch(54% 0.19 258);outline-offset:2px}
+nav a:focus-visible{outline-offset:-2px}
+label:focus-within{box-shadow:0 0 0 2px oklch(54% 0.19 258 / 0.35)}
+</style>
+<script src="./app-shell.js"></script>
+</helmet>
+
+<div style="min-height:100vh;background:oklch(94.6% 0.004 270);display:flex;flex-direction:column">
+
+<header style="height:52px;flex-shrink:0;background:oklch(94.6% 0.004 270);border-bottom:1px solid oklch(90.5% 0.006 270);display:flex;align-items:center;gap:16px;padding:0 16px;position:sticky;top:0;z-index:20;min-width:0">
+<div style="display:flex;align-items:center;gap:9px;flex:0 1 198px;min-width:0">
+<div style="width:22px;height:22px;border-radius:7px;background:oklch(54% 0.19 258);flex-shrink:0"></div>
+<span style="min-width:0;font-size:13.5px;font-weight:700;letter-spacing:-.01em;line-height:1.2;color:oklch(28% 0.012 270);overflow-wrap:anywhere">Operations Platform</span>
+</div>
+<x-import component-from-global-scope="op-header-tools" hint-size="100%,52px" style="flex:1 0 auto;min-width:0;display:flex;align-items:center;height:52px"></x-import>
+</header>
+
+<div style="flex:1;display:flex;min-height:0">
+
+<aside ref="{{ asideRef }}" style="width:{{ asideW }};transition:width .18s ease;overflow:hidden;flex-shrink:0;background:oklch(94.6% 0.004 270);border-right:1px solid oklch(90.5% 0.006 270);padding:10px 8px 14px;display:flex;flex-direction:column;position:sticky;top:52px;height:calc(100vh - 52px)">
+<nav ref="{{ navRef }}" aria-label="Main" style="display:flex;flex-direction:column;gap:1px;overflow-y:auto;min-height:0">
+<div style="display:{{ navTxt }};font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:oklch(47% 0.013 270);padding:4px 10px 6px">Workspace</div>
+<a href="Overview.dc.html" style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><rect x="2" y="2" width="5" height="5" rx="1"></rect><rect x="9" y="2" width="5" height="5" rx="1"></rect><rect x="2" y="9" width="5" height="5" rx="1"></rect><rect x="9" y="9" width="5" height="5" rx="1"></rect></svg><span style="display:{{ navTxt }};white-space:nowrap">Overview</span></a>
+<a href="Operations.dc.html" style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><polyline points="1.5,10 5,10 6.8,5.5 9.2,12 11,8 14.5,8"></polyline></svg><span style="display:{{ navTxt }};white-space:nowrap">Operations</span></a>
+<div style="display:{{ navTxt }};font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:oklch(47% 0.013 270);padding:{{ navLabelPad }}">Analysis</div>
+<a href="Location Analytics.dc.html" style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><line x1="3" y1="13" x2="3" y2="8.5"></line><line x1="8" y1="13" x2="8" y2="4"></line><line x1="13" y1="13" x2="13" y2="6.5"></line></svg><span style="display:{{ navTxt }};white-space:nowrap">Location analytics</span></a>
+<a href="Reports.dc.html" aria-current="page" style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:600;color:oklch(20% 0.012 270);background:#fff;border:1px solid oklch(91.5% 0.006 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(54% 0.19 258)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M4 2.2h5.2L12 5v8.8H4z"></path><line x1="6" y1="8" x2="10" y2="8"></line><line x1="6" y1="10.6" x2="9" y2="10.6"></line></svg><span style="display:{{ navTxt }};white-space:nowrap">Reports</span></a>
+<div style="display:{{ navTxt }};font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:oklch(47% 0.013 270);padding:{{ navLabelPad }}">Manage</div>
+<a href="Inventory.dc.html" style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M2.5 5.5 8 2.8l5.5 2.7v5L8 13.2 2.5 10.5z"></path><line x1="2.5" y1="5.5" x2="8" y2="8.2"></line><line x1="13.5" y1="5.5" x2="8" y2="8.2"></line></svg><span style="display:{{ navTxt }};white-space:nowrap">Inventory</span><span style="display:{{ navTxt }};margin-left:auto;font-size:10.5px;font-weight:600;color:oklch(42% 0.012 270);background:oklch(91.5% 0.006 270);border-radius:5px;padding:1px 5px">5</span></a>
+<a href="Employees.dc.html" style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="6.3" cy="6" r="2.4"></circle><path d="M2 13c.6-2.2 2.3-3.3 4.3-3.3S10 10.8 10.6 13"></path><path d="M11 5.2a2.2 2.2 0 0 1 0 4"></path></svg><span style="display:{{ navTxt }};white-space:nowrap">Employees</span></a>
+<a href="Locations.dc.html" style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M8 14c2.6-3.2 4-5.4 4-7.2A4 4 0 0 0 4 6.8C4 8.6 5.4 10.8 8 14Z"></path><circle cx="8" cy="6.6" r="1.5"></circle></svg><span style="display:{{ navTxt }};white-space:nowrap">Locations</span><span style="display:{{ navTxt }};margin-left:auto;font-size:10.5px;font-weight:600;color:oklch(42% 0.012 270);background:oklch(91.5% 0.006 270);border-radius:5px;padding:1px 5px">12</span></a>
+<a href="Customers.dc.html" style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="5.4" cy="5.6" r="2.3"></circle><circle cx="10.8" cy="7.4" r="1.9"></circle><path d="M1.8 13c.5-2 2-3 3.6-3s3.1 1 3.6 3"></path></svg><span style="display:{{ navTxt }};white-space:nowrap">Customers</span></a>
+</nav>
+<div ref="{{ bottomRef }}" style="margin-top:auto;display:flex;flex-direction:column;gap:1px">
+<sc-if value="{{ showGettingStartedC }}" hint-placeholder-val="{{ true }}"><div ref="{{ gsRef }}" style="display:flex;flex-direction:column;margin:0 2px 10px;padding:5px 5px 7px;background:#fff;border:1px solid oklch(91.5% 0.006 270);border-radius:14px;box-shadow:0 1px 2px oklch(25% 0.02 265 / 0.04)">
+<div style="position:relative;height:58px;border-radius:10px;background:oklch(95.6% 0.004 270);overflow:hidden">
+<button type="button" aria-label="Dismiss getting started" title="Dismiss" onClick="{{ dismissGs }}" style="position:absolute;z-index:1;top:4px;right:4px;width:20px;height:20px;padding:0;border:0;border-radius:6px;background:transparent;display:flex;align-items:center;justify-content:center;font-size:14px;line-height:1;color:oklch(52% 0.012 270);cursor:pointer" style-hover="background:oklch(91% 0.005 270);color:oklch(28% 0.012 270)">&#215;</button>
+<div style="position:absolute;left:16px;right:16px;top:12px;bottom:-8px;display:grid;grid-template-columns:18px minmax(0,1fr);gap:5px;padding:6px;background:#fff;border-radius:7px;box-shadow:0 0 0 1px oklch(92% 0.005 270),0 2px 6px oklch(25% 0.02 265 / 0.06)">
+<div style="display:flex;flex-direction:column;gap:3px"><span style="height:4px;border-radius:2px;background:oklch(54% 0.19 258 / 0.55)"></span><span style="height:4px;border-radius:2px;background:oklch(91% 0.005 270)"></span><span style="height:4px;border-radius:2px;background:oklch(91% 0.005 270)"></span></div>
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:12px 1fr;gap:3px"><span style="border-radius:3px;background:oklch(96.2% 0.004 270)"></span><span style="border-radius:3px;background:oklch(96.2% 0.004 270)"></span><span style="border-radius:3px;background:oklch(96.2% 0.004 270)"></span><span style="grid-column:1 / span 3;border-radius:3px;background:oklch(96.2% 0.004 270)"></span></div>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:3px;padding:11px 8px 10px;text-align:center">
+<span style="font-size:12.5px;font-weight:600;letter-spacing:-.008em;color:oklch(20% 0.012 270)">Getting started</span>
+<span style="font-size:11px;line-height:1.4;color:oklch(46% 0.013 270);text-wrap:pretty">Take a quick tour of the platform.</span>
+</div>
+<a href="#" data-op-tour="" role="button" style="display:flex;align-items:center;justify-content:center;gap:6px;height:32px;border-radius:9px;background:linear-gradient(oklch(31% 0.012 270),oklch(21% 0.012 270));box-shadow:inset 0 1px 0 oklch(100% 0 0 / 0.12),0 1px 2px oklch(20% 0.02 270 / 0.2);color:#fff;font-size:12px;font-weight:600;letter-spacing:-.004em;text-decoration:none" style-hover="background:linear-gradient(oklch(36% 0.012 270),oklch(25% 0.012 270))">Start onboarding &#8594;</a>
+</div></sc-if>
+<a href="Settings.dc.html" style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:7px 9px;cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><line x1="2.5" y1="5" x2="13.5" y2="5"></line><line x1="2.5" y1="11" x2="13.5" y2="11"></line><circle cx="6" cy="5" r="1.7"></circle><circle cx="10.4" cy="11" r="1.7"></circle></svg><span style="display:{{ navTxt }};white-space:nowrap">Settings</span></a>
+<div style="display:flex;flex-direction:{{ profileDir }};align-items:center;gap:9px;padding:10px {{ profilePadX }} 0;margin-top:8px;border-top:1px solid oklch(90.5% 0.006 270)">
+<div title="North &amp; Oak" style="width:26px;height:26px;border-radius:7px;background:oklch(30% 0.012 270);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:700;letter-spacing:.02em;color:#fff">N&amp;O</div>
+<div style="display:{{ navTxt }};min-width:0">
+<div style="font-size:11.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:oklch(30% 0.012 270)">North &amp; Oak</div>
+<div style="font-size:10.5px;color:oklch(46% 0.013 270)">Owner</div>
+</div>
+<button type="button" title="{{ collapseTitle }}" aria-label="{{ collapseTitle }}" onClick="{{ toggleSidebar }}" style="margin-left:{{ collapseML }};font-size:11px;color:oklch(45% 0.012 270);border:1px solid oklch(90% 0.006 270);border-radius:6px;padding:2px 6px;background:#fff;cursor:pointer;font-family:inherit;line-height:inherit" style-hover="color:oklch(24% 0.012 270);border-color:oklch(84% 0.008 270)">{{ collapseGlyph }}</button>
+</div>
+</div>
+</aside>
+
+<main data-screen-label="Location performance report" style="flex:1;min-width:0;display:flex;flex-direction:column;background:oklch(96.4% 0.004 265);border-top-left-radius:16px;border-left:1px solid oklch(92% 0.005 270);border-top:1px solid oklch(92% 0.005 270);margin-top:-1px;padding:0 0 44px">
+
+<div style="padding:18px 26px 18px;border-bottom:1px solid oklch(92% 0.005 265);display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap">
+<div style="display:flex;flex-direction:column;min-width:0;flex:1 1 auto">
+<nav aria-label="Breadcrumb" style="display:flex;align-items:center;gap:6px;margin-bottom:10px;font-size:12px;color:oklch(47% 0.013 270)"><a href="Reports.dc.html" style="font-weight:500;color:oklch(47% 0.013 270)" style-hover="color:oklch(26% 0.012 270)">Reports</a><span aria-hidden="true" style="color:oklch(68% 0.01 270)">/</span><span aria-current="page" style="font-weight:500;color:oklch(30% 0.012 270)">Location Performance</span></nav>
+<h1 style="margin:0;font-size:21px;font-weight:600;letter-spacing:-.024em;line-height:1.15;color:oklch(18% 0.012 270)">Location Performance Report</h1>
+<div aria-label="Report context" style="display:flex;align-items:baseline;flex-wrap:wrap;gap:2px 8px;margin-top:8px;font-size:12px;color:oklch(44% 0.013 270)"><sc-if value="{{ metaHasPeriod }}" hint-placeholder-val="{{ true }}"><span>{{ metaPeriod }}</span><span aria-hidden="true" style="color:oklch(76% 0.008 270)">&#183;</span></sc-if><span style="font-variant-numeric:tabular-nums">{{ metaDates }}</span><sc-if value="{{ hasCmp }}" hint-placeholder-val="{{ true }}"><span aria-hidden="true" style="color:oklch(76% 0.008 270)">&#183;</span><span>{{ metaCmp }}</span></sc-if><span aria-hidden="true" style="color:oklch(76% 0.008 270)">&#183;</span><span>{{ metaScope }}</span><span aria-hidden="true" style="color:oklch(76% 0.008 270)">&#183;</span><span>{{ metaDp }}</span><span aria-hidden="true" style="color:oklch(76% 0.008 270)">&#183;</span><span>{{ metaUpdated }}</span></div>
+</div>
+<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+<button type="button" onClick="{{ save }}" style="display:inline-flex;align-items:center;gap:6px;font-family:inherit;font-size:12px;font-weight:600;line-height:normal;color:oklch(28% 0.012 270);background:#fff;border:1px solid oklch(88% 0.008 270);border-radius:8px;padding:5px 12px;cursor:pointer;white-space:nowrap" style-hover="background:oklch(97.5% 0.004 270);border-color:oklch(83% 0.01 270)">{{ saveLabel }}</button>
+<div data-pop="1" style="position:relative">
+<button type="button" aria-haspopup="menu" aria-expanded="{{ exportExp }}" onClick="{{ openExport }}" style="display:inline-flex;align-items:center;gap:7px;font-family:inherit;font-size:12px;font-weight:600;line-height:normal;color:#fff;background:oklch(54% 0.19 258);border:1px solid oklch(54% 0.19 258);border-radius:8px;padding:5px 12px;cursor:pointer;white-space:nowrap" style-hover="background:oklch(50% 0.19 258)">Export <span aria-hidden="true" style="font-weight:500;opacity:.85">&#9662;</span></button>
+<sc-if value="{{ exportOpen }}" hint-placeholder-val="{{ false }}">
+<div role="menu" aria-label="Export format" style="position:absolute;top:calc(100% + 6px);background:#fff;border:1px solid oklch(90% 0.006 270);border-radius:14px;box-shadow:0 12px 32px oklch(20% 0.02 270 / 0.12);padding:8px;z-index:30;display:flex;flex-direction:column;gap:1px;right:0;width:248px">
+<div role="presentation" style="font-size:10px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:oklch(50% 0.013 270);padding:4px 9px 5px">Export as</div>
+<sc-for list="{{ exportOpts }}" as="o" hint-placeholder-count="3"><button type="button" role="menuitem" onClick="{{ o.pick }}" style="display:flex;align-items:center;gap:8px;width:100%;text-align:left;font-family:inherit;font-size:12.5px;font-weight:500;color:oklch(32% 0.01 270);background:transparent;border:0;border-radius:9px;padding:7px 9px;cursor:pointer;outline-offset:-2px" style-hover="background:oklch(96.5% 0.004 270)" style-focus="background:oklch(96.5% 0.004 270)"><span>{{ o.label }}</span><span style="margin-left:auto;font-size:11px;color:oklch(52% 0.013 270)">{{ o.meta }}</span></button></sc-for>
+<div style="font-size:11px;line-height:1.4;color:oklch(52% 0.013 270);padding:8px 9px 4px;border-top:1px solid oklch(95% 0.004 270);margin-top:5px">{{ exportNote }}</div>
+</div>
+</sc-if>
+</div>
+</div>
+</div>
+
+<div style="padding:18px 26px 0;display:flex;flex-direction:column;gap:22px;min-width:0">
+
+<section aria-label="Report parameters" style="display:flex;flex-direction:column;gap:10px;padding:10px 12px;margin-bottom:8px;background:oklch(97.6% 0.006 258);border:1px solid oklch(91.5% 0.006 270);border-radius:14px">
+<div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px 12px">
+<div data-pop="1" style="position:relative">
+<button type="button" aria-haspopup="menu" aria-expanded="{{ periodExp }}" onClick="{{ openPeriod }}" style="display:inline-flex;align-items:center;gap:7px;height:30px;padding:0 10px;font-family:inherit;font-size:12px;line-height:normal;color:oklch(30% 0.012 270);background:#fff;border:1px solid oklch(90% 0.006 270);border-radius:8px;cursor:pointer;white-space:nowrap" style-hover="border-color:oklch(84% 0.01 270)"><span style="color:oklch(50% 0.013 270)">Period</span><span style="font-weight:600;color:oklch(20% 0.012 270)">{{ dPeriodLabel }}</span><sc-if value="{{ chPeriod }}" hint-placeholder-val="{{ false }}"><span title="Changed, not applied yet" style="width:6px;height:6px;border-radius:50%;background:oklch(54% 0.19 258);flex-shrink:0"></span></sc-if><span aria-hidden="true" style="font-size:10px;color:oklch(50% 0.013 270)">&#9662;</span></button>
+<sc-if value="{{ periodOpen }}" hint-placeholder-val="{{ false }}"><div role="menu" aria-label="Period" style="position:absolute;top:calc(100% + 6px);background:#fff;border:1px solid oklch(90% 0.006 270);border-radius:14px;box-shadow:0 12px 32px oklch(20% 0.02 270 / 0.12);padding:8px;z-index:30;display:flex;flex-direction:column;gap:1px;left:0;width:264px"><sc-for list="{{ periodOpts }}" as="o" hint-placeholder-count="3"><button type="button" role="menuitemradio" aria-checked="{{ o.checkedStr }}" onClick="{{ o.pick }}" style="{{ o.style }}" style-hover="background:oklch(96.5% 0.004 270)" style-focus="background:oklch(96.5% 0.004 270)"><span>{{ o.label }}</span><span style="margin-left:auto;padding-left:12px;font-size:11px;color:oklch(52% 0.013 270);white-space:nowrap">{{ o.meta }}</span></button></sc-for></div></sc-if>
+</div>
+<sc-if value="{{ dIsCustom }}" hint-placeholder-val="{{ false }}">
+<span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:oklch(50% 0.013 270)"><input type="date" aria-label="Custom range start" value="{{ dFrom }}" min="2024-01-01" max="{{ maxDate }}" onChange="{{ onFrom }}" style="height:30px;font-family:inherit;font-size:12px;color:oklch(24% 0.012 270);background:#fff;border:1px solid oklch(90% 0.006 270);border-radius:8px;padding:0 8px"><span aria-hidden="true">&#8211;</span><input type="date" aria-label="Custom range end" value="{{ dTo }}" min="2024-01-01" max="{{ maxDate }}" onChange="{{ onTo }}" style="height:30px;font-family:inherit;font-size:12px;color:oklch(24% 0.012 270);background:#fff;border:1px solid oklch(90% 0.006 270);border-radius:8px;padding:0 8px"></span>
+</sc-if>
+<div data-pop="1" style="position:relative">
+<button type="button" aria-haspopup="menu" aria-expanded="{{ cmpExp }}" onClick="{{ openCmp }}" style="display:inline-flex;align-items:center;gap:7px;height:30px;padding:0 10px;font-family:inherit;font-size:12px;line-height:normal;color:oklch(30% 0.012 270);background:#fff;border:1px solid oklch(90% 0.006 270);border-radius:8px;cursor:pointer;white-space:nowrap" style-hover="border-color:oklch(84% 0.01 270)"><span style="color:oklch(50% 0.013 270)">Compare with</span><span style="font-weight:600;color:oklch(20% 0.012 270)">{{ dCmpLabel }}</span><sc-if value="{{ chCmp }}" hint-placeholder-val="{{ false }}"><span title="Changed, not applied yet" style="width:6px;height:6px;border-radius:50%;background:oklch(54% 0.19 258);flex-shrink:0"></span></sc-if><span aria-hidden="true" style="font-size:10px;color:oklch(50% 0.013 270)">&#9662;</span></button>
+<sc-if value="{{ cmpOpen }}" hint-placeholder-val="{{ false }}"><div role="menu" aria-label="Compare with" style="position:absolute;top:calc(100% + 6px);background:#fff;border:1px solid oklch(90% 0.006 270);border-radius:14px;box-shadow:0 12px 32px oklch(20% 0.02 270 / 0.12);padding:8px;z-index:30;display:flex;flex-direction:column;gap:1px;left:0;width:300px"><sc-for list="{{ cmpOpts }}" as="o" hint-placeholder-count="3"><button type="button" role="menuitemradio" aria-checked="{{ o.checkedStr }}" onClick="{{ o.pick }}" style="{{ o.style }}" style-hover="background:oklch(96.5% 0.004 270)" style-focus="background:oklch(96.5% 0.004 270)"><span>{{ o.label }}</span><span style="margin-left:auto;padding-left:12px;font-size:11px;color:oklch(52% 0.013 270);white-space:nowrap">{{ o.meta }}</span></button></sc-for></div></sc-if>
+</div>
+<div data-pop="1" style="position:relative">
+<button type="button" aria-haspopup="dialog" aria-expanded="{{ scopeExp }}" onClick="{{ openScope }}" style="display:inline-flex;align-items:center;gap:7px;height:30px;padding:0 10px;font-family:inherit;font-size:12px;line-height:normal;color:oklch(30% 0.012 270);background:#fff;border:1px solid oklch(90% 0.006 270);border-radius:8px;cursor:pointer;white-space:nowrap" style-hover="border-color:oklch(84% 0.01 270)"><span style="color:oklch(50% 0.013 270)">Scope</span><span style="font-weight:600;color:oklch(20% 0.012 270)">{{ dScopeLabel }}</span><sc-if value="{{ chScope }}" hint-placeholder-val="{{ false }}"><span title="Changed, not applied yet" style="width:6px;height:6px;border-radius:50%;background:oklch(54% 0.19 258);flex-shrink:0"></span></sc-if><span aria-hidden="true" style="font-size:10px;color:oklch(50% 0.013 270)">&#9662;</span></button>
+<sc-if value="{{ scopeOpen }}" hint-placeholder-val="{{ false }}">
+<div role="dialog" aria-label="Scope" style="position:absolute;top:calc(100% + 6px);background:#fff;border:1px solid oklch(90% 0.006 270);border-radius:14px;box-shadow:0 12px 32px oklch(20% 0.02 270 / 0.12);padding:8px;z-index:30;display:flex;flex-direction:column;gap:1px;left:0;width:300px">
+<sc-for list="{{ scopeOpts }}" as="o" hint-placeholder-count="3"><button type="button" role="menuitemradio" aria-checked="{{ o.checkedStr }}" onClick="{{ o.pick }}" style="{{ o.style }}" style-hover="background:oklch(96.5% 0.004 270)" style-focus="background:oklch(96.5% 0.004 270)"><span>{{ o.label }}</span><span style="margin-left:auto;padding-left:12px;font-size:11px;color:oklch(52% 0.013 270);white-space:nowrap">{{ o.meta }}</span></button></sc-for>
+<div style="display:flex;align-items:baseline;justify-content:space-between;padding:10px 9px 6px;margin-top:5px;border-top:1px solid oklch(95% 0.004 270)"><span style="font-size:10px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:oklch(50% 0.013 270)">Selected locations</span><span style="font-size:11px;color:oklch(52% 0.013 270)">{{ locCountNote }}</span></div>
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px 4px;padding:0 2px">
+<sc-for list="{{ locOpts }}" as="l" hint-placeholder-count="12"><label style="display:flex;align-items:center;gap:8px;padding:5px 7px;border-radius:7px;font-size:12.5px;color:oklch(28% 0.012 270);cursor:pointer" style-hover="background:oklch(97.2% 0.004 270)"><input type="checkbox" checked="{{ l.checked }}" onChange="{{ l.toggle }}" style="margin:0;accent-color:oklch(54% 0.19 258)"><span>{{ l.name }}</span></label></sc-for>
+</div>
+<div style="display:flex;justify-content:flex-end;padding:8px 4px 2px;margin-top:5px;border-top:1px solid oklch(95% 0.004 270)"><button type="button" onClick="{{ closePop }}" style="font-family:inherit;font-size:12px;font-weight:600;color:oklch(28% 0.012 270);background:#fff;border:1px solid oklch(88% 0.008 270);border-radius:7px;padding:4px 11px;cursor:pointer" style-hover="background:oklch(97.5% 0.004 270)">Done</button></div>
+</div>
+</sc-if>
+</div>
+</div>
+<div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px">
+<div role="group" aria-label="Granularity" style="display:flex;align-items:center;gap:8px"><span style="font-size:12px;color:oklch(50% 0.013 270)">Granularity</span><div style="display:flex;align-items:center;gap:2px;background:#fff;border:1px solid oklch(90% 0.006 270);border-radius:9px;padding:2px"><sc-for list="{{ granSegs }}" as="g" hint-placeholder-count="3"><button type="button" aria-pressed="{{ g.pressed }}" disabled="{{ g.disabled }}" title="{{ g.title }}" onClick="{{ g.pick }}" style="{{ g.style }}">{{ g.label }}</button></sc-for></div><sc-if value="{{ chGran }}" hint-placeholder-val="{{ false }}"><span title="Changed, not applied yet" style="width:6px;height:6px;border-radius:50%;background:oklch(54% 0.19 258);flex-shrink:0"></span></sc-if></div>
+<div role="group" aria-label="Daypart" style="display:flex;align-items:center;gap:8px"><span style="font-size:12px;color:oklch(50% 0.013 270)">Daypart</span><div style="display:flex;align-items:center;gap:2px;background:#fff;border:1px solid oklch(90% 0.006 270);border-radius:9px;padding:2px"><sc-for list="{{ dpSegs }}" as="g" hint-placeholder-count="3"><button type="button" aria-pressed="{{ g.pressed }}" disabled="{{ g.disabled }}" title="{{ g.title }}" onClick="{{ g.pick }}" style="{{ g.style }}">{{ g.label }}</button></sc-for></div><sc-if value="{{ chDp }}" hint-placeholder-val="{{ false }}"><span title="Changed, not applied yet" style="width:6px;height:6px;border-radius:50%;background:oklch(54% 0.19 258);flex-shrink:0"></span></sc-if></div>
+<div style="margin-left:auto;display:flex;align-items:center;gap:16px">
+<span aria-hidden="{{ dirtyHidden }}" style="font-size:11.5px;color:{{ dirtyColor }};visibility:{{ dirtyVis }}">{{ dirtyNote }}</span><span style="display:flex;align-items:center;gap:8px"><button type="button" onClick="{{ discard }}" tabIndex="{{ dirtyTab }}" aria-hidden="{{ dirtyHidden }}" style="visibility:{{ dirtyVis }};font-family:inherit;font-size:12px;font-weight:600;line-height:normal;color:oklch(28% 0.012 270);background:#fff;border:1px solid oklch(88% 0.008 270);border-radius:8px;padding:6px 13px;cursor:pointer;white-space:nowrap" style-hover="background:oklch(97.5% 0.004 270);border-color:oklch(83% 0.01 270)">Discard</button>
+<button type="button" onClick="{{ apply }}" disabled="{{ applyDisabled }}" style="{{ applyStyle }}">Update report</button></span>
+</div>
+</div>
+</section>
+
+<section aria-labelledby="sum-h" style="display:flex;flex-direction:column;gap:14px">
+<div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;padding:0 2px"><h2 id="sum-h" style="margin:0;font-size:13.5px;font-weight:600;letter-spacing:-.008em;color:oklch(20% 0.012 270)">Summary</h2><sc-if value="{{ hasCmp }}" hint-placeholder-val="{{ true }}"><span style="font-size:11.5px;color:oklch(50% 0.013 270)">{{ cmpLine }}</span></sc-if></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(176px,1fr));gap:18px 0">
+<sc-for list="{{ kpis }}" as="k" hint-placeholder-count="5">
+<div style="min-width:0;padding:0 16px 0 20px;border-left:1px solid oklch(91% 0.006 270);display:flex;flex-direction:column">
+<span style="font-size:12.5px;color:oklch(49% 0.012 270);margin-bottom:6px">{{ k.label }}</span>
+<span title="{{ k.title }}" style="font-size:28px;font-weight:600;font-variant-numeric:tabular-nums;font-feature-settings:'tnum','ss01';letter-spacing:-.032em;line-height:1.05;color:oklch(17% 0.012 270);white-space:nowrap">{{ k.value }}</span><sc-if value="{{ k.hasBar }}" hint-placeholder-val="{{ false }}"><span aria-hidden="true" style="display:block;max-width:180px;height:4px;margin-top:9px;border-radius:2px;background:oklch(93% 0.005 270);overflow:hidden"><span style="display:block;height:100%;width:{{ k.barW }};border-radius:2px;background:oklch(54% 0.19 258)"></span></span></sc-if>
+<sc-if value="{{ k.hasSub }}" hint-placeholder-val="{{ false }}"><span style="margin-top:7px;font-size:12px;color:oklch(49% 0.012 270);font-variant-numeric:tabular-nums;white-space:nowrap">{{ k.sub }}</span></sc-if>
+<sc-if value="{{ k.hasChg }}" hint-placeholder-val="{{ true }}"><span style="display:flex;align-items:baseline;gap:6px;margin-top:7px;font-size:12.5px;font-variant-numeric:tabular-nums;white-space:nowrap;min-width:0"><span style="display:inline-flex;align-items:baseline;gap:4px;font-weight:600;color:{{ k.chgColor }}"><span aria-hidden="true" style="display:{{ k.arrowDisp }};font-size:9.5px">{{ k.arrow }}</span>{{ k.chg }}</span><span style="color:oklch(52% 0.013 270);overflow:hidden;text-overflow:ellipsis">{{ k.ref }}</span></span></sc-if>
+</div>
+</sc-for>
+</div>
+</section>
+
+<section aria-labelledby="loc-h" style="background:#fff;border:1px solid oklch(92.6% 0.004 265);border-radius:18px;box-shadow:0 1px 2px oklch(25% 0.02 265 / 0.05)">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:16px 22px;border-bottom:1px solid oklch(95% 0.004 270)">
+<span style="display:inline-flex;align-items:baseline;gap:10px;flex-wrap:wrap"><h2 id="loc-h" style="margin:0;font-size:15.5px;font-weight:600;letter-spacing:-.012em;color:oklch(18% 0.012 270)">Revenue by location</h2><span style="font-size:12px;color:oklch(47% 0.013 270)">{{ chartSub }}</span></span>
+<span aria-hidden="true" style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;font-size:11.5px;color:oklch(42% 0.012 270)">
+<span style="display:inline-flex;align-items:center;gap:7px"><span style="width:12px;height:6px;border-radius:2px;background:oklch(76% 0.04 258)"></span>Revenue</span>
+<span style="display:inline-flex;align-items:center;gap:7px"><span style="width:1.5px;height:12px;border-radius:1px;background:oklch(42% 0.012 270)"></span>Target</span>
+<span style="display:inline-flex;align-items:center;gap:7px"><span style="width:1.5px;height:12px;border-radius:1px;background:oklch(56% 0.14 25)"></span>Target not reached</span>
+</span>
+</div>
+<div onMouseLeave="{{ barsLeave }}" style="position:relative;padding:12px 22px 14px;display:flex;flex-direction:column;gap:2px">
+<div style="overflow-x:auto;margin:0 -22px;padding:0 22px"><div style="min-width:440px;display:flex;flex-direction:column;gap:2px">
+<sc-for list="{{ bars }}" as="b" hint-placeholder-count="12">
+<div tabIndex="0" aria-label="{{ b.aria }}" onMouseEnter="{{ b.enter }}" onFocus="{{ b.enter }}" onBlur="{{ barsLeave }}" style="display:grid;grid-template-columns:172px minmax(0,1fr) {{ barRightW }};column-gap:14px;align-items:center;height:32px;padding:0 6px;margin:0 -6px;border-radius:7px;cursor:default;outline-offset:-2px" style-hover="background:oklch(98.2% 0.003 270)">
+<span style="display:flex;align-items:baseline;gap:8px;min-width:0"><span style="font-size:12.5px;font-weight:500;color:oklch(24% 0.012 270);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ b.name }}</span></span>
+<span style="position:relative;height:10px;border-radius:3px;background:oklch(97.2% 0.003 270)"><span style="{{ b.barStyle }}"></span><span style="{{ b.tickStyle }}"></span></span>
+<span style="display:flex;align-items:baseline;justify-content:flex-end;gap:10px;font-variant-numeric:tabular-nums;white-space:nowrap"><span style="font-size:12.5px;font-weight:600;color:oklch(20% 0.012 270)">{{ b.value }}</span><sc-if value="{{ hasChgCol }}" hint-placeholder-val="{{ true }}"><span style="display:inline-flex;justify-content:flex-end;align-items:baseline;gap:4px;width:62px;font-size:12px;font-weight:600;color:{{ b.chgColor }}"><span aria-hidden="true" style="display:{{ b.arrowDisp }};font-size:9px">{{ b.arrow }}</span>{{ b.chg }}</span></sc-if></span>
+</div>
+</sc-for>
+</div></div>
+<sc-if value="{{ hovOn }}" hint-placeholder-val="{{ false }}">
+<div role="presentation" style="{{ hovTipStyle }}">
+<span style="display:flex;align-items:baseline;justify-content:space-between;gap:14px;white-space:nowrap"><span style="font-size:12px;font-weight:600;color:oklch(18% 0.012 270)">{{ hv.name }}</span><span style="font-size:10.5px;color:oklch(50% 0.013 270)">{{ hv.region }}</span></span>
+<span style="display:flex;justify-content:space-between;gap:16px;font-size:11.5px;color:oklch(42% 0.012 270);white-space:nowrap"><span>Revenue</span><span style="font-weight:600;color:oklch(18% 0.012 270);font-variant-numeric:tabular-nums">{{ hv.rev }}</span></span>
+<sc-if value="{{ hasChgCol }}" hint-placeholder-val="{{ false }}"><span style="display:flex;justify-content:space-between;gap:16px;font-size:11.5px;color:oklch(42% 0.012 270);white-space:nowrap"><span>{{ cmpLegend }}</span><span style="font-weight:600;color:oklch(30% 0.012 270);font-variant-numeric:tabular-nums">{{ hv.crev }}</span></span><span style="display:flex;justify-content:space-between;gap:16px;font-size:11.5px;color:oklch(42% 0.012 270);white-space:nowrap"><span>Change</span><span style="font-weight:600;color:{{ hv.chgColor }};font-variant-numeric:tabular-nums">{{ hv.chg }}</span></span></sc-if>
+<span style="display:flex;flex-direction:column;gap:6px;border-top:1px solid oklch(95% 0.004 270);padding-top:6px"><span style="display:flex;justify-content:space-between;gap:16px;font-size:11.5px;color:oklch(42% 0.012 270);white-space:nowrap"><span>Target</span><span style="font-weight:600;color:oklch(30% 0.012 270);font-variant-numeric:tabular-nums">{{ hv.target }}</span></span><span style="display:flex;justify-content:space-between;gap:16px;font-size:11.5px;color:oklch(42% 0.012 270);white-space:nowrap"><span>Target progress</span><span style="font-weight:600;color:{{ hv.progColor }};font-variant-numeric:tabular-nums">{{ hv.prog }}</span></span></span>
+<sc-if value="{{ hv.hasSpark }}" hint-placeholder-val="{{ false }}"><span style="display:flex;flex-direction:column;gap:4px;border-top:1px solid oklch(95% 0.004 270);padding-top:6px"><span style="font-size:10.5px;color:oklch(50% 0.013 270)">{{ sparkLabel }}</span><svg viewBox="0 0 200 36" preserveAspectRatio="none" aria-hidden="true" style="display:block;width:100%;height:32px;overflow:visible"><path d="{{ hv.sparkArea }}" fill="oklch(58% 0.17 258 / 0.10)" stroke="none"></path><path d="{{ hv.spark }}" fill="none" stroke="oklch(54% 0.19 258)" stroke-width="1.5" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path></svg></span></sc-if>
+</div>
+</sc-if>
+</div>
+</section>
+
+<section aria-labelledby="tbl-h" style="background:#fff;border:1px solid oklch(92.6% 0.004 265);border-radius:18px;box-shadow:0 1px 2px oklch(25% 0.02 265 / 0.05);overflow:hidden">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:14px 22px;border-bottom:1px solid oklch(93.5% 0.005 270)">
+<span style="display:inline-flex;align-items:center;gap:9px;flex-wrap:wrap"><h2 id="tbl-h" style="margin:0;font-size:15.5px;font-weight:600;letter-spacing:-.012em;color:oklch(18% 0.012 270)">Location breakdown</h2><span style="font-size:11px;font-weight:600;color:oklch(40% 0.012 270);background:oklch(93.5% 0.005 270);border-radius:6px;padding:2px 7px;font-variant-numeric:tabular-nums">{{ rowCount }}</span></span>
+<span style="font-size:11.5px;color:oklch(50% 0.013 270)">Select a column heading to sort</span>
+</div>
+<div style="overflow-x:auto">
+<div role="table" aria-labelledby="tbl-h" style="min-width:{{ tMinW }};font-variant-numeric:tabular-nums">
+<div role="row" style="display:grid;grid-template-columns:{{ tCols }};column-gap:16px;align-items:center;padding-right:22px;height:36px;background:oklch(97.8% 0.003 270)">
+<sc-for list="{{ cols }}" as="c" hint-placeholder-count="7"><span role="columnheader" aria-sort="{{ c.ariaSort }}" style="{{ c.cellStyle }}"><button type="button" title="{{ c.full }}" aria-label="Sort by {{ c.full }}" onClick="{{ c.sort }}" style="display:inline-flex;flex-direction:{{ c.btnDir }};align-items:center;gap:4px;padding:2px 0;border:0;background:none;font-family:inherit;font-size:10.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:{{ c.color }};cursor:pointer;text-align:inherit;line-height:1.25" style-hover="color:oklch(24% 0.012 270)">{{ c.label }}<span aria-hidden="true" style="width:8px;font-size:10px;letter-spacing:0">{{ c.arrow }}</span></button></span></sc-for>
+</div>
+<sc-for list="{{ rows }}" as="r" hint-placeholder-count="12">
+<div role="row" style="display:grid;grid-template-columns:{{ tCols }};column-gap:16px;align-items:center;padding-right:22px;min-height:42px;border-top:1px solid oklch(94.5% 0.004 270)">
+<span role="cell" style="position:sticky;left:0;z-index:1;align-self:stretch;display:flex;align-items:center;gap:8px;min-width:0;padding-left:22px;background:#fff"><span style="font-size:12.5px;font-weight:500;color:oklch(22% 0.012 270);white-space:nowrap">{{ r.name }}</span><span style="font-size:11px;color:oklch(52% 0.013 270);white-space:nowrap">{{ r.region }}</span></span>
+<span role="cell" style="text-align:right;font-size:12.5px;font-weight:500;color:oklch(22% 0.012 270)">{{ r.rev }}</span>
+<sc-if value="{{ hasChgCol }}" hint-placeholder-val="{{ true }}"><span role="cell" title="{{ r.cTitle }}" style="display:flex;justify-content:flex-end;align-items:baseline;gap:4px;font-size:12.5px;font-weight:600;color:{{ r.chgColor }}"><span aria-hidden="true" style="display:{{ r.arrowDisp }};font-size:9.5px">{{ r.arrow }}</span>{{ r.chg }}</span></sc-if>
+<span role="cell" style="text-align:right;font-size:12.5px;color:oklch(34% 0.012 270)">{{ r.tx }}</span>
+<span role="cell" style="text-align:right;font-size:12.5px;color:oklch(34% 0.012 270)">{{ r.aov }}</span>
+<span role="cell" style="text-align:right;font-size:12.5px;color:oklch(34% 0.012 270)">{{ r.margin }}</span>
+<span role="cell" title="{{ r.progTitle }}" style="text-align:right;font-size:12.5px;font-weight:{{ r.progW }};color:{{ r.progColor }}">{{ r.prog }}</span>
+</div>
+</sc-for>
+<div role="row" style="display:grid;grid-template-columns:{{ tCols }};column-gap:16px;align-items:center;padding-right:22px;min-height:50px;border-top:1px solid oklch(86% 0.008 270);background:oklch(97.8% 0.003 270)">
+<span role="cell" style="position:sticky;left:0;z-index:1;align-self:stretch;display:flex;align-items:center;gap:8px;min-width:0;padding-left:22px;background:oklch(97.8% 0.003 270)"><span style="font-size:13.5px;font-weight:600;color:oklch(18% 0.012 270)">Total</span><span style="font-size:11px;color:oklch(52% 0.013 270);white-space:nowrap">{{ totSub }}</span></span>
+<span role="cell" style="text-align:right;font-size:12.5px;font-weight:600;color:oklch(18% 0.012 270)">{{ tot.rev }}</span>
+<sc-if value="{{ hasChgCol }}" hint-placeholder-val="{{ true }}"><span role="cell" style="display:flex;justify-content:flex-end;align-items:baseline;gap:4px;font-size:12.5px;font-weight:600;color:{{ tot.chgColor }}"><span aria-hidden="true" style="display:{{ tot.arrowDisp }};font-size:9.5px">{{ tot.arrow }}</span>{{ tot.chg }}</span></sc-if>
+<span role="cell" style="text-align:right;font-size:12.5px;font-weight:600;color:oklch(18% 0.012 270)">{{ tot.tx }}</span>
+<span role="cell" style="text-align:right;font-size:12.5px;font-weight:600;color:oklch(18% 0.012 270)">{{ tot.aov }}</span>
+<span role="cell" style="text-align:right;font-size:12.5px;font-weight:600;color:oklch(18% 0.012 270)">{{ tot.margin }}</span>
+<span role="cell" style="text-align:right;font-size:12.5px;font-weight:600;color:{{ tot.progColor }}">{{ tot.prog }}</span>
+</div>
+</div>
+</div>
+</section>
+
+</div>
+</main>
+</div>
+
+<sc-if value="{{ hasToast }}" hint-placeholder-val="{{ false }}">
+<div role="status" style="position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:40;display:flex;align-items:center;gap:12px;max-width:calc(100% - 48px);padding:9px 14px;background:oklch(24% 0.012 270);color:#fff;border-radius:10px;box-shadow:0 8px 24px oklch(20% 0.02 270 / 0.2);font-size:12.5px"><span>{{ toast }}</span><button type="button" onClick="{{ closeToast }}" aria-label="Dismiss message" style="padding:0 2px;border:0;background:none;font:inherit;line-height:1;cursor:pointer;color:oklch(80% 0.01 270)">&#215;</button></div>
+</sc-if>
+<span aria-live="polite" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">{{ live }}</span>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1000}}">
+const DAY = 864e5, U = (y, m, d) => Date.UTC(y, m, d);
+const LAST = U(2025, 10, 26); // latest complete day. Simulated today: Thu 27 Nov 2025
+const LOCS = [
+  { id: 'berlin', name: 'Berlin', region: 'north', w: 38.9, perf: 0.88 },
+  { id: 'amsterdam', name: 'Amsterdam', region: 'north', w: 61.2, perf: 1.06 },
+  { id: 'hamburg', name: 'Hamburg', region: 'north', w: 34.8, perf: 0.92 },
+  { id: 'copenhagen', name: 'Copenhagen', region: 'north', w: 36.1, perf: 1.0 },
+  { id: 'stockholm', name: 'Stockholm', region: 'north', w: 39.4, perf: 1.02 },
+  { id: 'madrid', name: 'Madrid', region: 'south', w: 52.3, perf: 1.01 },
+  { id: 'paris', name: 'Paris', region: 'south', w: 44.7, perf: 0.97 },
+  { id: 'barcelona', name: 'Barcelona', region: 'south', w: 47.9, perf: 1.03 },
+  { id: 'rome', name: 'Rome', region: 'south', w: 42.2, perf: 0.98 },
+  { id: 'munich', name: 'Munich', region: 'central', w: 41.6, perf: 1.0 },
+  { id: 'zurich', name: 'Zurich', region: 'central', w: 55.6, perf: 1.04 },
+  { id: 'lisbon', name: 'Lisbon', region: 'central', w: 33.5, perf: 0.99 },
+];
+const WSUM = LOCS.reduce((a, l) => a + l.w, 0);
+const REGIONS = [{ id: 'north', label: 'North region' }, { id: 'south', label: 'South region' }, { id: 'central', label: 'Central region' }];
+const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const MONL = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const DOWN = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+const PERIODS = [
+  { id: 'last-week', label: 'Last week', r: [U(2025, 10, 17), U(2025, 10, 23)], p: [U(2025, 10, 10), U(2025, 10, 16)] },
+  { id: 'last-month', label: 'Last month', r: [U(2025, 9, 1), U(2025, 9, 31)], p: [U(2025, 8, 1), U(2025, 8, 30)] },
+  { id: 'mtd', label: 'Month to date', r: [U(2025, 10, 1), LAST], p: [U(2025, 9, 1), U(2025, 9, 26)] },
+  { id: 'last-quarter', label: 'Last quarter', r: [U(2025, 6, 1), U(2025, 8, 30)], p: [U(2025, 3, 1), U(2025, 5, 30)] },
+  { id: 'custom', label: 'Custom range' },
+];
+const PER = Object.fromEntries(PERIODS.map(p => [p.id, p]));
+const CMPS = [
+  { id: 'prev', label: 'Previous period', legend: 'Previous period', ref: 'was' },
+  { id: 'yoy', label: 'Same period last year', legend: 'Last year', ref: 'was' },
+  { id: 'expected', label: 'Expected pace', legend: 'Expected pace', ref: 'expected' },
+  { id: 'none', label: 'None' },
+];
+const CMP = Object.fromEntries(CMPS.map(c => [c.id, c]));
+const GRANS = [{ id: 'day', label: 'Day', word: 'day' }, { id: 'week', label: 'Week', word: 'week' }, { id: 'month', label: 'Month', word: 'month' }];
+const DPS = [{ id: 'all', label: 'All day' }, { id: 'lunch', label: 'Lunch' }, { id: 'dinner', label: 'Dinner' }];
+const DEFAULTS = { period: 'last-month', from: '2025-10-01', to: '2025-10-31', cmp: 'prev', scope: 'all', locs: [], gran: 'day', dp: 'all' };
+const optStyle = on => 'display:flex;align-items:center;gap:8px;width:100%;text-align:left;font-family:inherit;font-size:12.5px;font-weight:' + (on ? 600 : 500) + ';color:' + (on ? 'oklch(20% 0.01 270)' : 'oklch(32% 0.01 270)') + ';background:' + (on ? 'oklch(96.5% 0.004 270)' : 'transparent') + ';border:0;border-radius:9px;padding:7px 9px;cursor:pointer;outline-offset:-2px';
+const POS = 'oklch(50% 0.11 155)', NEG = 'oklch(52% 0.16 25)', NEU = 'oklch(50% 0.012 270)', BLUE = 'oklch(54% 0.19 258)';
+
+const iso = t => new Date(t).toISOString().slice(0, 10);
+const parseIso = s => { const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s || ''); return m ? Date.UTC(+m[1], +m[2] - 1, +m[3]) : NaN; };
+const fd = (t, yr) => { const d = new Date(t); return d.getUTCDate() + ' ' + MON[d.getUTCMonth()] + (yr ? ' ' + d.getUTCFullYear() : ''); };
+const fRange = (a, b) => {
+  const A = new Date(a), B = new Date(b);
+  if (a === b) return fd(a, true);
+  if (A.getUTCFullYear() !== B.getUTCFullYear()) return fd(a, true) + ' – ' + fd(b, true);
+  if (A.getUTCMonth() === B.getUTCMonth()) return A.getUTCDate() + '–' + fd(b, true);
+  return fd(a) + ' – ' + fd(b, true);
+};
+const fRangeShort = (a, b) => { const A = new Date(a), B = new Date(b); return A.getUTCMonth() === B.getUTCMonth() ? A.getUTCDate() + '–' + fd(b) : fd(a) + ' – ' + fd(b); };
+const rangeOf = P => P.period === 'custom' ? [parseIso(P.from), parseIso(P.to)] : PER[P.period].r;
+const nDays = P => { const [a, b] = rangeOf(P); return (isNaN(a) || isNaN(b) || b < a) ? 0 : Math.round((b - a) / DAY) + 1; };
+const granOK = (g, n) => g === 'day' ? n <= 92 : g === 'week' ? n >= 14 : n >= 45;
+const granWhy = g => g === 'day' ? 'Daily view is available for periods up to 92 days' : g === 'week' ? 'Needs a period of at least 2 weeks' : 'Needs a period of at least 45 days';
+const fixP = P => { const n = nDays(P); if (!n || granOK(P.gran, n)) return P; const g = ['day', 'week', 'month'].find(x => granOK(x, n)); return { ...P, gran: g || P.gran }; };
+const validate = P => {
+  if (P.period === 'custom') {
+    const a = parseIso(P.from), b = parseIso(P.to);
+    if (isNaN(a) || isNaN(b)) return 'Enter a start and end date';
+    if (b < a) return 'End date is before start date';
+    if (b > LAST) return 'Data is available up to ' + fd(LAST, true);
+    if (nDays(P) > 366) return 'Custom ranges can cover up to 366 days';
+  }
+  if (P.scope === 'custom' && !P.locs.length) return 'Select at least one location';
+  return '';
+};
+const scopeLocs = P => P.scope === 'all' ? LOCS : P.scope === 'custom' ? LOCS.filter(l => P.locs.includes(l.id)) : LOCS.filter(l => l.region === P.scope);
+const scopeLabel = P => {
+  if (P.scope === 'all') return 'Whole business';
+  if (P.scope !== 'custom') return REGIONS.find(r => r.id === P.scope).label;
+  const L = scopeLocs(P);
+  return !L.length ? 'No locations' : L.length <= 2 ? L.map(l => l.name).join(', ') : L.length + ' locations';
+};
+const ymd = t => { const d = new Date(t); return [d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()]; };
+const mLen = (y, m) => new Date(Date.UTC(y, m + 1, 0)).getUTCDate();
+const mEnd = t => { const [y, m] = ymd(t); return Date.UTC(y, m, mLen(y, m)); };
+// Same calendar date in another month/year; day clamped to that month's length (31 Mar -> 28/29 Feb).
+const shiftCal = (t, dm) => { const [y, m, d] = ymd(t); const T = new Date(Date.UTC(y, m + dm, 1)); const Y = T.getUTCFullYear(), M = T.getUTCMonth(); return Date.UTC(Y, M, Math.min(d, mLen(Y, M))); };
+// Comparison date range. Previous period = immediately preceding calendar period of the same type; never overlaps [a,b].
+const compRangeOf = (P, a, b) => {
+  const n = Math.round((b - a) / DAY) + 1;
+  if (P.cmp === 'prev') {
+    if (P.period === 'last-week') return [a - 7 * DAY, b - 7 * DAY];
+    if (P.period === 'last-month') { const s = shiftCal(a, -1); return [s, mEnd(s)]; }
+    if (P.period === 'last-quarter') { const s = shiftCal(a, -3); return [s, mEnd(shiftCal(a, -1))]; }
+    if (P.period === 'mtd') { const s = shiftCal(a, -1); return [s, Math.min(shiftCal(b, -1), mEnd(s))]; }
+    return [a - n * DAY, a - DAY];
+  }
+  if (P.cmp === 'yoy') return [shiftCal(a, -12), shiftCal(b, -12)];
+  if (P.cmp === 'expected') return [a, b];
+  return null;
+};
+// Familiar name for a calendar-aligned range: "October 2025", "Q2 2025", otherwise a date range.
+const rangeName = (a, b) => {
+  const [y, m, d] = ymd(a), [y2, m2] = ymd(b);
+  if (d === 1 && b === mEnd(b) && y === y2) {
+    if (m === m2) return MONL[m] + ' ' + y;
+    if (m % 3 === 0 && m2 === m + 2) return 'Q' + (m / 3 + 1) + ' ' + y;
+  }
+  return fRange(a, b);
+};
+
+const hsh = n => { const x = Math.sin(n * 12.9898 + 78.233) * 43758.5453; return x - Math.floor(x); };
+const DOWF = [1.14, 0.8, 0.84, 0.9, 0.98, 1.2, 1.3];
+const SEAS = [0.86, 0.88, 0.94, 0.98, 1.02, 1.06, 1.09, 1.05, 1.0, 1.01, 0.97, 1.1];
+const dayCache = new Map();
+function rawDayVals(t, locs, dp, plan) {
+  const key = t + '|' + locs.map(l => l.id).join(',') + '|' + dp + '|' + (plan ? 1 : 0);
+  if (dayCache.has(key)) return dayCache.get(key);
+  const d = new Date(t), di = Math.round(t / DAY);
+  const g = 1 + 0.075 * ((t - U(2025, 0, 1)) / (365 * DAY));
+  const base = 50400 / WSUM * DOWF[d.getUTCDay()] * SEAS[d.getUTCMonth()] * g;
+  let rev = 0, tx = 0, pr = 0;
+  for (const l of locs) {
+    const i = LOCS.indexOf(l);
+    const n1 = plan ? 0.5 : hsh(di * 13 + i), n2 = plan ? 0.5 : hsh(di * 7 + i * 3 + 1), n3 = plan ? 0.5 : hsh(di * 5 + i * 11 + 2);
+    const r = l.w * base * (plan ? 1 : l.perf * (0.9 + 0.2 * n1));
+    const ls = 0.37 + 0.06 * (n2 - 0.5);
+    const aL = (plan ? 18.2 : 17.6 + 1.6 * n3), aD = (plan ? 32 : 31.2 + 2.4 * n2);
+    const mL = plan ? 0.165 : 0.152 + 0.022 * n3, mD = plan ? 0.195 : 0.182 + 0.02 * n1;
+    const rL = r * ls, rD = r - rL;
+    if (dp !== 'dinner') { rev += rL; tx += rL / aL; pr += rL * mL; }
+    if (dp !== 'lunch') { rev += rD; tx += rD / aD; pr += rD * mD; }
+  }
+  const v = { rev, tx, pr };
+  dayCache.set(key, v);
+  return v;
+}
+
+// Calibration to the operational screens (Overview v38, Locations v1, Location Analytics v8).
+// Their "This month" covers complete days 1–26 Nov and "vs last month" covers 1–26 Oct.
+// Per location, the raw model keeps its weekday, seasonal and noise shape and is scaled so those
+// windows reproduce the operational revenue, transactions and profit margin, and the plan profile
+// reproduces the operational expected pace. Scaling moves from the October level to the November
+// level over 27 Oct – 7 Nov instead of stepping on 1 Nov. Where Location Analytics models the
+// daily pace (Berlin, Munich, Barcelona), November follows that curve, e.g. Berlin from 8 Nov.
+// The same block is in all three report templates.
+const LA_DAY_W = Array.from({ length: 26 }, (_, i) => [0.88, 0.9, 0.94, 1.0, 1.12, 1.2, 0.96][i % 7]);
+const OPS_REF = {
+  berlin:     { rev: 18300, tx: 741,  m: 14.8, dm: -4.4, aovD: -2.6, revD: -15, exp: 22900, r: d => d < 7 ? 0.93 : 0.93 - 0.1309 * Math.sqrt((d - 7) / 18) },
+  amsterdam:  { rev: 28800, tx: 1050, m: 19.6, dm: -1.6, aovD: 0.9,  revD: 9,   pts: 12 },
+  hamburg:    { rev: 16370, tx: 648,  m: 16.9, dm: -2.4, aovD: -0.4, revD: -9,  pts: -7 },
+  copenhagen: { rev: 16990, tx: 633,  m: 18.1, dm: -1.8, aovD: 0.3,  revD: 2,   pts: -4 },
+  stockholm:  { rev: 18540, tx: 692,  m: 18.7, dm: -1.7, aovD: 0.6,  revD: 6,   pts: 1 },
+  madrid:     { rev: 24610, tx: 923,  m: 18.8, dm: -1.7, aovD: 0.5,  revD: 4,   pts: 3 },
+  paris:      { rev: 21030, tx: 829,  m: 17.9, dm: -2.0, aovD: 0.1,  revD: -1,  pts: -3 },
+  barcelona:  { rev: 22540, tx: 844,  m: 19.0, dm: -1.6, aovD: 0.8,  revD: 7,   exp: 19770, r: d => d < 6 ? 1.03 : 1.03 + 0.1101 * Math.sqrt((d - 6) / 19) },
+  rome:       { rev: 19860, tx: 766,  m: 17.6, dm: -2.1, aovD: 0.0,  revD: -2,  pts: -5 },
+  munich:     { rev: 20150, tx: 772,  m: 18.6, dm: -1.8, aovD: 0.5,  revD: 5,   exp: 20580, r: d => 0.99 - d * 0.0004 },
+  zurich:     { rev: 26160, tx: 903,  m: 19.8, dm: -1.5, aovD: 0.9,  revD: 8,   pts: 6 },
+  lisbon:     { rev: 15770, tx: 608,  m: 17.8, dm: -1.9, aovD: 0.3,  revD: 1,   pts: -1 },
+};
+const CAL_CUR = [U(2025, 10, 1), U(2025, 10, 26)], CAL_PREV = [U(2025, 9, 1), U(2025, 9, 26)], RAMP = [U(2025, 9, 26), U(2025, 10, 7)];
+const rampW = t => t <= RAMP[0] ? 0 : t >= RAMP[1] ? 1 : (t - RAMP[0]) / (RAMP[1] - RAMP[0]);
+// Daily pace relative to the month (1 = flat), from the Location Analytics cumulative curve.
+const paceShape = R => {
+  if (!R.r) return () => 1;
+  const cw = LA_DAY_W.reduce((a, v, i) => (a.push((a[i - 1] || 0) + v), a), []), n = cw.length;
+  const A = cw.map((c, i) => (i === n - 1 ? R.rev / R.exp : R.r(i)) * c);
+  const raw = A.map((v, i) => (v - (A[i - 1] || 0)) / (cw[i] - (cw[i - 1] || 0)));
+  // Differencing the cumulative curve spikes on the day a decline or rise starts; a 3-day centred average spreads that over neighbours.
+  const rho = raw.map((v, i) => { const w = raw.slice(Math.max(0, i - 1), i + 2); return w.reduce((a, x) => a + x, 0) / w.length; });
+  return t => rho[Math.max(0, Math.min(n - 1, Math.round((t - CAL_CUR[0]) / DAY)))];
+};
+const CAL = {};
+LOCS.forEach(l => {
+  const R = OPS_REF[l.id], shape = paceShape(R);
+  const days = (a, b) => { const o = []; for (let t = a; t <= b; t += DAY) o.push({ t, v: rawDayVals(t, [l], 'all', false), w: rampW(t), s: shape(t) }); return o; };
+  const P = days(...CAL_PREV), N = days(...CAL_CUR);
+  let ep = 0; for (let t = CAL_CUR[0]; t <= CAL_CUR[1]; t += DAY) ep += rawDayVals(t, [l], 'all', true).rev;
+  const exp = R.exp || R.rev / (1 + R.pts / 100);
+  const prevRev = R.rev / (1 + R.revD / 100), prevTx = prevRev / (R.rev / R.tx / (1 + R.aovD / 100));
+  const sumOf = (D, f) => D.reduce((a, d) => a + f(d), 0);
+  // Revenue: g(t) = gP·(1−w) + gC·shape·w. AOV and margin multipliers blend the same way.
+  const gP = prevRev / sumOf(P, d => d.v.rev);
+  const gC = (R.rev - gP * sumOf(N, d => d.v.rev * (1 - d.w))) / sumOf(N, d => d.v.rev * d.s * d.w);
+  const g = d => gP * (1 - d.w) + gC * d.s * d.w;
+  const aP = prevTx / sumOf(P, d => d.v.tx * gP), mP = prevRev * (R.m - R.dm) / 100 / sumOf(P, d => d.v.pr * gP);
+  const aC = (R.tx - aP * sumOf(N, d => d.v.tx * g(d) * (1 - d.w))) / sumOf(N, d => d.v.tx * g(d) * d.w);
+  const mC = (R.rev * R.m / 100 - mP * sumOf(N, d => d.v.pr * g(d) * (1 - d.w))) / sumOf(N, d => d.v.pr * g(d) * d.w);
+  const k = exp / ep;
+  CAL[l.id] = { gP, gC, aP, aC, mP, mC, shape, plan: { rev: k, tx: k * aC, pr: k * mC } };
+});
+const calOf = (id, t) => {
+  const c = CAL[id], w = rampW(t), g = c.gP * (1 - w) + c.gC * c.shape(t) * w;
+  return { rev: g, tx: g * (c.aP * (1 - w) + c.aC * w), pr: g * (c.mP * (1 - w) + c.mC * w) };
+};
+const calCache = new Map();
+function dayVals(t, locs, dp, plan) {
+  const key = t + '|' + locs.map(l => l.id).join(',') + '|' + dp + '|' + (plan ? 1 : 0);
+  if (calCache.has(key)) return calCache.get(key);
+  const v = { rev: 0, tx: 0, pr: 0 };
+  for (const l of locs) {
+    const r = rawDayVals(t, [l], dp, plan), f = plan ? CAL[l.id].plan : calOf(l.id, t);
+    v.rev += r.rev * f.rev; v.tx += r.tx * f.tx; v.pr += r.pr * f.pr;
+  }
+  calCache.set(key, v);
+  return v;
+}
+const sum = arr => arr.reduce((A, v) => (A.rev += v.rev, A.tx += v.tx, A.pr += v.pr, A), { rev: 0, tx: 0, pr: 0 });
+
+const REGION_NAME = { north: 'North', south: 'South', central: 'Central' };
+// Per-location aggregates; uses the same daily model as Sales Performance, so totals match that report for equal filters.
+function compute(P) {
+  const [a, b] = rangeOf(P), n = Math.round((b - a) / DAY) + 1, locs = scopeLocs(P);
+  const cr = compRangeOf(P, a, b), hasCmp = !!cr, planCmp = P.cmp === 'expected';
+  const keyOf = (t, i) => { const d = new Date(t); return P.gran === 'day' ? i : P.gran === 'week' ? Math.floor((Math.round(t / DAY) + 3) / 7) : d.getUTCFullYear() * 12 + d.getUTCMonth(); };
+  const rows = locs.map(l => {
+    const cur = { rev: 0, tx: 0, pr: 0 }, tgt = { rev: 0, tx: 0, pr: 0 }, series = [];
+    let lastK = null;
+    for (let i = 0; i < n; i++) {
+      const t = a + i * DAY, v = dayVals(t, [l], P.dp, false), p = dayVals(t, [l], P.dp, true);
+      cur.rev += v.rev; cur.tx += v.tx; cur.pr += v.pr; tgt.rev += p.rev; tgt.tx += p.tx; tgt.pr += p.pr;
+      const k = keyOf(t, i); if (k !== lastK) { series.push(0); lastK = k; } series[series.length - 1] += v.rev;
+    }
+    let cmp = null, cTgt = null;
+    if (cr) {
+      cmp = { rev: 0, tx: 0, pr: 0 }; cTgt = 0;
+      for (let t = cr[0]; t <= cr[1]; t += DAY) { const v = dayVals(t, [l], P.dp, planCmp); cmp.rev += v.rev; cmp.tx += v.tx; cmp.pr += v.pr; cTgt += dayVals(t, [l], P.dp, true).rev; }
+    }
+    return { id: l.id, name: l.name, region: REGION_NAME[l.region], cur, tgt, cmp, prog: cur.rev / tgt.rev, cProg: cmp && !planCmp ? cmp.rev / cTgt : null, series };
+  });
+  const S = k => rows.reduce((A, r) => (A.rev += r[k].rev, A.tx += r[k].tx, A.pr += r[k].pr, A), { rev: 0, tx: 0, pr: 0 });
+  const T = S('cur'), TG = S('tgt'), C = cr ? S('cmp') : null;
+  const below = rows.filter(r => r.prog < 1).length, cBelow = cr && !planCmp ? rows.filter(r => r.cProg < 1).length : null;
+  return { a, b, n, hasCmp, cr, rows, T, TG, C, prog: T.rev / TG.rev, below, cBelow };
+}
+
+const fmtMoney = v => v >= 1e6 ? '$' + (v / 1e6).toFixed(2) + 'M' : v >= 1e4 ? '$' + (v / 1e3).toFixed(1) + 'k' : '$' + Math.round(v).toLocaleString('en-US');
+const fmtFull = v => '$' + Math.round(v).toLocaleString('en-US');
+const fmtInt = v => Math.round(v).toLocaleString('en-US');
+const fmtAov = v => '$' + v.toFixed(2);
+const fmtPct = v => (v * 100).toFixed(1) + '%';
+const chgOf = (x, pts) => {
+  if (x === null || x === undefined || !isFinite(x)) return { arrowDisp: 'none', arrow: '', text: '–', color: NEU };
+  const th = pts ? 0.0005 : 0.0005, up = x > th, dn = x < -th;
+  return { arrowDisp: up || dn ? 'inline' : 'none', arrow: up ? '▲' : dn ? '▼' : '', text: pts ? Math.abs(x * 100).toFixed(1) + ' pts' : Math.abs(x * 100).toFixed(1) + '%', color: up ? POS : dn ? NEG : NEU, signed: (up ? '+' : dn ? '−' : '') + (pts ? Math.abs(x * 100).toFixed(1) + ' pts' : Math.abs(x * 100).toFixed(1) + '%') };
+};
+const niceStep = raw => { const p = Math.pow(10, Math.floor(Math.log10(raw))); for (const m of [1, 2, 2.5, 5, 10]) if (m * p >= raw) return m * p; return 10 * p; };
+const fmtAxis = v => v === 0 ? '$0' : v >= 1e6 ? '$' + +(v / 1e6).toFixed(2) + 'M' : v >= 1e3 ? '$' + +(v / 1e3).toFixed(1) + 'k' : '$' + Math.round(v);
+
+function initialParams() {
+  let P = { ...DEFAULTS };
+  try {
+    const q = new URLSearchParams(location.search);
+    if (PER[q.get('period')]) P.period = q.get('period');
+    if (CMP[q.get('cmp')]) P.cmp = q.get('cmp');
+    if (GRANS.some(g => g.id === q.get('gran'))) P.gran = q.get('gran');
+    if (DPS.some(g => g.id === q.get('dp'))) P.dp = q.get('dp');
+    if (['all', 'north', 'south', 'central'].includes(q.get('scope'))) P.scope = q.get('scope');
+    if (q.get('locs')) { const ids = q.get('locs').split(',').filter(id => LOCS.some(l => l.id === id)); if (ids.length) { P.scope = 'custom'; P.locs = ids; } }
+    if (P.period === 'custom' && !isNaN(parseIso(q.get('from'))) && !isNaN(parseIso(q.get('to')))) { P.from = q.get('from'); P.to = q.get('to'); }
+    else if (P.period !== 'custom') { P.from = iso(PER[P.period].r[0]); P.to = iso(PER[P.period].r[1]); }
+    if (validate(P)) P = { ...DEFAULTS };
+  } catch (e) {}
+  return fixP(P);
+}
+const P0 = initialParams();
+
+class Component extends DCLogic {
+  state = { applied: P0, draft: P0, open: null, sort: { k: 'rev', d: -1 }, showAll: false, hov: null, toast: null, savedKey: null, live: '' };
+  asideRef = React.createRef(); navRef = React.createRef(); bottomRef = React.createRef(); gsRef = React.createRef();
+  fitSidebar() {
+    const aside = this.asideRef.current, nav = this.navRef.current, bottom = this.bottomRef.current;
+    if (!aside || !nav || !bottom) return;
+    const gs = this.gsRef.current;
+    if (gs) this._gsH = gs.offsetHeight + 10;
+    const wH = this._gsH || 200, SAVE = 42;
+    const avail = aside.clientHeight - 24;
+    const base = bottom.offsetHeight - (gs ? gs.offsetHeight + 10 : 0);
+    const navN = nav.scrollHeight + (this.state.navCompact ? SAVE : 0);
+    let next;
+    if (navN + base + wH <= avail) next = { gsFit: true, navCompact: false };
+    else if (navN - SAVE + base + wH <= avail) next = { gsFit: true, navCompact: true };
+    else next = { gsFit: false, navCompact: false };
+    if (next.gsFit !== this.state.gsFit || next.navCompact !== this.state.navCompact) this.setState(next);
+  }
+  componentDidMount() {
+    try { this._opMq = window.matchMedia('(max-width: 719px)'); this._opMqFn = () => this.setState({ sideCollapsed: this._opMq.matches }); this._opMq.addEventListener('change', this._opMqFn); if (this._opMq.matches) this.setState({ sideCollapsed: true }); } catch (e) {}
+    
+    this._onResize = () => this.fitSidebar();
+    requestAnimationFrame(this._onResize);
+    if (document.fonts) document.fonts.ready.then(this._onResize);
+    window.addEventListener('resize', this._onResize);
+    this._onDoc = e => { if (this.state.open && !e.target.closest('[data-pop]')) this.setState({ open: null }); };
+    this._onKey = e => { if (e.key === 'Escape' && this.state.open) this.setState({ open: null }); };
+    document.addEventListener('mousedown', this._onDoc);
+    document.addEventListener('keydown', this._onKey);
+  }
+  componentDidUpdate() { this.fitSidebar(); }
+  componentWillUnmount() {
+    if (this._opMq) this._opMq.removeEventListener('change', this._opMqFn);
+    window.removeEventListener('resize', this._onResize);
+    document.removeEventListener('mousedown', this._onDoc); document.removeEventListener('keydown', this._onKey);
+    clearTimeout(this._tt);
+  }
+  say(msg) { clearTimeout(this._tt); this.setState({ toast: msg, open: null }); this._tt = setTimeout(() => this.setState({ toast: null }), 3600); }
+  setDraft(patch) { this.setState(s => ({ draft: fixP({ ...s.draft, ...patch }) })); }
+  data(P) { const k = JSON.stringify(P); if (this._dk !== k) { this._dk = k; this._d = compute(P); } return this._d; }
+
+  renderVals() {
+    const s = this.state, A = s.applied, D = s.draft, R = this.data(A);
+    const dirty = JSON.stringify(A) !== JSON.stringify(D), err = validate(D);
+    const cmpOn = R.hasCmp, cm = CMP[A.cmp];
+    const togg = k => () => this.setState(st => ({ open: st.open === k ? null : k }));
+    const segStyle = (on, dis) => 'font-family:inherit;font-size:12px;line-height:normal;font-weight:' + (on ? 600 : 500) + ';color:' + (dis ? 'oklch(74% 0.006 270)' : on ? 'oklch(20% 0.012 270)' : 'oklch(44% 0.012 270)') + ';background:' + (on ? 'oklch(95.4% 0.004 270)' : 'transparent') + ';border:0;border-radius:7px;padding:4px 10px;cursor:' + (dis ? 'not-allowed' : 'pointer') + ';white-space:nowrap';
+    const dn = nDays(D) || 0;
+
+    const T = R.T, C = R.C, TG = R.TG, exp = A.cmp === 'expected', ref = cm.ref;
+    const aov = T.rev / T.tx, mg = T.pr / T.rev, nL = R.rows.length;
+    const kpi = (label, value, title, chg, refTxt, extra) => ({ label, value, title, hasChg: cmpOn, arrowDisp: chg.arrowDisp, arrow: chg.arrow, chg: chg.text, chgColor: chg.color, ref: refTxt, hasBar: false, hasSub: false, barW: '0%', sub: '', ...(extra || {}) });
+    const cntChg = (cur, prev) => { if (prev === null) return chgOf(null); const d = cur - prev; return { arrowDisp: d ? 'inline' : 'none', arrow: d > 0 ? '▲' : d < 0 ? '▼' : '', text: d ? String(Math.abs(d)) : 'No change', color: d > 0 ? NEG : d < 0 ? POS : NEU }; };
+    const kpis = [
+      kpi('Total Revenue', fmtMoney(T.rev), fmtFull(T.rev), chgOf(C ? T.rev / C.rev - 1 : null), C ? ref + ' ' + fmtMoney(C.rev) : ''),
+      kpi('Transactions', fmtInt(T.tx), fmtInt(T.tx) + (A.cmp === 'expected' ? ' · ' + 'Expected: expected revenue ÷ planned AOV at target pace' : ''), chgOf(C ? T.tx / C.tx - 1 : null), C ? ref + ' ' + fmtInt(C.tx) : ''),
+      kpi('Average Order Value', fmtAov(aov), 'Total revenue ÷ transactions', chgOf(C ? aov / (C.rev / C.tx) - 1 : null), C ? ref + ' ' + fmtAov(C.rev / C.tx) : ''),
+      kpi('Average Profit Margin', fmtPct(mg), 'Revenue-weighted across included locations', chgOf(C ? mg - C.pr / C.rev : null, true), C ? ref + ' ' + fmtPct(C.pr / C.rev) : ''),
+      kpi('Locations Below Target', String(R.below), R.below + ' of ' + nL + ' locations under 100% of their target (expected pace). Operational screens flag below expected pace only beyond −10 pts.', cntChg(R.below, R.cBelow), R.cBelow !== null ? 'of ' + nL + ' · was ' + R.cBelow : '',
+        { hasChg: cmpOn && !exp, hasSub: !cmpOn || exp, sub: 'of ' + nL + ' · under 100% of target' }),
+    ];
+    // Chart: ranked by revenue
+    const ranked = R.rows.slice().sort((x, y) => y.cur.rev - x.cur.rev);
+    const vmax = Math.max(1, ...ranked.map(r => Math.max(r.cur.rev, r.tgt.rev)));
+    const step = niceStep(vmax * 1.04 / 4), xmax = step * 4;
+    const pc = v => (v / xmax * 100).toFixed(2) + '%';
+    const ABOVE = 'oklch(76% 0.04 258)', BELOW = 'oklch(88% 0.012 265)';
+    const rowChg = r => chgOf(r.cmp ? r.cur.rev / r.cmp.rev - 1 : null);
+    const bars = ranked.map((r, i) => { const c = rowChg(r), below = r.cur.rev < r.tgt.rev; return {
+      name: r.name, below, value: fmtMoney(r.cur.rev), chg: c.text, chgColor: c.color, arrow: c.arrow, arrowDisp: c.arrowDisp,
+      barStyle: 'position:absolute;left:0;top:0;bottom:0;width:' + pc(r.cur.rev) + ';border-radius:3px;transition:background-color .12s;background:' + (s.hov === i ? BLUE : below ? BELOW : ABOVE),
+      tickStyle: 'position:absolute;top:-4px;bottom:-4px;left:calc(' + pc(r.tgt.rev) + ' - 0.75px);width:1.5px;border-radius:1px;background:' + (below ? 'oklch(56% 0.14 25)' : 'oklch(42% 0.012 270)'),
+      aria: r.name + ': revenue ' + fmtFull(r.cur.rev) + ', ' + (Math.round(r.prog * 1000) / 10) + '% of target' + (below ? ', below target' : '') + (cmpOn ? ', ' + (c.signed || 'no change') + ' vs ' + cm.legend.toLowerCase() : ''),
+      enter: () => { if (this.state.hov !== i) this.setState({ hov: i }); } }; });
+    const hr = s.hov !== null && s.hov < ranked.length ? ranked[s.hov] : null;
+    let hv = { name: '', region: '', rev: '', crev: '', chg: '', chgColor: NEU, target: '', prog: '', progColor: NEU, hasSpark: false, spark: 'M0,0', sparkArea: 'M0,0' }, hovTipStyle = '';
+    if (hr) {
+      const c = rowChg(hr), sr = hr.series, smax = Math.max(...sr) * 1.05 || 1, sx = j => sr.length > 1 ? j / (sr.length - 1) * 200 : 100, sy = v => 34 - v / smax * 32;
+      const sp = sr.map((v, j) => (j ? 'L' : 'M') + sx(j).toFixed(1) + ',' + sy(v).toFixed(1)).join('');
+      hv = { name: hr.name, region: hr.region + ' region', rev: fmtFull(hr.cur.rev), crev: hr.cmp ? fmtFull(hr.cmp.rev) : '–', chg: c.signed || '–', chgColor: c.color, target: fmtFull(hr.tgt.rev),
+        prog: fmtPct(hr.prog), progColor: hr.prog < 1 ? NEG : 'oklch(18% 0.012 270)', hasSpark: sr.length > 1, spark: sp, sparkArea: sp + 'L200,36L0,36Z' };
+      const frac = Math.min(1, hr.cur.rev / xmax), up = s.hov > ranked.length / 2, top = 12 + s.hov * 34 + (up ? -2 : 34);
+      hovTipStyle = 'position:absolute;z-index:6;pointer-events:none;top:' + top + 'px;left:calc(208px + (100% - ' + (244 + (cmpOn ? 136 : 64)) + 'px) * ' + frac.toFixed(3) + ' + 12px);transform:translate(' + (frac > 0.55 ? 'calc(-100% - 24px)' : '0') + ',' + (up ? '-100%' : '0') + ');display:flex;flex-direction:column;gap:6px;width:220px;padding:9px 11px;background:#fff;border:1px solid oklch(91.5% 0.006 270);border-radius:10px;box-shadow:0 4px 14px oklch(25% 0.02 265 / 0.08),0 1px 2px oklch(25% 0.02 265 / 0.05)';
+    }
+    // Table
+    const cvLabel = exp ? 'vs expected' : A.cmp === 'yoy' ? 'vs last year' : 'vs previous';
+    const cols = [{ k: 'name', label: 'Location', right: false }, { k: 'rev', label: 'Revenue', right: true }]
+      .concat(cmpOn && !exp ? [{ k: 'chg', label: cvLabel, full: 'Revenue change ' + cvLabel, right: true }] : [])
+      .concat([{ k: 'tx', label: 'Transactions', right: true }, { k: 'aov', label: 'AOV', full: 'Average order value', right: true }, { k: 'margin', label: 'Margin', full: 'Profit margin', right: true }, { k: 'prog', label: 'Target', full: 'Target progress: revenue as % of expected pace', right: true }]);
+    const sk = s.sort.k === 'chg' && !(cmpOn && !exp) ? 'rev' : s.sort.k, sd = s.sort.d;
+    const val = (r, k) => k === 'rev' ? r.cur.rev : k === 'tx' ? r.cur.tx : k === 'aov' ? r.cur.rev / r.cur.tx : k === 'margin' ? r.cur.pr / r.cur.rev : k === 'prog' ? r.prog : k === 'chg' ? (r.cmp ? r.cur.rev / r.cmp.rev - 1 : null) : 0;
+    const sorted = R.rows.slice().sort((x, y) => { if (sk === 'name') return x.name.localeCompare(y.name) * sd; const a = val(x, sk), b = val(y, sk); return ((a === null ? -Infinity : a) - (b === null ? -Infinity : b)) * sd; });
+    const progCell = p => ({ prog: fmtPct(p), progColor: p < 1 ? NEG : 'oklch(30% 0.012 270)', progW: p < 1 ? 600 : 500, progTitle: p < 1 ? 'Below target' : 'At or above target' });
+    const totC = chgOf(C ? T.rev / C.rev - 1 : null), cmpRangeTxt = R.cr && !exp ? rangeName(R.cr[0], R.cr[1]) : '';
+    const dpTxt = DPS.find(d => d.id === A.dp).label;
+    return {
+      metaHasPeriod: A.period !== 'custom', metaPeriod: A.period !== 'custom' ? PER[A.period].label : '', metaDates: fRange(R.a, R.b),
+      metaCmp: !cmpOn ? '' : exp ? 'vs expected pace' : 'vs ' + cmpRangeTxt, metaScope: scopeLabel(A), metaDp: dpTxt, metaUpdated: 'Updated 27 Nov, 06:00',
+      saveLabel: s.savedKey === JSON.stringify(A) ? 'Saved' : 'Save report',
+      save: () => {
+        const name = 'Location Performance · ' + (A.period === 'custom' ? fRange(R.a, R.b) : PER[A.period].label);
+        this.setState({ savedKey: JSON.stringify(A) });
+        this.say((dirty ? 'Saved with the applied settings as “' : 'Saved as “') + name + '”.');
+      },
+      exportOpen: s.open === 'export', exportExp: s.open === 'export' ? 'true' : 'false', openExport: togg('export'),
+      exportOpts: [{ label: 'CSV', meta: 'Table rows' }, { label: 'Excel (XLSX)', meta: 'Table rows' }, { label: 'PDF', meta: 'Summary, chart and table' }].map(o => ({ ...o, pick: () => this.say('Exporting as ' + o.label + ' with the applied settings.') })),
+      exportNote: dirty ? 'Exports use the applied settings. Update the report first to include your changes.' : 'Exports use the settings shown on this page.',
+
+      periodOpen: s.open === 'period', periodExp: s.open === 'period' ? 'true' : 'false', openPeriod: togg('period'),
+      dPeriodLabel: PER[D.period].label,
+      periodOpts: PERIODS.map(p => ({ label: p.label, meta: p.r ? fRange(p.r[0], p.r[1]) : 'Choose dates', style: optStyle(D.period === p.id), checkedStr: D.period === p.id ? 'true' : 'false',
+        pick: () => { this.setDraft(p.r ? { period: p.id, from: iso(p.r[0]), to: iso(p.r[1]) } : { period: p.id }); this.setState({ open: null }); } })),
+      dIsCustom: D.period === 'custom', dFrom: D.from, dTo: D.to, maxDate: iso(LAST),
+      onFrom: e => this.setDraft({ from: e.target.value }), onTo: e => this.setDraft({ to: e.target.value }),
+      cmpOpen: s.open === 'cmp', cmpExp: s.open === 'cmp' ? 'true' : 'false', openCmp: togg('cmp'),
+      dCmpLabel: CMP[D.cmp].label,
+      cmpOpts: CMPS.map(c => {
+        const n = nDays(D), r = n ? rangeOf(D) : null, cr = r ? compRangeOf({ ...D, cmp: c.id }, r[0], r[1]) : null;
+        return { label: c.label, meta: c.id === 'expected' ? 'Revenue target' : c.id === 'none' ? '' : cr ? rangeName(cr[0], cr[1]) : '', style: optStyle(D.cmp === c.id), checkedStr: D.cmp === c.id ? 'true' : 'false',
+          pick: () => { this.setDraft({ cmp: c.id }); this.setState({ open: null }); } };
+      }),
+      scopeOpen: s.open === 'scope', scopeExp: s.open === 'scope' ? 'true' : 'false', openScope: togg('scope'),
+      dScopeLabel: scopeLabel(D),
+      scopeOpts: [{ id: 'all', label: 'Whole business', meta: '12 locations' }].concat(REGIONS.map(r => ({ id: r.id, label: r.label, meta: LOCS.filter(l => l.region === r.id).length + ' locations' }))).map(o => ({ ...o, style: optStyle(D.scope === o.id), checkedStr: D.scope === o.id ? 'true' : 'false',
+        pick: () => { this.setDraft({ scope: o.id, locs: [] }); this.setState({ open: null }); } })),
+      locCountNote: D.scope === 'custom' ? D.locs.length + ' selected' : '',
+      locOpts: LOCS.map(l => ({ name: l.name, checked: D.scope === 'custom' && D.locs.includes(l.id),
+        toggle: () => { const cur = D.scope === 'custom' ? D.locs : []; const locs = cur.includes(l.id) ? cur.filter(x => x !== l.id) : cur.concat(l.id); this.setDraft({ scope: 'custom', locs }); } })),
+      closePop: () => this.setState({ open: null }),
+      granSegs: GRANS.map(g => { const dis = !!dn && !granOK(g.id, dn); return { label: g.label, pressed: D.gran === g.id ? 'true' : 'false', disabled: dis, title: dis ? granWhy(g.id) : '', style: segStyle(D.gran === g.id, dis), pick: () => !dis && this.setDraft({ gran: g.id }) }; }),
+      dpSegs: DPS.map(g => ({ label: g.label, pressed: D.dp === g.id ? 'true' : 'false', disabled: false, title: '', style: segStyle(D.dp === g.id, false), pick: () => this.setDraft({ dp: g.id }) })),
+      chPeriod: D.period !== A.period || (D.period === 'custom' && (D.from !== A.from || D.to !== A.to)), chCmp: D.cmp !== A.cmp,
+      chScope: D.scope !== A.scope || D.locs.join() !== A.locs.join(), chGran: D.gran !== A.gran, chDp: D.dp !== A.dp,
+      dirty, dirtyVis: dirty ? 'visible' : 'hidden', dirtyHidden: dirty ? 'false' : 'true', dirtyTab: dirty ? 0 : -1, dirtyNote: err || 'Changes not applied yet', dirtyColor: err ? NEG : 'oklch(47% 0.013 270)',
+      discard: () => this.setState({ draft: A, open: null }),
+      applyDisabled: !dirty || !!err,
+      applyStyle: 'font-family:inherit;font-size:12px;font-weight:600;line-height:normal;border-radius:8px;padding:6px 13px;white-space:nowrap;' + (dirty && !err ? 'color:#fff;background:' + BLUE + ';border:1px solid ' + BLUE + ';cursor:pointer' : 'color:oklch(60% 0.01 270);background:oklch(96% 0.004 270);border:1px solid oklch(92% 0.005 270);cursor:default'),
+      apply: () => { if (!dirty || err) return; this.setState({ applied: D, open: null, showAll: false, hov: null, live: 'Report updated: ' + (D.period === 'custom' ? fRange(...rangeOf(D)) : PER[D.period].label) + ', ' + scopeLabel(D) + '.' }); },
+
+      cmpLine: !cmpOn ? '' : exp ? 'Changes vs expected pace' : A.cmp === 'yoy' ? 'Changes vs same period last year · ' + cmpRangeTxt : 'Changes vs previous period · ' + cmpRangeTxt,
+      hasChgCol: cmpOn && !exp,
+      kpis, hasCmp: cmpOn, cmpLegend: cmpOn ? cm.legend : '',
+      chartSub: nL + (nL === 1 ? ' location' : ' locations') + ' · ranked by revenue',
+      bars, barRightW: cmpOn && !exp ? '136px' : '64px', barsLeave: () => this.setState({ hov: null }),
+      hovOn: !!hr, hv, hovTipStyle, sparkLabel: (A.gran === 'day' ? 'Daily' : A.gran === 'week' ? 'Weekly' : 'Monthly') + ' revenue · ' + fRange(R.a, R.b),
+      rowCount: nL + (nL === 1 ? ' location' : ' locations'),
+      tCols: 'minmax(170px,1.6fr) repeat(' + (cmpOn && !exp ? 6 : 5) + ',minmax(96px,1fr))', tMinW: cmpOn && !exp ? '840px' : '720px',
+      cols: cols.map(c => { const on = sk === c.k; return { btnDir: c.right ? 'row-reverse' : 'row', label: c.label, full: c.full || c.label, arrow: on ? (sd > 0 ? '↑' : '↓') : '', ariaSort: on ? (sd > 0 ? 'ascending' : 'descending') : 'none', color: on ? 'oklch(26% 0.012 270)' : 'oklch(50% 0.013 270)',
+        cellStyle: 'display:flex;min-width:0;' + (c.right ? 'justify-content:flex-end;text-align:right' : 'justify-content:flex-start;text-align:left;position:sticky;left:0;z-index:1;align-self:stretch;align-items:center;padding-left:22px;background:oklch(97.8% 0.003 270)'),
+        sort: () => this.setState(st => ({ sort: { k: c.k, d: st.sort.k === c.k ? -st.sort.d : (c.k === 'name' ? 1 : -1) } })) }; }),
+      rows: sorted.map(r => { const c = rowChg(r); return { name: r.name, region: r.region, rev: fmtFull(r.cur.rev), arrow: c.arrow, arrowDisp: c.arrowDisp, chg: c.text, chgColor: c.color,
+        cTitle: !r.cmp ? 'No comparison data' : (exp ? 'Expected ' : cm.legend + ' (' + cmpRangeTxt + '): ') + fmtFull(r.cmp.rev), tx: fmtInt(r.cur.tx), aov: fmtAov(r.cur.rev / r.cur.tx), margin: fmtPct(r.cur.pr / r.cur.rev), ...progCell(r.prog) }; }),
+      tot: { rev: fmtFull(T.rev), tx: fmtInt(T.tx), aov: fmtAov(aov), margin: fmtPct(mg), arrow: totC.arrow, arrowDisp: totC.arrowDisp, chg: totC.text, chgColor: totC.color, ...progCell(R.prog) },
+      totSub: nL + (nL === 1 ? ' location' : ' locations'),
+
+      hasToast: !!s.toast, toast: s.toast, closeToast: () => this.setState({ toast: null }), live: s.live,
+
+      showGettingStartedC: !s.gsDismissed && s.gsFit !== false && !s.sideCollapsed,
+      dismissGs: () => { this.setState({ gsDismissed: true }); },
+      asideW: s.sideCollapsed ? '52px' : '198px',
+      navTxt: s.sideCollapsed ? 'none' : 'inline',
+      profileDir: s.sideCollapsed ? 'column' : 'row',
+      profilePadX: s.sideCollapsed ? '0' : '9px',
+      collapseML: s.sideCollapsed ? '0' : 'auto',
+      collapseGlyph: s.sideCollapsed ? '\u203A\u203A' : '\u2039\u2039',
+      collapseTitle: s.sideCollapsed ? 'Expand sidebar' : 'Collapse sidebar',
+      toggleSidebar: () => this.setState(st => ({ sideCollapsed: !st.sideCollapsed }), () => requestAnimationFrame(() => this.fitSidebar())),
+      navItemPad: s.navCompact ? '5px 9px' : '7px 9px',
+      navLabelPad: s.navCompact ? '9px 10px 5px' : '14px 10px 6px',
+      asideRef: this.asideRef, navRef: this.navRef, bottomRef: this.bottomRef, gsRef: this.gsRef,
+    };
+  }
+}
+</script>
+</body>
+</html>

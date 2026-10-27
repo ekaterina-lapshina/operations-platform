@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<title>Inventory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:oklch(96.5% 0.003 270);font-family:'Inter',system-ui,sans-serif;color:oklch(22% 0.01 270);-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+input::placeholder{color:oklch(66% 0.008 270)}
+a{color:oklch(54% 0.19 258);text-decoration:none}
+a:hover{color:oklch(46% 0.19 258)}
+a:focus-visible,button:focus-visible,[role=button]:focus-visible{outline:2px solid oklch(54% 0.19 258);outline-offset:2px}
+nav a:focus-visible,[data-opt]:focus-visible,[data-row]:focus-visible,[data-inset]:focus-visible{outline-offset:-2px}
+[data-tip]:focus-visible{outline:2px solid oklch(54% 0.19 258);outline-offset:2px;border-radius:3px}
+input[type=text]:focus-visible{outline:2px solid oklch(54% 0.19 258)!important;outline-offset:3px}
+</style>
+<script src="./app-shell.js"></script>
+</helmet>
+
+<div style="min-height:100vh;background:oklch(94.6% 0.004 270);display:flex;flex-direction:column">
+
+<header style="height:52px;flex-shrink:0;background:oklch(94.6% 0.004 270);border-bottom:1px solid oklch(90.5% 0.006 270);display:flex;align-items:center;gap:16px;padding:0 16px;position:sticky;top:0;z-index:20;min-width:0">
+<div style="display:flex;align-items:center;gap:9px;flex:0 1 198px;min-width:0">
+<div style="width:22px;height:22px;border-radius:7px;background:oklch(54% 0.19 258);flex-shrink:0"></div>
+<span style="min-width:0;font-size:13.5px;font-weight:700;letter-spacing:-.01em;line-height:1.2;color:oklch(28% 0.012 270);overflow-wrap:anywhere">Operations Platform</span>
+</div>
+<x-import component-from-global-scope="op-header-tools" hint-size="100%,52px" style="flex:1 0 auto;min-width:0;display:flex;align-items:center;height:52px"></x-import>
+</header>
+
+<div style="flex:1;display:flex;min-height:0">
+
+<aside ref="{{ asideRef }}" style="width:{{ asideW }};transition:width .18s ease;overflow:hidden;flex-shrink:0;background:oklch(94.6% 0.004 270);border-right:1px solid oklch(90.5% 0.006 270);padding:10px 8px 14px;display:flex;flex-direction:column;position:sticky;top:52px;height:calc(100vh - 52px)">
+<nav ref="{{ navRef }}" aria-label="Main" style="display:flex;flex-direction:column;gap:1px;overflow-y:auto;min-height:0">
+<div style="display:{{ navTxt }};font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:oklch(47% 0.013 270);padding:4px 10px 6px">Workspace</div>
+<a href="Overview.dc.html" style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><rect x="2" y="2" width="5" height="5" rx="1"></rect><rect x="9" y="2" width="5" height="5" rx="1"></rect><rect x="2" y="9" width="5" height="5" rx="1"></rect><rect x="9" y="9" width="5" height="5" rx="1"></rect></svg><span style="display:{{ navTxt }};white-space:nowrap">Overview</span></a>
+<a href="Operations.dc.html" style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><polyline points="1.5,10 5,10 6.8,5.5 9.2,12 11,8 14.5,8"></polyline></svg><span style="display:{{ navTxt }};white-space:nowrap">Operations</span></a>
+<div style="display:{{ navTxt }};font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:oklch(47% 0.013 270);padding:{{ navLabelPad }}">Analysis</div>
+<a href="Location Analytics.dc.html" style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><line x1="3" y1="13" x2="3" y2="8.5"></line><line x1="8" y1="13" x2="8" y2="4"></line><line x1="13" y1="13" x2="13" y2="6.5"></line></svg><span style="display:{{ navTxt }};white-space:nowrap">Location analytics</span></a>
+<a href="Reports.dc.html" style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M4 2.2h5.2L12 5v8.8H4z"></path><line x1="6" y1="8" x2="10" y2="8"></line><line x1="6" y1="10.6" x2="9" y2="10.6"></line></svg><span style="display:{{ navTxt }};white-space:nowrap">Reports</span></a>
+<div style="display:{{ navTxt }};font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:oklch(47% 0.013 270);padding:{{ navLabelPad }}">Manage</div>
+<a href="Inventory.dc.html" aria-current="page" style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:600;color:oklch(20% 0.012 270);background:#fff;border:1px solid oklch(91.5% 0.006 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(54% 0.19 258)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M2.5 5.5 8 2.8l5.5 2.7v5L8 13.2 2.5 10.5z"></path><line x1="2.5" y1="5.5" x2="8" y2="8.2"></line><line x1="13.5" y1="5.5" x2="8" y2="8.2"></line></svg><span style="display:{{ navTxt }};white-space:nowrap">Inventory</span><span style="display:{{ navTxt }};margin-left:auto;font-size:10.5px;font-weight:600;color:oklch(42% 0.012 270);background:oklch(91.5% 0.006 270);border-radius:5px;padding:1px 5px">5</span></a>
+<a href="Employees.dc.html" style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="6.3" cy="6" r="2.4"></circle><path d="M2 13c.6-2.2 2.3-3.3 4.3-3.3S10 10.8 10.6 13"></path><path d="M11 5.2a2.2 2.2 0 0 1 0 4"></path></svg><span style="display:{{ navTxt }};white-space:nowrap">Employees</span></a>
+<a href="Locations.dc.html" style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M8 14c2.6-3.2 4-5.4 4-7.2A4 4 0 0 0 4 6.8C4 8.6 5.4 10.8 8 14Z"></path><circle cx="8" cy="6.6" r="1.5"></circle></svg><span style="display:{{ navTxt }};white-space:nowrap">Locations</span><span style="display:{{ navTxt }};margin-left:auto;font-size:10.5px;font-weight:600;color:oklch(42% 0.012 270);background:oklch(91.5% 0.006 270);border-radius:5px;padding:1px 5px">12</span></a>
+<a href="Customers.dc.html" style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="5.4" cy="5.6" r="2.3"></circle><circle cx="10.8" cy="7.4" r="1.9"></circle><path d="M1.8 13c.5-2 2-3 3.6-3s3.1 1 3.6 3"></path></svg><span style="display:{{ navTxt }};white-space:nowrap">Customers</span></a>
+</nav>
+<div ref="{{ bottomRef }}" style="margin-top:auto;display:flex;flex-direction:column;gap:1px">
+<sc-if value="{{ showGettingStartedC }}" hint-placeholder-val="{{ true }}"><div ref="{{ gsRef }}" style="display:flex;flex-direction:column;margin:0 2px 10px;padding:5px 5px 7px;background:#fff;border:1px solid oklch(91.5% 0.006 270);border-radius:14px;box-shadow:0 1px 2px oklch(25% 0.02 265 / 0.04)">
+<div style="position:relative;height:58px;border-radius:10px;background:oklch(95.6% 0.004 270);overflow:hidden">
+<button type="button" aria-label="Dismiss getting started" title="Dismiss" onClick="{{ dismissGs }}" style="position:absolute;z-index:1;top:4px;right:4px;width:20px;height:20px;padding:0;border:0;border-radius:6px;background:transparent;display:flex;align-items:center;justify-content:center;font-size:14px;line-height:1;color:oklch(52% 0.012 270);cursor:pointer" style-hover="background:oklch(91% 0.005 270);color:oklch(28% 0.012 270)">&#215;</button>
+<div style="position:absolute;left:16px;right:16px;top:12px;bottom:-8px;display:grid;grid-template-columns:18px minmax(0,1fr);gap:5px;padding:6px;background:#fff;border-radius:7px;box-shadow:0 0 0 1px oklch(92% 0.005 270),0 2px 6px oklch(25% 0.02 265 / 0.06)">
+<div style="display:flex;flex-direction:column;gap:3px"><span style="height:4px;border-radius:2px;background:oklch(54% 0.19 258 / 0.55)"></span><span style="height:4px;border-radius:2px;background:oklch(91% 0.005 270)"></span><span style="height:4px;border-radius:2px;background:oklch(91% 0.005 270)"></span></div>
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:12px 1fr;gap:3px"><span style="border-radius:3px;background:oklch(96.2% 0.004 270)"></span><span style="border-radius:3px;background:oklch(96.2% 0.004 270)"></span><span style="border-radius:3px;background:oklch(96.2% 0.004 270)"></span><span style="grid-column:1 / span 3;border-radius:3px;background:oklch(96.2% 0.004 270)"></span></div>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:3px;padding:11px 8px 10px;text-align:center">
+<span style="font-size:12.5px;font-weight:600;letter-spacing:-.008em;color:oklch(20% 0.012 270)">Getting started</span>
+<span style="font-size:11px;line-height:1.4;color:oklch(46% 0.013 270);text-wrap:pretty">Take a quick tour of the platform.</span>
+</div>
+<a href="#" data-op-tour="" role="button" style="display:flex;align-items:center;justify-content:center;gap:6px;height:32px;border-radius:9px;background:linear-gradient(oklch(31% 0.012 270),oklch(21% 0.012 270));box-shadow:inset 0 1px 0 oklch(100% 0 0 / 0.12),0 1px 2px oklch(20% 0.02 270 / 0.2);color:#fff;font-size:12px;font-weight:600;letter-spacing:-.004em;text-decoration:none" style-hover="background:linear-gradient(oklch(36% 0.012 270),oklch(25% 0.012 270))">Start onboarding &#8594;</a>
+</div></sc-if>
+<a href="Settings.dc.html" style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:7px 9px;cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><line x1="2.5" y1="5" x2="13.5" y2="5"></line><line x1="2.5" y1="11" x2="13.5" y2="11"></line><circle cx="6" cy="5" r="1.7"></circle><circle cx="10.4" cy="11" r="1.7"></circle></svg><span style="display:{{ navTxt }};white-space:nowrap">Settings</span></a>
+<div style="display:flex;flex-direction:{{ profileDir }};align-items:center;gap:9px;padding:10px {{ profilePadX }} 0;margin-top:8px;border-top:1px solid oklch(90.5% 0.006 270)">
+<div title="North &amp; Oak" style="width:26px;height:26px;border-radius:7px;background:oklch(30% 0.012 270);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:700;letter-spacing:.02em;color:#fff">N&amp;O</div>
+<div style="display:{{ navTxt }};min-width:0">
+<div style="font-size:11.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:oklch(30% 0.012 270)">North &amp; Oak</div>
+<div style="font-size:10.5px;color:oklch(46% 0.013 270)">Owner</div>
+</div>
+<button type="button" title="{{ collapseTitle }}" aria-label="{{ collapseTitle }}" onClick="{{ toggleSidebar }}" style="margin-left:{{ collapseML }};font-size:11px;color:oklch(45% 0.012 270);border:1px solid oklch(90% 0.006 270);border-radius:6px;padding:2px 6px;background:#fff;cursor:pointer;font-family:inherit;line-height:inherit" style-hover="color:oklch(24% 0.012 270);border-color:oklch(84% 0.008 270)">{{ collapseGlyph }}</button>
+</div>
+</div>
+</aside>
+
+<main style="flex:1;min-width:0;display:flex;flex-direction:column;background:oklch(96.4% 0.004 265);border-top-left-radius:16px;border-left:1px solid oklch(92% 0.005 270);border-top:1px solid oklch(92% 0.005 270);margin-top:-1px;padding:0 0 44px">
+
+<div style="padding:18px 26px 16px;border-bottom:1px solid oklch(92% 0.005 265);display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+<div style="display:flex;flex-direction:column;gap:6px;min-width:0;flex:1 1 auto">
+<h1 style="margin:0;font-size:21px;font-weight:600;letter-spacing:-.024em;line-height:1.15;color:oklch(18% 0.012 270)">Inventory</h1>
+<span style="display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:12px;color:oklch(47% 0.013 270)"><span>12 locations</span><span style="color:oklch(80% 0.006 270)">&middot;</span><span>9 tracked products</span><span style="color:oklch(80% 0.006 270)">&middot;</span><span style="font-variant-numeric:tabular-nums">Stock as of Thu 27 Nov, 16:05</span></span>
+</div>
+</div>
+
+<div style="padding:20px 26px 0;display:flex;flex-direction:column;gap:22px;min-width:0">
+
+<div role="group" aria-label="Filter by stock status" style="display:flex;align-items:center;gap:2px;flex-wrap:wrap;align-self:flex-start;max-width:100%;margin:-4px 0 0 -9px">
+<sc-for list="{{ chips }}" as="c" hint-placeholder-count="5">
+<sc-if value="{{ c.hasSep }}" hint-placeholder-val="{{ false }}"><span aria-hidden="true" style="width:1px;height:12px;background:oklch(86% 0.006 270);margin:0 2px"></span></sc-if>
+<button type="button" title="{{ c.title }}" onClick="{{ c.toggle }}" aria-pressed="{{ c.pressed }}" aria-disabled="{{ c.disabled }}" style="{{ c.style }}" style-hover="background:oklch(92.8% 0.005 270)"><span style="{{ c.sw }}"></span><span style="font-weight:600;font-variant-numeric:tabular-nums;color:{{ c.numColor }}">{{ c.n }}</span><span>{{ c.label }}</span></button>
+</sc-for>
+<sc-if value="{{ statusActive }}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{ clearStatus }}" style="margin-left:10px;padding:0;border:0;background:none;font:inherit;font-size:12px;font-weight:600;color:oklch(44% 0.012 270);cursor:pointer" style-hover="color:oklch(24% 0.012 270)">Show all</button></sc-if>
+</div>
+
+<div style="display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start;min-width:0;min-height:calc(100vh - 112px)">
+
+<section ref="{{ tableRef }}" data-screen-label="Stock table" style="flex:65 1 0;min-width:min(560px,100%);background:transparent">
+<div style="box-sizing:border-box;display:flex;flex-direction:column;align-items:flex-start;padding:10px 12px;margin-bottom:2px;background:oklch(94.4% 0.004 270);border-radius:10px;gap:8px;min-width:0">
+<div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+<div role="group" aria-label="View" style="display:inline-flex;gap:2px;padding:3px;background:oklch(91% 0.005 270);border-radius:9px">
+<sc-for list="{{ views }}" as="v" hint-placeholder-count="2"><button type="button" aria-pressed="{{ v.pressed }}" onClick="{{ v.go }}" style="{{ v.style }}">{{ v.label }} <span style="font-variant-numeric:tabular-nums;color:oklch(50% 0.013 270);font-weight:500">{{ v.n }}</span></button></sc-for>
+</div>
+<span style="font-size:11.5px;color:oklch(50% 0.013 270);font-variant-numeric:tabular-nums">{{ countLabel }}</span>
+</div>
+<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+<label style="display:flex;align-items:center;gap:7px;width:180px;max-width:100%;background:#fff;border:1px solid oklch(91% 0.006 270);border-radius:8px;padding:5px 9px">
+<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.013 270)" stroke-width="1.5" stroke-linecap="round" style="flex-shrink:0"><circle cx="7" cy="7" r="4.6"></circle><line x1="10.4" y1="10.4" x2="14" y2="14"></line></svg>
+<input type="text" aria-label="Find a product" value="{{ q }}" onChange="{{ onQ }}" placeholder="Find a product" style="border:none;outline:none;background:transparent;font-family:inherit;font-size:12px;width:100%;min-width:0;color:oklch(24% 0.01 270)">
+<sc-if value="{{ hasQ }}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{ clearQ }}" title="Clear search" aria-label="Clear search" style="font-size:13px;line-height:1;color:oklch(52% 0.012 270);cursor:pointer;padding:0;border:0;background:none;font-family:inherit" style-hover="color:oklch(24% 0.012 270)">&#215;</button></sc-if>
+</label>
+<div style="position:relative">
+<button type="button" ref="{{ locBtnRef }}" aria-haspopup="menu" aria-expanded="{{ locExpanded }}" onKeyDown="{{ locBtnKey }}" onClick="{{ toggleLoc }}" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:oklch(34% 0.012 270);background:#fff;border:1px solid oklch(92% 0.005 270);border-radius:8px;padding:5px 9px;cursor:pointer;white-space:nowrap;font-family:inherit;line-height:inherit">{{ locLabel }} <span style="color:oklch(47% 0.013 270)">&#9662;</span></button>
+<sc-if value="{{ locOpen }}" hint-placeholder-val="{{ false }}">
+<div ref="{{ locMenuRef }}" role="menu" aria-label="Location" onKeyDown="{{ locMenuKey }}" style="position:absolute;top:calc(100% + 6px);right:0;width:220px;max-height:360px;overflow-y:auto;background:#fff;border:1px solid oklch(90% 0.006 270);border-radius:14px;box-shadow:0 12px 32px oklch(20% 0.02 270 / 0.12);padding:8px;z-index:30;display:flex;flex-direction:column;gap:1px">
+<sc-for list="{{ locOptions }}" as="o" hint-placeholder-count="4">
+<sc-if value="{{ o.hasHead }}" hint-placeholder-val="{{ false }}"><div style="font-size:10px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:oklch(50% 0.013 270);padding:10px 9px 5px;border-top:1px solid oklch(96% 0.004 270);margin-top:5px">{{ o.head }}</div></sc-if>
+<button type="button" data-opt="" role="menuitemradio" aria-checked="{{ o.checked }}" tabindex="-1" onClick="{{ o.select }}" style="{{ o.style }}"><span>{{ o.name }}</span><span style="margin-left:auto;font-size:11px;color:oklch(52% 0.013 270)">{{ o.meta }}</span></button>
+</sc-for>
+</div>
+</sc-if>
+</div>
+<div style="position:relative">
+<button type="button" ref="{{ catBtnRef }}" aria-haspopup="menu" aria-expanded="{{ catExpanded }}" onKeyDown="{{ catBtnKey }}" onClick="{{ toggleCat }}" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:oklch(34% 0.012 270);background:#fff;border:1px solid oklch(92% 0.005 270);border-radius:8px;padding:5px 9px;cursor:pointer;white-space:nowrap;font-family:inherit;line-height:inherit">{{ catLabel }} <span style="color:oklch(47% 0.013 270)">&#9662;</span></button>
+<sc-if value="{{ catOpen }}" hint-placeholder-val="{{ false }}">
+<div ref="{{ catMenuRef }}" role="menu" aria-label="Category" onKeyDown="{{ catMenuKey }}" style="position:absolute;top:calc(100% + 6px);right:0;width:200px;background:#fff;border:1px solid oklch(90% 0.006 270);border-radius:14px;box-shadow:0 12px 32px oklch(20% 0.02 270 / 0.12);padding:8px;z-index:30;display:flex;flex-direction:column;gap:1px">
+<sc-for list="{{ catOptions }}" as="o" hint-placeholder-count="4">
+<button type="button" data-opt="" role="menuitemradio" aria-checked="{{ o.checked }}" tabindex="-1" onClick="{{ o.select }}" style="{{ o.style }}"><span>{{ o.name }}</span><span style="margin-left:auto;font-size:11px;color:oklch(52% 0.013 270)">{{ o.meta }}</span></button>
+</sc-for>
+</div>
+</sc-if>
+</div>
+<div style="position:relative">
+<button type="button" ref="{{ sortBtnRef }}" aria-haspopup="menu" aria-expanded="{{ sortExpanded }}" onKeyDown="{{ sortBtnKey }}" onClick="{{ toggleSort }}" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:oklch(34% 0.012 270);background:#fff;border:1px solid oklch(92% 0.005 270);border-radius:8px;padding:5px 9px;cursor:pointer;white-space:nowrap;font-family:inherit;line-height:inherit"><span style="color:oklch(50% 0.013 270)">Sort:</span> {{ sortLabel }} <span style="color:oklch(47% 0.013 270)">&#9662;</span></button>
+<sc-if value="{{ sortOpen }}" hint-placeholder-val="{{ false }}">
+<div ref="{{ sortMenuRef }}" role="menu" aria-label="Sort stock" onKeyDown="{{ sortMenuKey }}" style="position:absolute;top:calc(100% + 6px);right:0;width:240px;background:#fff;border:1px solid oklch(90% 0.006 270);border-radius:14px;box-shadow:0 12px 32px oklch(20% 0.02 270 / 0.12);padding:8px;z-index:30;display:flex;flex-direction:column;gap:1px">
+<sc-for list="{{ sortOptions }}" as="o" hint-placeholder-count="3">
+<button type="button" data-opt="" role="menuitemradio" aria-checked="{{ o.checked }}" tabindex="-1" onClick="{{ o.select }}" style="{{ o.style }}"><span style="white-space:nowrap">{{ o.name }}</span><span style="margin-left:auto;padding-left:12px;font-size:11px;white-space:nowrap;text-align:right;color:oklch(52% 0.013 270)">{{ o.meta }}</span></button>
+</sc-for>
+</div>
+</sc-if>
+</div>
+</div>
+</div>
+
+<div style="overflow-x:auto">
+<div style="min-width:726px">
+<div style="display:grid;grid-template-columns:minmax(110px,1.6fr) minmax(80px,1fr) 104px 84px 76px 100px 80px;column-gap:10px;align-items:center;padding:0 16px;height:36px;font-size:10.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:oklch(47% 0.013 270)">
+<span>Product</span><span>Location</span><span>Status</span><span style="text-align:right">On hand</span><span style="text-align:right">Reorder</span><span><span data-tip="" tabindex="0" title="Days of cover: on-hand stock divided by average daily use. Run-out times assume trading hours 07:00 to 22:00." aria-label="Cover. Days of cover is on-hand stock divided by average daily use. Run-out times assume trading hours 07:00 to 22:00." style="cursor:help;text-decoration:underline dotted oklch(72% 0.008 270);text-underline-offset:3px">Cover</span></span><span style="text-align:right">Delivery</span>
+</div>
+<sc-for list="{{ rows }}" as="r" hint-placeholder-count="8">
+<div role="button" tabindex="0" data-row="" aria-current="{{ r.current }}" aria-label="{{ r.aria }}" onClick="{{ r.select }}" onKeyDown="{{ r.onKey }}" style="{{ r.style }}" style-hover="background:oklch(94.4% 0.004 270)">
+<span style="display:flex;flex-direction:column;gap:2px;min-width:0;padding:10px 0"><span style="font-size:13px;font-weight:600;letter-spacing:-.006em;line-height:1.3;color:oklch(18% 0.012 270);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere">{{ r.product }}</span><span style="font-size:11.5px;color:oklch(50% 0.013 270);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ r.category }}</span></span>
+<span style="display:flex;flex-direction:column;gap:2px;min-width:0"><span style="font-size:12.5px;line-height:1.3;color:oklch(26% 0.012 270);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere">{{ r.loc }}</span><span style="font-size:11.5px;color:oklch(50% 0.013 270)">{{ r.region }}</span></span>
+<span style="display:flex;flex-direction:column;align-items:flex-start;gap:4px;min-width:0"><span style="display:inline-flex;align-items:center;gap:6px;font-size:12.5px;white-space:nowrap;font-weight:{{ r.stWeight }};color:{{ r.stColor }}"><span style="{{ r.sw }}"></span>{{ r.stLabel }}</span><sc-if value="{{ r.hasTag }}" hint-placeholder-val="{{ false }}"><span style="display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:500;line-height:1.2;white-space:nowrap;color:oklch(44% 0.012 270)"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M3.5 14V2.5"></path><path d="M3.5 2.5h8l-1.8 3 1.8 3h-8"></path></svg>{{ r.tag }}</span></sc-if></span>
+<span style="text-align:right;font-size:13px;font-weight:500;color:oklch(20% 0.012 270);font-variant-numeric:tabular-nums;white-space:nowrap">{{ r.onHand }}</span>
+<span style="text-align:right;font-size:12px;color:oklch(47% 0.013 270);font-variant-numeric:tabular-nums;white-space:nowrap">{{ r.reorder }}</span>
+<span style="font-size:12px;font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:{{ r.coverWeight }};color:{{ r.coverColor }}">{{ r.cover }}</span>
+<span style="text-align:right;font-size:12px;color:oklch(40% 0.012 270);font-variant-numeric:tabular-nums;white-space:nowrap">{{ r.next }}</span>
+</div>
+</sc-for>
+<sc-if value="{{ isEmpty }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:28px 16px;border-top:1px solid oklch(91.5% 0.005 270);font-size:12.5px;color:oklch(45% 0.012 270)"><span>{{ emptyText }}</span><button type="button" onClick="{{ clearAll }}" style="padding:0;border:0;background:none;font:inherit;font-size:12.5px;font-weight:600;color:oklch(44% 0.012 270);cursor:pointer" style-hover="color:oklch(24% 0.012 270)">Clear filters</button></div>
+</sc-if>
+</div>
+</div>
+
+<div style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:4px 16px;margin-top:12px;padding:10px 16px;background:oklch(94.4% 0.004 270);border-radius:10px;font-size:11.5px;line-height:1.5;color:oklch(47% 0.013 270)">
+<span style="text-wrap:pretty"><span style="font-weight:600;color:oklch(32% 0.012 270)">Critical</span> runs out before the next delivery. <span style="font-weight:600;color:oklch(32% 0.012 270)">Low</span> is at or below the reorder level but lasts until delivery.</span>
+</div>
+</section>
+
+<section ref="{{ paneRef }}" data-screen-label="Stock detail" style="flex:35 1 0;min-width:min(340px,100%);position:sticky;top:68px;background:#fff;border:1px solid oklch(90.5% 0.006 270);border-radius:14px;box-shadow:0 1px 2px oklch(25% 0.02 265 / 0.05),0 10px 28px -12px oklch(25% 0.02 265 / 0.14)">
+<sc-if value="{{ hasSel }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;flex-direction:column;padding:20px 20px 18px;background:oklch(98.6% 0.002 270);border-bottom:1px solid oklch(94.5% 0.004 270);border-radius:14px 14px 0 0">
+<span style="font-size:12px;font-weight:500;color:oklch(48% 0.013 270)">{{ d.locLine }}</span>
+<h2 style="margin:4px 0 10px;font-size:22px;font-weight:600;letter-spacing:-.024em;line-height:1.25;color:oklch(14% 0.012 270);text-wrap:pretty">{{ d.product }}</h2>
+<span style="display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:{{ d.stWeight }};color:{{ d.stColor }}"><span style="{{ d.sw }}"></span>{{ d.stLabel }}</span>
+<span style="margin-top:4px;font-size:12.5px;line-height:1.45;color:oklch(46% 0.013 270);text-wrap:pretty">{{ d.rule }}</span>
+<div role="status" aria-live="polite"><sc-if value="{{ hasNotice }}" hint-placeholder-val="{{ false }}"><div style="margin-top:14px;padding:9px 12px;border-radius:9px;background:oklch(96.5% 0.012 258);font-size:12.5px;font-weight:500;line-height:1.45;color:oklch(38% 0.15 258);text-wrap:pretty">{{ noticeText }}</div></sc-if></div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:22px;padding:20px">
+
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 20px">
+<sc-for list="{{ d.facts }}" as="f" hint-placeholder-count="4">
+<div style="display:flex;flex-direction:column;gap:4px;min-width:0"><span style="font-size:11px;color:oklch(54% 0.012 270)">{{ f.label }}</span><span style="font-size:15px;font-weight:600;letter-spacing:-.01em;line-height:1.35;font-variant-numeric:tabular-nums;color:{{ f.color }}">{{ f.value }}</span><span style="font-size:12px;line-height:1.4;color:oklch(50% 0.013 270);font-variant-numeric:tabular-nums">{{ f.sub }}</span></div>
+</sc-for>
+<sc-if value="{{ d.hasTrack }}" hint-placeholder-val="{{ false }}">
+<div style="grid-column:1 / -1;display:flex;flex-direction:column;gap:6px">
+<span style="display:block;height:8px;border-radius:4px;{{ d.track }}"></span>
+<span style="display:flex;justify-content:space-between;gap:8px;font-size:11px;color:oklch(52% 0.013 270);font-variant-numeric:tabular-nums"><span>{{ d.trackFrom }}</span><span>{{ d.trackTo }}</span></span>
+</div>
+</sc-if>
+</div>
+
+<sc-if value="{{ d.hasIssue }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:3px;padding:12px 14px;border:1px solid oklch(92% 0.006 270);border-radius:10px;background:oklch(98.8% 0.002 270)">
+<span style="font-size:11px;color:oklch(54% 0.012 270)">Linked Operations issue</span>
+<span style="font-size:13.5px;font-weight:500;line-height:1.4;color:oklch(18% 0.012 270)">{{ d.issueTitle }}</span>
+</div>
+</sc-if>
+
+<div style="display:flex;flex-direction:column;gap:10px">
+<span style="font-size:10.5px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:oklch(50% 0.013 270)">Actions</span>
+<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+<sc-if value="{{ d.hasIssue }}" hint-placeholder-val="{{ false }}"><a href="{{ d.issueHref }}" style="display:inline-flex;align-items:center;height:36px;padding:0 16px;border-radius:8px;border:1px solid oklch(54% 0.19 258);background:oklch(54% 0.19 258);color:#fff;font-size:13px;font-weight:600;white-space:nowrap" style-hover="background:oklch(48% 0.19 258);border-color:oklch(48% 0.19 258);color:#fff">Open issue in Operations</a></sc-if>
+<sc-if value="{{ d.canReport }}" hint-placeholder-val="{{ false }}"><button type="button" ref="{{ reportBtnRef }}" aria-disabled="{{ d.reportedA }}" onClick="{{ d.report }}" style="{{ d.reportStyle }}">{{ d.reportLabel }}</button></sc-if>
+<a href="{{ d.laHref }}" style="display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 14px;border-radius:8px;border:1px solid oklch(89% 0.006 270);background:#fff;color:oklch(30% 0.012 270);font-size:12.5px;font-weight:500;white-space:nowrap" style-hover="border-color:oklch(78% 0.008 270);color:oklch(16% 0.012 270)"><span>{{ d.laLabel }}</span><span aria-hidden="true">&#8599;</span></a>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:6px;padding-top:18px;border-top:1px solid oklch(95% 0.004 270)">
+<span style="display:flex;align-items:baseline;gap:7px;flex-wrap:wrap"><span style="font-size:10.5px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:oklch(50% 0.013 270)">{{ d.product }} by location</span><span style="font-size:11px;color:oklch(54% 0.012 270)">&middot; {{ d.spreadNote }}</span></span>
+<div style="display:flex;flex-direction:column">
+<sc-for list="{{ d.spread }}" as="b" hint-placeholder-count="12">
+<button type="button" data-inset="" aria-current="{{ b.current }}" onClick="{{ b.go }}" style="{{ b.style }}" style-hover="background:oklch(97.6% 0.004 270)"><span style="font-size:12.5px;color:oklch(24% 0.012 270);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:{{ b.nameWeight }}">{{ b.loc }}</span><span style="text-align:right;font-size:12.5px;font-variant-numeric:tabular-nums;color:oklch(26% 0.012 270);white-space:nowrap">{{ b.onHand }}</span><span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;white-space:nowrap;font-weight:{{ b.stWeight }};color:{{ b.stColor }}"><span style="{{ b.sw }}"></span>{{ b.stLabel }}</span></button>
+</sc-for>
+</div>
+</div>
+
+</div>
+</sc-if>
+<sc-if value="{{ noSel }}" hint-placeholder-val="{{ false }}">
+<div style="padding:28px 22px;font-size:12.5px;line-height:1.5;color:oklch(47% 0.013 270)">No stock matches these filters. Clear the filters to see items again.</div>
+</sc-if>
+</section>
+
+</div>
+</div>
+
+</main>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1000}}">
+const NEG = 'oklch(55% 0.18 22)', POS = 'oklch(63% 0.03 175)', POS_TXT = 'oklch(45% 0.05 175)', MUTED = 'oklch(44% 0.012 270)', INK = 'oklch(22% 0.012 270)', BLUE = 'oklch(54% 0.19 258)';
+const REGION_NAME = { north: 'North region', south: 'South region', central: 'Central region' };
+const REGION_SHORT = { north: 'North', south: 'South', central: 'Central' };
+// Locations and month revenue reused from Locations v1 (Overview v38 figures).
+const LOCS = [
+  { id: 'berlin', name: 'Berlin', region: 'north' }, { id: 'amsterdam', name: 'Amsterdam', region: 'north' },
+  { id: 'hamburg', name: 'Hamburg', region: 'north' }, { id: 'copenhagen', name: 'Copenhagen', region: 'north' },
+  { id: 'stockholm', name: 'Stockholm', region: 'north' }, { id: 'madrid', name: 'Madrid', region: 'south' },
+  { id: 'paris', name: 'Paris', region: 'south' }, { id: 'barcelona', name: 'Barcelona', region: 'south' },
+  { id: 'rome', name: 'Rome', region: 'south' }, { id: 'munich', name: 'Munich', region: 'central' },
+  { id: 'zurich', name: 'Zurich', region: 'central' }, { id: 'lisbon', name: 'Lisbon', region: 'central' },
+];
+const REV = { berlin: 18300, amsterdam: 28800, hamburg: 16370, copenhagen: 16990, stockholm: 18540, madrid: 24610, paris: 21030, barcelona: 22540, rome: 19860, munich: 20150, zurich: 26160, lisbon: 15770 };
+
+// Simulated clock shared with Operations v7: Thursday 27 Nov, 16:05. Minutes from Thu 00:00.
+const NOW = 16 * 60 + 5, OPEN = 7 * 60, CLOSE = 22 * 60, TRADE = CLOSE - OPEN;
+const DAYN = ['Thu', 'Fri', 'Sat', 'Sun', 'Mon', 'Tue', 'Wed'];
+const at = (d, h, m) => d * 1440 + h * 60 + (m || 0);
+const hm = m => { m = Math.round(m); m = ((m % 1440) + 1440) % 1440; return String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0'); };
+const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const when = m => { const d = Math.floor(m / 1440); if (d >= 7) { const dt = new Date(2025, 10, 27 + d); return DAYN[d % 7] + ' ' + dt.getDate() + ' ' + MON[dt.getMonth()]; } return (d === 0 ? 'Today' : DAYN[d % 7]) + ' ' + hm(m); };
+
+// ---- Simulated inventory (new for this screen) ----
+const CATS = [['hot', 'Hot drinks'], ['bakery', 'Bakery'], ['wine', 'Beer & wine'], ['soft', 'Soft drinks'], ['supplies', 'Supplies']];
+const CAT = Object.fromEntries(CATS);
+// Base reorder level and daily use for an average site; scaled by each location's revenue.
+const PRODUCTS = [
+  { id: 'espresso-beans', name: 'Espresso beans', cat: 'hot', unit: 'kg', dp: 1, reorder: 4, daily: 6, next: at(1, 6, 30) },
+  { id: 'oat-milk', name: 'Oat milk', cat: 'hot', unit: 'L', dp: 0, reorder: 12, daily: 14, next: at(1, 6, 30) },
+  { id: 'whole-milk', name: 'Whole milk', cat: 'hot', unit: 'L', dp: 0, reorder: 16, daily: 20, next: at(1, 6, 30) },
+  { id: 'croissants', name: 'Croissants', cat: 'bakery', unit: 'pcs', dp: 0, reorder: 30, daily: 120, next: at(1, 6, 0) },
+  { id: 'sourdough', name: 'Sourdough loaves', cat: 'bakery', unit: 'pcs', dp: 0, reorder: 10, daily: 24, next: at(1, 6, 0) },
+  { id: 'house-red', name: 'House red wine', cat: 'wine', unit: 'bottles', dp: 0, reorder: 12, daily: 4, next: at(4, 10) },
+  { id: 'sparkling-water', name: 'Sparkling water', cat: 'soft', unit: 'cases', dp: 0, reorder: 6, daily: 2, next: at(5, 10) },
+  { id: 'ceramic-mugs', name: 'Ceramic mugs', cat: 'supplies', unit: 'pcs', dp: 0, reorder: 12, daily: 2.5, next: at(4, 10) },
+  { id: 'takeaway-cups', name: 'Takeaway cups', cat: 'supplies', unit: 'pcs', dp: 0, reorder: 400, daily: 220, next: at(4, 10) },
+];
+// Fixed points. Copenhagen and Paris beans match Operations v7 (copenhagen-stock, paris-stock).
+// Berlin/Paris mugs and Amsterdam oat milk match the products named in Overview's inventory signal.
+const FIXED = {
+  'espresso-beans@copenhagen': { onHand: 2.1, daily: 9.2, issue: 'copenhagen-stock' },
+  'espresso-beans@paris': { onHand: 3.2, issue: 'paris-stock' },
+  'ceramic-mugs@berlin': { onHand: 10 },
+  'ceramic-mugs@paris': { onHand: 10 },
+  'oat-milk@amsterdam': { onHand: 11 },
+  'takeaway-cups@amsterdam': { onHand: 0 },
+  'house-red@lisbon': { onHand: 120 },
+  'sparkling-water@munich': { onHand: 26 },
+};
+const ISSUES = { 'copenhagen-stock': 'Espresso beans may run out around 19:30', 'paris-stock': 'Espresso beans are low' };
+
+const round = (v, dp) => { const k = Math.pow(10, dp); return Math.round(v * k) / k; };
+const hash = s => { let h = 0; for (const ch of s) h = (h * 31 + ch.charCodeAt(0)) % 9973; return h; };
+// Trading minutes between two clock points (stock is only used 07:00–22:00).
+const tradeMin = (a, b) => { let t = 0; for (let d = 0; d < 8; d++) { const s = Math.max(a, d * 1440 + OPEN), e = Math.min(b, d * 1440 + CLOSE); if (e > s) t += e - s; } return t; };
+const runoutAt = (onHand, daily) => {
+  if (onHand <= 0) return NOW;
+  const per = daily / TRADE; let rem = onHand;
+  for (let d = 0; d < 90; d++) { const s = Math.max(NOW, d * 1440 + OPEN), e = d * 1440 + CLOSE; if (e <= s) continue; const cap = (e - s) * per; if (rem <= cap) return s + rem / per; rem -= cap; }
+  return Infinity;
+};
+// Presentation only: one 9px circular marker per status; labels stay neutral text.
+const AMBER = 'oklch(68% 0.15 62)', TEAL = 'oklch(58% 0.09 185)', GRAY = 'oklch(80% 0.006 270)';
+const dot = bg => 'width:9px;height:9px;border-radius:50%;flex-shrink:0;box-sizing:border-box;background:' + bg;
+const ST = {
+  out:      { label: 'Out of stock', rank: 0, color: INK,   weight: 600, sw: dot(NEG), rule: 'No stock on hand.' },
+  critical: { label: 'Critical',     rank: 1, color: INK,   weight: 600, sw: dot('#fff') + ';border:2px solid ' + NEG, rule: 'Projected to run out before the next delivery.' },
+  low:      { label: 'Low',          rank: 2, color: INK,   weight: 500, sw: dot(AMBER), rule: 'At or below the reorder level. Projected to last until the next delivery.' },
+  excess:   { label: 'Excess',       rank: 3, color: MUTED, weight: 500, sw: dot(TEAL), rule: 'More than 3\u00d7 the reorder level or more than 14 days of cover.' },
+  ok:       { label: 'OK',           rank: 4, color: MUTED, weight: 400, sw: dot(GRAY), rule: 'Above the reorder level and within the excess threshold.' },
+};
+const ORDER = ['out', 'critical', 'low', 'excess', 'ok'];
+// Status rules, applied to every record in the same order.
+const statusOf = r => r.onHand <= 0 ? 'out' : r.runout < r.next ? 'critical' : r.onHand <= r.reorder ? 'low' : (r.onHand > 3 * r.reorder || r.cover > 14) ? 'excess' : 'ok';
+
+const ROWS = [];
+PRODUCTS.forEach((p, pi) => LOCS.forEach((l, li) => {
+  const id = p.id + '@' + l.id, fx = FIXED[id] || {};
+  const scale = round(REV[l.id] / 21000, 1);
+  const reorder = round(p.reorder * scale, p.dp), daily = round(fx.daily || p.daily * scale, 1);
+  let onHand = fx.onHand;
+  if (onHand == null) {
+    const need = daily / TRADE * tradeMin(NOW, p.next);
+    onHand = round(Math.max(reorder * (1.5 + (hash(id) % 9) / 10), need * 1.3), p.dp);
+    onHand = Math.min(onHand, round(reorder * 2.8, p.dp), round(daily * 13, p.dp));
+  }
+  const r = { id, p, l, pi, li, reorder, daily, onHand, next: p.next, issue: fx.issue || null };
+  r.cover = daily > 0 ? onHand / daily : Infinity;
+  r.runout = runoutAt(onHand, daily);
+  r.status = statusOf(r);
+  ROWS.push(r);
+}));
+const BY_ID = Object.fromEntries(ROWS.map(r => [r.id, r]));
+const unitTxt = (p, v) => (p.unit === 'bottles' || p.unit === 'cases') && v === 1 ? p.unit.slice(0, -1) : p.unit;
+const qty = (p, v) => (p.dp ? v.toFixed(p.dp) : Math.round(v).toLocaleString('en-US')) + ' ' + unitTxt(p, v);
+const coverTxt = r => r.status === 'out' ? 'Out now' : r.runout < CLOSE ? 'Runs out ' + hm(r.runout) : (r.cover < 10 ? r.cover.toFixed(1) : Math.round(r.cover)) + ' days';
+const SORTS = {
+  urgency: { name: 'Most urgent', meta: 'Status, then run-out', cmp: (a, b) => ST[a.status].rank - ST[b.status].rank || a.runout - b.runout || a.cover - b.cover || a.p.name.localeCompare(b.p.name) },
+  az:      { name: 'Product A\u2013Z', meta: 'Then location', cmp: (a, b) => a.p.name.localeCompare(b.p.name) || a.li - b.li },
+  cover:   { name: 'Days of cover', meta: 'Lowest first', cmp: (a, b) => a.cover - b.cover || a.p.name.localeCompare(b.p.name) },
+};
+const ATTN = r => ST[r.status].rank <= 2;
+
+const initial = () => {
+  const s = { view: 'attention', statusF: null, locF: null, catF: null, q: '', sort: 'urgency', sel: null, reported: {}, notice: null };
+  let q; try { q = new URLSearchParams(window.location.search); } catch (e) { return s; }
+  const loc = q.get('location'), prod = q.get('product'), st = q.get('status');
+  if (LOCS.some(l => l.id === loc)) s.locF = loc;
+  if (ORDER.includes(st)) { s.statusF = st; if (!ATTN({ status: st })) s.view = 'all'; }
+  if (PRODUCTS.some(p => p.id === prod)) {
+    const cands = ROWS.filter(r => r.p.id === prod && (!s.locF || r.l.id === s.locF) && (!s.statusF || r.status === s.statusF)).sort(SORTS.urgency.cmp);
+    const pick = cands[0];
+    if (pick) { s.sel = pick.id; if (s.view === 'attention' && !ATTN(pick)) s.view = 'all'; }
+  }
+  return s;
+};
+
+class Component extends DCLogic {
+  state = Object.assign({ locOpen: false, catOpen: false, sortOpen: false }, initial());
+  asideRef = React.createRef(); navRef = React.createRef(); bottomRef = React.createRef(); gsRef = React.createRef();
+  reportBtnRef = React.createRef(); paneRef = React.createRef(); tableRef = React.createRef();
+  // Detail pane: when beside the table it scrolls on its own, sized so its bottom edge is always inside the viewport
+  // (otherwise the pane's end sat below the fold and wheel scrolling stalled at the pane boundary). Stacked: no inner scroll.
+  fitPane() {
+    const p = this.paneRef.current, t = this.tableRef.current; if (!p || !t) return;
+    if (p.getBoundingClientRect().left < t.getBoundingClientRect().right) { p.style.maxHeight = ''; p.style.overflowY = ''; p.style.overscrollBehaviorY = ''; return; }
+    const top = Math.max(68, p.getBoundingClientRect().top);
+    p.style.maxHeight = Math.max(240, window.innerHeight - top - 44) + 'px'; p.style.overflowY = 'auto'; p.style.overscrollBehaviorY = 'contain';
+  }
+  fitSidebar() {
+    const aside = this.asideRef.current, nav = this.navRef.current, bottom = this.bottomRef.current;
+    if (!aside || !nav || !bottom) return;
+    const gs = this.gsRef.current;
+    if (gs) this._gsH = gs.offsetHeight + 10;
+    const wH = this._gsH || 200, SAVE = 42;
+    const avail = aside.clientHeight - 24;
+    const base = bottom.offsetHeight - (gs ? gs.offsetHeight + 10 : 0);
+    const navN = nav.scrollHeight + (this.state.navCompact ? SAVE : 0);
+    let next;
+    if (navN + base + wH <= avail) next = { gsFit: true, navCompact: false };
+    else if (navN - SAVE + base + wH <= avail) next = { gsFit: true, navCompact: true };
+    else next = { gsFit: false, navCompact: false };
+    if (next.gsFit !== this.state.gsFit || next.navCompact !== this.state.navCompact) this.setState(next);
+  }
+  componentDidMount() {
+    try { this._opMq = window.matchMedia('(max-width: 719px)'); this._opMqFn = () => this.setState({ sideCollapsed: this._opMq.matches }); this._opMq.addEventListener('change', this._opMqFn); if (this._opMq.matches) this.setState({ sideCollapsed: true }); } catch (e) {}
+    
+    this._onResize = () => this.fitSidebar();
+    requestAnimationFrame(this._onResize);
+    if (document.fonts) document.fonts.ready.then(this._onResize);
+    window.addEventListener('resize', this._onResize);
+    this._onScroll = () => { if (this._paneRaf) return; this._paneRaf = requestAnimationFrame(() => { this._paneRaf = null; this.fitPane(); }); };
+    window.addEventListener('scroll', this._onScroll, { passive: true }); window.addEventListener('resize', this._onScroll);
+    requestAnimationFrame(this._onScroll);
+    this._onDocDown = e => {
+      ['loc', 'cat', 'sort'].forEach(k => {
+        if (!this.state[k + 'Open']) return;
+        const m = this.kbRef(k + 'Menu').current, b = this.kbRef(k + 'Btn').current;
+        if ((m && m.contains(e.target)) || (b && b.contains(e.target))) return;
+        this.setState({ [k + 'Open']: false });
+      });
+    };
+    document.addEventListener('mousedown', this._onDocDown);
+  }
+  // Toolbar menus: trigger buttons open a menu; arrows/Home/End move between options; Escape or Tab close it; focus returns to the trigger.
+  kbRefs = {};
+  kbRef(k) { return this.kbRefs[k] || (this.kbRefs[k] = React.createRef()); }
+  kbApplyFocus() {
+    const prev = this._kbPrev; this._kbPrev = { locOpen: this.state.locOpen, catOpen: this.state.catOpen, sortOpen: this.state.sortOpen };
+    if (this._kbIn) { const m = this.kbRef(this._kbIn + 'Menu').current; if (m) { this._kbIn = null; const it = m.querySelector('[data-opt][aria-checked="true"]') || m.querySelector('[data-opt]'); if (it) it.focus(); } }
+    ['loc', 'cat', 'sort'].forEach(k => {
+      if (!prev || !prev[k + 'Open'] || this.state[k + 'Open']) return;
+      const b = this.kbRef(k + 'Btn').current, a = document.activeElement;
+      if (b && (this._kbOut === k || !a || a === document.body)) b.focus();
+      if (this._kbOut === k) this._kbOut = null;
+    });
+  }
+  kbMenuKey(k) {
+    return e => {
+      const m = this.kbRef(k + 'Menu').current; if (!m) return;
+      const items = [...m.querySelectorAll('[data-opt]')], n = items.length, i = items.indexOf(document.activeElement);
+      const go = j => { e.preventDefault(); if (n) items[(j + n) % n].focus(); };
+      if (e.key === 'Escape' || e.key === 'Tab') { e.preventDefault(); e.stopPropagation(); this._kbOut = k; this.setState({ [k + 'Open']: false }); }
+      else if (e.key === 'ArrowDown') go(i < 0 ? 0 : i + 1);
+      else if (e.key === 'ArrowUp') go(i < 0 ? n - 1 : i - 1);
+      else if (e.key === 'Home') go(0);
+      else if (e.key === 'End') go(n - 1);
+    };
+  }
+  kbBtnKey(k) { return e => { if ((e.key === 'ArrowDown' || e.key === 'ArrowUp') && !this.state[k + 'Open']) { e.preventDefault(); e.currentTarget.click(); } }; }
+  kbVals(keys) {
+    const v = {};
+    keys.forEach(k => { v[k + 'BtnRef'] = this.kbRef(k + 'Btn'); v[k + 'MenuRef'] = this.kbRef(k + 'Menu'); v[k + 'BtnKey'] = this.kbBtnKey(k); v[k + 'MenuKey'] = this.kbMenuKey(k); v[k + 'Expanded'] = this.state[k + 'Open'] ? 'true' : 'false'; });
+    return v;
+  }
+  toggleMenu(k) { if (!this.state[k + 'Open']) this._kbIn = k; this.setState(st => ({ locOpen: false, catOpen: false, sortOpen: false, [k + 'Open']: !st[k + 'Open'] })); }
+  componentDidUpdate() {
+    this.fitSidebar(); this.kbApplyFocus(); this.fitPane();
+    if (this._paneSel !== this.state.sel) { this._paneSel = this.state.sel; if (this.paneRef.current) this.paneRef.current.scrollTop = 0; }
+    if (this._sel !== undefined && this._sel !== this.state.sel) this.setState({ sel: this._sel });
+  }
+  componentWillUnmount() {
+    if (this._opMq) this._opMq.removeEventListener('change', this._opMqFn);
+    window.removeEventListener('scroll', this._onScroll); window.removeEventListener('resize', this._onScroll); window.removeEventListener('resize', this._onResize); document.removeEventListener('mousedown', this._onDocDown); }
+
+  optStyle(active) {
+    return 'display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:' + (active ? 600 : 500) + ';color:' + (active ? 'oklch(20% 0.01 270)' : 'oklch(32% 0.01 270)') + ';background:' + (active ? 'oklch(96.5% 0.004 270)' : 'transparent') + ';border-radius:9px;padding:7px 9px;cursor:pointer;width:100%;border:0;font-family:inherit;text-align:left';
+  }
+  // Filters other than view/status (used for chip counts).
+  passBase(r, s) {
+    if (s.locF && r.l.id !== s.locF) return false;
+    if (s.catF && r.p.cat !== s.catF) return false;
+    const q = (s.q || '').trim().toLowerCase();
+    if (q && !(r.p.name.toLowerCase().includes(q) || CAT[r.p.cat].toLowerCase().includes(q) || r.l.name.toLowerCase().includes(q))) return false;
+    return true;
+  }
+  pass(r, s) {
+    if (!this.passBase(r, s)) return false;
+    if (s.statusF) return r.status === s.statusF;
+    return s.view === 'all' || ATTN(r);
+  }
+  // Selecting from the location breakdown reveals the row if current filters would hide it.
+  selectPair(id) {
+    const r = BY_ID[id], s = this.state;
+    if (this.pass(r, s)) return this.setState({ sel: id, notice: null });
+    this.setState({ sel: id, notice: null, view: 'all', statusF: null, locF: null, q: '', catF: s.catF && s.catF !== r.p.cat ? null : s.catF });
+  }
+
+  renderVals() {
+    const s = this.state;
+    const base = ROWS.filter(r => this.passBase(r, s));
+    const rows = ROWS.filter(r => this.pass(r, s)).sort(SORTS[s.sort].cmp);
+    const selR = rows.find(r => r.id === s.sel) || rows[0] || null;
+    this._sel = selR ? selR.id : s.sel;
+    const counts = Object.fromEntries(ORDER.map(k => [k, base.filter(r => r.status === k).length]));
+    const attnN = base.filter(ATTN).length;
+    const filtered = !!(s.locF || s.catF || (s.q || '').trim());
+
+    const tagOf = r => r.issue ? 'Issue open' : s.reported[r.id] ? 'Reported' : '';
+    const rowVals = rows.map(r => {
+      const S = ST[r.status], sel = selR && r.id === selR.id, tag = tagOf(r);
+      const select = () => this.setState({ sel: r.id, notice: null });
+      return {
+        product: r.p.name, category: CAT[r.p.cat], loc: r.l.name, region: REGION_SHORT[r.l.region],
+        stLabel: S.label, stColor: S.color, stWeight: S.weight, sw: S.sw, hasTag: !!tag, tag,
+        onHand: qty(r.p, r.onHand), reorder: qty(r.p, r.reorder), cover: coverTxt(r),
+        coverColor: r.status === 'out' || r.status === 'critical' ? NEG : 'oklch(40% 0.012 270)', coverWeight: r.status === 'critical' || r.status === 'out' ? 500 : 400,
+        next: when(r.next),
+        aria: r.p.name + ', ' + r.l.name + ', ' + S.label + ', ' + qty(r.p, r.onHand) + ' on hand' + (tag ? ', ' + tag : ''),
+        current: sel ? 'true' : 'false', select,
+        onKey: e => { if (e.target !== e.currentTarget) return; if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') { e.preventDefault(); select(); } },
+        style: 'display:grid;grid-template-columns:minmax(110px,1.6fr) minmax(80px,1fr) 104px 84px 76px 100px 80px;column-gap:10px;align-items:center;padding:0 16px;min-height:56px;border-top:1px solid oklch(91.5% 0.005 270);cursor:pointer;background:' + (sel ? 'oklch(94.4% 0.004 270)' : 'transparent') + ';box-shadow:' + (sel ? 'inset 3px 0 0 oklch(30% 0.012 270)' : 'none'),
+      };
+    });
+
+    let d = null;
+    if (selR) {
+      const r = selR, S = ST[r.status], p = r.p;
+      const reported = !!s.reported[r.id];
+      const facts = [
+        { label: 'On hand', value: qty(p, r.onHand), sub: 'Reorder level ' + qty(p, r.reorder), color: r.status === 'out' ? NEG : 'oklch(14% 0.012 270)' },
+        { label: 'Days of cover', value: r.status === 'out' ? '0 days' : (r.cover < 10 ? r.cover.toFixed(1) : Math.round(r.cover)) + ' days', sub: 'On hand \u00f7 ~' + qty(p, r.daily) + ' a day', color: 'oklch(14% 0.012 270)' },
+        { label: 'Next delivery', value: when(r.next), sub: r.status === 'critical' ? 'Arrives after projected run-out' : r.status === 'out' ? 'Out until then' : 'Stock lasts until delivery', color: 'oklch(14% 0.012 270)' },
+        { label: 'Projected run-out', value: r.status === 'out' ? 'Now' : r.runout === Infinity ? 'Not in the next 90 days' : when(r.runout), sub: r.status === 'out' || r.runout === Infinity ? '' : 'Assumes trading hours 07:00\u201322:00', color: r.status === 'critical' || r.status === 'out' ? NEG : 'oklch(14% 0.012 270)' },
+      ];
+      const hasTrack = r.status === 'critical';
+      const fill = hasTrack ? Math.max(0, Math.min(1, (r.runout - NOW) / (r.next - NOW))) : 0;
+      const attn = ATTN(r);
+      const spreadRows = ROWS.filter(x => x.p.id === p.id);
+      const spreadAttn = spreadRows.filter(ATTN).length;
+      d = {
+        product: p.name, locLine: CAT[p.cat] + ' \u00b7 ' + r.l.name + ', ' + REGION_SHORT[r.l.region],
+        stLabel: S.label, stColor: S.color, stWeight: S.weight === 400 ? 500 : S.weight, sw: S.sw, rule: S.rule,
+        facts, hasTrack,
+        track: 'background:linear-gradient(' + NEG + ',' + NEG + ') 0 0 / ' + (fill * 100).toFixed(1) + '% 100% no-repeat,repeating-linear-gradient(135deg,oklch(70% 0.008 270 / 0.6) 0 3px,transparent 3px 6px),oklch(96% 0.003 270)',
+        trackFrom: 'Now ' + hm(NOW), trackTo: 'Runs out ' + hm(r.runout) + ' \u00b7 delivery ' + when(r.next),
+        hasIssue: !!r.issue, issueTitle: r.issue ? ISSUES[r.issue] : '', issueHref: r.issue ? 'Operations.dc.html?issue=' + encodeURIComponent(r.issue) : '#',
+        canReport: attn && !r.issue, reportedA: reported ? 'true' : 'false',
+        reportLabel: reported ? '\u2713 Stock problem reported' : 'Report stock problem',
+        reportStyle: reported
+          ? 'height:36px;padding:0 14px;border-radius:8px;border:1px solid oklch(96.5% 0.012 258);background:oklch(96.5% 0.012 258);color:oklch(46% 0.15 258);font:inherit;font-size:12.5px;font-weight:600;cursor:default;white-space:nowrap'
+          : 'height:36px;padding:0 16px;border-radius:8px;border:1px solid ' + BLUE + ';background:' + BLUE + ';color:#fff;font:inherit;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap',
+        report: () => {
+          if (reported) return;
+          this.setState(st => ({ reported: Object.assign({}, st.reported, { [r.id]: true }), notice: { id: r.id, text: 'Stock problem reported for ' + p.name.toLowerCase() + ' at ' + r.l.name + '. Simulated in this prototype: nothing is sent, and it clears when you reload.' } }));
+        },
+        laHref: 'Location Analytics.dc.html?location=' + encodeURIComponent(r.l.id), laLabel: r.l.name + ' analytics',
+        spreadNote: spreadAttn ? spreadAttn + ' of 12 need attention' : 'All 12 within stock rules',
+        spread: spreadRows.map(x => {
+          const XS = ST[x.status], cur = x.id === r.id;
+          return {
+            loc: x.l.name, onHand: qty(p, x.onHand), stLabel: XS.label, stColor: XS.color, stWeight: XS.weight, sw: XS.sw, nameWeight: cur ? 600 : 400,
+            current: cur ? 'true' : 'false', go: () => this.selectPair(x.id),
+            style: 'display:grid;grid-template-columns:minmax(0,1fr) 84px 104px;column-gap:10px;align-items:center;width:100%;min-height:34px;padding:0 10px;border:0;border-radius:7px;font-family:inherit;text-align:left;cursor:pointer;background:' + (cur ? 'oklch(96.5% 0.004 270)' : 'transparent'),
+          };
+        }),
+      };
+    }
+
+    const L = s.locF ? LOCS.find(l => l.id === s.locF) : null;
+    const locOptions = [{ hasHead: false, head: '', name: 'All locations', meta: '12', checked: !s.locF ? 'true' : 'false', style: this.optStyle(!s.locF), select: () => this.setState({ locF: null, locOpen: false }) }]
+      .concat(LOCS.map((l, i) => ({ hasHead: i === 0 || LOCS[i - 1].region !== l.region, head: REGION_NAME[l.region], name: l.name, meta: String(ROWS.filter(r => r.l.id === l.id && ATTN(r)).length || ''), checked: s.locF === l.id ? 'true' : 'false', style: this.optStyle(s.locF === l.id), select: () => this.setState({ locF: l.id, locOpen: false }) })));
+    const catOptions = [{ name: 'All categories', meta: '', checked: !s.catF ? 'true' : 'false', style: this.optStyle(!s.catF), select: () => this.setState({ catF: null, catOpen: false }) }]
+      .concat(CATS.map(([id, name]) => ({ name, meta: PRODUCTS.filter(p => p.cat === id).length + ' products', checked: s.catF === id ? 'true' : 'false', style: this.optStyle(s.catF === id), select: () => this.setState({ catF: id, catOpen: false }) })));
+    const viewStyle = on => 'height:26px;padding:0 10px;border-radius:7px;border:0;font:inherit;font-size:12.5px;white-space:nowrap;cursor:pointer;font-weight:' + (on ? 600 : 500) + ';color:' + (on ? 'oklch(18% 0.012 270)' : 'oklch(40% 0.012 270)') + ';background:' + (on ? '#fff' : 'transparent') + ';box-shadow:' + (on ? '0 1px 2px oklch(25% 0.02 265 / 0.1)' : 'none');
+    const vOn = k => !s.statusF && s.view === k;
+
+    return {
+      ...this.kbVals(['loc', 'cat', 'sort']),
+      navBadge: String(new Set(ROWS.filter(ATTN).map(r => r.p.id)).size),
+      chips: ORDER.map((k, ci) => {
+        const n = counts[k], on = s.statusF === k, S = ST[k];
+        return {
+          n, label: S.label, sw: S.sw, numColor: n ? 'oklch(30% 0.012 270)' : 'oklch(60% 0.01 270)', hasSep: ci > 0, title: S.label + ': ' + S.rule, pressed: on ? 'true' : 'false', disabled: n ? 'false' : 'true',
+          toggle: () => { if (n) this.setState(st => ({ statusF: on ? null : k, view: on ? st.view : (ATTN({ status: k }) ? st.view : 'all') })); },
+          style: 'display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 9px;border-radius:7px;font:inherit;font-size:12px;white-space:nowrap;color:' + (n ? 'oklch(44% 0.012 270)' : 'oklch(60% 0.01 270)') + ';border:1px solid ' + (on ? 'oklch(88% 0.006 270)' : 'transparent') + ';background:' + (on ? '#fff' : 'transparent') + ';cursor:' + (n ? 'pointer' : 'default'),
+        };
+      }),
+      statusActive: !!s.statusF, clearStatus: () => this.setState({ statusF: null }),
+      views: [
+        { label: 'Needs attention', n: String(attnN), pressed: vOn('attention') ? 'true' : 'false', style: viewStyle(vOn('attention')), go: () => this.setState({ view: 'attention', statusF: null }) },
+        { label: 'All inventory', n: String(base.length), pressed: vOn('all') ? 'true' : 'false', style: viewStyle(vOn('all')), go: () => this.setState({ view: 'all', statusF: null }) },
+      ],
+      countLabel: s.statusF ? rows.length + ' ' + ST[s.statusF].label.toLowerCase() + (filtered ? ' \u00b7 filtered' : '') : (filtered ? rows.length + ' shown \u00b7 filtered' : rows.length + ' shown'),
+      q: s.q, onQ: e => this.setState({ q: e.target.value }), hasQ: !!s.q, clearQ: () => this.setState({ q: '' }),
+      locLabel: L ? L.name : 'All locations', locOpen: s.locOpen, toggleLoc: () => this.toggleMenu('loc'), locOptions,
+      catLabel: s.catF ? CAT[s.catF] : 'All categories', catOpen: s.catOpen, toggleCat: () => this.toggleMenu('cat'), catOptions,
+      sortLabel: SORTS[s.sort].name, sortOpen: s.sortOpen, toggleSort: () => this.toggleMenu('sort'),
+      sortOptions: Object.keys(SORTS).map(id => ({ name: SORTS[id].name, meta: SORTS[id].meta, checked: s.sort === id ? 'true' : 'false', style: this.optStyle(s.sort === id), select: () => this.setState({ sort: id, sortOpen: false }) })),
+      rows: rowVals, isEmpty: rows.length === 0,
+      emptyText: s.view === 'attention' && !s.statusF && !filtered ? 'Nothing needs attention right now.' : 'No stock matches these filters.',
+      clearAll: () => this.setState({ q: '', locF: null, catF: null, statusF: null }),
+      hasSel: !!d, noSel: !d, d: d || { facts: [], spread: [] }, reportBtnRef: this.reportBtnRef, paneRef: this.paneRef, tableRef: this.tableRef,
+      hasNotice: !!(s.notice && selR && s.notice.id === selR.id), noticeText: s.notice ? s.notice.text : '',
+
+      showGettingStartedC: !s.gsDismissed && s.gsFit !== false && !s.sideCollapsed,
+      dismissGs: () => { this.setState({ gsDismissed: true }); },
+      asideW: s.sideCollapsed ? '52px' : '198px',
+      navTxt: s.sideCollapsed ? 'none' : 'inline',
+      profileDir: s.sideCollapsed ? 'column' : 'row',
+      profilePadX: s.sideCollapsed ? '0' : '9px',
+      collapseML: s.sideCollapsed ? '0' : 'auto',
+      collapseGlyph: s.sideCollapsed ? '\u203A\u203A' : '\u2039\u2039',
+      collapseTitle: s.sideCollapsed ? 'Expand sidebar' : 'Collapse sidebar',
+      toggleSidebar: () => this.setState(st => ({ sideCollapsed: !st.sideCollapsed }), () => requestAnimationFrame(() => this.fitSidebar())),
+      navItemPad: s.navCompact ? '5px 9px' : '7px 9px',
+      navLabelPad: s.navCompact ? '9px 10px 5px' : '14px 10px 6px',
+      asideRef: this.asideRef, navRef: this.navRef, bottomRef: this.bottomRef, gsRef: this.gsRef,
+    };
+  }
+}
+
+</script>
+</body>
+</html>

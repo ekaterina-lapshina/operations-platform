@@ -17,45 +17,37 @@ body{margin:0;background:oklch(96.5% 0.003 270);font-family:'Inter',system-ui,sa
 input::placeholder{color:oklch(66% 0.008 270)}
 a{color:oklch(54% 0.19 258);text-decoration:none}
 a:hover{color:oklch(46% 0.19 258)}
+a:focus-visible,button:focus-visible,[role=button]:focus-visible{outline:2px solid oklch(54% 0.19 258);outline-offset:2px}
+nav a:focus-visible,[data-opt]:focus-visible{outline-offset:-2px}
 </style>
+<script src="./app-shell.js"></script>
 </helmet>
 
 <div style="min-height:100vh;background:oklch(94.6% 0.004 270);display:flex;flex-direction:column">
 
-<header style="height:52px;flex-shrink:0;background:oklch(94.6% 0.004 270);border-bottom:1px solid oklch(90.5% 0.006 270);display:flex;align-items:center;gap:16px;padding:0 16px;position:sticky;top:0;z-index:20">
-<div style="display:flex;align-items:center;gap:9px;width:198px;flex-shrink:0">
+<header style="height:52px;flex-shrink:0;background:oklch(94.6% 0.004 270);border-bottom:1px solid oklch(90.5% 0.006 270);display:flex;align-items:center;gap:16px;padding:0 16px;position:sticky;top:0;z-index:20;min-width:0">
+<div style="display:flex;align-items:center;gap:9px;flex:0 1 198px;min-width:0">
 <div style="width:22px;height:22px;border-radius:7px;background:oklch(54% 0.19 258);flex-shrink:0"></div>
-<span style="font-size:13.5px;font-weight:700;letter-spacing:-.01em;color:oklch(28% 0.012 270)">Operations Platform</span>
-<span style="margin-left:auto;font-size:11px;color:oklch(48% 0.012 270);background:#fff;border:1px solid oklch(91% 0.006 270);border-radius:6px;padding:2px 6px">Pro</span>
+<span style="min-width:0;font-size:13.5px;font-weight:700;letter-spacing:-.01em;line-height:1.2;color:oklch(28% 0.012 270);overflow-wrap:anywhere">Operations Platform</span>
 </div>
-<label style="flex:1;min-width:0;max-width:420px;display:flex;align-items:center;gap:8px;background:#fff;border:1px solid oklch(91% 0.006 270);border-radius:9px;padding:6px 11px">
-<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(47% 0.013 270)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="7" cy="7" r="4.6"></circle><line x1="10.4" y1="10.4" x2="14" y2="14"></line></svg>
-<input type="text" placeholder="Search locations, products, employees" style="border:none;outline:none;background:transparent;font-family:inherit;font-size:12.5px;color:oklch(22% 0.012 270);width:100%">
-<span style="font-size:10.5px;background:oklch(96.5% 0.004 270);border-radius:5px;padding:1px 5px;flex-shrink:0;color:oklch(52% 0.012 270)">&#8984;K</span>
-</label>
-<div style="margin-left:auto;display:flex;align-items:center;gap:8px;flex-shrink:0">
-<span style="width:32px;height:32px;border-radius:9px;background:#fff;border:1px solid oklch(91% 0.006 270);display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:oklch(50% 0.01 270);cursor:pointer">?</span>
-<span style="position:relative;width:32px;height:32px;border-radius:9px;background:#fff;border:1px solid oklch(91% 0.006 270);display:inline-flex;align-items:center;justify-content:center;cursor:pointer"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(48% 0.012 270)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M4 6.6a4 4 0 0 1 8 0c0 2.4.5 3.6 1.2 4.4H2.8C3.5 10.2 4 9 4 6.6Z"></path><path d="M6.6 13.2a1.6 1.6 0 0 0 2.8 0"></path></svg><span style="position:absolute;top:5px;right:6px;width:6px;height:6px;border-radius:50%;background:oklch(54% 0.19 258);border:1.5px solid #fff"></span></span>
-<div style="width:1px;height:20px;background:oklch(90.5% 0.006 270);margin:0 2px"></div>
-<span title="Anna Weber" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer"><span style="width:28px;height:28px;flex-shrink:0;border-radius:50%;background:oklch(86% 0.014 265);box-shadow:inset 0 0 0 1px oklch(80% 0.014 265);display:inline-flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:600;letter-spacing:.01em;color:oklch(32% 0.02 265)">AW</span><span style="font-size:11px;color:oklch(45% 0.012 270)">&#9662;</span></span>
-</div>
+<x-import component-from-global-scope="op-header-tools" hint-size="100%,52px" style="flex:1 0 auto;min-width:0;display:flex;align-items:center;height:52px"></x-import>
 </header>
 
 <div style="flex:1;display:flex;min-height:0">
 
 <aside ref="{{ asideRef }}" style="width:{{ asideW }};transition:width .18s ease;overflow:hidden;flex-shrink:0;background:oklch(94.6% 0.004 270);border-right:1px solid oklch(90.5% 0.006 270);padding:10px 8px 14px;display:flex;flex-direction:column;position:sticky;top:52px;height:calc(100vh - 52px)">
-<nav ref="{{ navRef }}" style="display:flex;flex-direction:column;gap:1px;overflow-y:auto;min-height:0">
+<nav ref="{{ navRef }}" aria-label="Main" style="display:flex;flex-direction:column;gap:1px;overflow-y:auto;min-height:0">
 <div style="display:{{ navTxt }};font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:oklch(47% 0.013 270);padding:4px 10px 6px">Workspace</div>
-<a href="Overview.dc.html" style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer;text-decoration:none" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><rect x="2" y="2" width="5" height="5" rx="1"></rect><rect x="9" y="2" width="5" height="5" rx="1"></rect><rect x="2" y="9" width="5" height="5" rx="1"></rect><rect x="9" y="9" width="5" height="5" rx="1"></rect></svg><span style="display:{{ navTxt }};white-space:nowrap">Overview</span></a>
-<a href="Operations.dc.html" style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer;text-decoration:none" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><polyline points="1.5,10 5,10 6.8,5.5 9.2,12 11,8 14.5,8"></polyline></svg><span style="display:{{ navTxt }};white-space:nowrap">Operations</span></a>
+<a href="Overview.dc.html" style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><rect x="2" y="2" width="5" height="5" rx="1"></rect><rect x="9" y="2" width="5" height="5" rx="1"></rect><rect x="2" y="9" width="5" height="5" rx="1"></rect><rect x="9" y="9" width="5" height="5" rx="1"></rect></svg><span style="display:{{ navTxt }};white-space:nowrap">Overview</span></a>
+<a href="Operations.dc.html" style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><polyline points="1.5,10 5,10 6.8,5.5 9.2,12 11,8 14.5,8"></polyline></svg><span style="display:{{ navTxt }};white-space:nowrap">Operations</span></a>
 <div style="display:{{ navTxt }};font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:oklch(47% 0.013 270);padding:{{ navLabelPad }}">Analysis</div>
-<span style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:600;color:oklch(20% 0.012 270);background:#fff;border:1px solid oklch(91.5% 0.006 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(54% 0.19 258)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><line x1="3" y1="13" x2="3" y2="8.5"></line><line x1="8" y1="13" x2="8" y2="4"></line><line x1="13" y1="13" x2="13" y2="6.5"></line></svg><span style="display:{{ navTxt }};white-space:nowrap">Location analytics</span></span>
-<span style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M4 2.2h5.2L12 5v8.8H4z"></path><line x1="6" y1="8" x2="10" y2="8"></line><line x1="6" y1="10.6" x2="9" y2="10.6"></line></svg><span style="display:{{ navTxt }};white-space:nowrap">Reports</span></span>
+<a href="Location Analytics.dc.html" aria-current="page" style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:600;color:oklch(20% 0.012 270);background:#fff;border:1px solid oklch(91.5% 0.006 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(54% 0.19 258)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><line x1="3" y1="13" x2="3" y2="8.5"></line><line x1="8" y1="13" x2="8" y2="4"></line><line x1="13" y1="13" x2="13" y2="6.5"></line></svg><span style="display:{{ navTxt }};white-space:nowrap">Location analytics</span></a>
+<a href="Reports.dc.html" style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M4 2.2h5.2L12 5v8.8H4z"></path><line x1="6" y1="8" x2="10" y2="8"></line><line x1="6" y1="10.6" x2="9" y2="10.6"></line></svg><span style="display:{{ navTxt }};white-space:nowrap">Reports</span></a>
 <div style="display:{{ navTxt }};font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:oklch(47% 0.013 270);padding:{{ navLabelPad }}">Manage</div>
-<span style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M2.5 5.5 8 2.8l5.5 2.7v5L8 13.2 2.5 10.5z"></path><line x1="2.5" y1="5.5" x2="8" y2="8.2"></line><line x1="13.5" y1="5.5" x2="8" y2="8.2"></line></svg><span style="display:{{ navTxt }};white-space:nowrap">Inventory</span><span style="display:{{ navTxt }};margin-left:auto;font-size:10.5px;font-weight:600;color:oklch(42% 0.012 270);background:oklch(91.5% 0.006 270);border-radius:5px;padding:1px 5px">5</span></span>
-<span style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="6.3" cy="6" r="2.4"></circle><path d="M2 13c.6-2.2 2.3-3.3 4.3-3.3S10 10.8 10.6 13"></path><path d="M11 5.2a2.2 2.2 0 0 1 0 4"></path></svg><span style="display:{{ navTxt }};white-space:nowrap">Team</span></span>
-<a href="Locations.dc.html" style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer;text-decoration:none" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M8 14c2.6-3.2 4-5.4 4-7.2A4 4 0 0 0 4 6.8C4 8.6 5.4 10.8 8 14Z"></path><circle cx="8" cy="6.6" r="1.5"></circle></svg><span style="display:{{ navTxt }};white-space:nowrap">Locations</span><span style="display:{{ navTxt }};margin-left:auto;font-size:10.5px;font-weight:600;color:oklch(42% 0.012 270);background:oklch(91.5% 0.006 270);border-radius:5px;padding:1px 5px">12</span></a>
-<span style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="5.4" cy="5.6" r="2.3"></circle><circle cx="10.8" cy="7.4" r="1.9"></circle><path d="M1.8 13c.5-2 2-3 3.6-3s3.1 1 3.6 3"></path></svg><span style="display:{{ navTxt }};white-space:nowrap">Customers</span></span>
+<a href="Inventory.dc.html" style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M2.5 5.5 8 2.8l5.5 2.7v5L8 13.2 2.5 10.5z"></path><line x1="2.5" y1="5.5" x2="8" y2="8.2"></line><line x1="13.5" y1="5.5" x2="8" y2="8.2"></line></svg><span style="display:{{ navTxt }};white-space:nowrap">Inventory</span><span style="display:{{ navTxt }};margin-left:auto;font-size:10.5px;font-weight:600;color:oklch(42% 0.012 270);background:oklch(91.5% 0.006 270);border-radius:5px;padding:1px 5px">5</span></a>
+<a href="Employees.dc.html" style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="6.3" cy="6" r="2.4"></circle><path d="M2 13c.6-2.2 2.3-3.3 4.3-3.3S10 10.8 10.6 13"></path><path d="M11 5.2a2.2 2.2 0 0 1 0 4"></path></svg><span style="display:{{ navTxt }};white-space:nowrap">Employees</span></a>
+<a href="Locations.dc.html" style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M8 14c2.6-3.2 4-5.4 4-7.2A4 4 0 0 0 4 6.8C4 8.6 5.4 10.8 8 14Z"></path><circle cx="8" cy="6.6" r="1.5"></circle></svg><span style="display:{{ navTxt }};white-space:nowrap">Locations</span><span style="display:{{ navTxt }};margin-left:auto;font-size:10.5px;font-weight:600;color:oklch(42% 0.012 270);background:oklch(91.5% 0.006 270);border-radius:5px;padding:1px 5px">12</span></a>
+<a href="Customers.dc.html" style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="5.4" cy="5.6" r="2.3"></circle><circle cx="10.8" cy="7.4" r="1.9"></circle><path d="M1.8 13c.5-2 2-3 3.6-3s3.1 1 3.6 3"></path></svg><span style="display:{{ navTxt }};white-space:nowrap">Customers</span></a>
 </nav>
 <div ref="{{ bottomRef }}" style="margin-top:auto;display:flex;flex-direction:column;gap:1px">
 <sc-if value="{{ showGettingStartedC }}" hint-placeholder-val="{{ true }}"><div ref="{{ gsRef }}" style="display:flex;flex-direction:column;margin:0 2px 10px;padding:5px 5px 7px;background:#fff;border:1px solid oklch(91.5% 0.006 270);border-radius:14px;box-shadow:0 1px 2px oklch(25% 0.02 265 / 0.04)">
@@ -70,16 +62,16 @@ a:hover{color:oklch(46% 0.19 258)}
 <span style="font-size:12.5px;font-weight:600;letter-spacing:-.008em;color:oklch(20% 0.012 270)">Getting started</span>
 <span style="font-size:11px;line-height:1.4;color:oklch(46% 0.013 270);text-wrap:pretty">Take a quick tour of the platform.</span>
 </div>
-<a href="#" style="display:flex;align-items:center;justify-content:center;gap:6px;height:32px;border-radius:9px;background:linear-gradient(oklch(31% 0.012 270),oklch(21% 0.012 270));box-shadow:inset 0 1px 0 oklch(100% 0 0 / 0.12),0 1px 2px oklch(20% 0.02 270 / 0.2);color:#fff;font-size:12px;font-weight:600;letter-spacing:-.004em;text-decoration:none" style-hover="background:linear-gradient(oklch(36% 0.012 270),oklch(25% 0.012 270))">Start onboarding &#8594;</a>
+<a href="#" data-op-tour="" role="button" style="display:flex;align-items:center;justify-content:center;gap:6px;height:32px;border-radius:9px;background:linear-gradient(oklch(31% 0.012 270),oklch(21% 0.012 270));box-shadow:inset 0 1px 0 oklch(100% 0 0 / 0.12),0 1px 2px oklch(20% 0.02 270 / 0.2);color:#fff;font-size:12px;font-weight:600;letter-spacing:-.004em;text-decoration:none" style-hover="background:linear-gradient(oklch(36% 0.012 270),oklch(25% 0.012 270))">Start onboarding &#8594;</a>
 </div></sc-if>
-<span style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:7px 9px;cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><line x1="2.5" y1="5" x2="13.5" y2="5"></line><line x1="2.5" y1="11" x2="13.5" y2="11"></line><circle cx="6" cy="5" r="1.7"></circle><circle cx="10.4" cy="11" r="1.7"></circle></svg><span style="display:{{ navTxt }};white-space:nowrap">Settings</span></span>
+<a href="Settings.dc.html" style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:7px 9px;cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><line x1="2.5" y1="5" x2="13.5" y2="5"></line><line x1="2.5" y1="11" x2="13.5" y2="11"></line><circle cx="6" cy="5" r="1.7"></circle><circle cx="10.4" cy="11" r="1.7"></circle></svg><span style="display:{{ navTxt }};white-space:nowrap">Settings</span></a>
 <div style="display:flex;flex-direction:{{ profileDir }};align-items:center;gap:9px;padding:10px {{ profilePadX }} 0;margin-top:8px;border-top:1px solid oklch(90.5% 0.006 270)">
 <div title="North &amp; Oak" style="width:26px;height:26px;border-radius:7px;background:oklch(30% 0.012 270);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:700;letter-spacing:.02em;color:#fff">N&amp;O</div>
 <div style="display:{{ navTxt }};min-width:0">
 <div style="font-size:11.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:oklch(30% 0.012 270)">North &amp; Oak</div>
 <div style="font-size:10.5px;color:oklch(46% 0.013 270)">Owner</div>
 </div>
-<span title="{{ collapseTitle }}" onClick="{{ toggleSidebar }}" style="margin-left:{{ collapseML }};font-size:11px;color:oklch(45% 0.012 270);border:1px solid oklch(90% 0.006 270);border-radius:6px;padding:2px 6px;background:#fff;cursor:pointer" style-hover="color:oklch(24% 0.012 270);border-color:oklch(84% 0.008 270)">{{ collapseGlyph }}</span>
+<button type="button" title="{{ collapseTitle }}" aria-label="{{ collapseTitle }}" onClick="{{ toggleSidebar }}" style="margin-left:{{ collapseML }};font-size:11px;color:oklch(45% 0.012 270);border:1px solid oklch(90% 0.006 270);border-radius:6px;padding:2px 6px;background:#fff;cursor:pointer;font-family:inherit;line-height:inherit" style-hover="color:oklch(24% 0.012 270);border-color:oklch(84% 0.008 270)">{{ collapseGlyph }}</button>
 </div>
 </div>
 </aside>
@@ -87,28 +79,28 @@ a:hover{color:oklch(46% 0.19 258)}
 <main style="flex:1;min-width:0;display:flex;flex-direction:column;background:oklch(96.4% 0.004 265);border-top-left-radius:16px;border-left:1px solid oklch(92% 0.005 270);border-top:1px solid oklch(92% 0.005 270);margin-top:-1px;padding:0 0 44px">
 <div style="padding:18px 26px 16px;border-bottom:1px solid oklch(92% 0.005 265);display:flex;align-items:center;gap:16px;flex-wrap:wrap">
 <div style="display:flex;flex-direction:column;gap:6px;min-width:0;flex:1 0 auto">
-<a href="Overview.dc.html" style="align-self:flex-start;font-size:12px;font-weight:500;color:oklch(47% 0.013 270)" style-hover="color:oklch(26% 0.012 270)">Overview &#8250;</a>
+<nav aria-label="Breadcrumb" style="align-self:flex-start;display:flex;align-items:center;gap:6px;font-size:12px;font-weight:500"><a href="Overview.dc.html" style="font-size:12px;font-weight:500;color:oklch(47% 0.013 270)" style-hover="color:oklch(26% 0.012 270)">Overview &#8250;</a><sc-if value="{{ hasDetail }}" hint-placeholder-val="{{ true }}"><a href="{{ locationsHref }}" style="font-size:12px;font-weight:500;color:oklch(47% 0.013 270)" style-hover="color:oklch(26% 0.012 270)">Locations &#8250;</a></sc-if></nav>
 <h1 style="margin:0;font-size:21px;font-weight:600;letter-spacing:-.024em;line-height:1.15;color:oklch(18% 0.012 270)">{{ locName }}</h1>
 <span style="display:inline-flex;align-items:center;gap:8px;font-size:12px;color:oklch(47% 0.013 270);min-width:0"><span style="width:6px;height:6px;border-radius:50%;background:oklch(54% 0.19 258);box-shadow:0 0 0 3px oklch(54% 0.19 258 / 0.16);flex-shrink:0"></span><span style="white-space:nowrap">{{ locMeta }}</span></span>
 </div>
 <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap;justify-content:flex-end">
 <div style="position:relative">
-<span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:oklch(28% 0.012 270);background:#fff;border:1px solid oklch(88% 0.008 270);border-radius:8px;padding:5px 9px;cursor:pointer;white-space:nowrap" onClick="{{ toggleLocPicker }}"><span style="width:6px;height:6px;border-radius:50%;background:oklch(54% 0.19 258)"></span>{{ locName }} <span style="color:oklch(47% 0.013 270);font-weight:500">&#9662;</span></span>
+<button type="button" ref="{{ locBtnRef }}" aria-haspopup="menu" aria-expanded="{{ locExpanded }}" onKeyDown="{{ locBtnKey }}" onClick="{{ toggleLocPicker }}" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:oklch(28% 0.012 270);background:#fff;border:1px solid oklch(88% 0.008 270);border-radius:8px;padding:5px 9px;cursor:pointer;white-space:nowrap;font-family:inherit;line-height:inherit"><span style="width:6px;height:6px;border-radius:50%;background:oklch(54% 0.19 258)"></span>{{ locName }} <span style="color:oklch(47% 0.013 270);font-weight:500">&#9662;</span></button>
 <sc-if value="{{ locOpen }}" hint-placeholder-val="{{ false }}">
-<div style="position:absolute;top:calc(100% + 6px);right:0;width:248px;background:#fff;border:1px solid oklch(90% 0.006 270);border-radius:14px;box-shadow:0 12px 32px oklch(20% 0.02 270 / 0.12);padding:8px;z-index:30;display:flex;flex-direction:column;gap:1px">
+<div ref="{{ locMenuRef }}" role="menu" aria-label="Location" onKeyDown="{{ locMenuKey }}" style="position:absolute;top:calc(100% + 6px);right:0;width:248px;background:#fff;border:1px solid oklch(90% 0.006 270);border-radius:14px;box-shadow:0 12px 32px oklch(20% 0.02 270 / 0.12);padding:8px;z-index:30;display:flex;flex-direction:column;gap:1px">
 <sc-for list="{{ locOptions }}" as="o" hint-placeholder-count="2">
-<div style="{{ o.style }}" onClick="{{ o.select }}"><span>{{ o.name }}</span><span style="margin-left:auto;font-size:11px;color:oklch(52% 0.013 270)">{{ o.meta }}</span></div>
+<button type="button" data-opt="" role="menuitemradio" aria-checked="{{ o.checked }}" tabindex="-1" onClick="{{ o.select }}" style="{{ o.style }}"><span>{{ o.name }}</span><span style="margin-left:auto;font-size:11px;color:oklch(52% 0.013 270)">{{ o.meta }}</span></button>
 </sc-for>
 <div style="font-size:11px;line-height:1.4;color:oklch(52% 0.013 270);padding:8px 9px 4px;border-top:1px solid oklch(96% 0.004 270);margin-top:5px">Other locations aren't modelled in this prototype.</div>
 </div>
 </sc-if>
 </div>
 <div style="position:relative">
-<span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:oklch(34% 0.012 270);background:#fff;border:1px solid oklch(92% 0.005 270);border-radius:8px;padding:5px 9px;cursor:pointer;white-space:nowrap" onClick="{{ togglePeriodPicker }}">{{ periodLabel }} <span style="color:oklch(47% 0.013 270)">&#9662;</span></span>
+<button type="button" ref="{{ periodBtnRef }}" aria-haspopup="menu" aria-expanded="{{ periodExpanded }}" onKeyDown="{{ periodBtnKey }}" onClick="{{ togglePeriodPicker }}" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:oklch(34% 0.012 270);background:#fff;border:1px solid oklch(92% 0.005 270);border-radius:8px;padding:5px 9px;cursor:pointer;white-space:nowrap;font-family:inherit;line-height:inherit">{{ periodLabel }} <span style="color:oklch(47% 0.013 270)">&#9662;</span></button>
 <sc-if value="{{ periodOpen }}" hint-placeholder-val="{{ false }}">
-<div style="position:absolute;top:calc(100% + 6px);right:0;width:168px;background:#fff;border:1px solid oklch(90% 0.006 270);border-radius:14px;box-shadow:0 12px 32px oklch(20% 0.02 270 / 0.12);padding:8px;z-index:30;display:flex;flex-direction:column;gap:1px">
+<div ref="{{ periodMenuRef }}" role="menu" aria-label="Reporting period" onKeyDown="{{ periodMenuKey }}" style="position:absolute;top:calc(100% + 6px);right:0;width:168px;background:#fff;border:1px solid oklch(90% 0.006 270);border-radius:14px;box-shadow:0 12px 32px oklch(20% 0.02 270 / 0.12);padding:8px;z-index:30;display:flex;flex-direction:column;gap:1px">
 <sc-for list="{{ periodOptions }}" as="o" hint-placeholder-count="2">
-<div style="{{ o.style }}" onClick="{{ o.select }}"><span>{{ o.name }}</span><span style="margin-left:auto;font-size:11px;color:oklch(52% 0.013 270)">{{ o.meta }}</span></div>
+<button type="button" data-opt="" role="menuitemradio" aria-checked="{{ o.checked }}" tabindex="-1" onClick="{{ o.select }}" style="{{ o.style }}"><span>{{ o.name }}</span><span style="margin-left:auto;font-size:11px;color:oklch(52% 0.013 270)">{{ o.meta }}</span></button>
 </sc-for>
 </div>
 </sc-if>
@@ -123,7 +115,7 @@ a:hover{color:oklch(46% 0.19 258)}
 <div data-screen-label="A Pace summary" style="display:flex;flex-wrap:wrap;align-items:flex-end;gap:28px;padding:6px 0 22px;border-bottom:1px solid oklch(93% 0.005 270)">
 <div style="flex:1 1 380px;min-width:0">
 <div style="display:flex;align-items:center;flex-wrap:wrap;column-gap:8px;row-gap:2px;margin-bottom:12px">
-<span style="font-size:13px;font-weight:600;letter-spacing:-.005em;color:oklch(26% 0.012 270)">Deviation from expected pace</span><span style="position:relative;display:inline-flex;align-self:center" onMouseEnter="{{ tipAOn }}" onMouseLeave="{{ tipOff }}"><span style="width:14px;height:14px;border-radius:50%;border:1px solid oklch(80% 0.008 270);display:inline-flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:oklch(47% 0.013 270);cursor:help">i</span><sc-if value="{{ tipAOpen }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);width:232px;padding:9px 11px;background:#fff;border:1px solid oklch(91.5% 0.006 270);border-radius:10px;box-shadow:0 4px 14px oklch(25% 0.02 265 / 0.08),0 1px 2px oklch(25% 0.02 265 / 0.05);font-size:11.5px;font-weight:400;line-height:1.45;letter-spacing:0;text-transform:none;color:oklch(32% 0.012 270);z-index:40;white-space:normal;text-align:left">Expected pace = expected revenue for the selected period based on the location's target pace.</span></sc-if></span>
+<span style="font-size:13px;font-weight:600;letter-spacing:-.005em;color:oklch(26% 0.012 270)">Deviation from expected pace</span><span style="position:relative;display:inline-flex;align-self:center" onMouseEnter="{{ tipAOn }}" onMouseLeave="{{ tipOff }}"><button type="button" aria-label="About deviation from expected pace" aria-describedby="tip-A" onKeyDown="{{ tipEsc }}" style="width:14px;height:14px;padding:0;border-radius:50%;border:1px solid oklch(80% 0.008 270);background:none;display:inline-flex;align-items:center;justify-content:center;font-family:inherit;font-size:9px;font-weight:700;line-height:1;color:oklch(47% 0.013 270);cursor:help">i</button><sc-if value="{{ tipAOpen }}" hint-placeholder-val="{{ false }}"><span id="tip-A" role="tooltip" style="position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);width:232px;padding:9px 11px;background:#fff;border:1px solid oklch(91.5% 0.006 270);border-radius:10px;box-shadow:0 4px 14px oklch(25% 0.02 265 / 0.08),0 1px 2px oklch(25% 0.02 265 / 0.05);font-size:11.5px;font-weight:400;line-height:1.45;letter-spacing:0;text-transform:none;color:oklch(32% 0.012 270);z-index:40;white-space:normal;text-align:left">Expected pace = expected revenue for the selected period based on the location's target pace.</span></sc-if></span>
 <span style="font-size:12.5px;color:oklch(49% 0.012 270)">&middot;</span>
 <span style="font-size:12.5px;color:oklch(49% 0.012 270);white-space:nowrap">{{ periodLabel }} &middot; {{ locName }}</span>
 </div>
@@ -138,7 +130,7 @@ a:hover{color:oklch(46% 0.19 258)}
 <div style="font-size:30px;font-weight:600;font-variant-numeric:tabular-nums;font-feature-settings:'tnum','ss01';letter-spacing:-.034em;line-height:1.05;color:oklch(17% 0.012 270);margin-bottom:7px"><span style="font-size:.6em;font-weight:500;letter-spacing:0;color:oklch(55% 0.01 270);margin-right:1px;vertical-align:.5em">$</span>{{ kRev }}</div>
 <div style="display:flex;align-items:center;gap:4px;font-size:12.5px;font-weight:500;color:oklch(30% 0.012 270)"><span style="font-size:10px;color:{{ kRevDColor }}">{{ kRevDArrow }}</span>{{ kRevDVal }}</div></div>
 <div style="flex:1 1 130px;min-width:0;padding:0 0 0 20px;border-left:1px solid oklch(91% 0.006 270)">
-<div style="display:flex;align-items:center;gap:6px;font-size:12.5px;color:oklch(49% 0.012 270);margin-bottom:6px">Expected pace<span style="position:relative;display:inline-flex;align-self:center" onMouseEnter="{{ tipKOn }}" onMouseLeave="{{ tipOff }}"><span style="width:14px;height:14px;border-radius:50%;border:1px solid oklch(80% 0.008 270);display:inline-flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:oklch(47% 0.013 270);cursor:help">i</span><sc-if value="{{ tipKOpen }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);width:232px;padding:9px 11px;background:#fff;border:1px solid oklch(91.5% 0.006 270);border-radius:10px;box-shadow:0 4px 14px oklch(25% 0.02 265 / 0.08),0 1px 2px oklch(25% 0.02 265 / 0.05);font-size:11.5px;font-weight:400;line-height:1.45;letter-spacing:0;text-transform:none;color:oklch(32% 0.012 270);z-index:40;white-space:normal;text-align:left">Expected pace = expected revenue for the selected period based on the location's target pace.</span></sc-if></span></div>
+<div style="display:flex;align-items:center;gap:6px;font-size:12.5px;color:oklch(49% 0.012 270);margin-bottom:6px">Expected pace<span style="position:relative;display:inline-flex;align-self:center" onMouseEnter="{{ tipKOn }}" onMouseLeave="{{ tipOff }}"><button type="button" aria-label="About expected pace" aria-describedby="tip-K" onKeyDown="{{ tipEsc }}" style="width:14px;height:14px;padding:0;border-radius:50%;border:1px solid oklch(80% 0.008 270);background:none;display:inline-flex;align-items:center;justify-content:center;font-family:inherit;font-size:9px;font-weight:700;line-height:1;color:oklch(47% 0.013 270);cursor:help">i</button><sc-if value="{{ tipKOpen }}" hint-placeholder-val="{{ false }}"><span id="tip-K" role="tooltip" style="position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);width:232px;padding:9px 11px;background:#fff;border:1px solid oklch(91.5% 0.006 270);border-radius:10px;box-shadow:0 4px 14px oklch(25% 0.02 265 / 0.08),0 1px 2px oklch(25% 0.02 265 / 0.05);font-size:11.5px;font-weight:400;line-height:1.45;letter-spacing:0;text-transform:none;color:oklch(32% 0.012 270);z-index:40;white-space:normal;text-align:left">Expected pace = expected revenue for the selected period based on the location's target pace.</span></sc-if></span></div>
 <div style="font-size:30px;font-weight:600;font-variant-numeric:tabular-nums;font-feature-settings:'tnum','ss01';letter-spacing:-.034em;line-height:1.05;color:oklch(17% 0.012 270);margin-bottom:7px"><span style="font-size:.6em;font-weight:500;letter-spacing:0;color:oklch(55% 0.01 270);margin-right:1px;vertical-align:.5em">$</span>{{ kExp }}</div>
 <div style="font-size:12.5px;font-weight:500;color:oklch(49% 0.012 270)">{{ kExpNote }}</div></div>
 <div style="flex:1 1 130px;min-width:0;padding:0 0 0 20px;border-left:1px solid oklch(91% 0.006 270)">
@@ -153,11 +145,11 @@ a:hover{color:oklch(46% 0.19 258)}
 </div>
 <div data-screen-label="B Revenue vs expected pace" style="background:#fff;border:1px solid oklch(92.6% 0.004 265);border-radius:18px;box-shadow:0 1px 2px oklch(25% 0.02 265 / 0.05)">
 <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 22px;border-bottom:1px solid oklch(95% 0.004 270);flex-wrap:wrap;gap:12px">
-<span style="display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap"><span style="display:inline-flex;align-items:center;gap:7px"><span style="font-size:15.5px;font-weight:600;letter-spacing:-.012em;color:oklch(18% 0.012 270)">Revenue vs expected pace</span><span style="position:relative;display:inline-flex;align-self:center" onMouseEnter="{{ tipBOn }}" onMouseLeave="{{ tipOff }}"><span style="width:14px;height:14px;border-radius:50%;border:1px solid oklch(80% 0.008 270);display:inline-flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:oklch(47% 0.013 270);cursor:help">i</span><sc-if value="{{ tipBOpen }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);width:232px;padding:9px 11px;background:#fff;border:1px solid oklch(91.5% 0.006 270);border-radius:10px;box-shadow:0 4px 14px oklch(25% 0.02 265 / 0.08),0 1px 2px oklch(25% 0.02 265 / 0.05);font-size:11.5px;font-weight:400;line-height:1.45;color:oklch(32% 0.012 270);z-index:40;white-space:normal;text-align:left">Expected pace = expected revenue for the selected period based on the location's target pace.</span></sc-if></span></span><span style="font-size:12px;color:oklch(47% 0.013 270)">Cumulative &middot; {{ periodLabel }} to date</span></span>
-<div style="{{ prevToggleStyle }}" onClick="{{ togglePrev }}">
+<span style="display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap"><span style="display:inline-flex;align-items:center;gap:7px"><span style="font-size:15.5px;font-weight:600;letter-spacing:-.012em;color:oklch(18% 0.012 270)">Revenue vs expected pace</span><span style="position:relative;display:inline-flex;align-self:center" onMouseEnter="{{ tipBOn }}" onMouseLeave="{{ tipOff }}"><button type="button" aria-label="About revenue vs expected pace" aria-describedby="tip-B" onKeyDown="{{ tipEsc }}" style="width:14px;height:14px;padding:0;border-radius:50%;border:1px solid oklch(80% 0.008 270);background:none;display:inline-flex;align-items:center;justify-content:center;font-family:inherit;font-size:9px;font-weight:700;line-height:1;color:oklch(47% 0.013 270);cursor:help">i</button><sc-if value="{{ tipBOpen }}" hint-placeholder-val="{{ false }}"><span id="tip-B" role="tooltip" style="position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);width:232px;padding:9px 11px;background:#fff;border:1px solid oklch(91.5% 0.006 270);border-radius:10px;box-shadow:0 4px 14px oklch(25% 0.02 265 / 0.08),0 1px 2px oklch(25% 0.02 265 / 0.05);font-size:11.5px;font-weight:400;line-height:1.45;color:oklch(32% 0.012 270);z-index:40;white-space:normal;text-align:left">Expected pace = expected revenue for the selected period based on the location's target pace.</span></sc-if></span></span><span style="font-size:12px;color:oklch(47% 0.013 270)">Cumulative &middot; {{ periodLabel }} to date</span></span>
+<button type="button" role="checkbox" aria-checked="{{ prevChecked }}" style="{{ prevToggleStyle }}" onClick="{{ togglePrev }}">
 <div style="width:15px;height:15px;border-radius:5px;border:1px solid oklch(82% 0.008 270);background:{{ prevBoxBg }};display:flex;align-items:center;justify-content:center;font-size:9px;color:#fff;flex-shrink:0">{{ prevCheck }}</div>
 <span style="font-size:12px;white-space:nowrap">Previous period</span>
-</div>
+</button>
 </div>
 <div style="padding:22px 22px 16px">
 <div style="position:relative;height:288px;padding-left:50px">
@@ -243,7 +235,7 @@ a:hover{color:oklch(46% 0.19 258)}
 <span style="min-width:0;overflow:visible;white-space:nowrap;font-size:10.5px;font-weight:700;letter-spacing:.02em;text-transform:uppercase;color:oklch(52% 0.011 270);padding-bottom:2px">{{ dp }}</span>
 </sc-for>
 <sc-for list="{{ dCells }}" as="c" hint-placeholder-count="10">
-<div style="{{ c.wrap }}" onClick="{{ c.select }}"><div style="{{ c.cell }}"></div><span style="{{ c.valStyle }}">{{ c.val }}</span><span style="{{ c.labStyle }}">{{ c.lab }}</span></div>
+<div role="{{ c.role }}" tabindex="{{ c.tab }}" aria-pressed="{{ c.pressed }}" aria-label="{{ c.aria }}" onKeyDown="{{ c.key }}" style="{{ c.wrap }}" onClick="{{ c.select }}"><div style="{{ c.cell }}"></div><span style="{{ c.valStyle }}">{{ c.val }}</span><span style="{{ c.labStyle }}">{{ c.lab }}</span></div>
 </sc-for>
 </div>
 </div>
@@ -279,7 +271,7 @@ a:hover{color:oklch(46% 0.19 258)}
 <div style="{{ f.rowStyle }}">
 <span style="font-size:12px;font-weight:600;color:oklch(56% 0.02 258);font-variant-numeric:tabular-nums;padding-top:1px">{{ f.n }}</span>
 <div style="min-width:0;display:flex;flex-direction:column;gap:2px"><span style="font-size:13px;font-weight:600;letter-spacing:-.003em;color:oklch(20% 0.012 270)">{{ f.title }}</span><span style="font-size:12.5px;line-height:1.45;color:oklch(44% 0.013 270);text-wrap:pretty">{{ f.q }}</span></div>
-<a href="#" style="{{ f.linkStyle }}" style-hover="color:oklch(46% 0.19 258)">{{ f.link }} &#8599;</a>
+<a href="{{ f.href }}" style="{{ f.linkStyle }}" style-hover="color:oklch(46% 0.19 258)">{{ f.link }} &#8599;</a>
 </div>
 </sc-for>
 </div>
@@ -294,7 +286,7 @@ a:hover{color:oklch(46% 0.19 258)}
 <p style="margin:0;font-size:13px;line-height:1.55;color:oklch(40% 0.012 270);text-wrap:pretty">{{ naBody }}</p>
 <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:8px">
 <sc-for list="{{ naActions }}" as="a" hint-placeholder-count="0"><button type="button" onClick="{{ a.go }}" style="padding:0;border:0;background:none;font:inherit;font-size:12.5px;font-weight:600;color:oklch(54% 0.19 258);cursor:pointer" style-hover="color:oklch(46% 0.19 258)">{{ a.label }} &#8594;</button></sc-for>
-<a href="Locations.dc.html" style="font-size:12.5px;font-weight:600;color:oklch(44% 0.012 270)" style-hover="color:oklch(24% 0.012 270)">Back to Locations</a>
+<a href="{{ locationsHref }}" style="font-size:12.5px;font-weight:600;color:oklch(44% 0.012 270)" style-hover="color:oklch(24% 0.012 270)">Back to Locations</a>
 </div>
 </div>
 </div>
@@ -309,12 +301,12 @@ const TOL = 10;
 const PERIODS = {
   Today: { label: 'Today', cmp: 'vs yesterday', labels: ['7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm'] },
   Week:  { label: 'This week', cmp: 'vs last week', labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'] },
-  Month: { label: 'This month', cmp: 'vs last month', labels: Array.from({ length: 25 }, (_, i) => 'Nov ' + (i + 1)) },
+  Month: { label: 'This month', cmp: 'vs last month', labels: Array.from({ length: 26 }, (_, i) => 'Nov ' + (i + 1)) },
 };
 const W = {
   Today: [0.45, 0.8, 0.95, 1.05, 1.5, 1.45, 1.0, 0.85, 0.9],
   Week:  [0.85, 0.88, 0.92, 0.98, 1.12, 1.2],
-  Month: Array.from({ length: 25 }, (_, i) => [0.88, 0.9, 0.94, 1.0, 1.12, 1.2, 0.96][i % 7]),
+  Month: Array.from({ length: 26 }, (_, i) => [0.88, 0.9, 0.94, 1.0, 1.12, 1.2, 0.96][i % 7]),
 };
 const DAYPARTS = ['Morning', 'Lunch', 'Afternoon', 'Dinner'];
 const DAYTYPES = [['wd', 'Weekday'], ['we', 'Weekend']];
@@ -358,7 +350,7 @@ const LOC = {
 const DATA = {
   berlin: {
     Month: { rev: 18300, exp: 22900, revD: -15, tx: 741, txD: -13, aov: 24.70, aovD: -2.6, prevAov: 25.36, expTx: 903, txEff: -4110, aovEff: -490,
-      wd: [-200, -690, -260, -3220], we: [-40, -70, -50, -70], r: d => d < 7 ? 0.93 : 0.93 - 0.1309 * Math.sqrt((d - 7) / 17), event: { i: 7, text: 'Below expected pace from Nov 8' } },
+      wd: [-200, -690, -260, -3220], we: [-40, -70, -50, -70], r: d => d < 7 ? 0.93 : 0.93 - 0.1309 * Math.sqrt((d - 7) / 18), event: { i: 7, text: 'Below expected pace from Nov 8' } },
     Week: { rev: 4246, exp: 5308, revD: -18, tx: 174, txD: -16, aov: 24.42, aovD: -2.8, prevAov: 25.12, expTx: 211, txEff: -940, aovEff: -122,
       wd: [-50, -160, -60, -740], we: [-10, -20, -10, -12], r: d => [0.83, 0.81, 0.80, 0.79, 0.80, 0.7999][d], event: { i: 0, text: 'Below expected pace since Monday' } },
     Today: { rev: 384, exp: 400, revD: 1, tx: 17, txD: 3, aov: 22.54, aovD: -1.8, r: d => 0.97 - d * 0.001 },
@@ -370,7 +362,7 @@ const DATA = {
   },
   barcelona: {
     Month: { rev: 22540, exp: 19770, revD: 7, tx: 844, txD: 6, aov: 26.71, aovD: 0.8, prevAov: 26.50, expTx: 746, txEff: 2600, aovEff: 170,
-      wd: [60, 90, 40, 420], we: [50, 1390, 30, 690], r: d => d < 6 ? 1.03 : 1.03 + 0.1101 * Math.sqrt((d - 6) / 18), event: { i: 9, text: 'Above expected pace from Nov 10' } },
+      wd: [60, 90, 40, 420], we: [50, 1390, 30, 690], r: d => d < 6 ? 1.03 : 1.03 + 0.1101 * Math.sqrt((d - 6) / 19), event: { i: 9, text: 'Above expected pace from Nov 10' } },
     Week: { rev: 5229, exp: 5000, revD: 7, tx: 198, txD: 6, aov: 26.40, aovD: 0.6, r: d => 1.03 + d * 0.003 },
     Today: { rev: 473, exp: 450, revD: 6, tx: 19, txD: 4, aov: 24.38, aovD: 1.6, r: d => 1.04 + d * 0.0013 },
   },
@@ -416,16 +408,55 @@ class Component extends DCLogic {
     if (next.gsFit !== this.state.gsFit || next.navCompact !== this.state.navCompact) this.setState(next);
   }
   componentDidMount() {
+    try { this._opMq = window.matchMedia('(max-width: 719px)'); this._opMqFn = () => this.setState({ sideCollapsed: this._opMq.matches }); this._opMq.addEventListener('change', this._opMqFn); if (this._opMq.matches) this.setState({ sideCollapsed: true }); } catch (e) {}
+    document.addEventListener('focusin', this._tipIn); document.addEventListener('focusout', this._tipOut);
+    
     this._onResize = () => this.fitSidebar();
     requestAnimationFrame(this._onResize);
     if (document.fonts) document.fonts.ready.then(this._onResize);
     window.addEventListener('resize', this._onResize);
   }
-  componentDidUpdate() { this.fitSidebar(); }
-  componentWillUnmount() { window.removeEventListener('resize', this._onResize); }
+  // Header pickers: trigger buttons open a menu; arrows/Home/End move between options; Escape or Tab close it; focus returns to the trigger.
+  kbRefs = {};
+  kbRef(k) { return this.kbRefs[k] || (this.kbRefs[k] = React.createRef()); }
+  kbApplyFocus() {
+    const prev = this._kbPrev; this._kbPrev = {}; ["loc","period"].forEach(k => { this._kbPrev[k + 'Open'] = this.state[k + 'Open']; });
+    if (this._kbIn) { const m = this.kbRef(this._kbIn + 'Menu').current; if (m) { this._kbIn = null; const it = m.querySelector('[data-opt][aria-checked="true"]') || m.querySelector('[data-opt]'); if (it) it.focus(); } }
+    ["loc","period"].forEach(k => {
+      if (!prev || !prev[k + 'Open'] || this.state[k + 'Open']) return;
+      const b = this.kbRef(k + 'Btn').current, a = document.activeElement;
+      if (b && (this._kbOut === k || !a || a === document.body)) b.focus();
+      if (this._kbOut === k) this._kbOut = null;
+    });
+  }
+  kbMenuKey(k) {
+    return e => {
+      const m = this.kbRef(k + 'Menu').current; if (!m) return;
+      const items = [...m.querySelectorAll('[data-opt]')], n = items.length, i = items.indexOf(document.activeElement);
+      const go = j => { e.preventDefault(); if (n) items[(j + n) % n].focus(); };
+      if (e.key === 'Escape' || e.key === 'Tab') { e.preventDefault(); e.stopPropagation(); this._kbOut = k; this.setState({ [k + 'Open']: false }); }
+      else if (e.key === 'ArrowDown') go(i < 0 ? 0 : i + 1);
+      else if (e.key === 'ArrowUp') go(i < 0 ? n - 1 : i - 1);
+      else if (e.key === 'Home') go(0);
+      else if (e.key === 'End') go(n - 1);
+    };
+  }
+  kbBtnKey(k) { return e => { if ((e.key === 'ArrowDown' || e.key === 'ArrowUp') && !this.state[k + 'Open']) { e.preventDefault(); e.currentTarget.click(); } }; }
+  kbVals(keys) {
+    const v = {};
+    keys.forEach(k => { v[k + 'BtnRef'] = this.kbRef(k + 'Btn'); v[k + 'MenuRef'] = this.kbRef(k + 'Menu'); v[k + 'BtnKey'] = this.kbBtnKey(k); v[k + 'MenuKey'] = this.kbMenuKey(k); v[k + 'Expanded'] = this.state[k + 'Open'] ? 'true' : 'false'; });
+    return v;
+  }
+  componentDidUpdate() { this.fitSidebar(); this.kbApplyFocus(); }
+  // Info tooltips also open on keyboard focus (native listeners; matched by aria-describedby="tip-X").
+  _tipIn = e => { const t = e.target && e.target.closest && e.target.closest('button[aria-describedby^="tip-"]'); if (t) this.setState({ tip: 'tip' + t.getAttribute('aria-describedby').slice(4) }); };
+  _tipOut = e => { const t = e.target && e.target.closest && e.target.closest('button[aria-describedby^="tip-"]'); if (t && this.state.tip) this.setState({ tip: null }); };
+  componentWillUnmount() {
+    if (this._opMq) this._opMq.removeEventListener('change', this._opMqFn);
+    document.removeEventListener('focusin', this._tipIn); document.removeEventListener('focusout', this._tipOut); window.removeEventListener('resize', this._onResize); }
 
   optStyle(active) {
-    return 'display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:' + (active ? 600 : 500) + ';color:' + (active ? 'oklch(20% 0.01 270)' : 'oklch(32% 0.01 270)') + ';background:' + (active ? 'oklch(96.5% 0.004 270)' : 'transparent') + ';border-radius:9px;padding:7px 9px;cursor:pointer';
+    return 'display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:' + (active ? 600 : 500) + ';color:' + (active ? 'oklch(20% 0.01 270)' : 'oklch(32% 0.01 270)') + ';background:' + (active ? 'oklch(96.5% 0.004 270)' : 'transparent') + ';border-radius:9px;padding:7px 9px;cursor:pointer;width:100%;border:0;font-family:inherit;text-align:left';
   }
 
   model() {
@@ -459,11 +490,12 @@ class Component extends DCLogic {
       locMeta: L.region + ' \u00b7 ' + L.site + ' \u00b7 updated 4 min ago',
       locOptions: (LOC[req.loc] ? [] : [req.loc]).concat(Object.keys(LOC)).map(id => {
         const x = DATA[id] && DATA[id][req.period], p = x ? Math.round((x.rev / x.exp - 1) * 100) : 0;
-        return { name: info(id).name, meta: info(id).region + ' \u00b7 ' + (x ? (p > 0 ? '+' : p < 0 ? '\u2212' : '') + Math.abs(p) + ' pts' : 'No detail yet'), style: this.optStyle(req.loc === id), select: () => this.setState({ loc: id, locOpen: false, slice: null, hov: null }) };
+        return { name: info(id).name, meta: info(id).region + ' \u00b7 ' + (x ? (p > 0 ? '+' : p < 0 ? '\u2212' : '') + Math.abs(p) + ' pts' : 'No detail yet'), style: this.optStyle(req.loc === id), checked: (req.loc === id) ? 'true' : 'false', select: () => this.setState({ loc: id, locOpen: false, slice: null, hov: null }) };
       }),
       periodLabel: PL,
-      periodOptions: ['Today', 'Week', 'Month'].concat(req.period === 'Year' ? ['Year'] : []).map(id => ({ name: PERIODS[id].label, meta: modelled && DATA[req.loc][id] ? '' : 'No detail yet', style: this.optStyle(req.period === id), select: () => this.setState({ period: id, periodOpen: false, slice: null, hov: null }) })),
+      periodOptions: ['Today', 'Week', 'Month'].concat(req.period === 'Year' ? ['Year'] : []).map(id => ({ name: PERIODS[id].label, meta: modelled && DATA[req.loc][id] ? '' : 'No detail yet', style: this.optStyle(req.period === id), checked: (req.period === id) ? 'true' : 'false', select: () => this.setState({ period: id, periodOpen: false, slice: null, hov: null }) })),
       hasDetail: has, noDetail: !has,
+      locationsHref: 'Locations.dc.html?period=' + encodeURIComponent(req.period),
       naHead: 'Detailed analytics for ' + L.name + ' \u00b7 ' + PL + ' aren\u2019t available yet.',
       naBody: modelled
         ? 'This period isn\u2019t modelled in this prototype. ' + L.name + ' has detailed analytics for ' + avail.map(id => PERIODS[id].label).join(', ').replace(/, ([^,]*)$/, ' and $1') + '.'
@@ -483,16 +515,19 @@ class Component extends DCLogic {
       locName: L0.name,
       locMeta: L0.region + ' \u00b7 ' + L0.site + ' \u00b7 updated 4 min ago',
       locOpen: s.locOpen,
-      toggleLocPicker: () => this.setState(st => ({ locOpen: !st.locOpen, periodOpen: false })),
+      toggleLocPicker: () => { if (!this.state.locOpen) this._kbIn = 'loc'; this.setState(st => ({ locOpen: !st.locOpen, periodOpen: false })); },
       locOptions: Object.keys(LOC).map(id => {
         const x = DATA[id][s.period], p = Math.round((x.rev / x.exp - 1) * 100);
-        return { name: LOC[id].name, meta: LOC[id].region + ' \u00b7 ' + (p > 0 ? '+' : p < 0 ? '\u2212' : '') + Math.abs(p) + ' pts', style: this.optStyle(s.loc === id), select: () => this.setState({ loc: id, locOpen: false, slice: null, hov: null }) };
+        return { name: LOC[id].name, meta: LOC[id].region + ' \u00b7 ' + (p > 0 ? '+' : p < 0 ? '\u2212' : '') + Math.abs(p) + ' pts', style: this.optStyle(s.loc === id), checked: (s.loc === id) ? 'true' : 'false', select: () => this.setState({ loc: id, locOpen: false, slice: null, hov: null }) };
       }),
       periodLabel: P0.label,
       periodOpen: s.periodOpen,
-      togglePeriodPicker: () => this.setState(st => ({ periodOpen: !st.periodOpen, locOpen: false })),
-      periodOptions: ['Today', 'Week', 'Month'].map(id => ({ name: PERIODS[id].label, meta: '', style: this.optStyle(s.period === id), select: () => this.setState({ period: id, periodOpen: false, slice: null, hov: null }) })),
+      togglePeriodPicker: () => { if (!this.state.periodOpen) this._kbIn = 'period'; this.setState(st => ({ periodOpen: !st.periodOpen, locOpen: false })); },
+      periodOptions: ['Today', 'Week', 'Month'].map(id => ({ name: PERIODS[id].label, meta: '', style: this.optStyle(s.period === id), checked: (s.period === id) ? 'true' : 'false', select: () => this.setState({ period: id, periodOpen: false, slice: null, hov: null }) })),
       tipOff: () => this.setState({ tip: null }),
+      tipEsc: e => { if (e.key === 'Escape' && this.state.tip) { e.preventDefault(); this.setState({ tip: null }); } },
+      prevChecked: s.showPrev ? 'true' : 'false',
+      ...this.kbVals(['loc', 'period']),
       heroSign: dev < 0 ? '\u2212' : '+',
       heroNum: fmt(dev),
       heroPts: (pts > 0 ? '+' : pts < 0 ? '\u2212' : '') + Math.abs(pts) + ' pts',
@@ -556,7 +591,7 @@ class Component extends DCLogic {
       bandPath: 'M' + up.join(' L') + ' L' + lo.join(' L') + ' Z',
       showPrev: !!s.showPrev,
       togglePrev: () => this.setState(st => ({ showPrev: !st.showPrev })),
-      prevToggleStyle: 'display:flex;align-items:center;gap:7px;cursor:pointer;color:' + (s.showPrev ? 'oklch(28% 0.012 270)' : 'oklch(45% 0.012 270)'),
+      prevToggleStyle: 'display:flex;align-items:center;gap:7px;cursor:pointer;padding:0;border:0;background:none;font:inherit;color:' + (s.showPrev ? 'oklch(28% 0.012 270)' : 'oklch(45% 0.012 270)'),
       prevBoxBg: s.showPrev ? 'oklch(30% 0.012 270)' : '#fff',
       prevCheck: s.showPrev ? '\u2713' : '',
       xLabels: xl, yLabels: yl,
@@ -564,7 +599,7 @@ class Component extends DCLogic {
       evText: ev ? ev.text : '', evColor: col,
       evMarkerStyle: dot(evX.toFixed(1), evY.toFixed(1), 'background:#fff;border:3px solid ' + col + ';z-index:3', 13),
       evRowStyle: 'position:absolute;left:0;right:0;top:0;height:calc(' + evY.toFixed(1) + '% - 2px);display:flex;flex-direction:column;align-items:flex-start;pointer-events:none;z-index:3',
-      evCalloutStyle: 'display:inline-flex;align-items:center;gap:8px;margin-left:clamp(0px,calc(' + evX.toFixed(1) + '% - 24px),calc(100% - 252px));max-width:252px;background:#fff;border:1px solid oklch(92.5% 0.006 270);box-shadow:0 3px 12px oklch(20% 0.02 270 / 0.07);border-radius:10px;padding:6px 11px;font-size:11.5px;line-height:1.4;color:oklch(32% 0.012 270);white-space:nowrap',
+      evCalloutStyle: 'display:inline-flex;align-items:center;gap:8px;margin-left:clamp(0px,calc(' + evX.toFixed(1) + '% - 24px),max(0px,calc(100% - 252px)));max-width:min(252px,100%);background:#fff;border:1px solid oklch(92.5% 0.006 270);box-shadow:0 3px 12px oklch(20% 0.02 270 / 0.07);border-radius:10px;padding:6px 11px;font-size:11.5px;line-height:1.4;color:oklch(32% 0.012 270);white-space:nowrap',
       evLeaderStyle: 'flex:1;width:0;margin-left:calc(' + evX.toFixed(1) + '% - 1px);border-left:1px dashed ' + (dir === 'below' ? 'oklch(74% 0.1 22)' : 'oklch(72% 0.03 175)'),
       endDotStyle: dot(xp(n - 1).toFixed(2), yp(A[n - 1]).toFixed(2), 'background:' + BLUE + ';box-shadow:0 0 0 3px #fff;z-index:2', 11),
       chartMove: e => {
@@ -588,8 +623,8 @@ class Component extends DCLogic {
   breakdownVals(d, dev, dir, col, slices, gapWord) {
     if (dir === 'within' || !d.wd) return Object.assign({ hasDev: false, noDev: true, dayparts: DAYPARTS, dCells: [], cRows: [], eRows: [] }, this.nextVals('within', [
       { title: 'Product mix', q: 'See which categories and items are selling this period.', link: 'View Products' },
-      { title: 'Team performance', q: 'Compare sales and transactions by shift.', link: 'View Team' },
-      { title: 'Other locations', q: 'See how this location compares with others in its region.', link: 'Compare Locations' },
+      { title: 'Team performance', q: 'Compare sales and transactions by shift.', link: 'View Employees' },
+      { title: 'Other locations', q: 'See how this location compares with others in its region.', link: 'Compare Locations', href: 'Locations.dc.html' },
     ], 'Performance is within expected pace. Explore product mix, team performance or other locations for opportunities to improve.'));
     const s = this.state;
     const below = dir === 'below';
@@ -616,7 +651,7 @@ class Component extends DCLogic {
     };
     const dCells = [];
     DAYTYPES.forEach(([k, name]) => {
-      dCells.push({ wrap: 'height:56px;display:flex;align-items:center', cell: 'display:none', val: '', valStyle: 'display:none', lab: name, labStyle: 'font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:oklch(44% 0.012 270)', select: null });
+      dCells.push({ wrap: 'height:56px;display:flex;align-items:center', cell: 'display:none', val: '', valStyle: 'display:none', lab: name, labStyle: 'font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:oklch(44% 0.012 270)', select: null, role: null, tab: null, pressed: null, aria: null, key: null });
       slices.filter(x => x.key.indexOf(k) === 0).forEach(x => dCells.push({
         wrap: 'display:flex;flex-direction:column;gap:6px;min-width:0;padding-bottom:8px;cursor:pointer',
         cell: cell(x),
@@ -625,6 +660,8 @@ class Component extends DCLogic {
         lab: '',
         labStyle: 'display:none',
         select: () => this.setState({ slice: x.key }),
+        role: 'button', tab: 0, pressed: view.key === x.key ? 'true' : 'false', aria: x.dt + ' ' + x.dp.toLowerCase() + ', ' + (x.v < 0 ? '\u2212' : '+') + money(x.v).replace(/^[\u2212+]/, ''),
+        key: e => { if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') { e.preventDefault(); this.setState({ slice: x.key }); } },
       }));
     });
     const share = pct(sel.v, dev);
@@ -648,20 +685,20 @@ class Component extends DCLogic {
     const fRows = [
       { title: below ? 'Shifts and opening hours' : 'Team on shift',
         q: below ? 'Compare ' + slot + ' shifts and opening hours' + (since ? ' before and after ' + since : '') + '.' : 'See who worked ' + slot + ' shifts' + (since ? ' from ' + since : '') + '.',
-        link: 'View Team', primary: txLed },
+        link: 'View Employees', primary: txLed },
       { title: catNames,
         q: 'These categories account for ' + pct(top2[0].v + top2[1].v, sel.v) + '% of the ' + slot + (below ? ' gap.' : ' above-pace revenue.'),
         link: below ? 'View Inventory' : 'View Products', primary: !txLed },
     ];
     if (second) fRows.push({ title: second.name.charAt(0).toUpperCase() + second.name.slice(1),
-      q: 'Also ' + (below ? 'below' : 'above') + ' expected pace. Check whether it follows the same pattern.', link: 'View Reports' });
-    if (!below) fRows.push({ title: 'Other locations', q: 'Check whether the same pattern appears elsewhere.', link: 'Compare Locations' });
+      q: 'Also ' + (below ? 'below' : 'above') + ' expected pace. Check whether it follows the same pattern.', link: this.reportLink(), href: this.reportHref() });
+    if (!below) fRows.push({ title: 'Other locations', q: 'Check whether the same pattern appears elsewhere.', link: 'Compare Locations', href: 'Locations.dc.html' });
     const fMsg = Sel + ' accounts for ' + share + '% of the ' + (below ? 'gap.' : 'above-pace revenue.');
     const vSlot = view.name.toLowerCase(), VSel = view.name.charAt(0).toUpperCase() + view.name.slice(1);
     const next = view.off ? this.nextVals(dir, fRows, fMsg) : this.nextVals('within', [
       { title: vCats[0].name + ' and ' + vCats[1].name, q: 'These categories make up ' + pct(vCats[0].v + vCats[1].v, vRev) + '% of ' + vSlot + ' revenue.', link: 'View Products' },
-      { title: 'Team on shift', q: 'See who worked ' + vSlot + ' shifts ' + PERIODS[s.period].label.toLowerCase() + '.', link: 'View Team' },
-      { title: 'Other locations', q: 'Compare ' + vSlot + ' with other locations in the region.', link: 'Compare Locations' },
+      { title: 'Team on shift', q: 'See who worked ' + vSlot + ' shifts ' + PERIODS[s.period].label.toLowerCase() + '.', link: 'View Employees' },
+      { title: 'Other locations', q: 'Compare ' + vSlot + ' with other locations in the region.', link: 'Compare Locations', href: 'Locations.dc.html' },
     ], VSel + ' is within expected pace. Explore what sells in this trading time and how it compares.');
     return {
       hasDev: true, noDev: false,
@@ -690,7 +727,7 @@ class Component extends DCLogic {
       cSegTx: 'width:' + txShare + '%;background:' + hard,
       cSegAov: 'flex:1;background:' + soft,
       cRows: [
-        { name: 'Transaction effect', meta: d.tx.toLocaleString('en-US') + ' vs ' + d.expTx + ' expected', v: money(d.txEff), share: txShare + '%', sw: 'width:8px;height:8px;border-radius:2px;flex-shrink:0;align-self:center;background:' + hard },
+        { name: 'Transaction effect', meta: d.tx.toLocaleString('en-US') + ' vs ' + d.expTx + ' expected at last month\u2019s AOV', v: money(d.txEff), share: txShare + '%', sw: 'width:8px;height:8px;border-radius:2px;flex-shrink:0;align-self:center;background:' + hard },
         { name: 'Order value effect', meta: '$' + d.aov.toFixed(2) + ' vs $' + d.prevAov.toFixed(2) + ' expected', v: money(d.aovEff), share: aovShare + '%', sw: 'width:8px;height:8px;border-radius:2px;flex-shrink:0;align-self:center;background:' + soft },
       ],
       eCue: (i => 'position:absolute;top:-1px;height:2px;border-radius:1px;pointer-events:none;background:' + BLUE + ';opacity:.7;width:calc((100% - 104px) / 4);left:calc(80px + (100% - 104px) / 4 * ' + i + ' + ' + (8 * i) + 'px);transition:left .22s ease')(DAYPARTS.indexOf(sel.dp)),
@@ -699,6 +736,13 @@ class Component extends DCLogic {
       eRows: !view.off ? vCats.map(c => ({ name: c.name, v: '$' + fmt(c.v), share: pct(c.v, vRev) + '%', bar: 'height:100%;border-radius:2px;width:' + (c.v / vmax * 100).toFixed(1) + '%;background:oklch(78% 0.012 265)' })) : cats.map(c => ({ name: c.name, v: money(c.v), share: pct(c.v, sel.v) + '%', bar: 'height:100%;border-radius:2px;width:' + (Math.abs(c.v) / cmax * 100).toFixed(1) + '%;background:' + hard })),
       ...next,
     };
+  }
+  // Location Performance Report for this location, using the report's URL params. Analytics 'Today' and 'This week' map to the latest complete days (data runs to 26 Nov).
+  // Reports cover complete days only (data to 26 Nov). Today and This week include today's live trading, so the link names the complete days it opens.
+  reportLink() { return { Month: 'View Reports', Week: 'View 24\u201326 Nov in Reports', Today: 'View 26 Nov in Reports' }[this.state.period] || 'View Reports'; }
+  reportHref() {
+    const p = { Month: 'period=mtd', Week: 'period=custom&from=2025-11-24&to=2025-11-26', Today: 'period=custom&from=2025-11-26&to=2025-11-26' }[this.state.period] || 'period=mtd';
+    return 'Location-Performance-Report.dc.html?' + p + '&locs=' + this.state.loc + '&cmp=expected';
   }
   nextVals(mode, rows, msg) {
     const head = { below: 'Investigate the drop', above: 'Understand what\u2019s working', within: 'Explore further' }[mode];
@@ -712,6 +756,7 @@ class Component extends DCLogic {
       fRows: rows.map((f, i) => Object.assign({}, f, {
         n: String(i + 1),
         rowStyle: 'display:grid;grid-template-columns:18px minmax(0,1fr) auto;align-items:start;gap:4px 12px;padding:' + (i ? '13px' : '6px') + ' 0 ' + (i === rows.length - 1 ? '7px' : '13px') + (i ? ';border-top:1px solid oklch(92.5% 0.008 258)' : ''),
+        href: f.href || (f.link === 'View Employees' ? 'Employees.dc.html' : f.link === 'View Inventory' ? 'Inventory.dc.html?location=' + encodeURIComponent(this.state.loc) : f.link === 'View Products' ? this.reportHref().replace('Location-Performance-Report', 'Category-Performance-Report').replace('&cmp=expected', '') : '#'),
         linkStyle: 'align-self:start;padding-top:1px;white-space:nowrap;font-size:12.5px;font-weight:600;text-decoration:none' + (f.primary ? '' : ';color:oklch(40% 0.014 265)'),
       })),
     };

@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<title>Customers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:oklch(96.5% 0.003 270);font-family:'Inter',system-ui,sans-serif;color:oklch(22% 0.01 270);-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+input::placeholder{color:oklch(66% 0.008 270)}
+a{color:oklch(54% 0.19 258);text-decoration:none}
+a:hover{color:oklch(46% 0.19 258)}
+a:focus-visible,button:focus-visible,select:focus-visible,[role=button]:focus-visible{outline:2px solid oklch(54% 0.19 258);outline-offset:2px}
+nav a:focus-visible,[data-opt]:focus-visible,[data-row]:focus-visible{outline-offset:-2px}
+input[type=text]:focus-visible,input[type=email]:focus-visible{outline:2px solid oklch(54% 0.19 258)!important;outline-offset:2px}
+</style>
+<script src="./app-shell.js"></script>
+</helmet>
+
+<div style="min-height:100vh;background:oklch(94.6% 0.004 270);display:flex;flex-direction:column">
+
+<header style="height:52px;flex-shrink:0;background:oklch(94.6% 0.004 270);border-bottom:1px solid oklch(90.5% 0.006 270);display:flex;align-items:center;gap:16px;padding:0 16px;position:sticky;top:0;z-index:20;min-width:0">
+<div style="display:flex;align-items:center;gap:9px;flex:0 1 198px;min-width:0">
+<div style="width:22px;height:22px;border-radius:7px;background:oklch(54% 0.19 258);flex-shrink:0"></div>
+<span style="min-width:0;font-size:13.5px;font-weight:700;letter-spacing:-.01em;line-height:1.2;color:oklch(28% 0.012 270);overflow-wrap:anywhere">Operations Platform</span>
+</div>
+<x-import component-from-global-scope="op-header-tools" hint-size="100%,52px" style="flex:1 0 auto;min-width:0;display:flex;align-items:center;height:52px"></x-import>
+</header>
+
+<div style="flex:1;display:flex;min-height:0">
+
+<aside ref="{{ asideRef }}" style="width:{{ asideW }};transition:width .18s ease;overflow:hidden;flex-shrink:0;background:oklch(94.6% 0.004 270);border-right:1px solid oklch(90.5% 0.006 270);padding:10px 8px 14px;display:flex;flex-direction:column;position:sticky;top:52px;height:calc(100vh - 52px)">
+<nav ref="{{ navRef }}" aria-label="Main" style="display:flex;flex-direction:column;gap:1px;overflow-y:auto;min-height:0">
+<div style="display:{{ navTxt }};font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:oklch(47% 0.013 270);padding:4px 10px 6px">Workspace</div>
+<a href="Overview.dc.html" style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><rect x="2" y="2" width="5" height="5" rx="1"></rect><rect x="9" y="2" width="5" height="5" rx="1"></rect><rect x="2" y="9" width="5" height="5" rx="1"></rect><rect x="9" y="9" width="5" height="5" rx="1"></rect></svg><span style="display:{{ navTxt }};white-space:nowrap">Overview</span></a>
+<a href="Operations.dc.html" style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><polyline points="1.5,10 5,10 6.8,5.5 9.2,12 11,8 14.5,8"></polyline></svg><span style="display:{{ navTxt }};white-space:nowrap">Operations</span></a>
+<div style="display:{{ navTxt }};font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:oklch(47% 0.013 270);padding:{{ navLabelPad }}">Analysis</div>
+<a href="Location Analytics.dc.html" style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><line x1="3" y1="13" x2="3" y2="8.5"></line><line x1="8" y1="13" x2="8" y2="4"></line><line x1="13" y1="13" x2="13" y2="6.5"></line></svg><span style="display:{{ navTxt }};white-space:nowrap">Location analytics</span></a>
+<a href="Reports.dc.html" style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M4 2.2h5.2L12 5v8.8H4z"></path><line x1="6" y1="8" x2="10" y2="8"></line><line x1="6" y1="10.6" x2="9" y2="10.6"></line></svg><span style="display:{{ navTxt }};white-space:nowrap">Reports</span></a>
+<div style="display:{{ navTxt }};font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:oklch(47% 0.013 270);padding:{{ navLabelPad }}">Manage</div>
+<a href="Inventory.dc.html" style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M2.5 5.5 8 2.8l5.5 2.7v5L8 13.2 2.5 10.5z"></path><line x1="2.5" y1="5.5" x2="8" y2="8.2"></line><line x1="13.5" y1="5.5" x2="8" y2="8.2"></line></svg><span style="display:{{ navTxt }};white-space:nowrap">Inventory</span><span style="display:{{ navTxt }};margin-left:auto;font-size:10.5px;font-weight:600;color:oklch(42% 0.012 270);background:oklch(91.5% 0.006 270);border-radius:5px;padding:1px 5px">5</span></a>
+<a href="Employees.dc.html" style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="6.3" cy="6" r="2.4"></circle><path d="M2 13c.6-2.2 2.3-3.3 4.3-3.3S10 10.8 10.6 13"></path><path d="M11 5.2a2.2 2.2 0 0 1 0 4"></path></svg><span style="display:{{ navTxt }};white-space:nowrap">Employees</span></a>
+<a href="Locations.dc.html" style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M8 14c2.6-3.2 4-5.4 4-7.2A4 4 0 0 0 4 6.8C4 8.6 5.4 10.8 8 14Z"></path><circle cx="8" cy="6.6" r="1.5"></circle></svg><span style="display:{{ navTxt }};white-space:nowrap">Locations</span><span style="display:{{ navTxt }};margin-left:auto;font-size:10.5px;font-weight:600;color:oklch(42% 0.012 270);background:oklch(91.5% 0.006 270);border-radius:5px;padding:1px 5px">12</span></a>
+<a href="Customers.dc.html" aria-current="page" style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:600;color:oklch(20% 0.012 270);background:#fff;border:1px solid oklch(91.5% 0.006 270);border-radius:8px;padding:{{ navItemPad }};cursor:pointer"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(54% 0.19 258)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="5.4" cy="5.6" r="2.3"></circle><circle cx="10.8" cy="7.4" r="1.9"></circle><path d="M1.8 13c.5-2 2-3 3.6-3s3.1 1 3.6 3"></path></svg><span style="display:{{ navTxt }};white-space:nowrap">Customers</span></a>
+</nav>
+<div ref="{{ bottomRef }}" style="margin-top:auto;display:flex;flex-direction:column;gap:1px">
+<sc-if value="{{ showGettingStartedC }}" hint-placeholder-val="{{ true }}"><div ref="{{ gsRef }}" style="display:flex;flex-direction:column;margin:0 2px 10px;padding:5px 5px 7px;background:#fff;border:1px solid oklch(91.5% 0.006 270);border-radius:14px;box-shadow:0 1px 2px oklch(25% 0.02 265 / 0.04)">
+<div style="position:relative;height:58px;border-radius:10px;background:oklch(95.6% 0.004 270);overflow:hidden">
+<button type="button" aria-label="Dismiss getting started" title="Dismiss" onClick="{{ dismissGs }}" style="position:absolute;z-index:1;top:4px;right:4px;width:20px;height:20px;padding:0;border:0;border-radius:6px;background:transparent;display:flex;align-items:center;justify-content:center;font-size:14px;line-height:1;color:oklch(52% 0.012 270);cursor:pointer" style-hover="background:oklch(91% 0.005 270);color:oklch(28% 0.012 270)">&#215;</button>
+<div style="position:absolute;left:16px;right:16px;top:12px;bottom:-8px;display:grid;grid-template-columns:18px minmax(0,1fr);gap:5px;padding:6px;background:#fff;border-radius:7px;box-shadow:0 0 0 1px oklch(92% 0.005 270),0 2px 6px oklch(25% 0.02 265 / 0.06)">
+<div style="display:flex;flex-direction:column;gap:3px"><span style="height:4px;border-radius:2px;background:oklch(54% 0.19 258 / 0.55)"></span><span style="height:4px;border-radius:2px;background:oklch(91% 0.005 270)"></span><span style="height:4px;border-radius:2px;background:oklch(91% 0.005 270)"></span></div>
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:12px 1fr;gap:3px"><span style="border-radius:3px;background:oklch(96.2% 0.004 270)"></span><span style="border-radius:3px;background:oklch(96.2% 0.004 270)"></span><span style="border-radius:3px;background:oklch(96.2% 0.004 270)"></span><span style="grid-column:1 / span 3;border-radius:3px;background:oklch(96.2% 0.004 270)"></span></div>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:3px;padding:11px 8px 10px;text-align:center">
+<span style="font-size:12.5px;font-weight:600;letter-spacing:-.008em;color:oklch(20% 0.012 270)">Getting started</span>
+<span style="font-size:11px;line-height:1.4;color:oklch(46% 0.013 270);text-wrap:pretty">Take a quick tour of the platform.</span>
+</div>
+<a href="#" data-op-tour="" role="button" style="display:flex;align-items:center;justify-content:center;gap:6px;height:32px;border-radius:9px;background:linear-gradient(oklch(31% 0.012 270),oklch(21% 0.012 270));box-shadow:inset 0 1px 0 oklch(100% 0 0 / 0.12),0 1px 2px oklch(20% 0.02 270 / 0.2);color:#fff;font-size:12px;font-weight:600;letter-spacing:-.004em;text-decoration:none" style-hover="background:linear-gradient(oklch(36% 0.012 270),oklch(25% 0.012 270))">Start onboarding &#8594;</a>
+</div></sc-if>
+<a href="Settings.dc.html" style="display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:oklch(40% 0.012 270);border-radius:8px;padding:7px 9px;cursor:pointer" style-hover="background:oklch(97.5% 0.004 270);color:oklch(26% 0.012 270)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.014 270)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><line x1="2.5" y1="5" x2="13.5" y2="5"></line><line x1="2.5" y1="11" x2="13.5" y2="11"></line><circle cx="6" cy="5" r="1.7"></circle><circle cx="10.4" cy="11" r="1.7"></circle></svg><span style="display:{{ navTxt }};white-space:nowrap">Settings</span></a>
+<div style="display:flex;flex-direction:{{ profileDir }};align-items:center;gap:9px;padding:10px {{ profilePadX }} 0;margin-top:8px;border-top:1px solid oklch(90.5% 0.006 270)">
+<div title="North &amp; Oak" style="width:26px;height:26px;border-radius:7px;background:oklch(30% 0.012 270);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:700;letter-spacing:.02em;color:#fff">N&amp;O</div>
+<div style="display:{{ navTxt }};min-width:0">
+<div style="font-size:11.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:oklch(30% 0.012 270)">North &amp; Oak</div>
+<div style="font-size:10.5px;color:oklch(46% 0.013 270)">Owner</div>
+</div>
+<button type="button" title="{{ collapseTitle }}" aria-label="{{ collapseTitle }}" onClick="{{ toggleSidebar }}" style="margin-left:{{ collapseML }};font-size:11px;color:oklch(45% 0.012 270);border:1px solid oklch(90% 0.006 270);border-radius:6px;padding:2px 6px;background:#fff;cursor:pointer;font-family:inherit;line-height:inherit" style-hover="color:oklch(24% 0.012 270);border-color:oklch(84% 0.008 270)">{{ collapseGlyph }}</button>
+</div>
+</div>
+</aside>
+
+<main style="flex:1;min-width:0;display:flex;flex-direction:column;background:oklch(96.4% 0.004 265);border-top-left-radius:16px;border-left:1px solid oklch(92% 0.005 270);border-top:1px solid oklch(92% 0.005 270);margin-top:-1px;padding:0 0 44px">
+
+<div style="padding:18px 26px 16px;border-bottom:1px solid oklch(92% 0.005 265);display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+<div style="display:flex;flex-direction:column;gap:6px;min-width:0;flex:1 1 260px">
+<h1 style="margin:0;font-size:21px;font-weight:600;letter-spacing:-.024em;line-height:1.15;color:oklch(18% 0.012 270)">Customers</h1>
+<span style="display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:12px;color:oklch(47% 0.013 270)"><span>Find a customer and see where and what they buy</span><span style="color:oklch(80% 0.006 270)">&middot;</span><span style="font-variant-numeric:tabular-nums">Purchases to Thu 27 Nov</span></span>
+</div>
+</div>
+
+<div style="padding:20px 26px 0;display:flex;flex-direction:column;gap:20px;min-width:0">
+<div style="display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start;min-width:0">
+
+<section ref="{{ tableRef }}" data-screen-label="Customer list" style="flex:62 1 0;min-width:min(560px,100%)">
+<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:10px 12px;margin-bottom:2px;background:oklch(94.4% 0.004 270);border-radius:10px;min-width:0">
+<label style="display:flex;align-items:center;gap:7px;width:240px;max-width:100%;background:#fff;border:1px solid oklch(91% 0.006 270);border-radius:8px;padding:5px 9px">
+<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="oklch(52% 0.013 270)" stroke-width="1.5" stroke-linecap="round" style="flex-shrink:0"><circle cx="7" cy="7" r="4.6"></circle><line x1="10.4" y1="10.4" x2="14" y2="14"></line></svg>
+<input type="text" aria-label="Search customers by name, email, phone or customer ID" value="{{ q }}" onChange="{{ onQ }}" placeholder="Name, email, phone or ID" style="border:none;outline:none;background:transparent;font-family:inherit;font-size:12px;width:100%;min-width:0;color:oklch(24% 0.01 270)">
+<sc-if value="{{ hasQ }}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{ clearQ }}" title="Clear search" aria-label="Clear search" style="font-size:13px;line-height:1;color:oklch(52% 0.012 270);cursor:pointer;padding:0;border:0;background:none;font-family:inherit" style-hover="color:oklch(24% 0.012 270)">&#215;</button></sc-if>
+</label>
+<sc-for list="{{ menus }}" as="m" hint-placeholder-count="3">
+<div style="position:relative">
+<button type="button" ref="{{ m.btnRef }}" aria-haspopup="menu" aria-expanded="{{ m.expanded }}" onKeyDown="{{ m.btnKey }}" onClick="{{ m.toggle }}" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:oklch(34% 0.012 270);background:#fff;border:1px solid {{ m.border }};border-radius:8px;padding:5px 9px;cursor:pointer;white-space:nowrap;font-family:inherit;line-height:inherit"><span style="color:oklch(50% 0.013 270)">{{ m.prefix }}</span>{{ m.label }}<span style="color:oklch(47% 0.013 270)">&#9662;</span></button>
+<sc-if value="{{ m.open }}" hint-placeholder-val="{{ false }}">
+<div ref="{{ m.menuRef }}" role="menu" aria-label="{{ m.aria }}" onKeyDown="{{ m.menuKey }}" style="position:absolute;top:calc(100% + 6px);left:{{ m.left }};right:{{ m.right }};width:230px;max-width:calc(100vw - 32px);max-height:360px;overflow-y:auto;background:#fff;border:1px solid oklch(90% 0.006 270);border-radius:14px;box-shadow:0 12px 32px oklch(20% 0.02 270 / 0.12);padding:8px;z-index:30;display:flex;flex-direction:column;gap:1px">
+<sc-for list="{{ m.options }}" as="o" hint-placeholder-count="4">
+<sc-if value="{{ o.hasHead }}" hint-placeholder-val="{{ false }}"><div style="font-size:10px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:oklch(50% 0.013 270);padding:10px 9px 5px;border-top:1px solid oklch(96% 0.004 270);margin-top:5px">{{ o.head }}</div></sc-if>
+<button type="button" data-opt="" role="menuitemradio" aria-checked="{{ o.checked }}" tabindex="-1" onClick="{{ o.select }}" style="{{ o.style }}"><span style="white-space:nowrap">{{ o.name }}</span><span style="margin-left:auto;padding-left:10px;font-size:11px;color:oklch(52% 0.013 270);font-variant-numeric:tabular-nums;white-space:nowrap">{{ o.meta }}</span></button>
+</sc-for>
+</div>
+</sc-if>
+</div>
+</sc-for>
+<span style="margin-left:auto;font-size:11.5px;color:oklch(50% 0.013 270);font-variant-numeric:tabular-nums;white-space:nowrap">{{ countLabel }}</span>
+</div>
+
+<div style="overflow-x:auto">
+<div style="min-width:600px">
+<div style="display:grid;grid-template-columns:minmax(190px,2fr) minmax(100px,1fr) 64px 84px 112px;column-gap:12px;align-items:center;padding:0 16px;height:36px;font-size:10.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:oklch(47% 0.013 270)">
+<span>Customer</span><span>Usual location</span><span style="text-align:right">Visits</span><span style="text-align:right">Spend</span><span style="text-align:right">Last visit</span>
+</div>
+<sc-for list="{{ rows }}" as="r" hint-placeholder-count="10">
+<div role="button" tabindex="0" data-row="" data-id="{{ r.id }}" aria-current="{{ r.current }}" aria-label="{{ r.aria }}" onClick="{{ r.select }}" onKeyDown="{{ r.onKey }}" style="{{ r.style }}" style-hover="background:oklch(93.8% 0.005 270)">
+<span style="display:flex;align-items:center;gap:10px;min-width:0;padding:9px 0"><span aria-hidden="true" style="{{ r.avStyle }}">{{ r.initials }}</span><span style="display:flex;flex-direction:column;gap:2px;min-width:0"><span style="font-size:13px;font-weight:600;letter-spacing:-.006em;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:oklch(18% 0.012 270)">{{ r.name }}</span><span style="font-size:11.5px;color:oklch(50% 0.013 270);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ r.email }}</span></span></span>
+<span style="display:flex;flex-direction:column;gap:2px;min-width:0"><span style="font-size:12.5px;line-height:1.3;color:oklch(26% 0.012 270)">{{ r.loc }}</span><span style="font-size:11.5px;color:oklch(50% 0.013 270);white-space:nowrap">{{ r.locSub }}</span></span>
+<span style="text-align:right;font-size:13px;font-weight:500;color:oklch(20% 0.012 270);font-variant-numeric:tabular-nums">{{ r.visits }}</span>
+<span style="text-align:right;font-size:13px;font-weight:500;color:oklch(20% 0.012 270);font-variant-numeric:tabular-nums;white-space:nowrap">{{ r.spend }}</span>
+<span style="text-align:right;font-size:12px;font-variant-numeric:tabular-nums;white-space:nowrap;color:{{ r.lastColor }}">{{ r.last }}</span>
+</div>
+</sc-for>
+</div>
+</div>
+<sc-if value="{{ isEmpty }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;align-items:flex-start;gap:8px;padding:28px 16px;border-top:1px solid oklch(91.5% 0.005 270);text-wrap:pretty"><span style="font-size:13px;font-weight:600;color:oklch(26% 0.012 270)">No customers match</span><span style="font-size:12.5px;line-height:1.45;color:oklch(45% 0.012 270)">{{ emptyText }}</span><button type="button" onClick="{{ clearAll }}" style="margin-top:2px;height:30px;padding:0 12px;border-radius:7px;border:1px solid oklch(89% 0.006 270);background:#fff;font-family:inherit;font-size:12.5px;font-weight:500;color:oklch(30% 0.012 270);cursor:pointer" style-hover="border-color:oklch(78% 0.008 270)">Clear search and filters</button></div>
+</sc-if>
+
+<div style="margin-top:12px;padding:10px 16px;background:oklch(94.4% 0.004 270);border-radius:10px;font-size:11.5px;line-height:1.5;color:oklch(47% 0.013 270);text-wrap:pretty"><span style="font-weight:600;color:oklch(32% 0.012 270)">Visits</span> and <span style="font-weight:600;color:oklch(32% 0.012 270)">spend</span> cover the last 12 months. <span style="font-weight:600;color:oklch(32% 0.012 270)">Usual location</span> is where the customer bought most often. Demo data: names, contacts and purchases are synthetic.</div>
+</section>
+
+<sc-if value="{{ hasSel }}" hint-placeholder-val="{{ false }}">
+<section ref="{{ paneRef }}" data-screen-label="Customer detail" aria-label="Customer details" style="flex:38 1 0;min-width:min(320px,100%);position:sticky;top:68px;background:#fff;border:1px solid oklch(90.5% 0.006 270);border-radius:14px;box-shadow:0 1px 2px oklch(25% 0.02 265 / 0.05),0 10px 28px -12px oklch(25% 0.02 265 / 0.14)">
+<div style="display:flex;flex-direction:column;padding:18px 20px 18px;background:oklch(98.6% 0.002 270);border-bottom:1px solid oklch(94.5% 0.004 270);border-radius:14px 14px 0 0">
+<div style="display:flex;align-items:flex-start;gap:12px">
+<div style="display:flex;flex-direction:column;gap:3px;min-width:0;flex:1">
+<span style="font-size:12px;font-weight:500;color:oklch(48% 0.013 270);font-variant-numeric:tabular-nums">{{ d.idLine }}</span>
+<h2 style="margin:0;font-size:21px;font-weight:600;letter-spacing:-.022em;line-height:1.25;color:oklch(14% 0.012 270);overflow-wrap:anywhere">{{ d.name }}</h2>
+</div>
+<button type="button" onClick="{{ closePane }}" aria-label="Close details" title="Close (Esc)" style="width:28px;height:28px;flex-shrink:0;margin:-4px -6px 0 0;border:0;border-radius:7px;background:transparent;font-size:17px;line-height:1;color:oklch(48% 0.012 270);cursor:pointer;font-family:inherit" style-hover="background:oklch(94.5% 0.004 270);color:oklch(22% 0.012 270)">&#215;</button>
+</div>
+<div style="margin-top:12px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px 20px">
+<div style="display:flex;flex-direction:column;gap:3px;min-width:0"><span style="font-size:11px;color:oklch(54% 0.012 270)">Email</span><a href="{{ d.mailto }}" style="font-size:13px;font-weight:500;overflow-wrap:anywhere">{{ d.email }}</a></div>
+<div style="display:flex;flex-direction:column;gap:3px;min-width:0"><span style="font-size:11px;color:oklch(54% 0.012 270)">Phone</span><sc-if value="{{ d.hasPhone }}" hint-placeholder-val="{{ true }}"><a href="{{ d.tel }}" style="font-size:13px;font-weight:500;font-variant-numeric:tabular-nums;white-space:nowrap">{{ d.phone }}</a></sc-if><sc-if value="{{ d.noPhone }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px;font-weight:500;color:oklch(52% 0.012 270)">Not provided</span></sc-if></div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:22px;padding:20px">
+<div style="display:flex;flex-direction:column;gap:14px">
+<span style="font-size:12px;color:oklch(50% 0.013 270);font-variant-numeric:tabular-nums">{{ d.sinceTxt }}</span>
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 20px">
+<sc-for list="{{ d.facts }}" as="f" hint-placeholder-count="4">
+<div style="display:flex;flex-direction:column;gap:4px;min-width:0"><span style="font-size:11px;color:oklch(54% 0.012 270)">{{ f.label }}</span><span style="font-size:15px;font-weight:600;letter-spacing:-.01em;line-height:1.35;font-variant-numeric:tabular-nums;color:oklch(14% 0.012 270)">{{ f.value }}</span><span style="font-size:12px;line-height:1.4;color:oklch(50% 0.013 270)">{{ f.sub }}</span></div>
+</sc-for>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:6px;padding-top:18px;border-top:1px solid oklch(95% 0.004 270)">
+<span style="display:flex;align-items:baseline;gap:7px;flex-wrap:wrap"><span style="font-size:10.5px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:oklch(50% 0.013 270)">Locations visited</span><span style="font-size:11px;color:oklch(54% 0.012 270)">&middot; last 12 months</span></span>
+<div style="display:flex;flex-direction:column">
+<sc-for list="{{ d.locs }}" as="l" hint-placeholder-count="2">
+<a href="{{ l.href }}" title="Open {{ l.name }} in Location analytics" style="display:grid;grid-template-columns:minmax(0,1fr) auto 16px;column-gap:12px;align-items:center;min-height:36px;padding:0 10px;border-radius:7px;color:oklch(24% 0.012 270)" style-hover="background:oklch(97.6% 0.004 270);color:oklch(14% 0.012 270)"><span style="display:flex;align-items:baseline;gap:8px;min-width:0"><span style="font-size:12.5px;font-weight:{{ l.weight }};white-space:nowrap">{{ l.name }}</span><span style="font-size:11.5px;color:oklch(52% 0.013 270);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ l.sub }}</span></span><span style="font-size:12px;color:oklch(40% 0.012 270);font-variant-numeric:tabular-nums;white-space:nowrap">{{ l.visits }}</span><span aria-hidden="true" style="font-size:12px;color:oklch(58% 0.012 270)">&#8599;</span></a>
+</sc-for>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:6px;padding-top:18px;border-top:1px solid oklch(95% 0.004 270)">
+<span style="display:flex;align-items:baseline;gap:7px;flex-wrap:wrap"><span style="font-size:10.5px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:oklch(50% 0.013 270)">Purchase history</span><span style="font-size:11px;color:oklch(54% 0.012 270)">&middot; {{ d.histNote }}</span></span>
+<div style="display:flex;flex-direction:column">
+<sc-for list="{{ d.orders }}" as="o" hint-placeholder-count="6">
+<div style="border-top:1px solid oklch(96% 0.004 270)">
+<button type="button" aria-expanded="{{ o.expanded }}" aria-controls="{{ o.panelId }}" onClick="{{ o.toggle }}" style="display:grid;grid-template-columns:minmax(0,1fr) auto 14px;column-gap:10px;align-items:start;width:100%;padding:9px 10px;border:0;border-radius:7px;background:{{ o.bg }};font-family:inherit;text-align:left;cursor:pointer" style-hover="background:oklch(97.6% 0.004 270)">
+<span style="display:flex;flex-direction:column;gap:3px;min-width:0"><span style="font-size:12.5px;font-weight:500;color:oklch(22% 0.012 270);font-variant-numeric:tabular-nums">{{ o.when }} <span style="font-weight:400;color:oklch(50% 0.013 270)">&middot; {{ o.loc }}</span></span><span style="font-size:12px;line-height:1.4;color:oklch(44% 0.012 270);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ o.summary }}</span></span>
+<span style="display:flex;flex-direction:column;align-items:flex-end;gap:3px"><span style="font-size:12.5px;font-weight:600;color:oklch(20% 0.012 270);font-variant-numeric:tabular-nums;white-space:nowrap">{{ o.total }}</span><span style="font-size:11px;color:oklch(52% 0.013 270);font-variant-numeric:tabular-nums;white-space:nowrap">{{ o.count }}</span></span>
+<span aria-hidden="true" style="display:flex;align-items:center;justify-content:center;width:14px;height:18px;transform:rotate({{ o.rot }});transition:transform .15s ease"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="oklch(50% 0.013 270)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,3.5 5,6.5 8,3.5"></polyline></svg></span>
+</button>
+<sc-if value="{{ o.open }}" hint-placeholder-val="{{ false }}">
+<ul id="{{ o.panelId }}" style="list-style:none;margin:0 0 8px;padding:2px 34px 4px 10px;display:flex;flex-direction:column;gap:5px">
+<sc-for list="{{ o.lines }}" as="li" hint-placeholder-count="3"><li style="display:grid;grid-template-columns:32px minmax(0,1fr);column-gap:6px;font-size:12px;line-height:1.4;color:oklch(32% 0.012 270)"><span style="font-variant-numeric:tabular-nums;color:oklch(50% 0.013 270)">{{ li.qty }}</span><span style="min-width:0;overflow-wrap:anywhere">{{ li.name }}</span></li></sc-for>
+</ul>
+</sc-if>
+</div>
+</sc-for>
+</div>
+<sc-if value="{{ d.canMore }}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{ d.toggleMore }}" style="align-self:flex-start;margin-top:4px;height:30px;padding:0 12px;border-radius:7px;border:1px solid oklch(89% 0.006 270);background:#fff;font-family:inherit;font-size:12.5px;font-weight:500;color:oklch(30% 0.012 270);cursor:pointer" style-hover="border-color:oklch(78% 0.008 270)">{{ d.moreLabel }}</button></sc-if>
+</div>
+</div>
+</section>
+</sc-if>
+
+</div>
+</div>
+</main>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1000}}">
+const REGION_NAME = { north: 'North region', south: 'South region', central: 'Central region' };
+// Locations match Operations.dc.html. cc/area are used only for synthetic phone numbers.
+const LOCS = [
+  { id: 'berlin', name: 'Berlin', region: 'north', cc: '+49 30' }, { id: 'amsterdam', name: 'Amsterdam', region: 'north', cc: '+31 20' },
+  { id: 'hamburg', name: 'Hamburg', region: 'north', cc: '+49 40' }, { id: 'copenhagen', name: 'Copenhagen', region: 'north', cc: '+45' },
+  { id: 'stockholm', name: 'Stockholm', region: 'north', cc: '+46 8' }, { id: 'madrid', name: 'Madrid', region: 'south', cc: '+34 91' },
+  { id: 'paris', name: 'Paris', region: 'south', cc: '+33 1' }, { id: 'barcelona', name: 'Barcelona', region: 'south', cc: '+34 93' },
+  { id: 'rome', name: 'Rome', region: 'south', cc: '+39 06' }, { id: 'munich', name: 'Munich', region: 'central', cc: '+49 89' },
+  { id: 'zurich', name: 'Zurich', region: 'central', cc: '+41 44' }, { id: 'lisbon', name: 'Lisbon', region: 'central', cc: '+351 21' },
+];
+const LOC = Object.fromEntries(LOCS.map(l => [l.id, l]));
+const NEAR = { berlin: ['hamburg', 'munich'], amsterdam: ['paris', 'berlin'], hamburg: ['berlin', 'copenhagen'], copenhagen: ['stockholm', 'hamburg'], stockholm: ['copenhagen'], madrid: ['barcelona', 'lisbon'], paris: ['amsterdam', 'zurich'], barcelona: ['madrid', 'paris'], rome: ['zurich', 'munich'], munich: ['zurich', 'berlin'], zurich: ['munich', 'paris'], lisbon: ['madrid'] };
+// Synthetic customers. Email domains are reserved example domains.
+const NAMES = {
+  berlin: ['Katrin Vogel', 'Simon Hartmann', 'Ayse Demir', 'Moritz Lange', 'Julia Schröder'],
+  amsterdam: ['Femke de Graaf', 'Thijs Mulder', 'Priya Ramdin', 'Joost van Dijk', 'Lotte Smit'],
+  hamburg: ['Henrik Petersen', 'Carla Neumann', 'Jan Ohlsen', 'Mila Hansen'],
+  copenhagen: ['Astrid Møller', 'Rasmus Jensen', 'Signe Kristensen', 'Anders Holt'],
+  stockholm: ['Maja Lindqvist', 'Johan Ek', 'Saga Andersson', 'Oliver Strand'],
+  madrid: ['Elena Castillo', 'Pablo Herrera', 'Irene Molina', 'Andrés Gil', 'Nuria Prieto'],
+  paris: ['Léa Bernard', 'Antoine Girard', 'Inès Fontaine', 'Mathieu Roux', 'Sarah Benali'],
+  barcelona: ['Clara Ferrer', 'Marc Soler', 'Laia Roca', 'Oriol Mas'],
+  rome: ['Francesca Conti', 'Matteo Greco', 'Chiara Marino', 'Davide Esposito'],
+  munich: ['Sophie Wimmer', 'Florian Maier', 'Theresa Brunner', 'Benedikt Lang'],
+  zurich: ['Noemi Graf', 'Raphael Baumann', 'Selin Aydin', 'Jonas Frey'],
+  lisbon: ['Mariana Lopes', 'João Pereira', 'Carolina Rocha', 'Miguel Fonseca'],
+};
+const MENU = {
+  coffee: [['Flat white', 4.2], ['Oat latte', 4.6], ['Cappuccino', 4.2], ['Espresso', 2.8], ['Filter coffee', 3.4]],
+  pastry: [['Croissant', 3.2], ['Cardamom bun', 3.8], ['Sourdough toast', 5.5], ['Banana bread', 3.9]],
+  lunch: [['Chicken sandwich', 11.5], ['Seasonal salad', 12], ['Soup of the day', 9.5], ['Grain bowl', 13]],
+  dinner: [['Roast chicken', 21], ['Mushroom risotto', 18.5], ['Steak frites', 26], ['Sea bass', 24]],
+  side: [['Fries', 5], ['Burrata', 9.5], ['Green salad', 5.5]],
+  dessert: [['Tiramisu', 7.5], ['Chocolate tart', 7]],
+  soft: [['Sparkling water', 3.2], ['Lemonade', 4]],
+  wine: [['House red wine', 7.5], ['Pilsner', 5.5], ['House white wine', 7.5]],
+};
+const DAYN = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'], MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+// Simulated today: Thu 27 Nov 2025. Day 0 = today, negative = past.
+const dateOf = d => new Date(2025, 10, 27 + d);
+const hm = m => String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0');
+const dayTxt = d => { const t = dateOf(d); if (d === 0) return 'Today'; if (d === -1) return 'Yesterday'; if (d > -7) return DAYN[t.getDay()] + ' ' + t.getDate() + ' ' + MON[t.getMonth()]; return t.getDate() + ' ' + MON[t.getMonth()] + (t.getFullYear() !== 2025 ? ' ' + t.getFullYear() : ''); };
+const money = v => '$' + v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const money0 = v => '$' + Math.round(v).toLocaleString('en-US');
+const hash = s => { let h = 7; for (const ch of s) h = (h * 31 + ch.charCodeAt(0)) % 2147483647; return h; };
+const rng = seed => () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+const slug = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/ø/g, 'o').toLowerCase().trim().replace(/[^a-z0-9]+/g, '.').replace(/^\.|\.$/g, '');
+const fold = s => slug(s).replace(/\./g, ' ');
+
+function makeOrder(r, day, loc) {
+  const slot = r(), items = [], add = (k, q) => { const [n, p] = MENU[k][Math.floor(r() * MENU[k].length)]; const ex = items.find(i => i[0] === n); if (ex) ex[1] += q; else items.push([n, q, p]); };
+  let min;
+  if (slot < 0.45) { min = 7 * 60 + 20 + Math.floor(r() * 200); add('coffee', 1); if (r() < 0.6) add('pastry', 1); if (r() < 0.25) add('coffee', 1); }
+  else if (slot < 0.75) { min = 11 * 60 + 40 + Math.floor(r() * 170); add('lunch', 1); add(r() < 0.5 ? 'soft' : 'coffee', 1); if (r() < 0.3) add('side', 1); }
+  else { min = 17 * 60 + 45 + Math.floor(r() * 210); const n = 1 + Math.floor(r() * 3.2); for (let i = 0; i < n; i++) add('dinner', 1); add('wine', n); if (r() < 0.5) add('side', 1); if (r() < 0.4) add('dessert', Math.max(1, n - 1)); }
+  if (day === 0) min = Math.min(min, 15 * 60 + 40 - Math.floor(r() * 300));
+  const total = Math.round(items.reduce((a, [, q, p]) => a + q * p, 0) * 100) / 100;
+  return { day, min, loc, items, total };
+}
+const CUSTOMERS = [];
+let seq = 0;
+LOCS.forEach(l => NAMES[l.id].forEach(name => {
+  const r = rng(hash(name)), kind = r();
+  // regular: several visits a month; occasional: about monthly; lapsed: stopped visiting 3+ months ago; new: first visit in the last 2 months.
+  const type = kind < 0.42 ? 'regular' : kind < 0.72 ? 'occasional' : kind < 0.86 ? 'lapsed' : 'new';
+  const gap = type === 'regular' ? 5 + r() * 7 : type === 'occasional' ? 18 + r() * 25 : type === 'lapsed' ? 20 + r() * 20 : 6 + r() * 8;
+  const start = type === 'new' ? -(20 + Math.floor(r() * 40)) : -364, stop = type === 'lapsed' ? -(95 + Math.floor(r() * 120)) : 0;
+  const near = NEAR[l.id], orders = [];
+  for (let d = stop - Math.floor(r() * Math.min(gap, 6)); d >= start; d -= Math.max(1, Math.round(gap * (0.6 + r() * 0.8)))) {
+    const roll = r(), loc = roll < 0.8 || !near.length ? l.id : near[roll < 0.93 ? 0 : near.length - 1];
+    orders.push(makeOrder(r, d, loc));
+  }
+  if (!orders.length) orders.push(makeOrder(r, stop, l.id));
+  seq++;
+  const since = type === 'new' ? orders[orders.length - 1].day : -(380 + Math.floor(r() * 1100));
+  const dom = ['example.com', 'example.net', 'example.org'][Math.floor(r() * 3)];
+  const digits = () => String(Math.floor(r() * 9000) + 1000);
+  CUSTOMERS.push({
+    id: 'C-' + (10200 + seq * 37), name, email: slug(name) + '@' + dom,
+    phone: r() < 0.72 ? l.cc + ' ' + digits() + ' ' + digits().slice(0, 3 + Math.floor(r() * 2)) : '',
+    orders, since,
+  });
+}));
+CUSTOMERS.forEach(c => {
+  c.visits = c.orders.length; c.spend = c.orders.reduce((a, o) => a + o.total, 0); c.last = c.orders[0];
+  const by = {}; c.orders.forEach(o => { (by[o.loc] = by[o.loc] || { n: 0, spend: 0, last: o }).n++; by[o.loc].spend += o.total; });
+  c.locs = Object.keys(by).map(id => ({ id, ...by[id] })).sort((a, b) => b.n - a.n || b.last.day - a.last.day);
+  c.home = c.locs[0].id;
+  c.recency = -c.last.day <= 30 ? 'r30' : -c.last.day <= 90 ? 'r90' : 'old';
+});
+const RECENCY = [['r30', 'Last 30 days'], ['r90', '31\u201390 days ago'], ['old', 'Over 90 days ago']];
+const REC = Object.fromEntries(RECENCY);
+const SORTS = {
+  recent: { name: 'Last visit', meta: 'Most recent first', cmp: (a, b) => b.last.day - a.last.day || b.last.min - a.last.min },
+  spend: { name: 'Spend', meta: 'Highest first', cmp: (a, b) => b.spend - a.spend },
+  visits: { name: 'Visits', meta: 'Most first', cmp: (a, b) => b.visits - a.visits || b.spend - a.spend },
+  name: { name: 'Name A\u2013Z', meta: '', cmp: (a, b) => a.name.localeCompare(b.name) },
+};
+const MENUS = ['loc', 'rec', 'sort'];
+// Same avatar treatment as Employees v1 (30px, hue from name).
+const initialsOf = n => n.trim().split(/\s+/).filter(w => /^[A-ZÀ-ÝØÆÅ]/.test(w)).map(w => w[0]).slice(0, 2).join('').toUpperCase();
+const av = name => { const h = hash(name) % 360; return 'width:30px;height:30px;flex-shrink:0;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:600;letter-spacing:.01em;background:oklch(90% 0.025 ' + h + ');color:oklch(34% 0.04 ' + h + ')'; };
+const HIST = 8;
+
+class Component extends DCLogic {
+  state = (() => {
+    const s = { q: '', locF: null, recF: null, sort: 'recent', sel: null, more: false, openOrders: {}, locOpen: false, recOpen: false, sortOpen: false };
+    try { const id = new URLSearchParams(window.location.search).get('customer'); if (id && CUSTOMERS.some(c => c.id === id)) s.sel = id; } catch (e) {}
+    return s;
+  })();
+  asideRef = React.createRef(); navRef = React.createRef(); bottomRef = React.createRef(); gsRef = React.createRef();
+  paneRef = React.createRef(); tableRef = React.createRef();
+  kbRefs = {};
+  kbRef(k) { return this.kbRefs[k] || (this.kbRefs[k] = React.createRef()); }
+  stacked() { const p = this.paneRef.current, t = this.tableRef.current; return !!(p && t && p.getBoundingClientRect().left < t.getBoundingClientRect().right); }
+  fitPane() {
+    const p = this.paneRef.current; if (!p) return;
+    if (this.stacked()) { p.style.maxHeight = ''; p.style.overflowY = ''; p.style.overscrollBehaviorY = ''; p.style.position = 'static'; return; }
+    p.style.position = 'sticky';
+    const top = Math.max(68, p.getBoundingClientRect().top);
+    p.style.maxHeight = Math.max(240, window.innerHeight - top - 44) + 'px'; p.style.overflowY = 'auto'; p.style.overscrollBehaviorY = 'contain';
+  }
+  fitSidebar() {
+    const aside = this.asideRef.current, nav = this.navRef.current, bottom = this.bottomRef.current;
+    if (!aside || !nav || !bottom) return;
+    const gs = this.gsRef.current;
+    if (gs) this._gsH = gs.offsetHeight + 10;
+    const wH = this._gsH || 200, SAVE = 42;
+    const avail = aside.clientHeight - 24;
+    const base = bottom.offsetHeight - (gs ? gs.offsetHeight + 10 : 0);
+    const navN = nav.scrollHeight + (this.state.navCompact ? SAVE : 0);
+    let next;
+    if (navN + base + wH <= avail) next = { gsFit: true, navCompact: false };
+    else if (navN - SAVE + base + wH <= avail) next = { gsFit: true, navCompact: true };
+    else next = { gsFit: false, navCompact: false };
+    if (next.gsFit !== this.state.gsFit || next.navCompact !== this.state.navCompact) this.setState(next);
+  }
+  componentDidMount() {
+    
+    try { this._opMq = window.matchMedia('(max-width: 719px)'); this._opMqFn = () => this.setState({ sideCollapsed: this._opMq.matches }); this._opMq.addEventListener('change', this._opMqFn); if (this._opMq.matches) this.setState({ sideCollapsed: true }); } catch (e) {}
+    this._prevSel = this.state.sel;
+    this._onResize = () => this.fitSidebar(); requestAnimationFrame(this._onResize); window.addEventListener('resize', this._onResize);
+    this._onScroll = () => { if (this._raf) return; this._raf = requestAnimationFrame(() => { this._raf = null; this.fitPane(); }); };
+    window.addEventListener('scroll', this._onScroll, { passive: true }); window.addEventListener('resize', this._onScroll);
+    requestAnimationFrame(this._onScroll);
+    this._onDocDown = e => MENUS.forEach(k => {
+      if (!this.state[k + 'Open']) return;
+      const m = this.kbRef(k + 'Menu').current, b = this.kbRef(k + 'Btn').current;
+      if ((m && m.contains(e.target)) || (b && b.contains(e.target))) return;
+      this.setState({ [k + 'Open']: false });
+    });
+    document.addEventListener('mousedown', this._onDocDown);
+    this._onKey = e => { if (e.key === 'Escape' && this.state.sel && !MENUS.some(k => this.state[k + 'Open'])) this.closePane(); };
+    document.addEventListener('keydown', this._onKey);
+  }
+  componentWillUnmount() {
+    if (this._opMq) this._opMq.removeEventListener('change', this._opMqFn);
+    window.removeEventListener('resize', this._onResize); window.removeEventListener('scroll', this._onScroll); window.removeEventListener('resize', this._onScroll);
+    document.removeEventListener('mousedown', this._onDocDown); document.removeEventListener('keydown', this._onKey);
+  }
+  componentDidUpdate() {
+    this.fitSidebar(); this.fitPane(); this.kbApplyFocus();
+    if (this.state.sel !== this._prevSel) {
+      this._prevSel = this.state.sel;
+      const p = this.paneRef.current; if (p) p.scrollTop = 0;
+      if (this._scrollToPane && p && this.stacked()) window.scrollTo({ top: p.getBoundingClientRect().top + window.scrollY - 64, behavior: 'smooth' });
+      this._scrollToPane = false;
+    }
+  }
+  kbApplyFocus() {
+    const prev = this._kbPrev; this._kbPrev = Object.fromEntries(MENUS.map(k => [k, this.state[k + 'Open']]));
+    if (this._kbIn) { const m = this.kbRef(this._kbIn + 'Menu').current; if (m) { this._kbIn = null; const it = m.querySelector('[data-opt][aria-checked="true"]') || m.querySelector('[data-opt]'); if (it) it.focus(); } }
+    MENUS.forEach(k => {
+      if (!prev || !prev[k] || this.state[k + 'Open']) return;
+      const b = this.kbRef(k + 'Btn').current, a = document.activeElement;
+      if (b && (this._kbOut === k || !a || a === document.body)) b.focus();
+      if (this._kbOut === k) this._kbOut = null;
+    });
+  }
+  menuKey(k) {
+    return e => {
+      const m = this.kbRef(k + 'Menu').current; if (!m) return;
+      const items = [...m.querySelectorAll('[data-opt]')], n = items.length, i = items.indexOf(document.activeElement);
+      const go = j => { e.preventDefault(); if (n) items[(j + n) % n].focus(); };
+      if (e.key === 'Escape' || e.key === 'Tab') { e.preventDefault(); e.stopPropagation(); this._kbOut = k; this.setState({ [k + 'Open']: false }); }
+      else if (e.key === 'ArrowDown') go(i < 0 ? 0 : i + 1);
+      else if (e.key === 'ArrowUp') go(i < 0 ? n - 1 : i - 1);
+      else if (e.key === 'Home') go(0);
+      else if (e.key === 'End') go(n - 1);
+    };
+  }
+  toggleMenu(k) { if (!this.state[k + 'Open']) this._kbIn = k; this.setState(st => Object.assign(Object.fromEntries(MENUS.map(m => [m + 'Open', false])), { [k + 'Open']: !st[k + 'Open'] })); }
+  optStyle(on) { return 'display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:' + (on ? 600 : 500) + ';color:' + (on ? 'oklch(20% 0.01 270)' : 'oklch(32% 0.01 270)') + ';background:' + (on ? 'oklch(96.5% 0.004 270)' : 'transparent') + ';border-radius:9px;padding:7px 9px;cursor:pointer;width:100%;border:0;font-family:inherit;text-align:left'; }
+  pass(c, s, skip) {
+    if (skip !== 'loc' && s.locF && c.home !== s.locF) return false;
+    if (skip !== 'rec' && s.recF && c.recency !== s.recF) return false;
+    const q = s.q.trim(); if (!q) return true;
+    const fq = fold(q), dq = q.replace(/\D/g, '');
+    return fold(c.name).includes(fq) || c.email.toLowerCase().includes(q.toLowerCase()) || c.id.toLowerCase().includes(q.toLowerCase().replace(/\s/g, '')) || (dq.length >= 3 && c.phone.replace(/\D/g, '').includes(dq));
+  }
+  closePane = () => {
+    const id = this.state.sel;
+    this.setState({ sel: null, more: false }, () => { const r = id && document.querySelector('[data-row][data-id="' + id + '"]'); if (r) r.focus({ preventScroll: true }); });
+  };
+
+  renderVals() {
+    const s = this.state;
+    const rows = CUSTOMERS.filter(c => this.pass(c, s)).sort(SORTS[s.sort].cmp);
+    const selC = s.sel ? rows.find(c => c.id === s.sel) || null : null;
+    const filtered = !!(s.q.trim() || s.locF || s.recF);
+    const rowVals = rows.map(c => {
+      const on = selC && selC.id === c.id, others = c.locs.length - 1;
+      const select = () => { this._scrollToPane = true; this.setState({ sel: c.id, more: false, openOrders: {} }); };
+      return {
+        id: c.id, name: c.name, email: c.email, initials: initialsOf(c.name), avStyle: av(c.name), loc: LOC[c.home].name, locSub: others ? '+' + others + ' other' + (others > 1 ? 's' : '') : 'Only location',
+        visits: String(c.visits), spend: money0(c.spend), last: dayTxt(c.last.day), lastColor: c.recency === 'old' ? 'oklch(52% 0.012 270)' : 'oklch(30% 0.012 270)',
+        aria: c.name + ', usual location ' + LOC[c.home].name + ', ' + c.visits + ' visits, ' + money0(c.spend) + ' spend, last visit ' + dayTxt(c.last.day),
+        current: on ? 'true' : 'false', select,
+        onKey: e => { if (e.target !== e.currentTarget) return; if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); select(); } },
+        style: 'display:grid;grid-template-columns:minmax(190px,2fr) minmax(100px,1fr) 64px 84px 112px;column-gap:12px;align-items:center;padding:0 16px;min-height:54px;border-top:1px solid oklch(91.5% 0.005 270);cursor:pointer;background:' + (on ? 'oklch(93.2% 0.005 270)' : 'transparent') + ';box-shadow:' + (on ? 'inset 3px 0 0 oklch(30% 0.012 270)' : 'none'),
+      };
+    });
+
+    let d = { facts: [], locs: [], orders: [] };
+    if (selC) {
+      const c = selC, sinceD = dateOf(c.since), first = c.orders[c.orders.length - 1];
+      const shown = s.more ? c.orders : c.orders.slice(0, HIST);
+      d = {
+        name: c.name, idLine: c.id, sinceTxt: 'Customer since ' + MON[sinceD.getMonth()] + ' ' + sinceD.getFullYear(),
+        email: c.email, mailto: 'mailto:' + c.email, phone: c.phone, hasPhone: !!c.phone, noPhone: !c.phone, tel: 'tel:' + c.phone.replace(/[^\d+]/g, ''),
+        facts: [
+          { label: 'Last visit', value: dayTxt(c.last.day), sub: hm(c.last.min) + ' \u00b7 ' + LOC[c.last.loc].name },
+          { label: 'Visits', value: String(c.visits), sub: c.since > -365 ? 'Since first visit ' + dayTxt(first.day) : 'Last 12 months' },
+          { label: 'Spend', value: money(c.spend), sub: 'Last 12 months' },
+          { label: 'Average order', value: money(c.spend / c.visits), sub: 'Across ' + c.visits + ' order' + (c.visits === 1 ? '' : 's') },
+        ],
+        locs: c.locs.map((l, i) => ({ name: LOC[l.id].name, weight: i === 0 ? 600 : 500, sub: (i === 0 ? 'Usual \u00b7 ' : '') + 'last visit ' + dayTxt(l.last.day).replace(/^(Today|Yesterday)$/, m => m.toLowerCase()), visits: l.n + (l.n === 1 ? ' visit' : ' visits'), href: 'Location Analytics.dc.html?location=' + encodeURIComponent(l.id) })),
+        histNote: c.orders.length > HIST && !s.more ? 'latest ' + HIST + ' of ' + c.orders.length : c.orders.length + ' order' + (c.orders.length === 1 ? '' : 's') + ', newest first',
+        orders: shown.map((o, i) => {
+          const key = c.id + ':' + i, open = !!s.openOrders[key], units = o.items.reduce((a, it) => a + it[1], 0), rest = o.items.length - 2;
+          return { when: dayTxt(o.day) + ', ' + hm(o.min), loc: LOC[o.loc].name, total: money(o.total), count: units + (units === 1 ? ' item' : ' items'),
+            summary: o.items.slice(0, 2).map(it => it[0]).join(', ') + (rest > 0 ? ' + ' + rest + ' more' : ''),
+            lines: o.items.map(([n, q]) => ({ qty: q + '\u00d7', name: n })), open, expanded: open ? 'true' : 'false', panelId: 'order-' + key.replace(/[^a-z0-9]/gi, '-'),
+            rot: open ? '180deg' : '0deg', bg: open ? 'oklch(97.6% 0.004 270)' : 'transparent',
+            toggle: () => this.setState(st => ({ openOrders: Object.assign({}, st.openOrders, { [key]: !st.openOrders[key] }) })) };
+        }),
+        canMore: c.orders.length > HIST, moreLabel: s.more ? 'Show latest ' + HIST : 'Show all ' + c.orders.length + ' orders',
+        toggleMore: () => this.setState(st => ({ more: !st.more })),
+      };
+    }
+
+    const cnt = (skip, fn) => CUSTOMERS.filter(c => this.pass(c, s, skip) && fn(c)).length;
+    const opt = (k, val, name, meta, extra) => Object.assign({ hasHead: false, head: '', name, meta: String(meta), checked: s[k + 'F'] === val ? 'true' : 'false', style: this.optStyle(s[k + 'F'] === val), select: () => this.setState({ [k + 'F']: val, [k + 'Open']: false }) }, extra || {});
+    const defs = {
+      loc: { aria: 'Usual location', prefix: '', label: s.locF ? LOC[s.locF].name : 'All locations', active: !!s.locF,
+        options: [opt('loc', null, 'All locations', cnt('loc', () => true))].concat(LOCS.map((l, i) => opt('loc', l.id, l.name, cnt('loc', c => c.home === l.id), { hasHead: i === 0 || LOCS[i - 1].region !== l.region, head: REGION_NAME[l.region] }))) },
+      rec: { aria: 'Last visit', prefix: '', label: s.recF ? REC[s.recF] : 'Any last visit', active: !!s.recF,
+        options: [opt('rec', null, 'Any last visit', cnt('rec', () => true))].concat(RECENCY.map(([id, n]) => opt('rec', id, n, cnt('rec', c => c.recency === id)))) },
+      sort: { aria: 'Sort customers', prefix: 'Sort:', label: SORTS[s.sort].name, active: false,
+        options: Object.keys(SORTS).map(id => ({ hasHead: false, head: '', name: SORTS[id].name, meta: SORTS[id].meta, checked: s.sort === id ? 'true' : 'false', style: this.optStyle(s.sort === id), select: () => this.setState({ sort: id, sortOpen: false }) })) },
+    };
+    const menus = MENUS.map(k => Object.assign({}, defs[k], {
+      open: s[k + 'Open'], expanded: s[k + 'Open'] ? 'true' : 'false', toggle: () => this.toggleMenu(k), btnRef: this.kbRef(k + 'Btn'), menuRef: this.kbRef(k + 'Menu'), menuKey: this.menuKey(k),
+      btnKey: e => { if ((e.key === 'ArrowDown' || e.key === 'ArrowUp') && !s[k + 'Open']) { e.preventDefault(); this.toggleMenu(k); } },
+      left: k === 'sort' ? 'auto' : '0', right: k === 'sort' ? '0' : 'auto',
+      border: defs[k].active ? 'oklch(80% 0.008 270)' : 'oklch(92% 0.005 270)',
+    }));
+
+    return {
+      q: s.q, onQ: e => this.setState({ q: e.target.value }), hasQ: !!s.q, clearQ: () => this.setState({ q: '' }),
+      menus, countLabel: rows.length + ' of ' + CUSTOMERS.length + (filtered ? ' \u00b7 filtered' : ''),
+      rows: rowVals, isEmpty: rows.length === 0,
+      emptyText: s.q.trim() ? 'No customer matches \u201c' + s.q.trim() + '\u201d' + (s.locF || s.recF ? ' with the current filters' : '') + '. Search works on name, email, phone or customer ID.' : 'No customers have this usual location and last visit combination.',
+      clearAll: () => this.setState({ q: '', locF: null, recF: null }),
+      hasSel: !!selC, d, closePane: this.closePane,
+      asideW: s.sideCollapsed ? '52px' : '198px', navTxt: s.sideCollapsed ? 'none' : 'inline', profileDir: s.sideCollapsed ? 'column' : 'row',
+      profilePadX: s.sideCollapsed ? '0' : '9px', collapseML: s.sideCollapsed ? '0' : 'auto', collapseGlyph: s.sideCollapsed ? '\u203A\u203A' : '\u2039\u2039',
+      collapseTitle: s.sideCollapsed ? 'Expand sidebar' : 'Collapse sidebar',
+      toggleSidebar: () => this.setState(st => ({ sideCollapsed: !st.sideCollapsed })),
+      navItemPad: s.navCompact ? '5px 9px' : '7px 9px', navLabelPad: s.navCompact ? '9px 10px 5px' : '14px 10px 6px',
+      showGettingStartedC: !this.state.gsDismissed && this.state.gsFit !== false && !this.state.sideCollapsed, dismissGs: () => { this.setState({ gsDismissed: true }); }, gsRef: this.gsRef,
+      asideRef: this.asideRef, navRef: this.navRef, bottomRef: this.bottomRef, tableRef: this.tableRef, paneRef: this.paneRef,
+    };
+  }
+}
+</script>
+</body>
+</html>
