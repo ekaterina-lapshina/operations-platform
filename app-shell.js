@@ -1,5 +1,5 @@
 // Shared header tools (search, help, notifications, account), onboarding tour and demo sign-out
-// for the North & Oak Operations Platform prototype. Loaded by every accepted screen.
+// for the Branchline prototype (client: North & Oak). Loaded by every accepted screen.
 (function () {
   if (window.OpShell) return;
   const ACC = 'oklch(54% 0.19 258)';
@@ -83,7 +83,7 @@
 
   // ---------- Tour ----------
   const STEPS = [
-    { title: 'Welcome to the Operations Platform', body: 'A short tour of where things live. Close it at any time and restart it from the help menu.' },
+    { title: 'Welcome to Branchline', body: 'A short tour of where things live. Close it at any time and restart it from the help menu.' },
     { sel: 'aside a[href="Overview.dc.html"]', title: 'Overview', body: 'The group-wide summary of performance across all 12 locations.', href: 'Overview.dc.html' },
     { sel: 'aside a[href="Operations.dc.html"]', title: 'Operations', body: 'Live issues by location, such as staffing, stock, equipment, deliveries and connectivity, with owners and next actions.', href: 'Operations.dc.html' },
     { sel: 'aside a[href="Inventory.dc.html"]', title: 'Inventory', body: 'Stock by product and location, checked against reorder levels and the next delivery.', href: 'Inventory.dc.html' },
@@ -158,7 +158,7 @@
     document.documentElement.style.overflow = 'hidden';
     box.innerHTML = `<div class="out" role="dialog" aria-modal="true" aria-labelledby="out-t" aria-describedby="out-b">
       <div style="width:100%;max-width:400px;background:#fff;border:1px solid oklch(90.5% 0.006 270);border-radius:14px;box-shadow:0 1px 2px oklch(25% 0.02 265 / 0.05),0 10px 28px -12px oklch(25% 0.02 265 / 0.14);padding:28px 24px 24px;display:flex;flex-direction:column;gap:14px">
-        <div style="display:flex;align-items:center;gap:9px"><span style="width:22px;height:22px;border-radius:7px;background:${ACC}"></span><span style="font-size:13.5px;font-weight:700;letter-spacing:-.01em;color:oklch(28% 0.012 270)">Operations Platform</span></div>
+        <div style="display:flex;align-items:center;gap:9px"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="flex-shrink:0;display:block"><rect width="24" height="24" rx="6" fill="oklch(54% 0.19 258)"></rect><path d="M9 7v10M9 14.5c0-3.5 2.4-5.5 6.5-5.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"></path><circle cx="9" cy="6.5" r="2.2" fill="#fff"></circle><circle cx="9" cy="17.5" r="2.2" fill="#fff"></circle><circle cx="16" cy="9" r="2.2" fill="#fff"></circle></svg><span style="font-size:13.5px;font-weight:700;letter-spacing:-.01em;color:oklch(28% 0.012 270)">Branchline</span></div>
         <h1 id="out-t" style="margin:6px 0 0;font-size:21px;font-weight:600;letter-spacing:-.024em;line-height:1.2;color:oklch(16% 0.012 270)">You\u2019re signed out</h1>
         <p id="out-b" style="margin:0;font-size:13px;line-height:1.55;color:oklch(40% 0.012 270);text-wrap:pretty">This is a demonstration sign-out. The prototype has no real accounts or sessions, so nothing was ended or sent anywhere.</p>
         <div style="display:flex;padding-top:4px"><button type="button" class="primary" data-act="back">Return to the demo workspace</button></div>
